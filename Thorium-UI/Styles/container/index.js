@@ -1,3 +1,4 @@
+// Default container styling
 export const containerStyle = {
   width: "100%",
   paddingRight: "15px",

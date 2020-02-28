@@ -1,23 +1,14 @@
-const pitchBlack = "#000000",
-  almostBlack = "#121212",
-  darkGray = "#333333",
-  medGray = "#555555",
-  lightGray = "#777777",
-  darkWhite = "#aaaaaa",
-  medWhite = "#cccccc",
-  pureWhite = "#ffffff"
+import { button } from "./button-themes";
+import { body } from "./body-themes";
 
+// Centralizes all component theme styling 
 export const themes = {
   dark: {
-    body: {
-      "background-color": almostBlack,
-      color: pureWhite
-    }
+    body: body.dark,
+    button: button.dark
   },
   light: {
-    body: {
-      "background-color": pureWhite,
-      color: pitchBlack
-    }
+    body: body.light,
+    button: button.light
   }
 };

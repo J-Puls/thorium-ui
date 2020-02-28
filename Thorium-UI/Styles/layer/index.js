@@ -1,3 +1,4 @@
+// Default layer styling
 export const layerStyle = {
   display: "flex",
   flexWrap: "wrap",
