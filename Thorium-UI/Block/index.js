@@ -33,9 +33,8 @@ const Block = props => {
   }, [context.viewportSizeName]);
 
   return (
-    <div className="block" style={style}>
-      {" "}
-      {props.children}{" "}
+    <div className="block" style={{...style, ...props.style}}>
+      {props.children}
     </div>
   );
 };

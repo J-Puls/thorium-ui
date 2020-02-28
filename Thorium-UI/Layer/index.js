@@ -23,7 +23,7 @@ const Layer = props => {
   }, []);
 
   return (
-    <div className="layer" style={style}>
+    <div className="layer" style={{...style, ...props.style}}>
       {props.children}
     </div>
   );
