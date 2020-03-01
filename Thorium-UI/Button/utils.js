@@ -1,5 +1,5 @@
 export const updateFromProps = (style, props, context) => {
-  let update = { ...style };
+  const update = {};
   let variants = context.theme.button;
 
   // Props is immutable, so we need to make a mutable copy
@@ -50,6 +50,10 @@ export const updateFromProps = (style, props, context) => {
             update.backgroundColor = variants.light.backgroundColor;
             update.color = variants.light.color;
             break;
+          case "link":
+            update.backgroundColor = variants.link.backgroundColor;
+            update.color = variants.link.color;
+            break;
           default:
             break;
         }
@@ -72,7 +76,9 @@ export const updateFromProps = (style, props, context) => {
           default:
             break;
         }
+      default:
+        return null;
     }
   });
-  return update;
+  return { ...style, ...update };
 };

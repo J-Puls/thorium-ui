@@ -11,8 +11,7 @@ import { colors } from "./colors";
 
 const defaultBody = {
   margin: "0",
-  "font-family":
-    "'Segoe UI', 'Roboto','Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans','Helvetica Neue', sans-serif"
+  "font-family": "'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans','Helvetica Neue', sans-serif"
 };
 export const body = {
   dark: {

@@ -26,7 +26,7 @@ const Container = props => {
   }, [context.viewportSizeName]);
 
   return (
-    <div className="container" style={style}>
+    <div className="container" style={{ ...style, ...props.style }}>
       {props.children}
     </div>
   );

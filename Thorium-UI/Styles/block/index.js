@@ -8,5 +8,4 @@ export const blockStyle = {
     flexGrow: 1,
     maxWidth: "100%",
     boxSizing: "inherit",
-    textAlign: "center"
 };

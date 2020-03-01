@@ -30,6 +30,10 @@ export const button = {
     dark: {
       backgroundColor: colors.neutral.medGray,
       color: colors.neutral.pureWhite
+    },
+    link: {
+      backgroundColor: "transparent",
+      color: colors.dark.secondary
     }
   },
   light: {
@@ -60,6 +64,10 @@ export const button = {
     dark: {
       backgroundColor: colors.neutral.darkGray,
       color: colors.neutral.lightWhite
+    },
+    link: {
+      backgroundColor: "transparent",
+      color: colors.light.secondary
     }
   }
 };
