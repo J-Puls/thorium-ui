@@ -3,12 +3,12 @@ A live sample app can be found at https://thorium-ui-preview.now.sh/
 
 ***Please note, this preview is only updated periodically and does not always represent the current state of the project***
 
-# How to use Thorium in your project
+# How to use Thorium-UI in your project
 Thorium-UI is in the very early stages of development right now. As such, there is no automated way to add it to your project.
 With that said, getting started with its current form is very simple.
 
 ### Step 1: Getting it installed
-Clone the repo and copy the Thorium-UI file to the `/src` file of your React project.
+Clone the repo and copy the Thorium-UI file to the `/src` directory of your React project.
 
 ### Step 2: Setting up you App
 Once the Thorium-UI source file is in your project, we need to do some very minimal boilerplate to get things up and running. Start by importing the `ThoriumRoot` component to the return statement of your App (or the render method, if using a class-based App component).
