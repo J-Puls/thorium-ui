@@ -69,3 +69,44 @@ export default ToggleButton;
 ```
 
 That's all there is to it! You can now add the toggle button anywhere inside the ThoriumRoot component, and it will dynamically change the theme styling for the entire application.
+# Thorium Components
+The goal of Throium-UI is to provide an intuitive, user-friendly API to build React components without needing a ton of CSS clutter. Providing either values to the `style` prop, or styling via CSS will override the built-in styling of any component.
+## The Grid System
+Like with many popular libraries and frameworks, Thorium uses a flexbox-based grid system to enable responsive design. There are three main components that make up this grid system:
+## Container:
+Containers provide a responsive, centered and padded container for the page contents. The `max-width` of the Container is calculated dependant on the current viewport width at different breakpoints, and will scale appropriately to ensure proper spacing regardless of viewport size.
+## Layer:
+Layer is comparable to `row` in the flexbox.
+
+Custom Props:
+  - **justify** *(string)*
+    + "start"
+    + "end"
+    + "center"
+    + "around"
+    + "between"
+## Block:
+Block is comparable to `col` in the flexbox.
+
+#### Sizing props: *(xs, sm, md, lg, xl)*
+Block sizing is controlled via props which take an integer value corresponding to how wide the object should be within the layer, out of 12 (ex. 3 corresponds to 3/12 the total width of the layer). Any combination of these props can be used together, or if none are provided, the block will default to fill the layer.
+
+  Custom props:
+  - **justify** *(string)*
+    + "start"
+    + "end"
+    + "center"
+    + "around"
+    + "between"
+  - **bg** *(hex, RGB, or HTML color name string)*
+  - **rounded** *(boolean, adds small border-radius)*
+  - **round** *(boolean, adds border-radius: 50%)*
+  - **translucent** *(boolean, lowers the opacity of the background color)*
+ ## Responsive Breakpoints
+ Thorium-UI uses five preset breakpoints to control layout scaling. The current breakpoint can be accessed at any point by accessing `ThoriumContext.viewportSizeName`, allowing components to react accordingly.
+ #### Breakpoints:
+  - **xs**: *viewport width* ***less than 576px***
+  - **sm**: *viewport width* ***between 576px and 767px***
+  - **md**: *viewport width* ***between 768px and  1023px***
+  - **lg**: *viewport width* ***between 1024px and 1919px***
+  - **xl**: *viewport width* ***greater than 1919px***
