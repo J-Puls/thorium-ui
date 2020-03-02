@@ -10,7 +10,7 @@ With that said, getting started with its current form is very simple.
 ### Step 1: Getting it installed
 Clone the repo and copy the Thorium-UI file to the `/src` directory of your React project.
 
-### Step 2: Setting up you App
+### Step 2: Setting up your App
 Once the Thorium-UI source file is in your project, we need to do some very minimal boilerplate to get things up and running. Start by importing the `ThoriumRoot` component to the return statement of your App (or the render method, if using a class-based App component).
 
 Your App.js file should look like this.
