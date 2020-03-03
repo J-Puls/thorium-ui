@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { layerStyle } from "../Styles";
-import { updateLayerStyle } from "./utils";
+import { updateFromProps } from "./utils";
+
 const Layer = props => {
   const [style, setStyle] = useState(layerStyle);
 
-  // Update the style if a 'justify' prop is given
   useEffect(() => {
-    updateLayerStyle(props, style, setStyle);
+    setStyle({ ...style, ...updateFromProps(props) });
   }, []);
 
   return (

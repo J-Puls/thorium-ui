@@ -31,7 +31,6 @@ const ThoriumRoot = props => {
    *    md: >= 768 && < 992
    *    lg: >= 992 && < 1024
    *    xl: >= 1024 && < 1920
-   *    fhd: > 1920
    */
   useEffect(() => {
     const w = viewportWidth;

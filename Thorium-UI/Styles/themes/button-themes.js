@@ -33,7 +33,7 @@ export const button = {
     },
     link: {
       backgroundColor: "transparent",
-      color: colors.dark.secondary
+      color: colors.dark.linkText
     }
   },
   light: {
@@ -67,7 +67,7 @@ export const button = {
     },
     link: {
       backgroundColor: "transparent",
-      color: colors.light.secondary
+      color: colors.light.linkText
     }
   }
 };

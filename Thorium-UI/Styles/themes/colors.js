@@ -21,7 +21,8 @@ export const colors = {
     danger: "#ee3b4a",
     dangerText: "#2b0000",
     warning: "#fff152",
-    warningText: "#382903"
+    warningText: "#382903",
+    linkText: "#00ced1"
   },
   light: {
     primary: "#422e5f",
@@ -33,6 +34,7 @@ export const colors = {
     danger: "#c50b1b",
     dangerText: "#fffacd",
     warning: "#ffec00",
-    warningText: "#1d1905"
+    warningText: "#1d1905",
+    linkText: "#3455db"
   }
 };

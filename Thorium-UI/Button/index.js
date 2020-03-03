@@ -1,21 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import ThoriumContext from "../ThoriumRoot/ThoriumContext";
 import { updateFromProps } from "./utils";
+import { buttonStyle } from "../Styles";
 
 const Button = props => {
   const context = useContext(ThoriumContext);
-
-  // Sets up the general button styling (defaults to primary)
   const defaultStyle = {
     ...context.theme.button.primary,
-    borderRadius: ".25rem",
-    border: "1px solid transparent",
-    padding: ".375rem .75rem",
-    fontWeight: "400",
-    outline: "none",
-    cursor: "pointer",
-    transitionDuration: ".15s",
-    fontFamily: "inherit"
+    ...buttonStyle
   };
 
   const [style, setStyle] = useState(defaultStyle);
@@ -49,6 +41,7 @@ const Button = props => {
     }
     setStyle({ ...newStyle });
   }, [isClicked]);
+
   // Changes style when button is hovered ('onHover' does not exist)
   const handleMouseEnter = () => {
     // Any variant except 'link'
@@ -59,16 +52,22 @@ const Button = props => {
         borderColor: "#00000044"
       });
     } else {
-        if (context.theme === context.themes.dark) setStyle({...style, color: "white"})
-        else setStyle({...style, color: "black"})
+      if (context.theme === context.themes.dark)
+        setStyle({ ...style, opacity: .7 });
+      else setStyle({ ...style, color: "black" });
     }
   };
 
   // Resets style when un-hovered
   const handleMouseLeave = () => {
-    setStyle({ ...style, boxShadow: "none", borderColor: "transparent", opacity: 1 });
+    setStyle({
+      ...style,
+      boxShadow: "none",
+      borderColor: "transparent",
+      opacity: 1
+    });
     if (style.backgroundColor === "transparent") {
-      setStyle({...style, color: context.theme.button.link.color})
+      setStyle({ ...style, color: context.theme.button.link.color, opacity: 1 });
     }
     isClicked && setIsClicked(false);
   };

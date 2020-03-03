@@ -1,23 +1,25 @@
-export const updateLayerStyle = (props, sty, set) => {
-  const styCopy = sty;
-  const justify = props.justify;
+const updateJustify = justify => {
+  let x = { display: "flex", alignItems: "baseline" };
   switch (justify) {
-    case "start":
-      styCopy.justifyContent = "flex-start";
-      break;
     case "center":
-      styCopy.justifyContent = "center";
-      break;
+      return { ...x, justifyContent: "center" };
+    case "start":
+      return { ...x, justifyContent: "flex-start" };
     case "end":
-      styCopy.justifyContent = "flex-end";
-      break;
-    case "between":
-      styCopy.justifyContent = "space-between";
-      break;
+      return { ...x, justifyContent: "flex-end" };
     case "around":
-      styCopy.justifyContent = "space-around";
-      break;
+      return { ...x, justifyContent: "space-around" };
+    case "between":
+      return { ...x, justifyContent: "space-between" };
   }
+};
 
-  if (props.height) styCopy.height = props.height;
+export const updateFromProps = props => {
+  let updated = {};
+
+  // Dynamically update the style if a 'justify' prop is given
+  props["justify"] &&
+    (updated = { ...updated, ...updateJustify(props.justify) });
+
+  return updated;
 };
