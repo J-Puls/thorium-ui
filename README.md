@@ -98,7 +98,7 @@ Block sizing is controlled via props which take an integer value corresponding t
     + "center"
     + "around"
     + "between"
-  - **bg** *(hex, RGB, or HTML color name string)*
+  - **bg** *(hex, RGB, or HTML color name string, adds background-color)*
   - **rounded** *(boolean, adds small border-radius)*
   - **round** *(boolean, adds border-radius: 50%)*
   - **translucent** *(boolean, lowers the opacity of the background color)*
