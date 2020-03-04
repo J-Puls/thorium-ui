@@ -13,6 +13,8 @@ Clone the repo and copy the Thorium-UI file to the `/src` directory of your Reac
 ### Step 2: Setting up your App
 Once the Thorium-UI source file is in your project, we need to do some very minimal boilerplate to get things up and running. Start by importing the `ThoriumRoot` component to the return statement of your App (or the render method, if using a class-based App component).
 
+When using ThroiumRoot, you must pass it either a "dark" or "light" prop. This will set the default theme to use (this can always be toggled later inside your components).
+
 Your App.js file should look like this.
 
 ```
@@ -22,7 +24,8 @@ import ThoriumRoot from "../Thorium-UI/ThoriumRoot";
 const App = () => {
 
   return (
-    <ThoriumRoot>
+    //When rendering the root element, you must declare a default theme to use (either dark or light)
+    <ThoriumRoot dark>
       /* Add your components here! */
     </ThoriumRoot>
   );
