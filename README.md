@@ -10,11 +10,11 @@ The goal of Throium-UI is to provide an intuitive, user-friendly API with which 
 Clone the GitHub repository and copy the Thorium-UI file to the `/src` directory of your React project.
 
 ## Setting up your App component
-Once the Thorium-UI source file is in your project, we need to do some very minimal boilerplate to get things up and running. Start by including the ThoriumRoot component in the return statement of your App (or the render method, if using a class-based App component).
+Once the `Thorium-UI` source file is in your project, we need to do some very minimal boilerplate to get things up and running. Start by including the `ThoriumRoot` component in the return statement of your App component (or the render method, if using a class-based App component).
 
-When using ThroiumRoot, you must pass it either a dark or light prop. This will set the default theme to use (this can always be toggled later inside your components).
+When using ThroiumRoot, you must pass it either a `dark` or `light` prop. This will set the default theme to use (this can always be toggled later inside your components).
 
-Your App.js file should look like this.
+Your App.js file should look like this:
 
 ```
 import React from "react";
