@@ -1,17 +1,17 @@
 import React from "react";
 import Block from "../Block";
 
-const Nav = props => {
+const Sidebar = props => {
   return (
     <Block
-      all={props.all}
       xs={props.xs}
       sm={props.sm}
       md={props.md}
       lg={props.lg}
       xl={props.xl}
-      justify={props.justify}
-      vertical={props.vertical}
+      bg={props.bg}
+      translucent={props.translucent}
+      style={{ display: "flex", flexDirection: "column", ...props.style }}
       className={props.className}
       id={props.id}
     >
@@ -20,4 +20,4 @@ const Nav = props => {
   );
 };
 
-export default Nav;
+export default Sidebar;

@@ -1,3 +1,4 @@
 export const linkStyle = {
-    textDecoration: "none"
+    textDecoration: "none",
+    cursor: "pointer"
 }

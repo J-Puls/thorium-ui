@@ -1,18 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
 import ThoriumContext from "../../ThoriumRoot/ThoriumContext";
 import { linkStyle } from "../../Styles";
+import { Link } from "react-router-dom";
 
 const NavLink = props => {
   const context = useContext(ThoriumContext);
 
-  const defaultStyle = {
-    ...linkStyle,
-    ...context.theme.link
-  };
-  const [style, setStyle] = useState(defaultStyle);
+  const [style, setStyle] = useState({ ...linkStyle, ...context.theme.link });
 
   useEffect(() => {
-    setStyle({ ...style, ...context.theme.link });
+    setStyle({ ...linkStyle, ...context.theme.link });
   }, [context.theme]);
 
   const handleMouseEnter = () => {
@@ -23,22 +20,26 @@ const NavLink = props => {
   };
   const handleClick = e => {
     if (props.onClick) {
-        e.preventDefault();
-        props.onClick();
+      e.preventDefault();
+      props.onClick();
     }
   };
 
   return (
-    <a
+    <Link
+      className={props.className}
+      id={props.id}
+      name={props.name}
       href={props.href}
       rel={props.rel}
-      style={style}
+      style={{ textDecoration: "none", ...style }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={e => handleClick(e)}
+      to={props.to}
     >
       {props.children}
-    </a>
+    </Link>
   );
 };
 export default NavLink;

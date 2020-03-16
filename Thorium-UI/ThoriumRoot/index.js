@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
 import ThoriumContext from "./ThoriumContext";
-import { themes } from "../Styles";
+import themes from "../themes";
+
+// Check for a 'customThemes.js' file
+let customThemes;
+try {
+  const data = require("../../customThemes");
+  customThemes = data.customThemes;
+} catch {
+  console.info("Custom theme not found. Using default theme.");
+}
 
 const ThoriumRoot = props => {
-
   // Set default theme via props
   let defaultTheme;
-  (props['light']) && (defaultTheme = themes.light);
-  (props['dark']) && (defaultTheme = themes.dark);
+  props["light"] && (defaultTheme = themes.light);
+  props["dark"] && (defaultTheme = themes.dark);
 
   // Grab the current viewport width (to be used for component style calculation)
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
@@ -49,7 +57,6 @@ const ThoriumRoot = props => {
       setViewportWidth(window.innerWidth);
     };
     window.addEventListener("resize", handleResize);
-    console.log("listener set");
   }, []);
 
   // Context to be accessable by all components
@@ -58,7 +65,9 @@ const ThoriumRoot = props => {
     viewportSizeName,
     theme,
     setTheme,
-    themes
+    themes,
+    defaultTheme,
+    customThemes
   };
 
   /**
@@ -68,19 +77,27 @@ const ThoriumRoot = props => {
    * The value comes from a JSON object, so we must first format it to valid CSS syntax
    */
   useEffect(() => {
-    const quotesAndBraces = /[\"\{\}]/g;
-    const commas = /[\,]/g;
+    const quotesAndBraces = /["{}]/g;
+    const commas = /[,]/g;
+    let bodyStyle = theme.body;
+    // If a customThem module was found, overwrite the default theme
+    customThemes && (bodyStyle = { ...bodyStyle, ...customThemes });
+
+    // Explicitely set the body styling
     document.body.style.cssText =
-      JSON.stringify(theme.body)
+      JSON.stringify(bodyStyle)
         .replace(quotesAndBraces, " ")
         .replace(commas, ";")
         .trim() + ";";
   }, [theme]);
   return (
     <ThoriumContext.Provider value={context}>
-      <thor-root className="thorium-root" style={{ boxSizing: "border-box" }}>
+      <thorium-root
+        className={props.className}
+        style={{ boxSizing: "border-box", ...props.style }}
+      >
         {props.children}
-      </thor-root>
+      </thorium-root>
     </ThoriumContext.Provider>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
-import Block from "../Block";
+import Block from "../../Block";
 
-const Nav = props => {
+const FormElement = props => {
   return (
     <Block
       all={props.all}
@@ -13,11 +13,11 @@ const Nav = props => {
       justify={props.justify}
       vertical={props.vertical}
       className={props.className}
-      id={props.id}
+      style={{...props.style}}
     >
       {props.children}
     </Block>
   );
 };
 
-export default Nav;
+export default FormElement;

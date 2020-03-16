@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { layerStyle } from "../Styles";
 import { updateFromProps } from "./utils";
 
 const Layer = props => {
-  const [style, setStyle] = useState(layerStyle);
-
-  useEffect(() => {
-    setStyle({ ...style, ...updateFromProps(props) });
-  }, []);
+  const style = { ...layerStyle, ...updateFromProps(props) };
 
   return (
-    <thor-layer className="layer" style={{ ...style, ...props.style }}>
+    <div
+      className={props.className}
+      id={props.id}
+      style={{ ...style, ...props.style }}
+    >
       {props.children}
-    </thor-layer>
+    </div>
   );
 };
 
