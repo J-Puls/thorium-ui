@@ -1,4 +1,4 @@
-# thorium-UI
+# Thorium-UI
 To read the full documentation, please visit https://thorium-ui-preview.now.sh/.
 
 ***Please note, this documentation is only updated periodically and does not always represent the current state of the project***
