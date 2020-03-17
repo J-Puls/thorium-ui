@@ -3,7 +3,7 @@ To read the full documentation, please visit https://thorium-ui-preview.now.sh/.
 
 ***Please note, this documentation is only updated periodically and does not always represent the current state of the project***
 # Overview
-The goal of Throium-UI is to provide an intuitive, user-friendly API with which to build React components, without needing a ton of CSS clutter. This does not mean, however, that you are stuck with the default styling baked into Thorium-UI. Either providing values to the style prop, or styling via CSS will override the built-in styling of any component.
+The goal of Throium-UI is to provide an intuitive, user-friendly API with which to build React applications without needing a ton of CSS clutter. This does not mean, however, that you are stuck with the default styling baked into Thorium-UI. Either providing values to the style prop, or styling via CSS will override the built-in styling of any component.
 
 # Getting Started
 ## Installation
