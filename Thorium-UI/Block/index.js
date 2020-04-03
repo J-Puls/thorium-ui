@@ -1,26 +1,59 @@
-import React, { useContext, useState, useEffect } from "react";
-import ThoriumContext from "../ThoriumRoot/ThoriumContext";
+import React, { Component } from "react";
+import { ThoriumConsumer } from "../ThoriumContext";
 import { blockStyle } from "../Styles";
 import { updateFromProps } from "./utils";
+import PropTypes from "prop-types";
+import { mapPropsToAttrs } from "../ThoriumUtils";
 
-const Block = props => {
-  const context = useContext(ThoriumContext);
-  const vpSize = context.viewportSizeName;
-  const [style, setStyle] = useState({
-    blockStyle,
-    ...updateFromProps(props, vpSize)
-  });
-
-  // Update sizing when viewport size changes
-  useEffect(() => {
-    setStyle({ ...blockStyle, ...updateFromProps(props, vpSize) });
-  }, [props, vpSize]);
-
-  return (
-    <div className={props.className} style={{ ...style, ...props.style }}>
-      {props.children}
-    </div>
-  );
+const propTypes = {
+  all: PropTypes.number,
+  xs: PropTypes.number,
+  sm: PropTypes.number,
+  md: PropTypes.number,
+  lg: PropTypes.number,
+  xl: PropTypes.number,
+  justify: PropTypes.string,
+  vertical: PropTypes.bool,
+  rounded: PropTypes.bool,
+  round: PropTypes.bool,
+  bg: PropTypes.string,
+  transucent: PropTypes.bool
 };
 
+class Block extends Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = () => {
+      this.props.onClick && this.props.onClick();
+    };
+    this.handleMouseEnter = () => {
+      this.props.onMouseEnter && this.props.onMouseEnter();
+    };
+    this.onMouseLeave = () => {
+      this.props.onMouseLeave && this.props.onMouseLeave();
+    };
+  }
+  render() {
+    return (
+      <ThoriumConsumer>
+        {context => {
+          return (
+            <div
+              {...mapPropsToAttrs(this.props)}
+              style={{
+                ...blockStyle,
+                ...updateFromProps(this.props, context.viewportSizeName),
+                ...this.props.style
+              }}
+            >
+              {this.props.children}
+            </div>
+          );
+        }}
+      </ThoriumConsumer>
+    );
+  }
+}
+
+Block.propTypes = propTypes;
 export default Block;

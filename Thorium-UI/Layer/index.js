@@ -1,15 +1,18 @@
 import React from "react";
 import { layerStyle } from "../Styles";
 import { updateFromProps } from "./utils";
+import { mapPropsToAttrs } from "../ThoriumUtils";
 
 const Layer = props => {
-  const style = { ...layerStyle, ...updateFromProps(props) };
-
   return (
     <div
-      className={props.className}
-      id={props.id}
-      style={{ ...style, ...props.style }}
+      {...mapPropsToAttrs(props)}
+      align={props.align}
+      style={{
+        ...layerStyle,
+        ...updateFromProps(props),
+        ...props.style
+      }}
     >
       {props.children}
     </div>

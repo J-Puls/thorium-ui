@@ -1,105 +1,76 @@
-import React, { useState, useEffect } from "react";
-import ThoriumContext from "./ThoriumContext";
+import React, { Component } from "react";
+import ThoriumContext from "../ThoriumContext";
 import themes from "../themes";
+import init from "../ThoriumUtils/thoriumInit";
+import { updateVpName } from "../ThoriumUtils/updateVpName";
+import { updateBodyStyle } from "../ThoriumUtils/updateBodyStyle";
 
-// Check for a 'customThemes.js' file
-let customThemes;
-try {
-  const data = require("../../customThemes");
-  customThemes = data.customThemes;
-} catch {
-  console.info("Custom theme not found. Using default theme.");
-}
+class ThoriumRoot extends Component {
+  constructor(props) {
+    super(props);
+    // Get initial styling data before render
+    this.initData = init();
 
-const ThoriumRoot = props => {
-  // Set default theme via props
-  let defaultTheme;
-  props["light"] && (defaultTheme = themes.light);
-  props["dark"] && (defaultTheme = themes.dark);
-
-  // Grab the current viewport width (to be used for component style calculation)
-  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
-  const [viewportSizeName, setViewportSizeName] = useState("");
-
-  /**
-   * Setting the theme in ThoriumRoot allows us to access it from any component.
-   *
-   * Calling setTheme from any component easily allows the application theme to be
-   * toggled between light and dark
-   */
-  const [theme, setTheme] = useState(defaultTheme);
-
-  /**
-   * Update the viewport size name when the browser is resized to set breakpoints
-   * (to be used for component style calculation)
-   *
-   * Breakpoints:
-   *    xs: < 576px
-   *    sm: >= 576 && < 768
-   *    md: >= 768 && < 992
-   *    lg: >= 992 && < 1024
-   *    xl: >= 1024 && < 1920
-   */
-  useEffect(() => {
-    const w = viewportWidth;
-    let val;
-    if (w < 576) val = "xs";
-    else if (w >= 576 && w < 768) val = "sm";
-    else if (w >= 768 && w < 1024) val = "md";
-    else if (w >= 1024 && w < 1920) val = "lg";
-    else val = "xl";
-    setViewportSizeName(val);
-  }, [viewportWidth]);
-
-  // Update viewport width state when the browser is resized
-  useEffect(() => {
-    const handleResize = () => {
-      setViewportWidth(window.innerWidth);
+    // If a custom theme was found, append to current theme
+    if (this.initData.customThemes) {
+      this.defaultTheme = {
+        ...themes[this.props.defaultTheme],
+        ...this.initData.customThemes[this.props.defaultTheme]
+      };
+    }
+    this.state = {
+      viewportWidth: window.innerWidth,
+      viewportSizeName: updateVpName(window.innerWidth),
+      theme: this.defaultTheme || themes[props.defaultTheme]
     };
-    window.addEventListener("resize", handleResize);
-  }, []);
 
-  // Context to be accessable by all components
-  const context = {
-    viewportWidth,
-    viewportSizeName,
-    theme,
-    setTheme,
-    themes,
-    defaultTheme,
-    customThemes
-  };
+    // Provide a way for children to modify the theme through Context
+    this.setTheme = data => {
+      this.setState({ theme: data });
+    };
 
-  /**
-   * Body element resides outside of the ThoriumRoot component, so we must
-   * explicitly update it when the theme is changed.
-   *
-   * The value comes from a JSON object, so we must first format it to valid CSS syntax
-   */
-  useEffect(() => {
-    const quotesAndBraces = /["{}]/g;
-    const commas = /[,]/g;
-    let bodyStyle = theme.body;
-    // If a customThem module was found, overwrite the default theme
-    customThemes && (bodyStyle = { ...bodyStyle, ...customThemes });
+    // Updates the viewport state properties when the window is resized past a breakpoint
+    this.handleResize = () => {
+      if (updateVpName(window.innerWidth) !== this.state.viewportSizeName) {
+        this.setState({
+          viewportWidth: window.innerWidth,
+          viewportSizeName: updateVpName(window.innerWidth)
+        });
+      }
+    };
+    window.addEventListener("resize", this.handleResize);
+  }
 
-    // Explicitely set the body styling
-    document.body.style.cssText =
-      JSON.stringify(bodyStyle)
-        .replace(quotesAndBraces, " ")
-        .replace(commas, ";")
-        .trim() + ";";
-  }, [theme]);
-  return (
-    <ThoriumContext.Provider value={context}>
-      <thorium-root
-        className={props.className}
-        style={{ boxSizing: "border-box", ...props.style }}
-      >
-        {props.children}
-      </thorium-root>
-    </ThoriumContext.Provider>
-  );
-};
+  // Remove the listener if re-rendered (memory leak cleanup)
+  componentWillUnmount() {
+    window.removeEventListener("resize");
+  }
+
+  render() {
+    // Body styling must be done explicitly as it resides outside of the ThroiumRoot component
+    updateBodyStyle(this.state.theme.body, this.initData.customThemes);
+
+    // Set up Context to be passed to children
+    const context = {
+      viewportWidth: this.state.viewportWidth,
+      viewportSizeName: this.state.viewportSizeName,
+      theme: this.state.theme,
+      setTheme: this.setTheme,
+      ...this.initData
+    };
+
+    return (
+      <ThoriumContext.Provider value={context}>
+        <thorium-root
+          id="thorium-root"
+          className="thorium-root"
+          style={{ boxSizing: "border-box", ...this.props.style }}
+        >
+          {this.props.children}
+        </thorium-root>
+      </ThoriumContext.Provider>
+    );
+  }
+}
 
 export default ThoriumRoot;

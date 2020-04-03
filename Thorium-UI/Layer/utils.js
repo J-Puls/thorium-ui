@@ -1,4 +1,4 @@
-import { updateJustify, makeBGTranslucent } from "../ThoriumUtils";
+import { updateJustify, makeTranslucent } from "../ThoriumUtils";
 
 export const updateFromProps = props => {
   let updated = {};
@@ -9,7 +9,7 @@ export const updateFromProps = props => {
 
   props.bg && (updated.backgroundColor = props.bg);
 
-  props.translucent && (updated.backgroundColor = makeBGTranslucent(props.bg));
+  props.translucent && (updated.backgroundColor = makeTranslucent(props.bg));
 
   props.sticky &&
     (updated = { ...updated, position: "sticky", top: 0, zIndex: 1000 });

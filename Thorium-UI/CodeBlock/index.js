@@ -1,16 +1,20 @@
-import React, { useContext } from "react";
-import ThoriumContext from "../ThoriumRoot/ThoriumContext";
+import React from "react";
+import { ThoriumConsumer } from "../ThoriumContext";
 import { codeblockStyle } from "../Styles";
 
 const CodeBlock = props => {
-  const context = useContext(ThoriumContext);
-  const style = {...codeblockStyle}
-  style.pre.backgroundColor = context.theme.codeblock.backgroundColor;
-
   return (
-    <pre style={{ ...style.pre, ...props.style }} className={props.className}>
-      <code style={{ ...style.code, ...props.style }}>{props.children}</code>
-    </pre>
+    <ThoriumConsumer>
+      {context => {
+        const pre = { ...codeblockStyle.pre, ...context.theme.codeblock };
+        const code = codeblockStyle.code;
+        return (
+          <pre style={{ ...pre, ...props.style }} className={props.className}>
+            <code style={{ ...code, ...props.style }}>{props.children}</code>
+          </pre>
+        );
+      }}
+    </ThoriumConsumer>
   );
 };
 

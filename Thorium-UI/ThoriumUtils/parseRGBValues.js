@@ -1,3 +1,4 @@
+// Parses an HTML RGB string and returns an object with the individual values
 export const parseRGBValues = rgb => {
   const parsed = rgb
     .replace("rgb(", "")

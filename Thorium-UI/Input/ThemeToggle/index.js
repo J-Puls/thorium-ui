@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import ToggleSwitch from "../ToggleSwitch";
-import ThoriumContext from "../../ThoriumRoot/ThoriumContext";
+import ThoriumContext from "../../ThoriumContext";
+import { mapPropsToAttrs } from "../../ThoriumUtils";
 
 const ThemeToggle = props => {
   const context = useContext(ThoriumContext);
@@ -12,25 +13,30 @@ const ThemeToggle = props => {
   const handleChange = () => {
     setIsOn(!isOn);
     if (context.theme.name === "dark") {
-      context.customThemes && context.setTheme(context.customThemes.light);
+      context.customThemes &&
+        context.setTheme({
+          ...context.themes.light,
+          ...context.customThemes.light
+        });
       !context.customThemes && context.setTheme(context.themes.light);
     } else {
-      context.customThemes && context.setTheme(context.customThemes.dark);
+      context.customThemes &&
+        context.setTheme({
+          ...context.themes.dark,
+          ...context.customThemes.dark
+        });
       !context.customThemes && context.setTheme(context.themes.dark);
     }
   };
 
   return (
     <ToggleSwitch
-      id={props.id}
-      name={props.name}
+      {...mapPropsToAttrs(props, "input")}
       large={props.large}
       variant="themeToggle"
       onChange={handleChange}
       label={props.label}
       checked={isOn}
-      style={{ ...props.style }}
-      className={props.className}
     />
   );
 };

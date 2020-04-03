@@ -1,24 +1,14 @@
 import React from "react";
 import { imageStyle } from "../Styles";
 import { updateFromProps } from "./utils";
+import { mapPropsToAttrs } from "../ThoriumUtils";
 
 const Image = props => {
   const style = { ...imageStyle, ...updateFromProps(props) };
-
   return (
+    //eslint-disable-next-line
     <img
-      src={props.src}
-      className={props.className}
-      alt={props.alt}
-      crossOrigin={props.crossOrigin}
-      height={props.height}
-      width={props.width}
-      ismap={props.ismap}
-      longdesc={props.longdesc}
-      referrerPolicy={props.referrerPolicy}
-      sizes={props.sizes}
-      srcSet={props.srcSet}
-      useMap={props.useMap}
+      {...mapPropsToAttrs(props, "img")}
       style={{ ...style, ...props.style }}
     />
   );

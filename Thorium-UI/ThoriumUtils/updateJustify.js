@@ -1,3 +1,4 @@
+// Returns a 'justify-content' value based on the given 'justify' prop
 export const updateJustify = justify => {
   let x = { display: "flex", alignItems: "baseline" };
   switch (justify) {

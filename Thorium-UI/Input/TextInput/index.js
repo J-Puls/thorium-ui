@@ -1,35 +1,38 @@
-import React, { useState, useEffect, useContext } from "react";
-import { updateFromProps } from "./utils";
-import ThoriumContext from "../../ThoriumRoot/ThoriumContext";
+import React, { Component } from "react";
+import { ThoriumConsumer } from "../../ThoriumContext";
 import { textInputStyle } from "../../Styles";
+import { mapPropsToAttrs } from "../../ThoriumUtils";
 
-const TextInput = props => {
-  const context = useContext(ThoriumContext);
-  const defaultStyle = {
-    ...textInputStyle
-  };
-  const [style, setStyle] = useState({
-    ...defaultStyle,
-    ...updateFromProps(props, context.theme)
-  });
-
-  useEffect(() => {
-    setStyle({ ...defaultStyle, ...updateFromProps(props, context.theme) });
-  }, [context.theme, defaultStyle, props]);
-
-  return (
-    <>
-      {props.label && <label htmlFor={props.name}>{props.label}</label>}
-      <input
-        id={props.id}
-        className={props.className}
-        name={props.name}
-        type={props.type}
-        placeholder={props.placeholder}
-        style={{ ...style, ...props.style }}
-      />
-    </>
-  );
-};
+class TextInput extends Component {
+  render() {
+    return (
+      <ThoriumConsumer>
+        {context => {
+          let style = textInputStyle.general;
+          !this.props.size && (style = { ...style, ...textInputStyle.normal });
+          this.props.size === "lg" &&
+            (style = { ...style, ...textInputStyle.large });
+          this.props.size === "sm" &&
+            (style = { ...style, ...textInputStyle.small });
+          this.props.bordered &&
+            (style = { ...style, ...textInputStyle.bordered });
+          return (
+            <>
+              {this.props.label && (
+                <label htmlFor={this.props.id} form={this.props.form} style={{ maxWidth: "90%" }}>
+                  {this.props.label}
+                </label>
+              )}
+              <input
+                {...mapPropsToAttrs(this.props, "input")}
+                style={{ ...style, ...context.theme.input }}
+              />
+            </>
+          );
+        }}
+      </ThoriumConsumer>
+    );
+  }
+}
 
 export default TextInput;

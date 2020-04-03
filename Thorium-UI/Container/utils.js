@@ -1,7 +1,7 @@
 export const updateFromVPName = (vpName, vpWidth) => {
   switch (vpName) {
     case "xs":
-      return vpWidth / 1.1;
+      return vpWidth;
     case "sm":
       return vpWidth / 1.12;
     case "md":

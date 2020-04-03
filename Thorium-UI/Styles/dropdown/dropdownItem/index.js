@@ -1,4 +1,5 @@
 export const dropdownItemStyle = {
-  padding: ".25rem",
+  paddingTop: ".25rem",
+  paddingBottom: ".25rem",
   cursor: "pointer"
 };

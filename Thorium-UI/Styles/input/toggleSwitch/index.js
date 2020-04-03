@@ -1,4 +1,5 @@
 export const toggleSwitchStyle = {
+  container: { display: "inline-flex", alignItems: "flex-end" },
   origin: {
     opacity: 0,
     width: 0,
@@ -57,7 +58,7 @@ export const toggleSwitchStyle = {
       boxShadow: "inset 0 0 4px 2px #00000055",
       backgroundColor: "#fafafa"
     },
-    off: { transform: "translateX(.025rem)" },
-    on: { transform: "translateX(1.3rem)" }
+    off: { transform: "translateX(1.3rem)" },
+    on: { transform: "translateX(.025rem)" }
   }
 };

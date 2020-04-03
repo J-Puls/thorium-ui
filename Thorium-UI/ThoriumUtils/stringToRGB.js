@@ -1,5 +1,6 @@
 import { parseRGBValues } from "./parseRGBValues";
 
+// Converts HTML standard color name strings to RGB string format
 export const stringToRGB = str => {
   const e = document.createElement("div");
   e.style.color = str;
