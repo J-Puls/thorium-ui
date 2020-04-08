@@ -22,7 +22,7 @@ import ThoriumRoot from "../Thorium-UI/ThoriumRoot";
 
 const App = () => {
   return (
-    <ThoriumRoot dark>
+    <ThoriumRoot defaultTheme="dark">
       /* YOUR Code HERE */
     </ThoriumRoot>
   );
