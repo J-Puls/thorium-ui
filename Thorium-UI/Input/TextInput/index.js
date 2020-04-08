@@ -7,7 +7,7 @@ class TextInput extends Component {
   render() {
     return (
       <ThoriumConsumer>
-        {context => {
+        {(context) => {
           let style = textInputStyle.general;
           !this.props.size && (style = { ...style, ...textInputStyle.normal });
           this.props.size === "lg" &&
@@ -19,7 +19,11 @@ class TextInput extends Component {
           return (
             <>
               {this.props.label && (
-                <label htmlFor={this.props.id} form={this.props.form} style={{ maxWidth: "90%" }}>
+                <label
+                  htmlFor={this.props.id}
+                  form={this.props.form}
+                  style={{ maxWidth: "90%" }}
+                >
                   {this.props.label}
                 </label>
               )}

@@ -1,9 +1,7 @@
 import attrs from "./htmlAttributes";
 
 export const mapPropsToAttrs = (props, tag) => {
-  const g = {};
-  const e = {};
-  const t = {};
+  const [g, e, t] = [{}, {}, {}];
   for (let key of attrs.HTMLGlobalAttributes.keys()) {
     props[key] && (g[key] = props[key]);
   }

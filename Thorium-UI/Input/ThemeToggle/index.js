@@ -3,7 +3,7 @@ import ToggleSwitch from "../ToggleSwitch";
 import ThoriumContext from "../../ThoriumContext";
 import { mapPropsToAttrs } from "../../ThoriumUtils";
 
-const ThemeToggle = props => {
+const ThemeToggle = (props) => {
   const context = useContext(ThoriumContext);
 
   // Default to the "off" position
@@ -16,14 +16,14 @@ const ThemeToggle = props => {
       context.customThemes &&
         context.setTheme({
           ...context.themes.light,
-          ...context.customThemes.light
+          ...context.customThemes.light,
         });
       !context.customThemes && context.setTheme(context.themes.light);
     } else {
       context.customThemes &&
         context.setTheme({
           ...context.themes.dark,
-          ...context.customThemes.dark
+          ...context.customThemes.dark,
         });
       !context.customThemes && context.setTheme(context.themes.dark);
     }

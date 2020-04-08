@@ -4,6 +4,8 @@ import React from 'react';
 const ThoriumContext = React.createContext({});
 ThoriumContext.displayName = 'ThoriumContext';
 
+// Provide shorthand version of Provider and Consumer
 export const ThoriumProvider = ThoriumContext.Provider;
 export const ThoriumConsumer = ThoriumContext.Consumer;
+
 export default ThoriumContext;

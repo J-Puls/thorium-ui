@@ -4,11 +4,21 @@ import { buttonStyle } from "../Styles";
 import PropTypes from "prop-types";
 import { mapPropsToAttrs } from "../ThoriumUtils";
 
+const validVariants = [
+  "primary",
+  "secondary",
+  "success",
+  "warning",
+  "danger",
+  "dark",
+  "light",
+  "link",
+];
 const propTypes = {
   animated: PropTypes.bool,
   size: PropTypes.string,
   stretch: PropTypes.bool,
-  variant: PropTypes.string
+  variant: PropTypes.oneOf(validVariants),
 };
 
 class Button extends Component {
@@ -60,7 +70,7 @@ class Button extends Component {
     let renderStyle = {
       ...buttonStyle.general,
       ...(buttonStyle[this.props.size] || buttonStyle.default),
-      ...style
+      ...style,
     };
     this.props.stretch &&
       (renderStyle = { ...renderStyle, ...buttonStyle.stretch });

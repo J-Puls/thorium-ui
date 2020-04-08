@@ -3,6 +3,23 @@ import { updateFromProps } from "./utils";
 import { ThoriumConsumer } from "../../ThoriumContext";
 import { toggleSwitchStyle as toggle } from "../../Styles";
 import { mapPropsToAttrs } from "../../ThoriumUtils";
+import PropTypes from "prop-types";
+
+const validVariants = [
+  "primary",
+  "secondary",
+  "success",
+  "warning",
+  "danger",
+  "dark",
+  "light",
+  "themeToggle",
+];
+const propTypes = {
+  checked: PropTypes.bool,
+  large: PropTypes.bool,
+  variant: PropTypes.oneOf(validVariants),
+};
 
 class ToggleSwitch extends Component {
   constructor(props) {
@@ -16,19 +33,19 @@ class ToggleSwitch extends Component {
 
     this.state = {
       switchState: toggle[this.init.state],
-      isChecked: this.init.val
+      isChecked: this.init.val,
     };
     this.handleClick = () => {
       let newState;
       if (this.state.isChecked) {
         newState = {
           isChecked: !this.state.isChecked,
-          switchState: this.toggle.on
+          switchState: this.toggle.on,
         };
       } else {
         newState = {
           isChecked: !this.state.isChecked,
-          switchState: this.toggle.off
+          switchState: this.toggle.off,
         };
       }
       this.setState({ ...newState }, () => {
@@ -48,7 +65,7 @@ class ToggleSwitch extends Component {
     }
     return (
       <ThoriumConsumer>
-        {context => {
+        {(context) => {
           return (
             <div
               style={{ ...toggle.container, ...this.props.style }}
@@ -76,7 +93,7 @@ class ToggleSwitch extends Component {
                 <span
                   style={{
                     ...toggle.rail,
-                    ...updateFromProps(this.props.variant, context.theme)
+                    ...updateFromProps(this.props.variant, context.theme),
                   }}
                 />
               </div>
@@ -87,5 +104,5 @@ class ToggleSwitch extends Component {
     );
   }
 }
-
+ToggleSwitch.propTypes = propTypes;
 export default ToggleSwitch;

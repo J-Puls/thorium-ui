@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ThoriumContext from "../../ThoriumContext";
 import { dropdownLinkStyle } from "../../Styles";
 import { mapPropsToAttrs } from "../../ThoriumUtils";
+
 class DropdownLink extends Component {
   static contextType = ThoriumContext;
   constructor(props) {
@@ -29,7 +30,7 @@ class DropdownLink extends Component {
           {...mapPropsToAttrs(this.props, "anchor")}
           style={{
             ...dropdownLinkStyle,
-            ...style
+            ...style,
           }}
           onClick={this.handleClick}
           onMouseEnter={this.handleMouseEnter}
@@ -46,7 +47,7 @@ class DropdownLink extends Component {
           href={this.props.href || this.props.to}
           rel={this.props.rel}
           style={{
-            ...dropdownLinkStyle
+            ...dropdownLinkStyle,
           }}
         >
           {this.props.children}

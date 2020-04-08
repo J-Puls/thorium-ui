@@ -1,6 +1,6 @@
 import checkForRouter from "./checkForRouter";
 import checkForCustomTheme from "./customThemeCheck";
-import themes from "../themes";
+import themes from "../Themes";
 
 // Returns an object containing initial state data for ThoriumRoot
 export const thoriumInit = () => {

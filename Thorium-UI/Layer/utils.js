@@ -1,18 +1,21 @@
 import { updateJustify, makeTranslucent } from "../ThoriumUtils";
 
-export const updateFromProps = props => {
-  let updated = {};
-  // Dynamically update the style based on given props
-  props.justify && (updated = { ...updated, ...updateJustify(props.justify) });
-
-  props.rounded && (updated.borderRadius = ".25rem");
-
-  props.bg && (updated.backgroundColor = props.bg);
-
-  props.translucent && (updated.backgroundColor = makeTranslucent(props.bg));
-
-  props.sticky &&
-    (updated = { ...updated, position: "sticky", top: 0, zIndex: 1000 });
-
-  return updated;
+// Update the Layer style when breakpoints are reached
+export const updateFromProps = (props) => {
+  let mods = {};
+  const validModifiers = ["justify", "rounded", "bg", "translucent", "sticky"];
+  // Check for valid modifiers and add styles accordingly
+  for (let key of validModifiers) {
+    if (props[key]) {
+      key === "justify" &&
+        (mods = { ...mods, ...updateJustify(props.justify) });
+      key === "rounded" && (mods.borderRadius = "1rem");
+      key === "bg" && (mods.backgroundColor = props.bg);
+      key === "translucent" &&
+        (mods.backgroundColor = makeTranslucent(props.bg));
+      key === "sticky" &&
+        (mods = { ...mods, position: "sticky", top: 0, zIndex: 1000 });
+    }
+  }
+  return mods;
 };

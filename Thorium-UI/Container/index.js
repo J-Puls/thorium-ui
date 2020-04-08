@@ -8,7 +8,7 @@ class Container extends Component {
   render() {
     return (
       <ThoriumConsumer>
-        {context => {
+        {(context) => {
           return (
             <div
               {...mapPropsToAttrs(this.props)}
@@ -18,7 +18,7 @@ class Container extends Component {
                   context.viewportSizeName,
                   context.viewportWidth
                 ),
-                ...this.props.style
+                ...this.props.style,
               }}
             >
               {this.props.children}

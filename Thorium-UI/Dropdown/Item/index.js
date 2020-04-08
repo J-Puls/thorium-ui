@@ -16,9 +16,9 @@ class DropdownItem extends Component {
   render() {
     return (
       <ThoriumConsumer>
-        {context => {
+        {(context) => {
           let style;
-          !this.props.isHovered
+          !this.state.isHovered
             ? (style = context.theme.dropdown.item.normal)
             : (style = context.theme.dropdown.item.hover);
           return (

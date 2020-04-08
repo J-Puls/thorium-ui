@@ -1,18 +1,14 @@
-export const updateFromProps = props => {
-  let updated = {};
-
-  if (props["fluid"]) {
-    updated.maxWidth = "100%";
-    updated.height = "auto";
-  } else if (props["fluidHalf"]) {
-    updated.maxWidth = "50%";
-    updated.height = "auto";
+export const updateFromProps = (props) => {
+  const validModifiers = ["fluid", "fluidHalf", "rounded", "round"];
+  let mods = {};
+  for (let key of validModifiers) {
+    if (props[key]) {
+      key === "fluid" && (mods = { ...mods, maxWidth: "100%", height: "auto" });
+      key === "fluidHalf" &&
+        (mods = { ...mods, maxWidth: "50%", height: "auto" });
+      key === "rounded" && (mods.borderRadius = ".5rem");
+      key === "round" && (mods.borderRadius = "50%");
+    }
   }
-  if (props["rounded"]) {
-    updated.borderRadius = ".5rem";
-  } else if (props["round"]) {
-    updated.borderRadius = "50%";
-  }
-
-  return updated;
+  return mods;
 };

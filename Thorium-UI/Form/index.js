@@ -7,7 +7,12 @@ import Block from "../Block";
 import Group from "./Group";
 import Submit from "../Input/Submit";
 import { mapPropsToAttrs, mapPropsToResponsiveSize } from "../ThoriumUtils";
+import PropTypes from "prop-types";
 
+const propTypes = {
+  bordered: PropTypes.bool,
+  vertical: PropTypes.bool
+}
 class Form extends Component {
   render() {
     let style = { ...formStyle };
@@ -31,4 +36,5 @@ Form.Group = Group;
 Form.Checkbox = Checkbox;
 Form.Field = Field;
 Form.TextInput = TextInput;
+Form.propTypes = propTypes;
 export default Form;

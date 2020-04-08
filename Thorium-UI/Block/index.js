@@ -4,20 +4,21 @@ import { blockStyle } from "../Styles";
 import { updateFromProps } from "./utils";
 import PropTypes from "prop-types";
 import { mapPropsToAttrs } from "../ThoriumUtils";
-
+const validJustify = ["start", "end", "center", "between", "around", "evenly"];
+const validSizes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const propTypes = {
-  all: PropTypes.number,
-  xs: PropTypes.number,
-  sm: PropTypes.number,
-  md: PropTypes.number,
-  lg: PropTypes.number,
-  xl: PropTypes.number,
-  justify: PropTypes.string,
+  all: PropTypes.oneOf(validSizes),
+  xs: PropTypes.oneOf(validSizes),
+  sm: PropTypes.oneOf(validSizes),
+  md: PropTypes.oneOf(validSizes),
+  lg: PropTypes.oneOf(validSizes),
+  xl: PropTypes.oneOf(validSizes),
+  justify: PropTypes.oneOf(validJustify),
   vertical: PropTypes.bool,
   rounded: PropTypes.bool,
   round: PropTypes.bool,
   bg: PropTypes.string,
-  transucent: PropTypes.bool
+  transucent: PropTypes.bool,
 };
 
 class Block extends Component {
@@ -36,14 +37,14 @@ class Block extends Component {
   render() {
     return (
       <ThoriumConsumer>
-        {context => {
+        {(context) => {
           return (
             <div
               {...mapPropsToAttrs(this.props)}
               style={{
                 ...blockStyle,
                 ...updateFromProps(this.props, context.viewportSizeName),
-                ...this.props.style
+                ...this.props.style,
               }}
             >
               {this.props.children}

@@ -12,13 +12,23 @@ import PropTypes from "prop-types";
 import { cloneElement } from "react";
 import { mapPropsToAttrs } from "../ThoriumUtils";
 
+const validVariants = [
+  "primary",
+  "secondary",
+  "success",
+  "warning",
+  "danger",
+  "dark",
+  "light",
+  "link"
+];
 const propTypes = {
   defaultOpen: PropTypes.bool,
   clickable: PropTypes.bool,
   hoverable: PropTypes.bool,
   floating: PropTypes.bool,
   icons: PropTypes.bool,
-  variant: PropTypes.string,
+  variant: PropTypes.oneOf(validVariants),
   text: PropTypes.string
 };
 

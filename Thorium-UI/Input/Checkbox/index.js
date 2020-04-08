@@ -2,11 +2,23 @@ import React, { Component } from "react";
 import { checkboxInputStyle as cbs } from "../../Styles";
 import Block from "../../Block";
 import { mapPropsToAttrs } from "../../ThoriumUtils";
+import PropTypes from "prop-types";
+
+const validJustify = ["start", "end", "center", "between", "around", "evenly"];
+const propTypes = {
+  defaultChecked: PropTypes.bool,
+  size: PropTypes.oneOf(["lg", "sm"]),
+  rounded: PropTypes.bool,
+  round: PropTypes.bool,
+  vertical: PropTypes.bool,
+  justify: PropTypes.oneOf(validJustify),
+};
+
 class Checkbox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isChecked: this.props.defaultChecked || false
+      isChecked: this.props.defaultChecked || false,
     };
     this.handleClick = () =>
       this.setState({ isChecked: !this.state.isChecked });
@@ -23,7 +35,11 @@ class Checkbox extends Component {
         style={{ paddingLeft: 0 }}
       >
         {this.props.label && (
-          <label htmlFor={this.props.id} form={this.props.form} style={style.label}>
+          <label
+            htmlFor={this.props.id}
+            form={this.props.form}
+            style={style.label}
+          >
             {this.props.label}
           </label>
         )}
@@ -42,4 +58,5 @@ class Checkbox extends Component {
   }
 }
 
+Checkbox.propTypes = propTypes;
 export default Checkbox;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import ThoriumContext from "../ThoriumContext";
-import themes from "../themes";
+import { ThoriumProvider } from "../ThoriumContext";
+import themes from "../Themes";
 import init from "../ThoriumUtils/thoriumInit";
 import { updateVpName } from "../ThoriumUtils/updateVpName";
 import { updateBodyStyle } from "../ThoriumUtils/updateBodyStyle";
@@ -15,17 +15,17 @@ class ThoriumRoot extends Component {
     if (this.initData.customThemes) {
       this.defaultTheme = {
         ...themes[this.props.defaultTheme],
-        ...this.initData.customThemes[this.props.defaultTheme]
+        ...this.initData.customThemes[this.props.defaultTheme],
       };
     }
     this.state = {
       viewportWidth: window.innerWidth,
       viewportSizeName: updateVpName(window.innerWidth),
-      theme: this.defaultTheme || themes[props.defaultTheme]
+      theme: this.defaultTheme || themes[props.defaultTheme],
     };
 
     // Provide a way for children to modify the theme through Context
-    this.setTheme = data => {
+    this.setTheme = (data) => {
       this.setState({ theme: data });
     };
 
@@ -34,14 +34,14 @@ class ThoriumRoot extends Component {
       if (updateVpName(window.innerWidth) !== this.state.viewportSizeName) {
         this.setState({
           viewportWidth: window.innerWidth,
-          viewportSizeName: updateVpName(window.innerWidth)
+          viewportSizeName: updateVpName(window.innerWidth),
         });
       }
     };
     window.addEventListener("resize", this.handleResize);
   }
 
-  // Remove the listener if re-rendered (memory leak cleanup)
+  // Prevent memory leak if unmounted
   componentWillUnmount() {
     window.removeEventListener("resize");
   }
@@ -56,19 +56,19 @@ class ThoriumRoot extends Component {
       viewportSizeName: this.state.viewportSizeName,
       theme: this.state.theme,
       setTheme: this.setTheme,
-      ...this.initData
+      ...this.initData,
     };
 
     return (
-      <ThoriumContext.Provider value={context}>
+      <ThoriumProvider value={context}>
         <thorium-root
-          id="thorium-root"
+          id="thoriumRoot"
           className="thorium-root"
           style={{ boxSizing: "border-box", ...this.props.style }}
         >
           {this.props.children}
         </thorium-root>
-      </ThoriumContext.Provider>
+      </ThoriumProvider>
     );
   }
 }

@@ -1,16 +1,10 @@
 export const updateFromVPName = (vpName, vpWidth) => {
-  switch (vpName) {
-    case "xs":
-      return vpWidth;
-    case "sm":
-      return vpWidth / 1.12;
-    case "md":
-      return vpWidth / 1.17;
-    case "lg":
-      return vpWidth / 1.2;
-    case "xl":
-      return vpWidth / 1.3;
-    default:
-      return null;
-  }
+  const vals = {
+    xs: vpWidth,
+    sm: vpWidth / 1.12,
+    md: vpWidth / 1.17,
+    lg: vpWidth / 1.2,
+    xl: vpWidth / 1.3,
+  };
+  return vals[vpName];
 };
