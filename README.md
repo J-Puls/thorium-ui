@@ -12,7 +12,7 @@ Clone the GitHub repository and copy the Thorium-UI file to the `/src` directory
 ## Setting up your App component
 Once the `Thorium-UI` source file is in your project, we need to do some very minimal boilerplate to get things up and running. Start by including the `ThoriumRoot` component in the return statement of your App component (or the render method, if using a class-based App component).
 
-When using ThroiumRoot, you must pass it either a `dark` or `light` prop. This will set the default theme to use (this can always be toggled later inside your components).
+When using ThroiumRoot, you must pass it either a defaultTheme prop with the value of either "dark" or "light". This will set the default theme your app will use on startup (this can always be toggled later inside your components).
 
 Your App.js file should look like this:
 
@@ -22,8 +22,8 @@ import ThoriumRoot from "../Thorium-UI/ThoriumRoot";
 
 const App = () => {
   return (
-    <ThoriumRoot dark>
-      /* YOUR Code HERE */
+    <ThoriumRoot defaultTheme="dark">
+      /* YOUR CODE HERE */
     </ThoriumRoot>
   );
 };
