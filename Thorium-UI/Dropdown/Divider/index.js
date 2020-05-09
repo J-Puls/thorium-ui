@@ -5,24 +5,27 @@ import PropTypes from "prop-types";
 import { mapPropsToAttrs } from "../../ThoriumUtils";
 
 const propTypes = {
-  label: PropTypes.string
+  label: PropTypes.string,
 };
 
 class DropdownDivider extends Component {
   render() {
     return (
       <ThoriumConsumer>
-        {context => {
+        {(context) => {
+          const style = context.theme.dropdown.divider;
           return (
             <div
               {...mapPropsToAttrs(this.props)}
               style={{
                 ...dropdownDividerStyle,
-                ...context.theme.dropdown.divider,
-                ...this.props.style
+                ...style.body,
+                ...this.props.style,
               }}
             >
-              {this.props.label}
+              {this.props.label && (
+                <span style={style.label}>{this.props.label}</span>
+              )}
             </div>
           );
         }}

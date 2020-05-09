@@ -4,6 +4,8 @@ import themes from "../Themes";
 import init from "../ThoriumUtils/thoriumInit";
 import { updateVpName } from "../ThoriumUtils/updateVpName";
 import { updateBodyStyle } from "../ThoriumUtils/updateBodyStyle";
+import { checkForCustomStyles } from "../ThoriumUtils/customStylesCheck";
+import { colors } from "../Themes/colors";
 
 class ThoriumRoot extends Component {
   constructor(props) {
@@ -43,19 +45,24 @@ class ThoriumRoot extends Component {
 
   // Prevent memory leak if unmounted
   componentWillUnmount() {
-    window.removeEventListener("resize");
+    window.removeEventListener("resize", this.handleResize);
   }
 
   render() {
     // Body styling must be done explicitly as it resides outside of the ThroiumRoot component
     updateBodyStyle(this.state.theme.body, this.initData.customThemes);
 
+    // Check of user defined styles, returns null if false
+    const customStyles = checkForCustomStyles(this.state.theme);
+
     // Set up Context to be passed to children
     const context = {
       viewportWidth: this.state.viewportWidth,
       viewportSizeName: this.state.viewportSizeName,
       theme: this.state.theme,
+      customStyles,
       setTheme: this.setTheme,
+      colors,
       ...this.initData,
     };
 

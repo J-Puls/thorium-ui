@@ -3,7 +3,7 @@ import { mapPropsToAttrs } from "../../ThoriumUtils";
 
 const NavItem = props => {
   const handleClick = () => props.setActive && props.setActive(props.navId);
-  const style = { padding: "0 .25rem" };
+  const style = { padding: "0 .25rem", display: "inline-block" };
   if (props.navId === props.activeItem && props.boldActive)
     style.fontWeight = "900";
 

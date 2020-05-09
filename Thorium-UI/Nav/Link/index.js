@@ -8,9 +8,9 @@ class NavLink extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isHovered: false
+      isHovered: false,
     };
-    this.handleClick = e => {
+    this.handleClick = (e) => {
       if (this.props.onClick) {
         e.preventDefault();
         this.props.onClick();
@@ -20,12 +20,12 @@ class NavLink extends Component {
     this.handleMouseLeave = () => this.setState({ isHovered: false });
   }
   render() {
+    let style;
+    !this.state.isHovered
+      ? (style = this.context.theme.nav.link.normal)
+      : (style = this.context.theme.nav.link.hover);
     if (this.context.hasRouterEnabled && !this.props.asAnchor) {
       const Link = require("react-router-dom").Link;
-      let style;
-      !this.state.isHovered
-        ? (style = this.context.theme.nav.link.normal)
-        : (style = this.context.theme.nav.link.hover);
 
       return (
         <Link
@@ -33,7 +33,7 @@ class NavLink extends Component {
           style={{ ...linkStyle, ...style }}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
-          onClick={e => this.handleClick(e)}
+          onClick={(e) => this.handleClick(e)}
           to={this.props.to}
         >
           {this.props.children}
@@ -43,7 +43,9 @@ class NavLink extends Component {
       return (
         <a
           {...mapPropsToAttrs(this.props, "anchor")}
-          style={{ ...linkStyle, ...this.context.theme.link }}
+          onMouseEnter={this.handleMouseEnter}
+          onMouseLeave={this.handleMouseLeave}
+          style={{ ...linkStyle, ...style }}
         >
           {this.props.children}
         </a>
