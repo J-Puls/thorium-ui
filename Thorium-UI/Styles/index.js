@@ -14,3 +14,4 @@ export { toggleSwitchStyle } from "./input/toggleSwitch";
 export { textInputStyle } from "./input/text";
 export { checkboxInputStyle } from "./input/checkbox";
 export { formStyle } from "./form";
+export { navItemStyle } from "./nav/navItem";

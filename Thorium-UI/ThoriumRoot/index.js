@@ -54,7 +54,7 @@ class ThoriumRoot extends Component {
 
     // Check of user defined styles, returns null if false
     const customStyles = checkForCustomStyles(this.state.theme);
-
+    
     // Set up Context to be passed to children
     const context = {
       viewportWidth: this.state.viewportWidth,

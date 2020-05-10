@@ -1,44 +1,50 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import ToggleSwitch from "../ToggleSwitch";
 import ThoriumContext from "../../ThoriumContext";
 import { mapPropsToAttrs } from "../../ThoriumUtils";
 
-const ThemeToggle = (props) => {
-  const context = useContext(ThoriumContext);
+class ThemeToggle extends ToggleSwitch {
+  static contextType = ThoriumContext;
 
-  // Default to the "off" position
-  const [isOn, setIsOn] = useState(false);
-
-  // When clicked, toggle "on/off" position and theme
-  const handleChange = () => {
-    setIsOn(!isOn);
-    if (context.theme.name === "dark") {
-      context.customThemes &&
-        context.setTheme({
-          ...context.themes.light,
-          ...context.customThemes.light,
-        });
-      !context.customThemes && context.setTheme(context.themes.light);
-    } else {
-      context.customThemes &&
-        context.setTheme({
-          ...context.themes.dark,
-          ...context.customThemes.dark,
-        });
-      !context.customThemes && context.setTheme(context.themes.dark);
-    }
-  };
-
-  return (
-    <ToggleSwitch
-      {...mapPropsToAttrs(props, "input")}
-      large={props.large}
-      variant="themeToggle"
-      onChange={handleChange}
-      label={props.label}
-      checked={isOn}
-    />
-  );
-};
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOn: false,
+    };
+    this.handleChange = () => {
+      this.setState({ isOn: !this.state.isOn });
+      if (this.context.theme.name === "dark") {
+        this.context.customThemes &&
+          this.context.setTheme({
+            ...this.context.themes.light,
+            ...this.context.customThemes.light,
+          });
+        !this.context.customThemes &&
+          this.context.setTheme(this.context.themes.light);
+      } else {
+        this.context.customThemes &&
+          this.context.setTheme({
+            ...this.context.themes.dark,
+            ...this.context.customThemes.dark,
+          });
+        !this.context.customThemes &&
+          this.context.setTheme(this.context.themes.dark);
+      }
+    };
+  }
+  render() {
+    return (
+      <ToggleSwitch
+        {...mapPropsToAttrs(this.props, "input")}
+        large={this.props.large}
+        variant="themeToggle"
+        onChange={() => this.handleChange()}
+        label={this.props.label}
+        checked={this.state.isOn}
+        style={this.props.style}
+      />
+    );
+  }
+}
 
 export default ThemeToggle;

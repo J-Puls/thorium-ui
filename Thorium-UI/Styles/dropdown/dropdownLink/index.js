@@ -1,5 +1,5 @@
 export const dropdownLinkStyle = {
-  paddingLeft: "1rem",
+  paddingLeft: "1.5rem",
   paddingRight: ".25rem",
   paddingTop: ".25rem",
   paddingBottom: ".25rem",

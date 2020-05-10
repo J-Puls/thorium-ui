@@ -1,20 +1,34 @@
 import React from "react";
 import { mapPropsToAttrs } from "../../ThoriumUtils";
+import { navItemStyle as style } from "../../Styles/nav/navItem";
+import { Component } from "react";
 
-const NavItem = props => {
-  const handleClick = () => props.setActive && props.setActive(props.navId);
-  const style = { padding: "0 .25rem", display: "inline-block" };
-  if (props.navId === props.activeItem && props.boldActive)
-    style.fontWeight = "900";
+class NavItem extends Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <div
-      {...mapPropsToAttrs(props)}
-      style={{ ...style, ...props.style }}
-      onClick={handleClick}
-    >
-      {props.children}
-    </div>
-  );
-};
+    this.handleClick = () => {
+      this.props.setActive && this.props.setActive(this.props.navId);
+    };
+    this.weight = null;
+  }
+
+  render() {
+    if (this.props.boldActive && this.props.navId === this.props.activeItem) {
+      this.weight = 900;
+    } else {
+      this.weight = 400;
+    }
+    return (
+      <div
+        {...mapPropsToAttrs(this.props)}
+        style={{ ...style, fontWeight: this.weight, ...this.props.style }}
+        onClick={() => this.handleClick()}
+      >
+        {this.props.children}
+      </div>
+    );
+  }
+}
+
 export default NavItem;

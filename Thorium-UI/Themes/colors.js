@@ -24,7 +24,7 @@ export const colors = {
     danger: "#e8254c",
     dangerHover: "#c21f3f",
     dangerText: "#fffacd",
-    linkText: "#3455db",
+    linkText: "#101010",
     primary: "#41a9ff",
     primaryHover: "#2e77b3",
     primaryText: "#ffecdb",

@@ -86,7 +86,8 @@ export const light = {
   colors: colors.light,
   dropdown: {
     divider: {
-      backgroundColor: "#dddddd",
+      body: { backgroundColor: "#f0f0f0" },
+      label: { color: colors.light.primary, fontWeight: 700 },
     },
     item: {
       hover: {
@@ -94,7 +95,7 @@ export const light = {
         color: colors.light.linkText,
       },
       normal: {
-        backgroundColor: "#dddddd",
+        backgroundColor: "#fefefe",
         color: colors.light.linkText,
       },
     },
@@ -104,7 +105,7 @@ export const light = {
         color: colors.light.linkText,
       },
       normal: {
-        backgroundColor: "#dddddd",
+        backgroundColor: "#fefefe",
         color: colors.light.linkText,
       },
     },

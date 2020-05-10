@@ -6,7 +6,7 @@ const Navbar = props => {
     <Layer
       className={props.className}
       id={props.id}
-      justify="between"
+      justify={props.justify}
       bg={props.bg}
       translucent={props.translucent}
       rounded={props.rounded}

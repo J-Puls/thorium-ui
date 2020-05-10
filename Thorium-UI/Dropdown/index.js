@@ -120,7 +120,7 @@ class Dropdown extends Component {
                 onClick={() => this.handleClick()}
                 style={{ display: "none" }}
                 id={this.props.targetID}
-              ></Button>
+              />
             )}
             {!this.props.remoteTrigger && (
               <Button
@@ -132,10 +132,10 @@ class Dropdown extends Component {
               >
                 {this.props.text}{" "}
                 {this.props.icon && this.state.visible && (
-                  <span style={{ fontWeight: 900 }}>⇀</span>
+                  <span style={{ fontWeight: 900 }}>⇁</span>
                 )}
                 {this.props.icon && !this.state.visible && (
-                  <span style={{ fontWeight: 900 }}>⇁</span>
+                  <span style={{ fontWeight: 900 }}>⇀</span>
                 )}
               </Button>
             )}

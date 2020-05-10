@@ -88,7 +88,7 @@ export const dark = {
   dropdown: {
     divider: {
       body: { backgroundColor: "#222222" },
-      label: { color: colors.dark.primaryText },
+      label: { color: colors.dark.primary, fontWeight: 700 },
     },
     item: {
       hover: {

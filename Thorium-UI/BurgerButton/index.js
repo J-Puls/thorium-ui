@@ -26,14 +26,15 @@ class BurgerButton extends Button {
         onClick={() =>
           this.handleClick(document.querySelector(`#${this.props.target}`))
         }
+        style={this.props.style}
       >
         {!this.state.active && (
           // eslint-disable-next-line
-          <img src={burgerIcon} />
+          <img src={burgerIcon} draggable={false} onContextMenu ={(e) => e.preventDefault()} />
         )}
         {this.state.active && (
           // eslint-disable-next-line
-          <img src={closeIcon} />
+          <img src={closeIcon} draggable={false} onContextMenu ={(e) => e.preventDefault()}/>
         )}
       </Button>
     );

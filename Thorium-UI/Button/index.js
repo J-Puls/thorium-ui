@@ -45,6 +45,14 @@ class Button extends Component {
       this.setState({ isHovered: false, isClicked: false });
       this.props.onMouseLeave && this.props.onMouseLeave();
     };
+    this.handleTouchStart = () => {
+      this.setState({ isClicked: true, isHovered: true });
+      this.props.onMouseDown && this.props.onMouseDown();
+    };
+    this.handleTouchEnd = () => {
+      this.setState({ isClicked: false, isHovered: false });
+      this.props.onMouseUp && this.props.onMouseUp();
+    };
   }
 
   render() {
@@ -82,6 +90,8 @@ class Button extends Component {
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
         onMouseUp={this.handleMouseUp}
+        onTouchStart={this.handleTouchStart}
+        onTouchEnd={this.handleTouchEnd}
         ref={this.ref}
         style={{ ...renderStyle, ...this.props.style }}
       >

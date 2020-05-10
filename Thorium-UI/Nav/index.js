@@ -8,16 +8,16 @@ import { mapPropsToResponsiveSize, mapPropsToAttrs } from "../ThoriumUtils";
 const justifyOps = ["start", "end", "center", "around", "between", "evenly"];
 const propTypes = {
   justify: PropTypes.oneOf(justifyOps),
-  vertical: PropTypes.bool
+  vertical: PropTypes.bool,
 };
 
 class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeItem: this.props.defaultActive || 0
+      activeItem: this.props.defaultActive || 0,
     };
-    this.setActive = item => {
+    this.setActive = (item) => {
       this.setState({ activeItem: item });
     };
   }
@@ -25,14 +25,17 @@ class Nav extends Component {
   render() {
     let children;
     if (this.props.children.length >= 0) {
-      children = Children.map(this.props.children, child => {
-        const navId = this.props.children.indexOf(child);
-        return cloneElement(child, {
-          activeItem: this.state.activeItem,
-          setActive: () => this.setActive(navId),
-          navId,
-          boldActive: this.props.boldActive
-        });
+      children = Children.map(this.props.children, (child) => {
+        if (child.type.name !== "NavItem") return child;
+        else {
+          const navId = this.props.children.indexOf(child);
+          return cloneElement(child, {
+            activeItem: this.state.activeItem,
+            setActive: () => this.setActive(navId),
+            navId,
+            boldActive: this.props.boldActive,
+          });
+        }
       });
     }
 
