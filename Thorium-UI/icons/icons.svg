@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<!-- Burger Icon -->
+	<symbol id="burger-icon" viewBox="0 0 20 20">
+		<rect width="20" height="4" />
+		<rect y="8" width="20" height="4" />
+		<rect y="16" width="20" height="4" />
+	</symbol>
+	<!-- Close Icon -->
+	<symbol id="close-icon" viewBox="0 0 20 20">
+		<polygon points="18.5 4.3 15.7 1.5 10 7.2
+        4.3 1.5 1.5 4.3 7.2 10 1.5 15.7 4.3 18.5
+        10 12.8 15.7 18.5 18.5 15.7 12.8 10 " />
+	</symbol>
+	<!-- Test Icon -->
+	<symbol id="test-icon" viewBox="0 0 20 20">
+		<rect width="20" height="20" />
+	</symbol>
+	<!-- Chevron Up -->
+	<symbol id="chevron-up" viewBox="0 0 24 24">
+		<path d="M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z"/>
+	</symbol>
+	<!-- Chevron Down -->
+	<symbol id="chevron-down" viewBox="0 0 24 24">
+		<path d="M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z"/>
+	</symbol>
+</svg>

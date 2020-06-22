@@ -6,14 +6,14 @@ import { mapPropsToAttrs } from "../../ThoriumUtils";
 import PropTypes from "prop-types";
 
 const validVariants = [
-  "primary",
-  "secondary",
-  "success",
-  "warning",
   "danger",
   "dark",
   "light",
+  "primary",
+  "secondary",
+  "success",
   "themeToggle",
+  "warning",
 ];
 const propTypes = {
   checked: PropTypes.bool,
@@ -21,7 +21,7 @@ const propTypes = {
   variant: PropTypes.oneOf(validVariants),
 };
 
-class ToggleSwitch extends Component {
+export class ToggleSwitch extends Component {
   constructor(props) {
     super(props);
     this.props.checked
@@ -68,14 +68,14 @@ class ToggleSwitch extends Component {
         {(context) => {
           return (
             <div
-              style={{ ...toggle.container, ...this.props.style }}
-              id={this.props.id}
               className={this.props.className}
+              id={this.props.id}
               name={this.props.name}
+              style={{ ...toggle.container, ...this.props.style }}
             >
               <label
-                htmlFor={this.props.id}
                 form={this.props.form}
+                htmlFor={this.props.id}
                 style={{ paddingRight: ".5rem" }}
               >
                 {this.props.label}
@@ -87,8 +87,8 @@ class ToggleSwitch extends Component {
                   value={this.state.isChecked}
                 />
                 <div
-                  style={{ ...slider, ...switchState }}
                   onClick={this.handleClick}
+                  style={{ ...slider, ...switchState }}
                 />
                 <span
                   style={{

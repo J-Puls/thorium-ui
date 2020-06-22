@@ -1,19 +1,28 @@
+/* React */
 import React, { Component } from "react";
+/* Thorium-UI Components */
+import { Block, Checkbox, TextInput } from "../";
+
+/* Subcomponents */
 import Field from "./Field";
-import Checkbox from "../Input/Checkbox";
-import TextInput from "../Input/TextInput";
-import { formStyle } from "../Styles";
-import Block from "../Block";
 import Group from "./Group";
-import Submit from "../Input/Submit";
-import { mapPropsToAttrs, mapPropsToResponsiveSize } from "../ThoriumUtils";
+/* Styling */
+import { formStyle } from "../Styles";
+/* PropTypes */
 import PropTypes from "prop-types";
+/* Utils */
+import { mapPropsToAttrs, mapPropsToResponsiveSize } from "../ThoriumUtils";
 
 const propTypes = {
   bordered: PropTypes.bool,
-  vertical: PropTypes.bool
-}
-class Form extends Component {
+  vertical: PropTypes.bool,
+};
+export class Form extends Component {
+  constructor(props) {
+    super(props);
+    Form.TextInput = TextInput;
+  }
+
   render() {
     let style = { ...formStyle };
     this.props.bordered && (style.borderColor = "gray");
@@ -31,10 +40,11 @@ class Form extends Component {
     );
   }
 }
-Form.Submit = Submit;
-Form.Group = Group;
+
 Form.Checkbox = Checkbox;
 Form.Field = Field;
-Form.TextInput = TextInput;
+Form.Group = Group;
+// Form.Submit = Submit;
+
 Form.propTypes = propTypes;
 export default Form;

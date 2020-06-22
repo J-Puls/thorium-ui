@@ -2,7 +2,7 @@ import React from "react";
 import Layer from "../../Layer";
 import { mapPropsToAttrs } from "../../ThoriumUtils";
 
-const FormGroup = props => {
+export const FormGroup = props => {
   const style = {
     paddingLeft: "1rem",
     paddingRight: "1rem",

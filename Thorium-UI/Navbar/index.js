@@ -1,17 +1,17 @@
 import React from "react";
 import Layer from "../Layer";
 
-const Navbar = props => {
+export const Navbar = props => {
   return (
     <Layer
+      bg={props.bg}
       className={props.className}
       id={props.id}
       justify={props.justify}
-      bg={props.bg}
-      translucent={props.translucent}
       rounded={props.rounded}
       sticky={props.sticky}
       style={{ padding: ".5rem", ...props.style }}
+      translucent={props.translucent}
     >
       {props.children}
     </Layer>

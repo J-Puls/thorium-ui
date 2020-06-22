@@ -3,7 +3,7 @@ import { ThoriumConsumer } from "../../ThoriumContext";
 import { textInputStyle } from "../../Styles";
 import { mapPropsToAttrs } from "../../ThoriumUtils";
 
-class TextInput extends Component {
+export class TextInput extends Component {
   render() {
     return (
       <ThoriumConsumer>
@@ -20,8 +20,8 @@ class TextInput extends Component {
             <>
               {this.props.label && (
                 <label
-                  htmlFor={this.props.id}
                   form={this.props.form}
+                  htmlFor={this.props.id}
                   style={{ maxWidth: "90%" }}
                 >
                   {this.props.label}

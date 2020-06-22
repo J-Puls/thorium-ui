@@ -1,32 +1,38 @@
+/* React */
 import React, { Component } from "react";
-import ThoriumContext from "../ThoriumContext";
-import { buttonStyle } from "../Styles";
+/* Context */
+import { ThoriumConsumer } from "../ThoriumContext";
+/* Style */
+import { buttonStyle as bs } from "../Styles";
+/* Utils */
+import { mapPropsToAttrs, validProps } from "../ThoriumUtils";
+/* PropTypes */
 import PropTypes from "prop-types";
-import { mapPropsToAttrs } from "../ThoriumUtils";
 
-const validVariants = [
-  "primary",
-  "secondary",
-  "success",
-  "warning",
-  "danger",
-  "dark",
-  "light",
-  "link",
-];
 const propTypes = {
   animated: PropTypes.bool,
   size: PropTypes.string,
   stretch: PropTypes.bool,
-  variant: PropTypes.oneOf(validVariants),
+  variant: PropTypes.oneOf(validProps.variants),
+  disabled: PropTypes.bool,
 };
 
-class Button extends Component {
-  static contextType = ThoriumContext;
+const defaultProps = {
+  animated: false,
+  size: "normal",
+  stretch: false,
+  variant: "primary",
+  disabled: false,
+};
+
+export class Button extends Component {
   constructor(props) {
     super(props);
-    this.ref = this.props.widthRef;
-    this.state = { isHovered: false, isClicked: false };
+    this.state = {
+      hoverState: "normal",
+      isClicked: false,
+      disabled: this.props.disabled || false,
+    };
 
     this.handleMouseDown = () => {
       this.setState({ isClicked: true });
@@ -38,67 +44,74 @@ class Button extends Component {
     };
     this.handleClick = () => this.props.onClick && this.props.onClick();
     this.handleMouseEnter = () => {
-      this.setState({ isHovered: true });
+      this.setState({ hoverState: "hover" });
       this.props.onMouseEnter && this.props.onMouseEnter();
     };
     this.handleMouseLeave = () => {
-      this.setState({ isHovered: false, isClicked: false });
+      this.setState({ hoverState: "normal", isClicked: false });
       this.props.onMouseLeave && this.props.onMouseLeave();
     };
     this.handleTouchStart = () => {
-      this.setState({ isClicked: true, isHovered: true });
+      this.setState({ isClicked: true, hoverState: "hover" });
       this.props.onMouseDown && this.props.onMouseDown();
     };
     this.handleTouchEnd = () => {
-      this.setState({ isClicked: false, isHovered: false });
+      this.setState({ isClicked: false, hoverState: "normal" });
       this.props.onMouseUp && this.props.onMouseUp();
     };
   }
 
   render() {
-    let style;
-    if (!this.state.isHovered) {
-      style =
-        this.context.theme.button.normal[this.props.variant] ||
-        this.context.theme.button.normal.primary;
-    } else {
-      style =
-        this.context.theme.button.hover[this.props.variant] ||
-        this.context.theme.button.hover.primary;
-    }
-
-    if (this.props.animated) {
-      if (this.state.isClicked && !this.state.stretch) {
-        style = { ...style, ...buttonStyle.animate.normal };
-      } else if (this.state.isClicked && this.state.stretch) {
-        style = { ...style, ...buttonStyle.animate.stretch };
-      }
-    }
-
-    let renderStyle = {
-      ...buttonStyle.general,
-      ...(buttonStyle[this.props.size] || buttonStyle.default),
-      ...style,
-    };
-    this.props.stretch &&
-      (renderStyle = { ...renderStyle, ...buttonStyle.stretch });
     return (
-      <button
-        {...mapPropsToAttrs(this.props, "button")}
-        onClick={this.handleClick}
-        onMouseDown={this.handleMouseDown}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-        onMouseUp={this.handleMouseUp}
-        onTouchStart={this.handleTouchStart}
-        onTouchEnd={this.handleTouchEnd}
-        ref={this.ref}
-        style={{ ...renderStyle, ...this.props.style }}
-      >
-        {this.props.children}
-      </button>
+      <ThoriumConsumer>
+        {(context) => {
+          // Build render style from props & state
+          let rs = {
+            ...bs.general,
+            ...bs[this.props.size],
+            ...context.theme.button[this.state.hoverState][this.props.variant],
+          };
+
+          // Add respective animation when clicked
+          if (this.props.animated && this.state.isClicked) {
+            this.props.stretch
+              ? (rs = { ...rs, ...bs.animate.normal })
+              : (rs = { ...rs, ...bs.animate.stretch });
+          }
+
+          this.props.stretch && (rs = { ...rs, ...bs.stretch });
+          this.props.disabled &&
+            (rs = {
+              ...rs,
+              ...context.theme.button.disabled,
+              cursor: "not-allowed",
+            });
+
+          return (
+            <div style={{ position: "relative", width: rs.width }}>
+              <button
+                {...mapPropsToAttrs(this.props, "button")}
+                disabled={this.state.disabled}
+                onClick={this.handleClick}
+                onMouseDown={this.handleMouseDown}
+                onMouseEnter={this.handleMouseEnter}
+                onMouseLeave={this.handleMouseLeave}
+                onMouseUp={this.handleMouseUp}
+                onTouchStart={this.handleTouchStart}
+                onTouchEnd={this.handleTouchEnd}
+                ref={this.ref}
+                style={{ ...rs, ...this.props.style }}
+                data-testid="button"
+              >
+                {this.props.children}
+              </button>
+            </div>
+          );
+        }}
+      </ThoriumConsumer>
     );
   }
 }
+Button.defaultProps = defaultProps;
 Button.propTypes = propTypes;
 export default Button;

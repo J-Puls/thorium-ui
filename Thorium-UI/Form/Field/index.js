@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Block from "../../Block";
 import { mapPropsToResponsiveSize, mapPropsToAttrs } from "../../ThoriumUtils";
 
-class FormField extends Component {
+export class FormField extends Component {
   render() {
     return (
       <Block

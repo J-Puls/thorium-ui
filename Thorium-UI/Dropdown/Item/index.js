@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import { Block } from "../../";
 import { ThoriumConsumer } from "../../ThoriumContext";
 import { dropdownItemStyle } from "../../Styles";
-import Block from "../../Block";
+
 import { mapPropsToAttrs, mapPropsToResponsiveSize } from "../../ThoriumUtils";
 
-class DropdownItem extends Component {
+export class DropdownItem extends Component {
   constructor(props) {
     super(props);
     this.state = { isHoverd: false };

@@ -1,32 +1,50 @@
-import React from "react";
+import React, { Component } from "react";
 import { mapPropsToAttrs } from "../../ThoriumUtils";
 import { navItemStyle as style } from "../../Styles/nav/navItem";
-import { Component } from "react";
+import { ThoriumConsumer } from "../../ThoriumContext";
 
-class NavItem extends Component {
-  constructor(props) {
+export class NavItem extends Component {
+  constructor(props, context) {
     super(props);
-
-    this.handleClick = () => {
-      this.props.setActive && this.props.setActive(this.props.navId);
+    this.state = {
+      activeColor: null,
+      isActive: this.props.isActive,
+      isHovered: false,
     };
-    this.weight = null;
+    this.activeColor = null;
+    this.handleClick = () => {
+      this.props.setActive && !this.state.isActive && this.props.setActive();
+    };
   }
 
   render() {
-    if (this.props.boldActive && this.props.navId === this.props.activeItem) {
-      this.weight = 900;
-    } else {
-      this.weight = 400;
-    }
     return (
-      <div
-        {...mapPropsToAttrs(this.props)}
-        style={{ ...style, fontWeight: this.weight, ...this.props.style }}
-        onClick={() => this.handleClick()}
-      >
-        {this.props.children}
-      </div>
+      <ThoriumConsumer>
+        {(context) => {
+          let renderStyle = {};
+          const activeColor = context.theme.nav.item.active.backgroundColor;
+          if (this.state.isActive) {
+            renderStyle = {
+              ...style,
+              backgroundColor: activeColor,
+              fontWeight: 900,
+            };
+          } else if (this.state.isHovered) {
+            renderStyle = { ...style, backgroundColor: activeColor };
+          } else renderStyle = style;
+          return (
+            <div
+              {...mapPropsToAttrs(this.props)}
+              style={{ ...renderStyle, ...this.props.style }}
+              onClick={() => this.handleClick()}
+              // onMouseEnter={() => this.handleMouseEnter()}
+              // onMouseLeave={() => this.handleMouseLeave()}
+            >
+              {this.props.children}
+            </div>
+          );
+        }}
+      </ThoriumConsumer>
     );
   }
 }

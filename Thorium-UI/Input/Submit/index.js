@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import Button from "../../Button";
+import { Button } from "../../";
 
-class Submit extends Component {
+export class Submit extends Component {
   render() {
     return (
       <Button
-        type="submit"
-        stretch={this.props.stretch}
+        data-testid="submit"
         animated={this.props.animated}
         size={this.props.size}
+        stretch={this.props.stretch}
+        type="submit"
         variant={this.props.size}
       >
         {this.props.children}

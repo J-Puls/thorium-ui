@@ -1,33 +1,31 @@
-import React, { Component } from "react";
+import React from "react";
 import { ThoriumConsumer } from "../ThoriumContext";
 import { containerStyle } from "../Styles";
-import { updateFromVPName } from "./utils";
 import { mapPropsToAttrs } from "../ThoriumUtils";
+import { config } from "../config";
 
-class Container extends Component {
-  render() {
-    return (
-      <ThoriumConsumer>
-        {(context) => {
-          return (
-            <div
-              {...mapPropsToAttrs(this.props)}
-              style={{
-                ...containerStyle,
-                maxWidth: updateFromVPName(
-                  context.viewportSizeName,
-                  context.viewportWidth
-                ),
-                ...this.props.style,
-              }}
-            >
-              {this.props.children}
-            </div>
-          );
-        }}
-      </ThoriumConsumer>
-    );
-  }
-}
+export const Container = (props) => {
+  return (
+    <ThoriumConsumer>
+      {(context) => {
+        const vpWidth = context.viewportWidth;
+        const vpName = context.viewportSizeName;
+        return (
+          <div
+            data-testid="container"
+            {...mapPropsToAttrs(props)}
+            style={{
+              ...containerStyle,
+              maxWidth: vpWidth / config.containerSizes[vpName] || "100%",
+              ...props.style,
+            }}
+          >
+            {props.children}
+          </div>
+        );
+      }}
+    </ThoriumConsumer>
+  );
+};
 
 export default Container;

@@ -1,64 +1,75 @@
 export const toggleSwitchStyle = {
-  container: { display: "inline-flex", alignItems: "flex-end" },
-  origin: {
-    opacity: 0,
-    width: 0,
-    height: 0
-  },
-  rail: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    transitionDuration: ".1s",
-    borderRadius: "1rem",
-    zIndex: 1,
-    boxShadow: "inset 0 0 2px 1px #22222277"
-  },
-  normal: {
-    body: {
-      position: "relative",
-      display: "inline-block",
-      width: "2rem",
-      height: "1rem"
-    },
-    slider: {
-      position: "absolute",
-      cursor: "pointer",
-      height: ".9rem",
-      width: ".9rem",
-      bottom: ".05rem",
-      transitionDuration: ".1s",
-      borderRadius: "50%",
-      zIndex: 2,
-      boxShadow: "inset 0 0 4px 2px #00000055",
-      backgroundColor: "#fafafa"
-    },
-    off: { transform: "translateX(.025rem)" },
-    on: { transform: "translateX(1.05rem)" }
+  container: {
+    alignItems: "flex-end",
+    display: "inline-flex",
   },
   large: {
     body: {
-      position: "relative",
       display: "inline-block",
-      width: "2.5rem",
       height: "1.25rem",
-      overflow: "hidden"
+      overflow: "hidden",
+      position: "relative",
+      width: "2.5rem",
+    },
+    off: {
+      transform: "translateX(1.3rem)",
+    },
+    on: {
+      transform: "translateX(.025rem)",
     },
     slider: {
-      position: "absolute",
+      backgroundColor: "#fafafa",
+      borderRadius: "50%",
+      bottom: ".025rem",
+      boxShadow: "inset 0 0 4px 2px #00000055",
       cursor: "pointer",
       height: "1.2rem",
-      width: "1.2rem",
-      bottom: ".025rem",
+      position: "absolute",
       transitionDuration: ".1s",
-      borderRadius: "50%",
+      width: "1.2rem",
       zIndex: 2,
-      boxShadow: "inset 0 0 4px 2px #00000055",
-      backgroundColor: "#fafafa"
     },
-    off: { transform: "translateX(1.3rem)" },
-    on: { transform: "translateX(.025rem)" }
-  }
+  },
+  normal: {
+    body: {
+      display: "inline-block",
+      height: "1rem",
+      position: "relative",
+      width: "2rem",
+    },
+    off: {
+      transform: "translateX(.025rem)",
+    },
+    on: {
+      transform: "translateX(1.05rem)",
+    },
+    slider: {
+      backgroundColor: "#fafafa",
+      borderRadius: "50%",
+      bottom: ".05rem",
+      boxShadow: "inset 0 0 4px 2px #00000055",
+      cursor: "pointer",
+      height: ".9rem",
+      position: "absolute",
+      transitionDuration: ".1s",
+      width: ".9rem",
+      zIndex: 2,
+    },
+  },
+  origin: {
+    height: 0,
+    opacity: 0,
+    width: 0,
+  },
+  rail: {
+    borderRadius: "1rem",
+    bottom: 0,
+    boxShadow: "inset 0 0 2px 1px #22222277",
+    left: 0,
+    position: "absolute",
+    right: 0,
+    top: 0,
+    transitionDuration: ".1s",
+    zIndex: 1,
+  },
 };

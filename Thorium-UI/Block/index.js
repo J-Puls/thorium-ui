@@ -1,29 +1,48 @@
+/* React */
 import React, { Component } from "react";
+/* Context */
 import { ThoriumConsumer } from "../ThoriumContext";
+/* Styling */
 import { blockStyle } from "../Styles";
-import { updateFromProps } from "./utils";
+/* Utils */
+import { mapPropsToAttrs, validProps, updateFromProps } from "../ThoriumUtils";
+/* PropTypes */
 import PropTypes from "prop-types";
-import { mapPropsToAttrs } from "../ThoriumUtils";
-const validJustify = ["start", "end", "center", "between", "around", "evenly"];
-const validSizes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
 const propTypes = {
-  all: PropTypes.oneOf(validSizes),
-  xs: PropTypes.oneOf(validSizes),
-  sm: PropTypes.oneOf(validSizes),
-  md: PropTypes.oneOf(validSizes),
-  lg: PropTypes.oneOf(validSizes),
-  xl: PropTypes.oneOf(validSizes),
-  justify: PropTypes.oneOf(validJustify),
-  vertical: PropTypes.bool,
-  rounded: PropTypes.bool,
-  round: PropTypes.bool,
+  all: PropTypes.oneOf(validProps.sizes),
   bg: PropTypes.string,
+  justify: PropTypes.oneOf(validProps.justify),
+  lg: PropTypes.oneOf(validProps.sizes),
+  md: PropTypes.oneOf(validProps.sizes),
+  round: PropTypes.bool,
+  rounded: PropTypes.bool,
+  sm: PropTypes.oneOf(validProps.sizes),
   transucent: PropTypes.bool,
+  vertical: PropTypes.bool,
+  xl: PropTypes.oneOf(validProps.sizes),
+  xs: PropTypes.oneOf(validProps.sizes),
 };
 
-class Block extends Component {
+const defaultProps = {
+  all: null,
+  bg: null,
+  justify: null,
+  lg: null,
+  md: null,
+  round: false,
+  rounded: false,
+  sm: null,
+  transucent: false,
+  vertical: false,
+  xl: null,
+  xs: null,
+};
+
+export class Block extends Component {
   constructor(props) {
     super(props);
+    // Pass down mouse events if present
     this.handleClick = () => {
       this.props.onClick && this.props.onClick();
     };
@@ -40,10 +59,15 @@ class Block extends Component {
         {(context) => {
           return (
             <div
+              data-testid="block"
               {...mapPropsToAttrs(this.props)}
               style={{
                 ...blockStyle,
-                ...updateFromProps(this.props, context.viewportSizeName),
+                ...updateFromProps(
+                  "block",
+                  this.props,
+                  context.viewportSizeName
+                ),
                 ...this.props.style,
               }}
             >
@@ -55,6 +79,6 @@ class Block extends Component {
     );
   }
 }
-
+Block.defaultProps = defaultProps;
 Block.propTypes = propTypes;
 export default Block;

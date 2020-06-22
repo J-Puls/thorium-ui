@@ -8,7 +8,7 @@ const propTypes = {
   label: PropTypes.string,
 };
 
-class DropdownDivider extends Component {
+export class DropdownDivider extends Component {
   render() {
     return (
       <ThoriumConsumer>

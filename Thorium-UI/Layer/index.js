@@ -1,22 +1,22 @@
-import React from "react";
+import React, { Component } from "react";
 import { layerStyle } from "../Styles";
-import { updateFromProps } from "./utils";
-import { mapPropsToAttrs } from "../ThoriumUtils";
+import { mapPropsToAttrs, updateFromProps } from "../ThoriumUtils";
 
-const Layer = props => {
-  return (
-    <div
-      {...mapPropsToAttrs(props)}
-      align={props.align}
-      style={{
-        ...layerStyle,
-        ...updateFromProps(props),
-        ...props.style
-      }}
-    >
-      {props.children}
-    </div>
-  );
-};
+export class Layer extends Component {
+  render() {
+    return (
+      <div
+        {...mapPropsToAttrs(this.props)}
+        style={{
+          ...layerStyle,
+          ...updateFromProps("layer", this.props),
+          ...this.props.style,
+        }}
+      >
+        {this.props.children}
+      </div>
+    );
+  }
+}
 
 export default Layer;

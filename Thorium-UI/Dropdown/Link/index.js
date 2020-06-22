@@ -3,7 +3,7 @@ import ThoriumContext from "../../ThoriumContext";
 import { dropdownLinkStyle } from "../../Styles";
 import { mapPropsToAttrs } from "../../ThoriumUtils";
 
-class DropdownLink extends Component {
+export class DropdownLink extends Component {
   static contextType = ThoriumContext;
   constructor(props) {
     super(props);

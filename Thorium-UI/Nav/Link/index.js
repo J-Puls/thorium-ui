@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import ThoriumContext from "../../ThoriumContext";
-import { linkStyle } from "../../Styles";
+import { navLinkStyle } from "../../Styles";
 import { mapPropsToAttrs } from "../../ThoriumUtils";
 
-class NavLink extends Component {
+export class NavLink extends Component {
   static contextType = ThoriumContext;
   constructor(props) {
     super(props);
@@ -11,6 +11,7 @@ class NavLink extends Component {
       isHovered: false,
     };
     this.handleClick = (e) => {
+      this.props.setActive && !this.state.isActive && this.props.setActive();
       if (this.props.onClick) {
         e.preventDefault();
         this.props.onClick();
@@ -20,20 +21,22 @@ class NavLink extends Component {
     this.handleMouseLeave = () => this.setState({ isHovered: false });
   }
   render() {
-    let style;
-    !this.state.isHovered
-      ? (style = this.context.theme.nav.link.normal)
-      : (style = this.context.theme.nav.link.hover);
+    let style = {};
+    !this.state.isHovered &&
+      !this.props.isActive &&
+      (style = this.context.theme.nav.link.normal);
+    this.state.isHovered && (style = this.context.theme.nav.link.hover);
+    this.props.isActive && (style = this.context.theme.nav.link.active);
+    // this.props.noBg && (style.backgroundColor = "none");
     if (this.context.hasRouterEnabled && !this.props.asAnchor) {
       const Link = require("react-router-dom").Link;
-
       return (
         <Link
           {...mapPropsToAttrs(this.props, "anchor")}
-          style={{ ...linkStyle, ...style }}
+          onClick={(e) => this.handleClick(e)}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
-          onClick={(e) => this.handleClick(e)}
+          style={{ ...navLinkStyle, ...style, ...this.props.style }}
           to={this.props.to}
         >
           {this.props.children}
@@ -45,7 +48,7 @@ class NavLink extends Component {
           {...mapPropsToAttrs(this.props, "anchor")}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}
-          style={{ ...linkStyle, ...style }}
+          style={{ ...navLinkStyle, ...style, ...this.props.style }}
         >
           {this.props.children}
         </a>

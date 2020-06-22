@@ -1,20 +1,20 @@
 import React, { Component } from "react";
+import { Block } from "../../";
 import { checkboxInputStyle as cbs } from "../../Styles";
-import Block from "../../Block";
-import { mapPropsToAttrs } from "../../ThoriumUtils";
+import { mapPropsToAttrs, validProps } from "../../ThoriumUtils";
 import PropTypes from "prop-types";
 
-const validJustify = ["start", "end", "center", "between", "around", "evenly"];
+
 const propTypes = {
   defaultChecked: PropTypes.bool,
-  size: PropTypes.oneOf(["lg", "sm"]),
-  rounded: PropTypes.bool,
+  justify: PropTypes.oneOf(validProps.justify),
   round: PropTypes.bool,
+  rounded: PropTypes.bool,
+  size: PropTypes.oneOf(["lg", "sm"]),
   vertical: PropTypes.bool,
-  justify: PropTypes.oneOf(validJustify),
 };
 
-class Checkbox extends Component {
+export class Checkbox extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,14 +30,14 @@ class Checkbox extends Component {
     this.props.round && (style.borderRadius = cbs.round);
     return (
       <Block
-        vertical={this.props.vertical}
         justify={this.props.justify}
         style={{ paddingLeft: 0 }}
+        vertical={this.props.vertical}
       >
         {this.props.label && (
           <label
-            htmlFor={this.props.id}
             form={this.props.form}
+            htmlFor={this.props.id}
             style={style.label}
           >
             {this.props.label}

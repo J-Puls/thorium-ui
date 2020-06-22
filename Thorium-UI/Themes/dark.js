@@ -2,26 +2,64 @@ import { colors } from "./colors";
 
 export const dark = {
   body: {
-    "background-color": colors.neutral.almostBlack,
-    color: colors.neutral.pureWhite,
+    "background-color": colors.neutral.b2,
+    "box-sizing": "border-box !important",
+    color: colors.neutral.w4,
     "font-family": "'Lato', 'Roboto', Arial, sans-serif",
     margin: "0",
     "transition-duration": ".15s",
-    "box-sizing": "border-box !important",
   },
   button: {
+    disabled: {
+      backgroundColor: colors.neutral.b4,
+      color: colors.neutral.g3,
+    },
+    hover: {
+      danger: {
+        backgroundColor: colors.dark.dangerHover,
+        color: colors.neutral.b0,
+      },
+      dark: {
+        backgroundColor: colors.neutral.b4,
+        color: colors.neutral.w4,
+      },
+      light: {
+        backgroundColor: colors.neutral.g4,
+        color: colors.neutral.b0,
+      },
+      link: {
+        backgroundColor: "transparent",
+        color: colors.neutral.g2,
+      },
+      primary: {
+        backgroundColor: colors.dark.primaryHover,
+        color: colors.neutral.b0,
+      },
+      secondary: {
+        backgroundColor: colors.dark.secondaryHover,
+        color: colors.neutral.b0,
+      },
+      success: {
+        backgroundColor: colors.dark.successHover,
+        color: colors.neutral.b0,
+      },
+      warning: {
+        backgroundColor: colors.dark.warningHover,
+        color: colors.neutral.b0,
+      },
+    },
     normal: {
       danger: {
         backgroundColor: colors.dark.danger,
-        color: colors.neutral.pitchBlack,
+        color: colors.neutral.b0,
       },
       dark: {
-        backgroundColor: colors.neutral.medGray,
-        color: colors.neutral.pureWhite,
+        backgroundColor: colors.neutral.g0,
+        color: colors.neutral.w4,
       },
       light: {
-        backgroundColor: colors.neutral.medWhite,
-        color: colors.neutral.pitchBlack,
+        backgroundColor: colors.neutral.w2,
+        color: colors.neutral.b0,
       },
       link: {
         backgroundColor: "transparent",
@@ -29,107 +67,94 @@ export const dark = {
       },
       primary: {
         backgroundColor: colors.dark.primary,
-        color: colors.neutral.pitchBlack,
+        color: colors.neutral.b0,
       },
       secondary: {
         backgroundColor: colors.dark.secondary,
-        color: colors.neutral.pitchBlack,
+        color: colors.neutral.b0,
       },
       success: {
         backgroundColor: colors.dark.success,
-        color: colors.neutral.pitchBlack,
+        color: colors.neutral.b0,
       },
       warning: {
         backgroundColor: colors.dark.warning,
-        color: colors.neutral.pitchBlack,
-      },
-    },
-    hover: {
-      danger: {
-        backgroundColor: colors.dark.dangerHover,
-        color: colors.neutral.pitchBlack,
-      },
-      dark: {
-        backgroundColor: colors.neutral.darkGray,
-        color: colors.neutral.pureWhite,
-      },
-      light: {
-        backgroundColor: colors.neutral.lightGray,
-        color: colors.neutral.pitchBlack,
-      },
-      link: {
-        backgroundColor: "transparent",
-        color: colors.neutral.lightGray,
-      },
-      primary: {
-        backgroundColor: colors.dark.primaryHover,
-        color: colors.neutral.pitchBlack,
-      },
-      secondary: {
-        backgroundColor: colors.dark.secondaryHover,
-        color: colors.neutral.pitchBlack,
-      },
-      success: {
-        backgroundColor: colors.dark.successHover,
-        color: colors.neutral.pitchBlack,
-      },
-      warning: {
-        backgroundColor: colors.dark.warningHover,
-        color: colors.neutral.pitchBlack,
+        color: colors.neutral.b0,
       },
     },
   },
   codeblock: {
-    backgroundColor: colors.neutral.darkGray,
-    color: colors.dark.secondary,
-    boxShadow: "2px 2px 2px 0px #000000aa",
+    backgroundColor: colors.neutral.b1,
+    boxShadow: `2px 2px 5px 0px ${colors.neutral.b0} inset`,
+    color: colors.neutral.w4,
   },
   colors: colors.dark,
   dropdown: {
     divider: {
-      body: { backgroundColor: "#222222" },
-      label: { color: colors.dark.primary, fontWeight: 700 },
+      body: {
+        backgroundColor: colors.neutral.b2,
+      },
+      label: {
+        color: colors.dark.primary,
+        fontWeight: 700,
+      },
     },
     item: {
       hover: {
-        backgroundColor: "#2f2f2f",
+        backgroundColor: colors.neutral.b3,
         color: colors.dark.linkText,
       },
       normal: {
-        backgroundColor: "#222222",
+        backgroundColor: colors.neutral.b2,
         color: colors.dark.linkText,
       },
     },
     link: {
       hover: {
-        backgroundColor: "#2f2f2f",
+        backgroundColor: colors.neutral.b3,
         color: colors.dark.linkText,
       },
       normal: {
-        backgroundColor: "#222222",
+        backgroundColor: colors.neutral.b2,
         color: colors.dark.linkText,
       },
     },
     menu: {
-      backgroundColor: "#222222",
+      backgroundColor: colors.neutral.b2,
     },
   },
   input: {
-    backgroundColor: colors.neutral.darkGray,
-    color: "#fafafa",
+    backgroundColor: colors.neutral.b3,
+    color: colors.neutral.w4,
+    outlineColor: colors.dark.primaryHover,
   },
   link: {
     color: colors.dark.linkText,
   },
   name: "dark",
   nav: {
+    item: {
+      active: {
+        backgroundColor: colors.neutral.b1,
+      },
+    },
     link: {
+      active: {
+        backgroundColor: colors.neutral.b1,
+        color: colors.neutral.w4,
+        fontWeight: 900,
+      },
       hover: {
-        color: colors.neutral.lightGray,
+        backgroundColor: colors.neutral.b1,
+        color: colors.neutral.g5,
       },
       normal: {
         color: colors.dark.linkText,
       },
     },
+  },
+  toolTip: {
+    backgroundColor: colors.neutral.b0,
+    color: colors.neutral.w4,
   },
 };
