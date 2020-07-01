@@ -1,4 +1,8 @@
-export { checkForCustomStyles } from "./Initialization/customStylesCheck";
+export { appendStyle } from "./StyleModifiers/appendStyle";
+export {
+  checkForCustomStyles,
+  getCustomStyles,
+} from "./Initialization/customStylesCheck";
 export { checkForRouter } from "./Initialization/checkForRouter";
 export { checkIfMobileDevice } from "./Initialization/checkIfMobileDevice";
 export { codeParser } from "./General/codeParser";
@@ -11,7 +15,6 @@ export { parseRGBValues } from "./StyleModifiers/parseRGBValues";
 export { stringToRGB } from "./StyleModifiers/stringToRGB";
 export { thoriumInit } from "./Initialization/thoriumInit";
 export { updateBodyStyle } from "./General/updateBodyStyle";
-export { updateFromProps } from "./StyleModifiers/updateFromProps";
 export { updateFromVPName } from "./StyleModifiers/updateFromVPName";
 export { updateJustify } from "./StyleModifiers/updateJustify";
 export { updateVpName } from "./General/updateVpName";

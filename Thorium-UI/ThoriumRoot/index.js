@@ -6,8 +6,8 @@ import { ThoriumProvider } from "../ThoriumContext";
 import themes, { colors } from "../Themes";
 // Utils
 import {
-  thoriumInit as init,
-  checkForCustomStyles,
+  thoriumInit,
+  getCustomStyles,
   updateBodyStyle,
   updateVpName,
 } from "../ThoriumUtils";
@@ -23,7 +23,7 @@ export class ThoriumRoot extends Component {
   constructor(props) {
     super(props);
     // Get initial styling data before render
-    this.initData = init();
+    this.initData = thoriumInit();
 
     // If a custom theme was found, append to current theme
     if (this.initData.customThemes) {
@@ -53,8 +53,6 @@ export class ThoriumRoot extends Component {
       viewportWidth: window.innerWidth,
     };
 
-    this.customStyles = checkForCustomStyles(this.state.theme, colors);
-    
     /**
      * Allows children components to explicitely set the theme at any point
      * @param { Object } data An object containing the new theme definition
@@ -113,10 +111,14 @@ export class ThoriumRoot extends Component {
     // Explicitely set DOM body styling
     updateBodyStyle(this.state.theme.body, this.initData.customThemes);
 
+    let customStyles;
+    if (this.initData.hasCustomStyles)
+      customStyles = getCustomStyles(this.state.theme, colors);
+
     // ThoriumContext
     const context = {
       colors,
-      customStyles: this.customStyles,
+      customStyles,
       setTheme: this.setTheme,
       theme: this.state.theme,
       toggleTheme: this.toggleTheme,
@@ -124,7 +126,6 @@ export class ThoriumRoot extends Component {
       viewportWidth: this.state.viewportWidth,
       ...this.initData,
     };
-
     return (
       <ThoriumProvider value={context}>
         <thorium-root

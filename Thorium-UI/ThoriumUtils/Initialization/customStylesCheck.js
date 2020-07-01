@@ -4,13 +4,27 @@ To use custom styles, create a customStyles.js file in the /src directory.`;
 
 /**
  * Checks if a customStyles file exists, provides a warning if not.
- * @returns An object containing the custom styles, or null
+ * @returns true or false
  */
-export const checkForCustomStyles = (...args) => {
+
+export const checkForCustomStyles = () => {
   try {
-    // eslint-disable-next-line
-    const data = require("../../../customStyles");
+    require.resolve("../../../customStyles");
     console.info(success);
+    return true;
+  } catch {
+    console.info(failure);
+    return false;
+  }
+};
+
+/**
+ * Checks if a customStyles file exists, provides a warning if not.
+ * @returns An object containing the custom styles for the current theme
+ */
+export const getCustomStyles = (...args) => {
+  try {
+    const data = require("../../../customStyles");
     if (typeof data.customStyles === "function") {
       return data.customStyles(...args);
     } else if (typeof data.customStyles === "object") {

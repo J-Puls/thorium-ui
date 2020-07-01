@@ -19,15 +19,23 @@ export class NavLink extends Component {
     };
     this.handleMouseEnter = () => this.setState({ isHovered: true });
     this.handleMouseLeave = () => this.setState({ isHovered: false });
+    if (
+      this.props.activeByURL &&
+      this.props.urlKey === window.location.pathname
+    ) {
+      this.props.setActive();
+    }
   }
   render() {
     let style = {};
     !this.state.isHovered &&
       !this.props.isActive &&
       (style = this.context.theme.nav.link.normal);
-    this.state.isHovered && (style = this.context.theme.nav.link.hover);
+    this.state.isHovered &&
+      !this.props.noHover &&
+      (style = this.context.theme.nav.link.hover);
     this.props.isActive && (style = this.context.theme.nav.link.active);
-    // this.props.noBg && (style.backgroundColor = "none");
+
     if (this.context.hasRouterEnabled && !this.props.asAnchor) {
       const Link = require("react-router-dom").Link;
       return (

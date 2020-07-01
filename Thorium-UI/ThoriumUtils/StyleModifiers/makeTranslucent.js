@@ -11,7 +11,7 @@ export const makeTranslucent = (color) => {
   const rgb = /(rgb\(\d{1,3}, \d{1,3}, \d{1,3}\))/;
   let rgbValues;
   if (color) {
-    if (hex.test(color)) rgbValues = hexToRGB(color);
+    if (hex.test(color)) rgbValues = hexToRGB(color).values;
     else if (rgb.test(color)) rgbValues = parseRGBValues(color);
     else rgbValues = stringToRGB(color);
   }

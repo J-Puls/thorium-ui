@@ -6,6 +6,7 @@ export const dark = {
     "box-sizing": "border-box !important",
     color: colors.neutral.w4,
     "font-family": "'Lato', 'Roboto', Arial, sans-serif",
+
     margin: "0",
     "transition-duration": ".15s",
   },
@@ -135,18 +136,17 @@ export const dark = {
   nav: {
     item: {
       active: {
-        backgroundColor: colors.neutral.b1,
+        backgroundColor: colors.neutral.b2,
       },
     },
     link: {
       active: {
-        backgroundColor: colors.neutral.b1,
+        backgroundColor: colors.neutral.b2,
         color: colors.neutral.w4,
         fontWeight: 900,
       },
       hover: {
-        backgroundColor: colors.neutral.b1,
-        color: colors.neutral.g5,
+        color: colors.neutral.g4,
       },
       normal: {
         color: colors.dark.linkText,

@@ -13,23 +13,23 @@ export const buttonStyle = {
   lg: {
     paddingTop: ".5rem",
     paddingBottom: ".5rem",
-    paddingLeft: " 1rem",
-    paddingRight: " 1rem",
+    paddingLeft: "1rem",
+    paddingRight: "1rem",
     fontSize: "1.1rem",
   },
   normal: {
     paddingTop: ".375rem",
     paddingBottom: ".375rem",
-    paddingLeft: " .75rem",
-    paddingRight: " .75rem",
+    paddingLeft: ".75rem",
+    paddingRight: ".75rem",
     fontSize: "1rem",
   },
   sm: {
     paddingTop: ".125rem",
     paddingBottom: ".125rem",
-    paddingLeft: " .375rem",
-    paddingRight: " .375rem",
-    fontSize: ".9rem"
+    paddingLeft: ".375rem",
+    paddingRight: ".375rem",
+    fontSize: ".9rem",
   },
   stretch: { width: "100%" },
   animate: {

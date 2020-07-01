@@ -9,8 +9,8 @@ export const DropdownContainer = (props) => {
       onMouseEnter={props.onMouseEnter}
       onMouseLeave={props.onMouseLeave}
     >
-      <Block all={12} style={{paddingLeft: 0, paddingRight: 0}}>
-      {props.children}
+      <Block all={12} style={{ paddingLeft: 0, paddingRight: 0 }}>
+        {props.children}
       </Block>
     </Layer>
   );

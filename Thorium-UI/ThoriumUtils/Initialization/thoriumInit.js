@@ -1,5 +1,10 @@
 import themes from "../../Themes";
-import { checkForRouter, checkIfMobileDevice, customThemeCheck } from "../";
+import {
+  checkForRouter,
+  checkIfMobileDevice,
+  customThemeCheck,
+  checkForCustomStyles,
+} from "../";
 
 // Check for system-wide theme mode preference
 let sysDefaultTheme;
@@ -22,6 +27,7 @@ export const thoriumInit = () => {
   return {
     customThemes: customThemeCheck(),
     hasRouterEnabled: checkForRouter(),
+    hasCustomStyles: checkForCustomStyles(),
     isMobile: checkIfMobileDevice(),
     sysDefaultTheme,
     themes,

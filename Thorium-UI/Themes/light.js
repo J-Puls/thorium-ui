@@ -5,6 +5,7 @@ export const light = {
     "background-color": colors.neutral.w4,
     color: colors.neutral.b0,
     "font-family": "'Lato', 'Roboto', Arial, sans-serif",
+
     margin: "0",
     "transition-duration": ".15s",
   },
@@ -134,7 +135,7 @@ export const light = {
   nav: {
     item: {
       active: {
-        backgroundColor: colors.neutral.medWhite,
+        backgroundColor: colors.neutral.w2,
       },
     },
     link: {

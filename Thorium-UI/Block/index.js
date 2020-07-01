@@ -5,7 +5,7 @@ import { ThoriumConsumer } from "../ThoriumContext";
 /* Styling */
 import { blockStyle } from "../Styles";
 /* Utils */
-import { mapPropsToAttrs, validProps, updateFromProps } from "../ThoriumUtils";
+import { mapPropsToAttrs, validProps, appendStyle } from "../ThoriumUtils";
 /* PropTypes */
 import PropTypes from "prop-types";
 
@@ -39,6 +39,20 @@ const defaultProps = {
   xs: null,
 };
 
+const stylingProps = [
+  "round",
+  "rounded",
+  "vertical",
+  "justify",
+  "all",
+  "xs",
+  "sm",
+  "md",
+  "lg",
+  "xl",
+  "bg"
+];
+
 export class Block extends Component {
   constructor(props) {
     super(props);
@@ -57,19 +71,20 @@ export class Block extends Component {
     return (
       <ThoriumConsumer>
         {(context) => {
+          let style = { ...blockStyle.general };
+          style = appendStyle(
+            this.props,
+            stylingProps,
+            style,
+            blockStyle,
+            context
+          );
+
           return (
             <div
               data-testid="block"
               {...mapPropsToAttrs(this.props)}
-              style={{
-                ...blockStyle,
-                ...updateFromProps(
-                  "block",
-                  this.props,
-                  context.viewportSizeName
-                ),
-                ...this.props.style,
-              }}
+              style={{ ...style, ...this.props.style }}
             >
               {this.props.children}
             </div>

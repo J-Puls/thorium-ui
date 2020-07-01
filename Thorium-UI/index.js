@@ -20,7 +20,6 @@ export { Layer } from "./Layer";
 export { Nav } from "./Nav";
 export { NavItem } from "./Nav/Item";
 export { NavLink } from "./Nav/Link";
-export { Navbar } from "./Navbar";
 export { Submit } from "./Input/Submit";
 export { Table } from "./Table";
 export { TableHeader } from "./Table/Header";

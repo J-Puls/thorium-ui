@@ -1,7 +1,9 @@
 /* React */
 import React, { Component } from "react";
 /* Thorium-UI Components */
-import { Block, Checkbox, TextInput } from "../";
+import { Block, Checkbox } from "../";
+import TextInput from "../Input/TextInput";
+import Submit from "../Input/Submit";
 
 /* Subcomponents */
 import Field from "./Field";
@@ -18,11 +20,6 @@ const propTypes = {
   vertical: PropTypes.bool,
 };
 export class Form extends Component {
-  constructor(props) {
-    super(props);
-    Form.TextInput = TextInput;
-  }
-
   render() {
     let style = { ...formStyle };
     this.props.bordered && (style.borderColor = "gray");
@@ -44,7 +41,8 @@ export class Form extends Component {
 Form.Checkbox = Checkbox;
 Form.Field = Field;
 Form.Group = Group;
-// Form.Submit = Submit;
+Form.Submit = Submit;
+Form.TextInput = TextInput;
 
 Form.propTypes = propTypes;
 export default Form;

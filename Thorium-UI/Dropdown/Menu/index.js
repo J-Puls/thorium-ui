@@ -11,9 +11,8 @@ export const DropdownMenu = (props) => {
   return (
     <Block
       all={12}
-      vertical
       justify="center"
-      style={{ ...style, height: props.height }}
+      style={{ ...style, height: props.height, flexDirection: "column" }}
     >
       {props.children}
     </Block>
