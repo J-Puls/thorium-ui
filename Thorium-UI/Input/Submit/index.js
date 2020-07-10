@@ -1,21 +1,19 @@
-import React, { Component } from "react";
+/* React */
+import React from "react";
+/* Thorium-UI */
 import { Button } from "../../";
 
-export class Submit extends Component {
-  render() {
-    return (
-      <Button
-        data-testid="submit"
-        animated={this.props.animated}
-        size={this.props.size}
-        stretch={this.props.stretch}
-        type="submit"
-        variant={this.props.size}
-      >
-        {this.props.children}
-      </Button>
-    );
-  }
-}
+export const Submit = (props) => (
+  <Button
+    data-testid="submit"
+    animated={props.animated}
+    size={props.size}
+    stretch={props.stretch}
+    type="submit"
+    variant={props.size}
+  >
+    {props.children}
+  </Button>
+);
 
 export default Submit;

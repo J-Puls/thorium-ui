@@ -1,3 +1,5 @@
+/* Breakpoint Configuration */
+
 const responsiveSizes = {
   "12": 100,
   "11": 91.666667,

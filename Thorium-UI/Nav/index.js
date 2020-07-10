@@ -1,17 +1,26 @@
-import React, { Component, Children, cloneElement } from "react";
+/* React */
+import React, { useState } from "react";
+/* Thorium-UI */
 import { Block } from "../";
+/* Subcomponents */
 import Link from "./Link";
 import Item from "./Item";
+/* NavContext */
+import { NavProvider } from "./context";
+/* Utils */
+import {
+  mapPropsToResponsiveSize,
+  mapPropsToAttrs,
+  validProps,
+} from "../ThoriumUtils";
+/* PropTypes */
 import PropTypes from "prop-types";
-import { validProps } from "../ThoriumUtils";
-import { mapPropsToResponsiveSize, mapPropsToAttrs } from "../ThoriumUtils";
 
 const propTypes = {
   justify: PropTypes.oneOf(validProps.justify),
   vertical: PropTypes.bool,
   trackActive: PropTypes.bool,
   centerLinks: PropTypes.bool,
-  defaultActive: PropTypes.number,
 };
 
 const defaultProps = {
@@ -22,63 +31,36 @@ const defaultProps = {
   defaultActive: 0,
 };
 
-export class Nav extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeItem: this.props.defaultActive,
-    };
-    this.setActive = (item) => {
-      this.setState({ activeItem: item });
-    };
+/**
+ *  A pre-styled navigation menu that can be included in any layout component
+ */
+export const Nav = (props) => {
+  const [activeItem, setActiveItem] = useState(props.defaultActive);
 
-    this.mapChildren = () => {
-      let children;
+  // Define context to be accessible by Nav subcomponents
+  const navContext = {
+    activeItem: activeItem,
+    setActive: (id) => setActiveItem(id),
+    currentURL: window.location.pathname,
+    trackActive: props.trackActive,
+  };
 
-      if (this.props.children.length >= 0) {
-        children = Children.map(this.props.children, (child, key) => {
-          if (child.type.name !== "NavLink") return child;
-          else {
-            if (this.props.trackActive) {
-              const urlKey = child.props.to || child.props.href || null;
-              const navId = key;
-
-              return cloneElement(child, {
-                activeItem: this.state.activeItem,
-                activeByURL: this.props.activeByURL,
-                navId,
-                urlKey,
-                isActive: this.state.activeItem === navId,
-                setActive: () => this.setActive(navId),
-                boldActive: this.props.boldActive,
-                style: this.props.centerLinks && { textAlign: "center" },
-              });
-            } else
-              return cloneElement(child, {
-                style: this.props.centerLinks && { textAlign: "center" },
-              });
-          }
-        });
-      }
-      return children;
-    };
-  }
-
-  render() {
-    let children = this.mapChildren();
-    return (
+  let style = { ...props.style };
+  props.centerLinks && (style.textAlign = "center");
+  return (
+    <NavProvider value={navContext}>
       <Block
-        {...mapPropsToAttrs(this.props)}
-        {...mapPropsToResponsiveSize(this.props)}
-        justify={this.props.justify}
-        vertical={this.props.vertical}
-        style={{ ...this.props.style }}
+        {...mapPropsToAttrs(props)}
+        {...mapPropsToResponsiveSize(props)}
+        justify={props.justify}
+        vertical={props.vertical}
+        style={style}
       >
-        {children || this.props.children}
+        {props.children}
       </Block>
-    );
-  }
-}
+    </NavProvider>
+  );
+};
 
 Nav.Link = Link;
 Nav.Item = Item;

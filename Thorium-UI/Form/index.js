@@ -1,5 +1,5 @@
 /* React */
-import React, { Component } from "react";
+import React from "react";
 /* Thorium-UI Components */
 import { Block, Checkbox } from "../";
 import TextInput from "../Input/TextInput";
@@ -19,24 +19,25 @@ const propTypes = {
   bordered: PropTypes.bool,
   vertical: PropTypes.bool,
 };
-export class Form extends Component {
-  render() {
-    let style = { ...formStyle };
-    this.props.bordered && (style.borderColor = "gray");
-    return (
-      <Block
-        {...mapPropsToResponsiveSize(this.props)}
-        vertical={this.props.vertical}
-        className={this.props.className}
-        style={{ ...this.props.style }}
-      >
-        <form {...mapPropsToAttrs(this.props, "form")} style={{ ...style }}>
-          {this.props.children}
-        </form>
-      </Block>
-    );
-  }
-}
+
+/**
+ * The main wrapper which contains all other subcomponents.
+ */
+export const Form = (props) => {
+  let style = { ...formStyle.general };
+  props.bordered && (style.borderColor = "gray");
+  return (
+    <Block
+      {...mapPropsToResponsiveSize(props)}
+      vertical={props.vertical}
+      style={{ ...props.style }}
+    >
+      <form {...mapPropsToAttrs(props, "form")} style={{ ...style }}>
+        {props.children}
+      </form>
+    </Block>
+  );
+};
 
 Form.Checkbox = Checkbox;
 Form.Field = Field;

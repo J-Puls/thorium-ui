@@ -1,3 +1,5 @@
+/* Export all Thorium-UI components from one module */
+
 export { Block } from "./Block";
 export { BurgerButton } from "./BurgerButton";
 export { Button } from "./Button";
@@ -22,12 +24,16 @@ export { NavItem } from "./Nav/Item";
 export { NavLink } from "./Nav/Link";
 export { Submit } from "./Input/Submit";
 export { Table } from "./Table";
-export { TableHeader } from "./Table/Header";
-export { TableCell } from "./Table/Cell";
 export { TableBody } from "./Table/Body";
+export { TableCell } from "./Table/Cell";
+export { TableHeader } from "./Table/Header";
 export { TextInput } from "./Input/TextInput";
 export { ThemeToggle } from "./Input/ThemeToggle";
 export { Themes } from "./Themes";
-export { ThoriumContext } from "./ThoriumContext";
+export {
+  ThoriumContext,
+  ThoriumConsumer,
+  ThoriumProvider,
+} from "./ThoriumContext";
 export { ThoriumRoot } from "./ThoriumRoot";
 export { ToggleSwitch } from "./Input/ToggleSwitch";

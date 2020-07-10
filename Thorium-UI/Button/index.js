@@ -1,7 +1,7 @@
 /* React */
 import React, { Component } from "react";
-/* Context */
-import { ThoriumConsumer } from "../ThoriumContext";
+/* ThoriumContext */
+import { ThoriumConsumer } from "../";
 /* Style */
 import { buttonStyle as bs } from "../Styles";
 /* Utils */
@@ -25,6 +25,9 @@ const defaultProps = {
   disabled: false,
 };
 
+/**
+ * Pre-styled, theme-dependant buttons
+ */
 export class Button extends Component {
   constructor(props) {
     super(props);
@@ -88,6 +91,10 @@ export class Button extends Component {
             });
 
           return (
+            /**
+             * Buttons must be contained in a parent div to allow proper
+             * sizing when set to "stretch"
+             */
             <div style={{ position: "relative", width: rs.width }}>
               <button
                 {...mapPropsToAttrs(this.props, "button")}

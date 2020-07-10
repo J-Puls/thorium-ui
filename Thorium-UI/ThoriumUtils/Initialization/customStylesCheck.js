@@ -6,7 +6,6 @@ To use custom styles, create a customStyles.js file in the /src directory.`;
  * Checks if a customStyles file exists, provides a warning if not.
  * @returns true or false
  */
-
 export const checkForCustomStyles = () => {
   try {
     require.resolve("../../../customStyles");

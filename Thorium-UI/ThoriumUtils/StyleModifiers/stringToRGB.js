@@ -1,3 +1,4 @@
+/* Utils */
 import { parseRGBValues } from "./parseRGBValues";
 
 /**

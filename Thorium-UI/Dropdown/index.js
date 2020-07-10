@@ -36,6 +36,9 @@ const defaultProps = {
   displayType: "block",
 };
 
+/**
+ * A collapsable menu with a customizable trigger.
+ */
 export class Dropdown extends Component {
   constructor(props) {
     super(props);

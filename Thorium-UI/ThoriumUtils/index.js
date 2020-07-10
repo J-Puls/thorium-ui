@@ -1,3 +1,5 @@
+/* Export all Utils from one module */
+
 export { appendStyle } from "./StyleModifiers/appendStyle";
 export {
   checkForCustomStyles,
@@ -19,3 +21,4 @@ export { updateFromVPName } from "./StyleModifiers/updateFromVPName";
 export { updateJustify } from "./StyleModifiers/updateJustify";
 export { updateVpName } from "./General/updateVpName";
 export { validProps } from "./General/propValidation";
+export { copyToClipboard } from "./General/copyToClipboard";

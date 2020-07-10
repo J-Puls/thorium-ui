@@ -1,7 +1,7 @@
 /* React */
 import React, { Component } from "react";
-/* Context */
-import { ThoriumConsumer } from "../ThoriumContext";
+/* ThoriumContext */
+import { ThoriumConsumer } from "../";
 /* Styling */
 import { blockStyle } from "../Styles";
 /* Utils */
@@ -11,7 +11,6 @@ import PropTypes from "prop-types";
 
 const propTypes = {
   all: PropTypes.oneOf(validProps.sizes),
-  bg: PropTypes.string,
   justify: PropTypes.oneOf(validProps.justify),
   lg: PropTypes.oneOf(validProps.sizes),
   md: PropTypes.oneOf(validProps.sizes),
@@ -26,11 +25,9 @@ const propTypes = {
 
 const defaultProps = {
   all: null,
-  bg: null,
   justify: null,
   lg: null,
   md: null,
-  round: false,
   rounded: false,
   sm: null,
   transucent: false,
@@ -39,8 +36,8 @@ const defaultProps = {
   xs: null,
 };
 
+// All valid props to be used by appendStyle
 const stylingProps = [
-  "round",
   "rounded",
   "vertical",
   "justify",
@@ -50,12 +47,15 @@ const stylingProps = [
   "md",
   "lg",
   "xl",
-  "bg"
 ];
 
+/**
+ * Defines a column within a Layer
+ */
 export class Block extends Component {
   constructor(props) {
     super(props);
+    
     // Pass down mouse events if present
     this.handleClick = () => {
       this.props.onClick && this.props.onClick();

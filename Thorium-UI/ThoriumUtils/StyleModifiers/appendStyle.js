@@ -1,3 +1,12 @@
+/**
+ * Dynamically append style modifications, based on supplied prop values
+ * @param {Object} props React props object
+ * @param {Array} stylingProps List of valid styling props
+ * @param {Object} style The default style object to be appended to
+ * @param {Object} styleRoot The root style object containing all possible styling properties
+ * @param {Object} context The current context, if necessary for theme-dependant styles
+ * @returns {Object} An object containing the updated style
+ */
 export const appendStyle = (props, stylingProps, style, styleRoot, context) => {
   let newStyle = { ...style };
   let stylesToAdd;

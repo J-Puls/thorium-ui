@@ -1,19 +1,23 @@
+/* React */
 import React from "react";
-import Layer from "../../Layer";
+/* Thorium-UI */
+import { Layer } from "../../";
+/* Utils */
 import { mapPropsToAttrs } from "../../ThoriumUtils";
+/* Style */
+import { formStyle } from "../../Styles";
 
-export const FormGroup = props => {
-  const style = {
-    paddingLeft: "1rem",
-    paddingRight: "1rem",
-    paddingTop: 0,
-    paddingBottom: ".5rem"
-  };
-  return (
-    <Layer {...mapPropsToAttrs(props)} style={style} justify={props.justify}>
-      {props.children}
-    </Layer>
-  );
-};
+/**
+ * A wrapper designed to contain a set of related Fields.
+ */
+export const FormGroup = (props) => (
+  <Layer
+    {...mapPropsToAttrs(props)}
+    style={{ ...formStyle.group, ...props.style }}
+    justify={props.justify}
+  >
+    {props.children}
+  </Layer>
+);
 
 export default FormGroup;

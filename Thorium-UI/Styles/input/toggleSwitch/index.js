@@ -3,7 +3,7 @@ export const toggleSwitchStyle = {
     alignItems: "flex-end",
     display: "inline-flex",
   },
-  large: {
+  lg: {
     body: {
       display: "inline-block",
       height: "1.25rem",
@@ -12,10 +12,10 @@ export const toggleSwitchStyle = {
       width: "2.5rem",
     },
     off: {
-      transform: "translateX(1.3rem)",
+      transform: "translateX(.025rem)",
     },
     on: {
-      transform: "translateX(.025rem)",
+      transform: "translateX(1.3rem)",
     },
     slider: {
       backgroundColor: "#fafafa",

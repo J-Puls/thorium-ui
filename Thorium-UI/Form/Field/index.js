@@ -1,25 +1,21 @@
-import React, { Component } from "react";
-import Block from "../../Block";
+import React from "react";
+import { Block } from "../../";
 import { mapPropsToResponsiveSize, mapPropsToAttrs } from "../../ThoriumUtils";
+import { formStyle } from "../../Styles";
 
-export class FormField extends Component {
-  render() {
-    return (
-      <Block
-        {...mapPropsToAttrs(this.props)}
-        {...mapPropsToResponsiveSize(this.props)}
-        justify={this.props.justify}
-        vertical={this.props.vertical}
-        style={{
-          padding: ".5rem",
-          boxSizing: "border-box",
-          ...this.props.style
-        }}
-      >
-        {this.props.children}
-      </Block>
-    );
-  }
-}
+/**
+ * A Block wrapper designed to contain an individual Input
+ */
+export const FormField = (props) => (
+  <Block
+    {...mapPropsToAttrs(props)}
+    {...mapPropsToResponsiveSize(props)}
+    justify={props.justify}
+    vertical={props.vertical}
+    style={{ ...formStyle.field, ...props.style }}
+  >
+    {props.children}
+  </Block>
+);
 
 export default FormField;

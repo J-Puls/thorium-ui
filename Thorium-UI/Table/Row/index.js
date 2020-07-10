@@ -1,17 +1,27 @@
+/* React */
 import React, { Children, cloneElement } from "react";
-import { tableStyle } from "../../Styles";
+/* ThoriumContext */
+import { ThoriumConsumer } from "../../";
 
 const TableRow = (props) => {
   let children;
-  const style = { ...tableStyle.row };
 
+  // Add "body" or "footer" prop to each respective Cell for proper rendering downstream
   if (props.children.length > 0) {
     children = Children.map(props.children, (child) => {
       if (props.body) return cloneElement(child, { body: true });
       else return cloneElement(child, { footer: true });
     });
   }
-  return <tr style={style}>{children}</tr>;
+  return (
+    <ThoriumConsumer>
+      {(context) => {
+        let style = {};
+        if (props.striped) style = context.theme.table.row.striped;
+        return <tr style={style}>{children}</tr>;
+      }}
+    </ThoriumConsumer>
+  );
 };
 
 export default TableRow;

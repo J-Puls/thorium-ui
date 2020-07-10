@@ -1,60 +1,47 @@
-import React, { Component } from "react";
+/* React */
+import React, { useContext, useState } from "react";
+/* ThoriumContext */
 import ThoriumContext from "../../ThoriumContext";
+/* Style */
 import { dropdownLinkStyle } from "../../Styles";
+/* Utils */
 import { mapPropsToAttrs } from "../../ThoriumUtils";
 
-export class DropdownLink extends Component {
-  static contextType = ThoriumContext;
-  constructor(props) {
-    super(props);
-    this.state = { isHovered: false };
-    this.handleClick = () => {
-      this.props.onClick && this.props.onClick();
-    };
-    this.handleMouseEnter = () => {
-      this.setState({ isHovered: true });
-    };
-    this.handleMouseLeave = () => {
-      this.setState({ isHovered: false });
-    };
-  }
-  render() {
-    if (this.context.hasRouterEnabled) {
-      const Link = require("react-router-dom").Link;
-      let style;
-      !this.state.isHovered
-        ? (style = this.context.theme.dropdown.link.normal)
-        : (style = this.context.theme.dropdown.link.hover);
-      return (
-        <Link
-          {...mapPropsToAttrs(this.props, "anchor")}
-          style={{
-            ...dropdownLinkStyle,
-            ...style,
-          }}
-          onClick={this.handleClick}
-          onMouseEnter={this.handleMouseEnter}
-          onMouseLeave={this.handleMouseLeave}
-          to={this.props.to}
-        >
-          {this.props.children}
-        </Link>
-      );
-    } else {
-      return (
-        <a
-          {...mapPropsToAttrs(this.props, "anchor")}
-          href={this.props.href || this.props.to}
-          rel={this.props.rel}
-          style={{
-            ...dropdownLinkStyle,
-          }}
-        >
-          {this.props.children}
-        </a>
-      );
-    }
-  }
-}
+/**
+ * A styalized Link component
+ */
+export const DropdownLink = (props) => {
+  const context = useContext(ThoriumContext);
+  const [style, setStyle] = useState(context.theme.dropdown.link.normal);
+  const handleClick = () => props.onClick && props.onClick();
+  const handleMouseEnter = () => setStyle(context.theme.dropdown.link.hover);
+  const handleMouseLeave = () => setStyle(context.theme.dropdown.link.normal);
 
+  if (context.hasRouterEnabled) {
+    const Link = require("react-router-dom").Link;
+    return (
+      <Link
+        {...mapPropsToAttrs(props, "anchor")}
+        onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        style={{ ...dropdownLinkStyle, ...style }}
+        to={props.to}
+      >
+        {props.children}
+      </Link>
+    );
+  } else {
+    return (
+      <a
+        {...mapPropsToAttrs(props, "anchor")}
+        href={props.href || props.to}
+        rel={props.rel}
+        style={{ ...dropdownLinkStyle }}
+      >
+        {props.children}
+      </a>
+    );
+  }
+};
 export default DropdownLink;

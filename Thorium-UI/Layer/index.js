@@ -1,23 +1,28 @@
-import React, { Component } from "react";
+/* React */
+import React from "react";
+/* Style */
 import { layerStyle } from "../Styles";
+/* Utils */
 import { mapPropsToAttrs, appendStyle, makeTranslucent } from "../ThoriumUtils";
 
+// All valid props to be used by appendStyle
 const stylingProps = ["justify", "rounded", "sticky"];
 
-export class Layer extends Component {
-  render() {
-    let style = { ...layerStyle.general };
-    style = appendStyle(this.props, stylingProps, style, layerStyle);
-    this.props.style && (style = { ...style, ...this.props.style });
-    if (this.props.translucent) {
-      style.backgroundColor = makeTranslucent(style.backgroundColor);
-    }
-    return (
-      <div {...mapPropsToAttrs(this.props)} style={style}>
-        {this.props.children}
-      </div>
-    );
+/**
+ * A horizontal row in the page grid, segmented into 12 blocks.
+ */
+export const Layer = (props) => {
+  let style = { ...layerStyle.general };
+  style = appendStyle(props, stylingProps, style, layerStyle);
+  props.style && (style = { ...style, ...props.style });
+  if (props.translucent) {
+    style.backgroundColor = makeTranslucent(style.backgroundColor);
   }
-}
+  return (
+    <div {...mapPropsToAttrs(props)} style={style}>
+      {props.children}
+    </div>
+  );
+};
 
 export default Layer;

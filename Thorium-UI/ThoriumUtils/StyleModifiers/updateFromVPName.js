@@ -1,3 +1,4 @@
+/* Breakpoint Configuration */
 import { config } from "../../config";
 
 /**

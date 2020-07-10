@@ -1,9 +1,13 @@
-import React, { Component } from "react";
+/* React */
+import React, { useState } from "react";
+/* Thorium-UI */
 import { Block } from "../../";
+/* Style */
 import { checkboxInputStyle as cbs } from "../../Styles";
+/* Utils */
 import { mapPropsToAttrs, validProps } from "../../ThoriumUtils";
+/* PropTypes */
 import PropTypes from "prop-types";
-
 
 const propTypes = {
   defaultChecked: PropTypes.bool,
@@ -14,49 +18,47 @@ const propTypes = {
   vertical: PropTypes.bool,
 };
 
-export class Checkbox extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isChecked: this.props.defaultChecked || false,
-    };
-    this.handleClick = () =>
-      this.setState({ isChecked: !this.state.isChecked });
-  }
-  render() {
-    let style;
-    this.props.size ? (style = cbs[this.props.size]) : (style = cbs.normal);
-    this.props.rounded && (style.borderRadius = cbs.rounded);
-    this.props.round && (style.borderRadius = cbs.round);
-    return (
-      <Block
-        justify={this.props.justify}
-        style={{ paddingLeft: 0 }}
-        vertical={this.props.vertical}
-      >
-        {this.props.label && (
-          <label
-            form={this.props.form}
-            htmlFor={this.props.id}
-            style={style.label}
-          >
-            {this.props.label}
-          </label>
-        )}
-        <div style={{ ...cbs.general, ...style }} onClick={this.handleClick}>
-          {this.state.isChecked && <span>&#10003;</span>}
-          {!this.state.isChecked && <span>&nbsp;&nbsp;</span>}
-        </div>
+const defaultProps = {
+  defaultChecked: false,
+  justify: "start",
+  round: false,
+  rounded: false,
+  size: "lg",
+  vertical: false,
+};
 
-        <input
-          {...mapPropsToAttrs(this.props, "input")}
-          type="hidden"
-          value={this.state.isChecked}
-        />
-      </Block>
-    );
-  }
-}
+export const Checkbox = (props) => {
+  const [isChecked, setIsChecked] = useState(props.defaultChecked);
+  const handleClick = () => setIsChecked(!isChecked);
 
+  let style;
+  props.size ? (style = cbs[props.size]) : (style = cbs.normal);
+  props.rounded && (style.borderRadius = cbs.rounded);
+  props.round && (style.borderRadius = cbs.round);
+  return (
+    <Block
+      justify={props.justify}
+      style={{ paddingLeft: 0 }}
+      vertical={props.vertical}
+    >
+      {props.label && (
+        <label form={props.form} htmlFor={props.id} style={style.label}>
+          {props.label}
+        </label>
+      )}
+      <div style={{ ...cbs.general, ...style }} onClick={handleClick}>
+        {isChecked && <span>&#10003;</span>}
+        {!isChecked && <span>&nbsp;&nbsp;</span>}
+      </div>
+
+      <input
+        {...mapPropsToAttrs(props, "input")}
+        type="hidden"
+        value={isChecked}
+      />
+    </Block>
+  );
+};
+Checkbox.defaultProps = defaultProps;
 Checkbox.propTypes = propTypes;
 export default Checkbox;

@@ -1,9 +1,7 @@
 /* React */
 import React, { Component } from "react";
-/* Thorium components */
-import { Button, Icon } from "../";
-/* Context */
-import { ThoriumConsumer } from "../ThoriumContext";
+/* Thorium-UI */
+import { Button, Icon, ThoriumConsumer } from "../";
 /* Icons */
 import Icons from "../icons/icons.svg";
 /* Utils */
@@ -31,6 +29,9 @@ const defaultProps = {
   variant: "link",
 };
 
+/**
+ *  A pre-styled button to be used as the trigger for a mobile dropdown menu
+ */
 export class BurgerButton extends Component {
   constructor(props, ref) {
     super(props);
@@ -38,9 +39,17 @@ export class BurgerButton extends Component {
       target: this.props.targetID,
       active: false,
     };
+
+    /**
+     * Toggle the "active" state of the component
+     */
     this.toggle = () => {
       this.setState({ active: !this.state.active });
     };
+
+    /**
+     * Fires a click event on the component's "target" and then toggles its "active" state
+     */
     this.handleClick = () => {
       const target = document.querySelector(`#${this.state.target}`);
       target.click();
@@ -53,6 +62,7 @@ export class BurgerButton extends Component {
     return (
       <ThoriumConsumer>
         {(context) => {
+          // Define the icon's fill color
           const iconFill =
             this.props.iconFill ||
             context.theme.button.normal[this.props.variant].color;

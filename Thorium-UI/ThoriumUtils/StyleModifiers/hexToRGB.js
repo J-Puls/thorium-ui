@@ -1,6 +1,5 @@
-// Converts hex coded colors to HTML RGB format
-
 /**
+ * Converts hex coded colors to HTML RGB format
  * @param { String } hex - Standard or shorthand hexadecimal color string (eg. #000000 or #000)
  * @returns { Object } {r, g, b} - Returns an object containing the separate RGB color values
  */

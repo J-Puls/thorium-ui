@@ -1,7 +1,12 @@
-import React, { Component } from "react";
-import { ThoriumConsumer } from "../../ThoriumContext";
+/* React */
+import React from "react";
+/* ThoriumContext */
+import { ThoriumConsumer } from "../../";
+/* Style */
 import { textInputStyle } from "../../Styles";
+/* Utils */
 import { appendStyle, mapPropsToAttrs } from "../../ThoriumUtils";
+/* PropTypes */
 import PropTypes from "prop-types";
 
 const propTypes = {
@@ -16,30 +21,28 @@ const defaultProps = {
   label: "",
 };
 
+// All valid props to be used by appendStyle
 const stylingProps = ["size", "bordered"];
-export class TextInput extends Component {
-  render() {
-    return (
-      <ThoriumConsumer>
-        {(context) => {
-          let style = { ...textInputStyle.general, ...context.theme.input };
-          style = appendStyle(this.props, stylingProps, style, textInputStyle);
 
-          return (
-            <>
-              {this.props.label && (
-                <label form={this.props.form} htmlFor={this.props.id}>
-                  {this.props.label}
-                </label>
-              )}
-              <input {...mapPropsToAttrs(this.props, "input")} style={style} />
-            </>
-          );
-        }}
-      </ThoriumConsumer>
-    );
-  }
-}
+export const TextInput = (props) => (
+  <ThoriumConsumer>
+    {(context) => {
+      let style = { ...textInputStyle.general, ...context.theme.input };
+      style = appendStyle(props, stylingProps, style, textInputStyle);
+
+      return (
+        <>
+          {props.label && (
+            <label form={props.form} htmlFor={props.id}>
+              {props.label}
+            </label>
+          )}
+          <input {...mapPropsToAttrs(props, "input")} style={style} />
+        </>
+      );
+    }}
+  </ThoriumConsumer>
+);
 
 TextInput.propTypes = propTypes;
 TextInput.defaultProps = defaultProps;

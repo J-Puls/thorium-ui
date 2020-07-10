@@ -1,35 +1,36 @@
-// React
+/* React */
 import React, { Component } from "react";
-// ThoriumContext
+/* ThoriumContext */
 import { ThoriumProvider } from "../ThoriumContext";
-// Themes
+/* Themes */
 import themes, { colors } from "../Themes";
-// Utils
+// PropTypes
+import PropTypes from "prop-types";
+/* Utils */
 import {
   thoriumInit,
   getCustomStyles,
   updateBodyStyle,
   updateVpName,
 } from "../ThoriumUtils";
-// PropTypes
-import PropTypes from "prop-types";
 
 const propTypes = {
   defaultTheme: PropTypes.oneOf(["dark", "light"]),
   overrideSysTheme: PropTypes.bool,
 };
 
+const defaultProps = {
+  overrideSysTheme: false,
+};
+
 export class ThoriumRoot extends Component {
   constructor(props) {
     super(props);
-    // Get initial styling data before render
     this.initData = thoriumInit();
 
-    // If a custom theme was found, append to current theme
     if (this.initData.customThemes) {
       // If a system-wide theme preference is found and not flagged to override,
       // use that theme. Else, fall back to the default theme.
-
       if (this.initData.sysDefaultTheme && !this.props.overrideSysTheme) {
         this.defaultTheme = {
           ...themes[this.initData.sysDefaultTheme],
@@ -94,7 +95,7 @@ export class ThoriumRoot extends Component {
     // Monitor for window resizing
     window.addEventListener("resize", this.handleResize);
 
-    // Monitor for changes is system-wide theme mode
+    // Monitor for changes in system-wide theme mode
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", (e) => {
@@ -105,12 +106,16 @@ export class ThoriumRoot extends Component {
   // Prevent memory leak when unmounted
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleResize);
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .removeEventListener("change", this.toggleTheme());
   }
 
   render() {
     // Explicitely set DOM body styling
     updateBodyStyle(this.state.theme.body, this.initData.customThemes);
 
+    // Get custom styles if the file was found during initialization
     let customStyles;
     if (this.initData.hasCustomStyles)
       customStyles = getCustomStyles(this.state.theme, colors);
@@ -140,5 +145,6 @@ export class ThoriumRoot extends Component {
   }
 }
 
+ThoriumRoot.defaultProps = defaultProps;
 ThoriumRoot.propTypes = propTypes;
 export default ThoriumRoot;

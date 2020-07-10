@@ -1,8 +1,8 @@
+/* Utils */
 import { hexToRGB, parseRGBValues, stringToRGB } from "../";
 
 /**
  * Converts hexadecimal and rgb color string to the equivelant RGBa string with reduced opacity
- *
  * @param {String} color A hexadecimal or rgb() formatted color string
  * @returns {String} An rgba() formatted color string
  */

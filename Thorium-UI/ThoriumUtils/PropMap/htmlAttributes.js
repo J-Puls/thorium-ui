@@ -1,3 +1,5 @@
+// Defines lists of valid HTML attributes (for use in mapPropsToAttrs)
+
 const globalAttrs = [
   "accessKey",
   "autoCapitalize",

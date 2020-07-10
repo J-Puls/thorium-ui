@@ -1,12 +1,12 @@
 import { colors } from "./colors";
 
+// Defines the "dark" color scheme
 export const dark = {
   body: {
     "background-color": colors.neutral.b2,
     "box-sizing": "border-box !important",
     color: colors.neutral.w4,
     "font-family": "'Lato', 'Roboto', Arial, sans-serif",
-
     margin: "0",
     "transition-duration": ".15s",
   },
@@ -92,9 +92,6 @@ export const dark = {
   colors: colors.dark,
   dropdown: {
     divider: {
-      body: {
-        backgroundColor: colors.neutral.b2,
-      },
       label: {
         color: colors.dark.primary,
         fontWeight: 700,
@@ -136,21 +133,54 @@ export const dark = {
   nav: {
     item: {
       active: {
-        backgroundColor: colors.neutral.b2,
+        backgroundColor: colors.neutral.b1,
       },
     },
     link: {
       active: {
-        backgroundColor: colors.neutral.b2,
+        backgroundColor: colors.neutral.b1,
         color: colors.neutral.w4,
         fontWeight: 900,
       },
       hover: {
+        backgroundColor: colors.neutral.b2,
         color: colors.neutral.g4,
       },
       normal: {
         color: colors.dark.linkText,
       },
+    },
+  },
+  table: {
+    row: {
+      striped: {
+        backgroundColor: colors.neutral.b1,
+      },
+    },
+  },
+  toggleSwitch: {
+    off: {
+      backgroundColor: colors.neutral.b3,
+    },
+    on: {
+      danger: {
+        backgroundColor: colors.dark.danger,
+      },
+      primary: {
+        backgroundColor: colors.dark.primary,
+      },
+      secondary: {
+        backgroundColor: colors.dark.secondary,
+      },
+      success: {
+        backgroundColor: colors.dark.success,
+      },
+      warning: {
+        backgroundColor: colors.dark.warning,
+      },
+    },
+    themeToggle: {
+      backgroundColor: "#2c189e",
     },
   },
   toolTip: {

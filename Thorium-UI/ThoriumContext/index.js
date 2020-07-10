@@ -1,3 +1,4 @@
+/* React */
 import { createContext } from "react";
 
 // Creates the main context passed in ThoriumRoot

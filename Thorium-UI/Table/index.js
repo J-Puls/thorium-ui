@@ -1,35 +1,51 @@
-import React, { Component } from "react";
+/* React */
+import React from "react";
+/* Thorium-UI */
 import { Layer, Block } from "../";
+/* Subcomponents */
 import Header from "./Header";
 import Cell from "./Cell";
 import Row from "./Row";
 import Body from "./Body";
+/* Style */
 import { tableStyle } from "../Styles";
+/* Utils */
+import { appendStyle, mapPropsToResponsiveSize } from "../ThoriumUtils";
+/* PropTypes */
+import PropTypes from "prop-types";
 
-export class Table extends Component {
-  render() {
-    const style = { ...tableStyle.wrapper };
-    this.props.bordered && (style.border = "1px solid gray");
-    this.props.rounded && (style.borderRadius = ".25rem");
-    return (
-      <Layer justify={this.props.justify}>
-        <Block
-          all={this.props.all}
-          xs={this.props.xs}
-          sm={this.props.sm}
-          md={this.props.md}
-          lg={this.props.lg}
-          xl={this.props.xl}
-          style={{ ...style, ...this.props.style }}
-        >
-          <table style={tableStyle.table}>{this.props.children}</table>
-        </Block>
-      </Layer>
-    );
-  }
-}
+const propTypes = {
+  bordered: PropTypes.bool,
+  rounded: PropTypes.bool,
+};
+
+const defaultProps = {
+  bordered: true,
+  rounded: false,
+};
+
+const stylingProps = ["bordered", "rounded"];
+
+export const Table = (props) => {
+  let style = { ...tableStyle.wrapper };
+  style = appendStyle(props, stylingProps, style, tableStyle);
+
+  return (
+    <Layer justify={props.justify}>
+      <Block
+        {...mapPropsToResponsiveSize(props)}
+        style={{ ...style, ...props.style }}
+      >
+        <table style={tableStyle.table}>{props.children}</table>
+      </Block>
+    </Layer>
+  );
+};
+
 Table.Header = Header;
 Table.Cell = Cell;
 Table.Row = Row;
 Table.Body = Body;
+Table.propTypes = propTypes;
+Table.defaultProps = defaultProps;
 export default Table;

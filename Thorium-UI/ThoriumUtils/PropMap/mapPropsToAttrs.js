@@ -1,3 +1,4 @@
+/* Valid HTML attributes */
 import attrs from "./htmlAttributes";
 
 /**
