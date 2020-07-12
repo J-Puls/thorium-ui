@@ -32,7 +32,7 @@ export class Button extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hoverState: "normal",
+      isHovered: false,
       isClicked: false,
       disabled: this.props.disabled || false,
     };
@@ -47,19 +47,19 @@ export class Button extends Component {
     };
     this.handleClick = () => this.props.onClick && this.props.onClick();
     this.handleMouseEnter = () => {
-      this.setState({ hoverState: "hover" });
+      this.setState({ isHovered: true });
       this.props.onMouseEnter && this.props.onMouseEnter();
     };
     this.handleMouseLeave = () => {
-      this.setState({ hoverState: "normal", isClicked: false });
+      this.setState({ isHovered: false, isClicked: false });
       this.props.onMouseLeave && this.props.onMouseLeave();
     };
     this.handleTouchStart = () => {
-      this.setState({ isClicked: true, hoverState: "hover" });
+      this.setState({ isClicked: true, isHovered: true });
       this.props.onMouseDown && this.props.onMouseDown();
     };
     this.handleTouchEnd = () => {
-      this.setState({ isClicked: false, hoverState: "normal" });
+      this.setState({ isClicked: false, isHovered: false });
       this.props.onMouseUp && this.props.onMouseUp();
     };
   }
@@ -72,9 +72,12 @@ export class Button extends Component {
           let rs = {
             ...bs.general,
             ...bs[this.props.size],
-            ...context.theme.button[this.state.hoverState][this.props.variant],
+            ...context.theme.button[this.props.variant].normal,
           };
 
+          if (this.state.isHovered) {
+            rs = { ...rs, ...context.theme.button[this.props.variant].hover };
+          }
           // Add respective animation when clicked
           if (this.props.animated && this.state.isClicked) {
             this.props.stretch

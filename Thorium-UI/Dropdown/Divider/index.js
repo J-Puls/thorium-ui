@@ -3,7 +3,7 @@ import React from "react";
 /* ThoriumContext */
 import { ThoriumConsumer } from "../../";
 /* Style */
-import { dropdownDividerStyle } from "../../Styles";
+import { dropdownDividerStyle as style } from "../../Styles";
 /* Utils */
 import { mapPropsToAttrs } from "../../ThoriumUtils";
 /* PropTypes */
@@ -19,17 +19,16 @@ const propTypes = {
 export const DropdownDivider = (props) => (
   <ThoriumConsumer>
     {(context) => {
-      const style = context.theme.dropdown.divider;
       return (
         <div
           {...mapPropsToAttrs(props)}
           style={{
-            ...dropdownDividerStyle,
-            ...style.body,
+            ...style,
+            ...context.theme.dropdown.divider,
             ...props.style,
           }}
         >
-          {props.label && <span style={style.label}>{props.label}</span>}
+          {props.label && <span>{props.label}</span>}
         </div>
       );
     }}

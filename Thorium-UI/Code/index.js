@@ -13,8 +13,7 @@ export const Code = (props) => (
           data-testid="code"
           style={{
             ...codeStyle,
-            backgroundColor: context.theme.codeblock.backgroundColor,
-            color: context.theme.colors.secondary,
+            ...context.theme.code,
           }}
         >
           {props.children}

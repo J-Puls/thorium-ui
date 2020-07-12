@@ -21,6 +21,8 @@ const propTypes = {
   vertical: PropTypes.bool,
   trackActive: PropTypes.bool,
   centerLinks: PropTypes.bool,
+  variant: PropTypes.oneOf(validProps.variants),
+  type: PropTypes.oneOf(["normal", "tabs", "pills"]),
 };
 
 const defaultProps = {
@@ -29,6 +31,8 @@ const defaultProps = {
   trackActive: false,
   centerLinks: false,
   defaultActive: 0,
+  variant: "link",
+  type: "normal",
 };
 
 /**
@@ -43,6 +47,8 @@ export const Nav = (props) => {
     setActive: (id) => setActiveItem(id),
     currentURL: window.location.pathname,
     trackActive: props.trackActive,
+    variant: props.variant,
+    type: props.type,
   };
 
   let style = { ...props.style };

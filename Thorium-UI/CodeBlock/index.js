@@ -37,7 +37,7 @@ export const CodeBlock = (props) => {
         };
 
         // Break down the style to its respective components
-        const pre = { ...codeblockStyle.pre, ...context.theme.codeblock };
+        const pre = { ...codeblockStyle.pre, ...context.theme.codeBlock };
         const code = codeblockStyle.code;
         const copyBtn = codeblockStyle.copyBtn;
 

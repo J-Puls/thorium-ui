@@ -13,6 +13,7 @@ import {
   updateBodyStyle,
   updateVpName,
 } from "../ThoriumUtils";
+import { bodyStyle } from "../Styles";
 
 const propTypes = {
   defaultTheme: PropTypes.oneOf(["dark", "light"]),
@@ -112,13 +113,13 @@ export class ThoriumRoot extends Component {
   }
 
   render() {
-    // Explicitely set DOM body styling
-    updateBodyStyle(this.state.theme.body, this.initData.customThemes);
-
     // Get custom styles if the file was found during initialization
     let customStyles;
     if (this.initData.hasCustomStyles)
       customStyles = getCustomStyles(this.state.theme, colors);
+
+    // Explicitely set DOM body styling
+    updateBodyStyle(bodyStyle, customStyles, this.state.theme.body, this.initData.customThemes);
 
     // ThoriumContext
     const context = {

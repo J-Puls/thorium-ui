@@ -65,7 +65,7 @@ export class BurgerButton extends Component {
           // Define the icon's fill color
           const iconFill =
             this.props.iconFill ||
-            context.theme.button.normal[this.props.variant].color;
+            context.theme.button[this.props.variant].normal.color;
 
           return (
             <Button

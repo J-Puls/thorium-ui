@@ -1,11 +1,11 @@
 /* React */
 import React, { useState, useContext, useEffect } from "react";
 /* ThoriumContext */
-import { ThoriumConsumer } from "../../";
+import { ThoriumConsumer, Nav } from "../../";
 /* Style */
 import { navLinkStyle } from "../../Styles";
 /* Utils */
-import { mapPropsToAttrs } from "../../ThoriumUtils";
+import { mapPropsToAttrs, validProps } from "../../ThoriumUtils";
 /* NavContext */
 import NavContext from "../context";
 /* PropTypes */
@@ -13,10 +13,12 @@ import PropTypes from "prop-types";
 
 const propTypes = {
   noHover: PropTypes.bool,
+  variant: PropTypes.oneOf(validProps.variants),
 };
 
 const defaultProps = {
   noHover: false,
+  variant: "link",
 };
 
 /**
@@ -24,62 +26,58 @@ const defaultProps = {
  */
 export const NavLink = (props) => {
   const navContext = useContext(NavContext);
-
-  let [isHovered, setIsHovered] = useState(false);
-  let [isActive, setIsActive] = useState(navContext.activeItem === props.to);
-
+  let [isActive, setIsActive] = useState(
+    navContext.activeItem === props.navKey
+  );
+  let link;
   useEffect(() => {
-    const status = navContext.activeItem === props.to;
+    const status = navContext.activeItem === props.navKey;
     setIsActive(status);
-  }, [navContext.activeItem, props.to]);
+  }, [navContext.activeItem, props.navKey]);
 
   const handleClick = (e) => {
-    !isActive && navContext.setActive(props.to);
+    !isActive && navContext.setActive(props.navKey);
+    link.click();
     if (props.onClick) {
       e.preventDefault();
       props.onClick();
     }
   };
 
-  const handleMouseEnter = () => setIsHovered(true);
-  const handleMouseLeave = () => setIsHovered(false);
-
   return (
     <ThoriumConsumer>
       {(context) => {
-        let style = { ...navLinkStyle.general };
+        let Link;
+        if (context.hasRouterEnabled && !props.asAnchor)
+          Link = require("react-router-dom").Link;
+        let style = {
+          ...navLinkStyle.general,
+          color: "inherit",
+        };
 
-        if (isHovered && !props.noHover) {
-          style = { ...style, ...context.theme.nav.link.hover };
-        } else if (navContext.trackActive && isActive)
-          style = { ...style, ...context.theme.nav.link.active };
-        else style = { ...style, ...context.theme.nav.link.normal };
-        if (context.hasRouterEnabled && !props.asAnchor) {
-          const Link = require("react-router-dom").Link;
-          return (
-            <Link
-              {...mapPropsToAttrs(props, "anchor")}
-              onClick={(e) => handleClick(e)}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              style={{ ...style, ...props.style }}
-              to={props.to}
-            >
-              {props.children}
-            </Link>
-          );
-        } else if (props.asAnchor || !context.hasRouterEnabled) {
-          return (
-            <a
-              {...mapPropsToAttrs(props, "anchor")}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              style={{ ...style, ...props.style }}
-            >
-              {props.children}
-            </a>
-          );
-        }
+        return (
+          <Nav.Item onClick={(e) => handleClick(e)} navKey={props.navKey}>
+            {context.hasRouterEnabled && !props.asAnchor && (
+              <Link
+                {...mapPropsToAttrs(props, "anchor")}
+                to={props.to}
+                style={{ ...style }}
+                ref={(el) => (link = el)}
+              >
+                {props.children}
+              </Link>
+            )}
+            {(props.asAnchor || !context.hasRouterEnabled) && (
+              <a
+                {...mapPropsToAttrs(props, "anchor")}
+                style={{ ...style }}
+                ref={(el) => (link = el)}
+              >
+                {props.children}
+              </a>
+            )}
+          </Nav.Item>
+        );
       }}
     </ThoriumConsumer>
   );

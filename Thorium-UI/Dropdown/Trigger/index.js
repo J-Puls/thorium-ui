@@ -29,7 +29,7 @@ export const DropdownTrigger = React.forwardRef((props, ref) => (
                   width={10}
                   height={10}
                   src={`${Icons}#chevron-up`}
-                  fill={context.theme.button.normal[props.variant].color}
+                  fill={context.theme.button[props.variant].normal.color}
                 />
               </span>
             )}
@@ -40,7 +40,7 @@ export const DropdownTrigger = React.forwardRef((props, ref) => (
                   width={10}
                   height={10}
                   src={`${Icons}#chevron-down`}
-                  fill={context.theme.button.normal[props.variant].color}
+                  fill={context.theme.button[props.variant].normal.color}
                 />
               </span>
             )}

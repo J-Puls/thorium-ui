@@ -9,15 +9,18 @@
  * @param { Object } style Object containing styling to be processed
  * @param { Object } [customStyle] Object containing custom styling, if applicable
  */
-export const updateBodyStyle = (style, customTheme) => {
+export const updateBodyStyle = (style, customStyle, theme, customTheme) => {
   const quotesAndBraces = /["{}]/g,
     commas = /[,]/g;
+
   // If a customTheme module exists, overwrite the default style
-  customTheme && (style = { ...style, ...customTheme });
+  let calcStyle = { ...style, ...theme };
+  if (customStyle.body) calcStyle = { ...calcStyle, ...customStyle.body };
+  if (customTheme) calcStyle = { ...calcStyle, ...customTheme };
 
   // Format to CSS syntax
   const bodyStyle =
-    JSON.stringify(style)
+    JSON.stringify(calcStyle)
       .replace(quotesAndBraces, " ")
       .replace(commas, ";")
       .trim() + ";";

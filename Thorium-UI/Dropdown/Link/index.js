@@ -1,7 +1,7 @@
 /* React */
-import React, { useContext, useState } from "react";
+import React from "react";
 /* ThoriumContext */
-import ThoriumContext from "../../ThoriumContext";
+import { Dropdown, ThoriumConsumer } from "../../";
 /* Style */
 import { dropdownLinkStyle } from "../../Styles";
 /* Utils */
@@ -11,37 +11,52 @@ import { mapPropsToAttrs } from "../../ThoriumUtils";
  * A styalized Link component
  */
 export const DropdownLink = (props) => {
-  const context = useContext(ThoriumContext);
-  const [style, setStyle] = useState(context.theme.dropdown.link.normal);
-  const handleClick = () => props.onClick && props.onClick();
-  const handleMouseEnter = () => setStyle(context.theme.dropdown.link.hover);
-  const handleMouseLeave = () => setStyle(context.theme.dropdown.link.normal);
+  let link;
+  const handleClick = (e) => {
+    link.click();
+    if (props.onClick) {
+      e.preventDefault();
+      props.onClick();
+    }
+  };
 
-  if (context.hasRouterEnabled) {
-    const Link = require("react-router-dom").Link;
-    return (
-      <Link
-        {...mapPropsToAttrs(props, "anchor")}
-        onClick={handleClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        style={{ ...dropdownLinkStyle, ...style }}
-        to={props.to}
-      >
-        {props.children}
-      </Link>
-    );
-  } else {
-    return (
-      <a
-        {...mapPropsToAttrs(props, "anchor")}
-        href={props.href || props.to}
-        rel={props.rel}
-        style={{ ...dropdownLinkStyle }}
-      >
-        {props.children}
-      </a>
-    );
-  }
+  return (
+    <ThoriumConsumer>
+      {(context) => {
+        let Link;
+        if (context.hasRouterEnabled && !props.asAnchor)
+          Link = require("react-router-dom").Link;
+        let style = {
+          ...dropdownLinkStyle.general,
+          color: "inherit",
+        };
+
+        return (
+          <Dropdown.Item onClick={(e) => handleClick(e)} navKey={props.navKey}>
+            {context.hasRouterEnabled && !props.asAnchor && (
+              <Link
+                {...mapPropsToAttrs(props, "anchor")}
+                to={props.to}
+                style={{ ...style }}
+                ref={(el) => (link = el)}
+              >
+                {props.children}
+              </Link>
+            )}
+            {(props.asAnchor || !context.hasRouterEnabled) && (
+              <a
+                {...mapPropsToAttrs(props, "anchor")}
+                style={{ ...style }}
+                ref={(el) => (link = el)}
+              >
+                {props.children}
+              </a>
+            )}
+          </Dropdown.Item>
+        );
+      }}
+    </ThoriumConsumer>
+  );
 };
+
 export default DropdownLink;
