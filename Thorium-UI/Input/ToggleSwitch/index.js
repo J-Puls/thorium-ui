@@ -51,7 +51,7 @@ export const ToggleSwitch = (props) => {
         }
 
         return (
-          <div
+          <th-ts-container
             className={props.className}
             id={props.id}
             name={props.name}
@@ -64,16 +64,16 @@ export const ToggleSwitch = (props) => {
             >
               {props.label}
             </label>
-            <div style={body}>
+            <th-ts-body style={body}>
               <input
                 {...mapPropsToAttrs(props, "input")}
                 type="hidden"
                 value={isActive}
               />
-              <div onClick={handleClick} style={slider} />
+              <th-ts-slider onClick={handleClick} style={slider} />
               <span style={rail} />
-            </div>
-          </div>
+            </th-ts-body>
+          </th-ts-container>
         );
       }}
     </ThoriumConsumer>

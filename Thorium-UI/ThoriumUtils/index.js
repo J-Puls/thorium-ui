@@ -1,10 +1,7 @@
 /* Export all Utils from one module */
 
 export { appendStyle } from "./StyleModifiers/appendStyle";
-export {
-  checkForCustomStyles,
-  getCustomStyles,
-} from "./Initialization/customStylesCheck";
+export * from "./Initialization/customStylesCheck";
 export { checkForRouter } from "./Initialization/checkForRouter";
 export { checkIfMobileDevice } from "./Initialization/checkIfMobileDevice";
 export { codeParser } from "./General/codeParser";

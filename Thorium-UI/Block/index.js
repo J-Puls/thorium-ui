@@ -81,13 +81,13 @@ export class Block extends Component {
           );
 
           return (
-            <div
+            <th-block
               data-testid="block"
               {...mapPropsToAttrs(this.props)}
               style={{ ...style, ...this.props.style }}
             >
               {this.props.children}
-            </div>
+            </th-block>
           );
         }}
       </ThoriumConsumer>

@@ -46,10 +46,10 @@ export const Checkbox = (props) => {
           {props.label}
         </label>
       )}
-      <div style={{ ...cbs.general, ...style }} onClick={handleClick}>
+      <th-checkbox style={{ ...cbs.general, ...style }} onClick={handleClick}>
         {isChecked && <span>&#10003;</span>}
         {!isChecked && <span>&nbsp;&nbsp;</span>}
-      </div>
+      </th-checkbox>
 
       <input
         {...mapPropsToAttrs(props, "input")}

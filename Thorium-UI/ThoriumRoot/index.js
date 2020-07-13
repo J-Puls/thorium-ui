@@ -134,13 +134,13 @@ export class ThoriumRoot extends Component {
     };
     return (
       <ThoriumProvider value={context}>
-        <thorium-root
+        <th-root
           className="thorium-root"
           id="thoriumRoot"
           style={{ boxSizing: "border-box", ...this.props.style }}
         >
           {this.props.children}
-        </thorium-root>
+        </th-root>
       </ThoriumProvider>
     );
   }

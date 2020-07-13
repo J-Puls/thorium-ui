@@ -1,5 +1,5 @@
 /* React */
-import React from "react";
+import React, { forwardRef } from "react";
 /* Style */
 import { layerStyle } from "../Styles";
 /* Utils */
@@ -11,7 +11,7 @@ const stylingProps = ["justify", "rounded", "sticky"];
 /**
  * A horizontal row in the page grid, segmented into 12 blocks.
  */
-export const Layer = (props) => {
+export const Layer = forwardRef((props, ref) => {
   let style = { ...layerStyle.general };
   style = appendStyle(props, stylingProps, style, layerStyle);
   props.style && (style = { ...style, ...props.style });
@@ -19,10 +19,10 @@ export const Layer = (props) => {
     style.backgroundColor = makeTranslucent(style.backgroundColor);
   }
   return (
-    <div {...mapPropsToAttrs(props)} style={style}>
+    <th-layer {...mapPropsToAttrs(props)} style={style} ref={ref}>
       {props.children}
-    </div>
+    </th-layer>
   );
-};
+});
 
 export default Layer;

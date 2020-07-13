@@ -62,7 +62,7 @@ export const NavItem = (props) => {
         }
 
         return (
-          <nav-item
+          <th-navItem
             {...mapPropsToAttrs(props)}
             style={{ ...style, ...props.style }}
             onMouseEnter={handleMouseEnter}
@@ -71,7 +71,7 @@ export const NavItem = (props) => {
             navKey={props.navKey}
           >
             {props.children}
-          </nav-item>
+          </th-navItem>
         );
       }}
     </ThoriumConsumer>

@@ -18,7 +18,7 @@ export const Container = (props) => (
       const vpWidth = context.viewportWidth;
       const vpName = context.viewportSizeName;
       return (
-        <div
+        <th-container
           data-testid="container"
           {...mapPropsToAttrs(props)}
           style={{
@@ -28,7 +28,7 @@ export const Container = (props) => (
           }}
         >
           {props.children}
-        </div>
+        </th-container>
       );
     }}
   </ThoriumConsumer>

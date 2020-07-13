@@ -25,7 +25,7 @@ export const DropdownItem = (props) => {
     <ThoriumConsumer>
       {(context) => {
         let style = { ...dropdownItemStyle.general };
-        if (isHovered) {
+        if (isHovered && !props.noHover) {
           style = {
             ...style,
             ...context.theme.dropdown.item.hover,
