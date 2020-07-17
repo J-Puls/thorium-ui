@@ -1,33 +1,46 @@
 # Thorium-UI
+
 To read the full documentation, please visit https://thorium-ui-preview.now.sh/.
 
-***Please note, this documentation is only updated periodically and does not always represent the current state of the project***
+**_Please note, this documentation is only updated periodically and does not always represent the current state of the project_**
+
 # Overview
-The goal of Throium-UI is to provide an intuitive, user-friendly API with which to build React applications without needing a ton of CSS clutter. This does not mean, however, that you are stuck with the default styling baked into Thorium-UI. Either providing values to the style prop, or styling via CSS will override the built-in styling of any component.
+
+Throium-UI is designed to be an intuitive React.js framework with which to quickly build themed applications, without needing a ton of CSS clutter.
 
 # Getting Started
+
+Use the following instructions to get up and running with Thorium-UI.
+
 ## Installation
-Clone the GitHub repository and copy the Thorium-UI file to the `/src` directory of your React project.
 
-## Setting up your App component
-Once the `Thorium-UI` source file is in your project, we need to do some very minimal boilerplate to get things up and running. Start by including the `ThoriumRoot` component in the return statement of your App component (or the render method, if using a class-based App component).
+Clone the repository and copy the Thorium-UI folder to the `src` directory of your React project.
 
-When using ThroiumRoot, you must pass it either a defaultTheme prop with the value of either "dark" or "light". This will set the default theme your app will use on startup (this can always be toggled later inside your components).
+## Using ThoriumRoot
 
-Your App.js file should look like this:
+Once you've included Thorium-UI in your project, some very minimal boilerplate is needed to get up and running.
+
+1. In your App.js file, begin by importing the ThoriumRoot component from Thorium-UI.
+2. Wrap the ThoriumRoot around the rest of your App contents.
+
+Your App.js file should look like the following.
 
 ```
 import React from "react";
-import ThoriumRoot from "../Thorium-UI/ThoriumRoot";
+import { ThoriumRoot } from "Thorium-UI";
 
-const App = () => {
-  return (
-    <ThoriumRoot defaultTheme="dark">
-      /* YOUR CODE HERE */
-    </ThoriumRoot>
-  );
-};
+ const App = () => {
+   return (
+     <ThoriumRoot>
+       <Container>
+         /* YOUR CODE HERE */
+       </Container>
+     </ThoriumRoot>
+   );
+ }
 export default App;
 ```
 
-You're now ready to begin using Thorium components!
+## Thats It!
+
+With that finished, you're now ready to begin using Thorium-UI!
