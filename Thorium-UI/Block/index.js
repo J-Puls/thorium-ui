@@ -55,7 +55,7 @@ const stylingProps = [
 export class Block extends Component {
   constructor(props) {
     super(props);
-    
+
     // Pass down mouse events if present
     this.handleClick = () => {
       this.props.onClick && this.props.onClick();

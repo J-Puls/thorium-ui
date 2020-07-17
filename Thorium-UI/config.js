@@ -1,6 +1,6 @@
 /* Breakpoint Configuration */
 
-const responsiveSizes = {
+export const responsiveSizes = {
   "12": 100,
   "11": 91.666667,
   "10": 83.333333,
@@ -15,7 +15,7 @@ const responsiveSizes = {
   "1": 8.333333,
 };
 
-const containerSizes = {
+export const containerSizes = {
   xs: 1,
   sm: 1.12,
   md: 1.17,

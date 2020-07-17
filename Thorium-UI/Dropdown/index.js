@@ -79,7 +79,7 @@ export class Dropdown extends Component {
     return (
       <Container
         {...mapPropsToAttrs(this.props)}
-        style={{ marginLeft: 0, marginRight: 0 }}
+        style={{ marginLeft: 0, marginRight: 0, ...this.props.style }}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >

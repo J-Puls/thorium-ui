@@ -119,7 +119,12 @@ export class ThoriumRoot extends Component {
       customStyles = getCustomStyles(this.state.theme, colors);
 
     // Explicitely set DOM body styling
-    updateBodyStyle(bodyStyle, customStyles, this.state.theme.body, this.initData.customThemes);
+    updateBodyStyle(
+      bodyStyle,
+      customStyles,
+      this.state.theme.body,
+      this.initData.customThemes
+    );
 
     // ThoriumContext
     const context = {
@@ -130,6 +135,7 @@ export class ThoriumRoot extends Component {
       toggleTheme: this.toggleTheme,
       viewportSizeName: this.state.viewportSizeName,
       viewportWidth: this.state.viewportWidth,
+
       ...this.initData,
     };
     return (

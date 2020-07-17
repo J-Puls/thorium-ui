@@ -18,6 +18,7 @@ export { FormGroup } from "./Form/Group";
 export { Icon } from "./Icon";
 export { Image } from "./Image";
 export { Layer } from "./Layer";
+export { Link } from "./Link";
 export { Nav } from "./Nav";
 export { NavItem } from "./Nav/Item";
 export { NavLink } from "./Nav/Link";

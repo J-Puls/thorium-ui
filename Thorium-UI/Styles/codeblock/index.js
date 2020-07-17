@@ -1,5 +1,5 @@
 const pre = {
-  fontSize: "1.2rem",
+  fontSize: ".9rem",
   paddingLeft: "1rem",
   paddingRight: "1rem",
   paddingTop: "1rem",
