@@ -1,36 +1,41 @@
-/* Export all Thorium-UI components from one module */
-export { Block } from "./Block";
-export { BurgerButton } from "./BurgerButton";
-export { Button } from "./Button";
-export { Checkbox } from "./Input/Checkbox";
-export { Code } from "./Code";
-export { CodeBlock } from "./CodeBlock";
-export { Container } from "./Container";
-export { Dropdown } from "./Dropdown";
-export { DropdownDivider } from "./Dropdown/Divider";
-export { DropdownItem } from "./Dropdown/Item";
-export { DropdownLink } from "./Dropdown/Link";
-export { DropdownMenu } from "./Dropdown/Menu";
-export { Footer } from "./Footer";
-export { Form } from "./Form";
-export { FormField } from "./Form/Field";
-export { FormGroup } from "./Form/Group";
-export { Icon } from "./Icon";
-export { Image } from "./Image";
-export { Layer } from "./Layer";
-export { Link } from "./Link";
-export { Nav } from "./Nav";
-export { NavItem } from "./Nav/Item";
-export { NavLink } from "./Nav/Link";
-export { Submit } from "./Input/Submit";
-export { Table } from "./Table";
-export { TableBody } from "./Table/Body";
-export { TableCell } from "./Table/Cell";
-export { TableHeader } from "./Table/Header";
-export { TextInput } from "./Input/TextInput";
-export { ThemeToggle } from "./Input/ThemeToggle";
-export { Themes } from "./Themes";
-export * from "./ThoriumContext";
-export { ThoriumRoot } from "./ThoriumRoot";
-export * from "./ThoriumUtils";
-export { ToggleSwitch } from "./Input/ToggleSwitch";
+export { Block } from "./components/Block";
+export { BurgerButton } from "./components/BurgerButton";
+export { Button } from "./components/Button";
+export { Checkbox } from "./components/Checkbox";
+export { Code } from "./components/Code";
+export { CodeBlock } from "./components/CodeBlock";
+export { Container } from "./components/Container";
+export { Dropdown } from "./components/Dropdown";
+export { DropdownContainer } from "./components/DropdownContainer";
+export { DropdownDivider } from "./components/DropdownDivider";
+export { DropdownItem } from "./components/DropdownItem";
+export { DropdownLink } from "./components/DropdownLink";
+export { DropdownMenu } from "./components/DropdownMenu";
+export { DropdownTrigger } from "./components/DropdownTrigger";
+export { Footer } from "./components/Footer";
+export { Form } from "./components/Form";
+export { FormField } from "./components/FormField";
+export { FormGroup } from "./components/FormGroup";
+export { Icon } from "./components/Icon";
+export { Layer } from "./components/Layer";
+export { Nav } from "./components/Nav";
+export { NavItem } from "./components/NavItem";
+export { NavLink } from "./components/NavLink";
+export { Picture } from "./components/Picture";
+export { Submit } from "./components/Submit";
+export { Table } from "./components/Table";
+export { TableBody } from "./components/TableBody";
+export { TableCell } from "./components/TableCell";
+export { TableHeader } from "./components/TableHeader";
+export { TableRow } from "./components/TableRow";
+export { TextArea } from "./components/TextArea";
+export { TextInput } from "./components/TextInput";
+export { ThemeToggle } from "./components/ThemeToggle";
+export { ThoriumRoot } from "./components/ThoriumRoot";
+export { ToggleSwitch } from "./components/ToggleSwitch";
+
+export {
+  ThoriumContext,
+  ThoriumConsumer,
+  ThoriumProvider,
+} from "./context/ThoriumContext";

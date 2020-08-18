@@ -13,6 +13,7 @@ export const responsiveSizes = {
   "3": 25,
   "2": 16.666667,
   "1": 8.333333,
+  none: 0,
 };
 
 export const containerSizes = {

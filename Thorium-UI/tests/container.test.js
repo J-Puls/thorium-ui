@@ -1,5 +1,5 @@
 import React from "react";
-import Container from "../Container";
+import Container from "../components/Container";
 import { render } from "@testing-library/react";
 import config from "../config";
 

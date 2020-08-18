@@ -1,10 +1,9 @@
 import React from "react";
-import { Code } from "../";
-import { ThoriumProvider } from "../ThoriumContext";
+import { Code } from "../components/Code";
+import { ThoriumProvider } from "../context/ThoriumContext";
 import { render } from "@testing-library/react";
-import themes from "../Themes";
-import { colors } from "../Themes/colors";
-import { hexToRGB } from "../ThoriumUtils";
+import themes, { colors } from "../themes";
+import { hexToRGB } from "../utils";
 
 const context = { theme: themes.dark };
 it("renders correctly", () => {

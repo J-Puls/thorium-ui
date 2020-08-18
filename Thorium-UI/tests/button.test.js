@@ -1,10 +1,10 @@
 import React from "react";
-import { Button } from "../Button";
+import { Button } from "../components/Button";
 import { render } from "@testing-library/react";
-import { ThoriumProvider } from "../ThoriumContext";
-import themes from "../Themes";
-import { buttonStyle } from "../Styles";
-import { hexToRGB } from "../ThoriumUtils";
+import { ThoriumProvider } from "../context/ThoriumContext";
+import themes from "../themes";
+import { buttonStyle } from "../styles";
+import { hexToRGB } from "../utils";
 
 const context = { theme: themes.dark };
 it("renders correctly", () => {

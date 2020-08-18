@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { Block } from "../Block";
+import { Block } from "../components/Block";
 import { config } from "../config";
 
 it("renders correctly", () => {

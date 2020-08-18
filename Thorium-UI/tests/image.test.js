@@ -1,42 +1,38 @@
 import React from "react";
-import { Image } from "../";
+import { Picture } from "../components/Picture";
 import { render } from "@testing-library/react";
 import testImg from "./test-image.jpg";
-import { imageStyle as imgSty } from "../Styles";
+import { pictureStyle as ps } from "../styles";
 
 it("renders correctly", () => {
-  const { container, getByTestId } = render(<Image src={testImg} />);
+  const { container, getByTestId } = render(<Picture src={testImg} />);
   expect(getByTestId("image")).toBeInTheDocument();
 });
 
 it("responds to fluid", () => {
   const { container, getByTestId } = render(
     <div style={{ width: "100px" }}>
-      <Image src={testImg} fluid />
+      <Picture src={testImg} fluid />
     </div>
   );
-  expect(getByTestId("image").style.maxWidth).toBe(imgSty.fluid.maxWidth);
+  expect(getByTestId("image").style.maxWidth).toBe(ps.fluid.maxWidth);
 });
 
 it("responds to fluidHalf", () => {
   const { container, getByTestId } = render(
     <div style={{ width: "100px" }}>
-      <Image src={testImg} fluidHalf />
+      <Picture src={testImg} fluidHalf />
     </div>
   );
-  expect(getByTestId("image").style.maxWidth).toBe(imgSty.fluidHalf.maxWidth);
+  expect(getByTestId("image").style.maxWidth).toBe(ps.fluidHalf.maxWidth);
 });
 
 it("responds to round", () => {
-  const { container, getByTestId } = render(<Image src={testImg} round />);
-  expect(getByTestId("image").style.borderRadius).toBe(
-    imgSty.round.borderRadius
-  );
+  const { container, getByTestId } = render(<Picture src={testImg} round />);
+  expect(getByTestId("image").style.borderRadius).toBe(ps.round.borderRadius);
 });
 
 it("responds to rounded", () => {
-  const { container, getByTestId } = render(<Image src={testImg} rounded />);
-  expect(getByTestId("image").style.borderRadius).toBe(
-    imgSty.rounded.borderRadius
-  );
+  const { container, getByTestId } = render(<Picture src={testImg} rounded />);
+  expect(getByTestId("image").style.borderRadius).toBe(ps.rounded.borderRadius);
 });

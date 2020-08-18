@@ -1,17 +1,17 @@
 import { colors } from "./colors";
-import { bodyThemes as body } from "./body";
-import { buttonThemes as button } from "./button";
-import { codeThemes as code } from "./code";
-import { codeBlockThemes as codeBlock } from "./codeBlock";
-import { dropdownThemes as dropdown } from "./dropdown";
-import { inputThemes as input } from "./input";
-import { linkThemes as link } from "./link";
-import { navThemes as nav } from "./nav";
-import { tableThemes as table } from "./table";
-import { toggleSwitchThemes as toggleSwitch } from "./toggleSwitch";
-import { tooltipThemes as tooltip } from "./tooltip";
+import { bodyThemes as body } from "./bodyThemes";
+import { buttonThemes as button } from "./buttonThemes";
+import { codeThemes as code } from "./codeThemes";
+import { codeBlockThemes as codeBlock } from "./codeBlockThemes";
+import { dropdownThemes as dropdown } from "./dropdownThemes";
+import { textInputThemes as textInput } from "./textInputThemes";
+import { linkThemes as link } from "./linkThemes";
+import { navThemes as nav } from "./navThemes";
+import { tableThemes as table } from "./tableThemes";
+import { toggleSwitchThemes as toggleSwitch } from "./toggleSwitchThemes";
+import { tooltipThemes as tooltip } from "./tooltipThemes";
 
-const dark = {
+export const darkTheme = {
   name: "dark",
   colors: colors.dark,
   body: body.dark,
@@ -19,7 +19,7 @@ const dark = {
   code: code.dark,
   codeBlock: codeBlock.dark,
   dropdown: dropdown.dark,
-  input: input.dark,
+  textInput: textInput.dark,
   link: link.dark,
   nav: nav.dark,
   table: table.dark,
@@ -27,7 +27,7 @@ const dark = {
   tooltip: tooltip.dark,
 };
 
-const light = {
+export const lightTheme = {
   name: "light",
   colors: colors.light,
   body: body.light,
@@ -35,7 +35,7 @@ const light = {
   code: code.light,
   codeBlock: codeBlock.light,
   dropdown: dropdown.light,
-  input: input.light,
+  textInput: textInput.light,
   link: link.light,
   nav: nav.light,
   table: table.light,
@@ -44,6 +44,7 @@ const light = {
 };
 
 // Export for inclusion in ThoriumContext
-export const Themes = { dark, light };
+export const themes = { dark: darkTheme, light: lightTheme };
+
 export { colors } from "./colors";
-export default Themes;
+export default themes;
