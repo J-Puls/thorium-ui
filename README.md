@@ -6,7 +6,7 @@ To read the full documentation, please visit https://thorium-ui-preview.now.sh/.
 
 # Overview
 
-Throium-UI is designed to be an intuitive React.js frameworkm, with which to quickly build themed applications, without needing a ton of CSS clutter.
+Throium-UI is designed to be an intuitive React.js framework, with which to quickly build themed applications, without needing a ton of CSS clutter.
 
 # Getting Started
 
