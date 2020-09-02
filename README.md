@@ -35,9 +35,7 @@ import customThemes from "customThemes.js";
  export const App = (props) => {
    return (
      <ThoriumRoot customStyles={customStyles} customThemes={customThemes}>
-       <Container>
-         /* YOUR COMPONENTS HERE */
-       </Container>
+        /* YOUR COMPONENTS HERE */
      </ThoriumRoot>
    );
  }
