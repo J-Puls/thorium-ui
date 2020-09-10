@@ -26,10 +26,10 @@ const defaultProps = {
 }
 
 export class ThoriumRoot extends Component {
-  constructor(props) {
+  constructor(props, ref) {
     super(props)
     this.initData = thoriumInit()
-
+    this.ref = ref
     // Set default theme based on initialization data
     if (this.props.customThemes) {
       this.defaultTheme = this.props.overrideSysTheme
@@ -120,7 +120,7 @@ export class ThoriumRoot extends Component {
     // Get custom styles if the file was found during initialization
     let customStyles = this.props.customStyles(this.state.theme, colors)
 
-    // Explicitely set DOM body styling
+    // Explicitly set DOM body styling
     updateBodyStyle(bodyStyle, customStyles, this.state.theme.body)
 
     // ThoriumContext
@@ -141,6 +141,7 @@ export class ThoriumRoot extends Component {
           class='thorium-root'
           id='thoriumRoot'
           style={{ boxSizing: 'border-box', ...this.props.style }}
+          ref={this.ref}
         >
           {this.props.children}
         </th-root>
