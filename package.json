@@ -27,14 +27,7 @@
     "react": "^16.0.0"
   },
   "devDependencies": {
-    "@4c/tsconfig": "^0.3.1",
-    "@testing-library/react": "^11.0.2",
-    "@types/jest": "^26.0.13",
-    "@types/node": "^14.6.4",
-    "@types/react": "^16.9.49",
-    "@types/react-dom": "^16.9.8",
-    "@typescript-eslint/eslint-plugin": "^4.1.0",
-    "@typescript-eslint/parser": "^4.1.0",
+    "microbundle-crl": "^0.13.10",
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
@@ -48,19 +41,16 @@
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-standard": "^4.0.1",
     "gh-pages": "^2.2.0",
-    "microbundle-crl": "^0.13.10",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.1",
-    "typescript": "^4.0.2"
+    "react-scripts": "^3.4.1"
   },
   "files": [
     "dist"
   ],
   "dependencies": {
-    "@types/prop-types": "^15.7.3",
     "framer-motion": "^2.6.5",
     "prop-types": "^15.7.2",
     "react-router-dom": "^5.2.0"

@@ -1,16 +1,16 @@
 /* React */
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment } from 'react'
 /* ThoriumContext */
-import { ThoriumConsumer } from '../context/ThoriumContext';
+import { ThoriumConsumer } from '../context/ThoriumContext'
 /* Styling */
-import { blockStyle } from '../styles/blockStyle';
+import { blockStyle } from '../styles/blockStyle'
 /* Utils */
-import mapPropsToAttrs from '../utils/mapPropsToAttrs';
-import { validProps } from '../utils/propValidation';
-import appendStyle from '../utils/appendStyle';
-import mapPropsToMotion from '../utils/mapPropsToMotion';
+import mapPropsToAttrs from '../utils/mapPropsToAttrs'
+import { validProps } from '../utils/propValidation'
+import appendStyle from '../utils/appendStyle'
+import mapPropsToMotion from '../utils/mapPropsToMotion'
 /* PropTypes */
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 const propTypes = {
   all: PropTypes.oneOf(validProps.sizes),
@@ -20,11 +20,11 @@ const propTypes = {
   round: PropTypes.bool,
   rounded: PropTypes.bool,
   sm: PropTypes.oneOf(validProps.sizes),
-  translucent: PropTypes.bool,
+  transucent: PropTypes.bool,
   vertical: PropTypes.bool,
   xl: PropTypes.oneOf(validProps.sizes),
   xs: PropTypes.oneOf(validProps.sizes)
-};
+}
 
 const defaultProps = {
   all: null,
@@ -33,12 +33,12 @@ const defaultProps = {
   md: null,
   rounded: false,
   sm: null,
-  translucent: false,
+  transucent: false,
   vertical: false,
   xl: null,
   xs: null,
   withMotion: false
-};
+}
 
 // All valid props to be used by appendStyle
 const stylingProps = [
@@ -51,41 +51,65 @@ const stylingProps = [
   'md',
   'lg',
   'xl'
-];
+]
 
 /**
  * Defines a column within a Layer
  */
-export const Block = (props) => {
-  return (
-    <ThoriumConsumer>
-      {(context) => {
-        let motion;
-        if (context.hasFramerEnabled && props.withMotion) {
-          motion = require('framer-motion').motion;
-        }
-        let style = { ...blockStyle.general };
-        style = appendStyle(props, stylingProps, style, blockStyle, context);
-        const genericProps = {
-          'data-testid': 'block',
-          ...mapPropsToAttrs(props),
-          style: { ...style, ...props.style }
-        };
+export class Block extends Component {
+  constructor(props) {
+    super(props)
 
-        return (
-          <Fragment>
-            {props.withMotion && (
-              <motion.div {...mapPropsToMotion(props)} {...genericProps}>
-                {props.children}
-              </motion.div>
-            )}
-            {!props.withMotion && <div {...genericProps}>{props.children}</div>}
-          </Fragment>
-        );
-      }}
-    </ThoriumConsumer>
-  );
-};
-Block.defaultProps = defaultProps;
-Block.propTypes = propTypes;
-export default Block;
+    // Pass down mouse events if present
+    this.handleClick = () => {
+      this.props.onClick && this.props.onClick()
+    }
+    this.handleMouseEnter = () => {
+      this.props.onMouseEnter && this.props.onMouseEnter()
+    }
+    this.onMouseLeave = () => {
+      this.props.onMouseLeave && this.props.onMouseLeave()
+    }
+  }
+  render() {
+    return (
+      <ThoriumConsumer>
+        {(context) => {
+          let motion
+          if (context.hasFramerEnabled && this.props.withMotion) {
+            motion = require('framer-motion').motion
+          }
+          let style = { ...blockStyle.general }
+          style = appendStyle(
+            this.props,
+            stylingProps,
+            style,
+            blockStyle,
+            context
+          )
+          const genericProps = {
+            'data-testid': 'block',
+            ...mapPropsToAttrs(this.props),
+            style: { ...style, ...this.props.style }
+          }
+
+          return (
+            <Fragment>
+              {this.props.withMotion && (
+                <motion.div {...mapPropsToMotion(this.props)} {...genericProps}>
+                  {this.props.children}
+                </motion.div>
+              )}
+              {!this.props.withMotion && (
+                <div {...genericProps}>{this.props.children}</div>
+              )}
+            </Fragment>
+          )
+        }}
+      </ThoriumConsumer>
+    )
+  }
+}
+Block.defaultProps = defaultProps
+Block.propTypes = propTypes
+export default Block
