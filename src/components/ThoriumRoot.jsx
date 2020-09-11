@@ -1,5 +1,5 @@
 /* React */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 /* ThoriumContext */
 import { ThoriumProvider } from '../context/ThoriumContext';
 /* Themes */
@@ -9,7 +9,6 @@ import colors from '../themes/colors';
 import PropTypes from 'prop-types';
 /* Utils */
 import thoriumInit from '../utils/thoriumInit';
-// import { getCustomStyles } from '../utils/customStylesCheck'
 import updateBodyStyle from '../utils/updateBodyStyle';
 import updateVpName from '../utils/updateVpName';
 /* Style */
@@ -25,7 +24,7 @@ const defaultProps = {
   overrideSysTheme: false
 };
 
-const ThoriumRoot = React.forwardRef((props, ref) => {
+const ThoriumRoot = forwardRef((props, ref) => {
   const initData = thoriumInit();
   const overrideSysTheme = props.overrideSysTheme;
   const sysDefaultTheme = initData.sysDefaultTheme;
@@ -89,7 +88,7 @@ const ThoriumRoot = React.forwardRef((props, ref) => {
         setViewportWidth(window.innerWidth);
       }
     };
-    // Monitor for window resizing
+    // Monitor for window resizing and update state accordingly
     window.addEventListener('resize', handleResize);
 
     return () => {
@@ -105,7 +104,7 @@ const ThoriumRoot = React.forwardRef((props, ref) => {
     setViewportSizeName(updateVpName(viewportWidth));
   }, [viewportWidth]);
 
-  // Evaluate custom styles if the present
+  // Evaluate custom styles if present
   let customStyles = props.customStyles(theme, colors) || null;
 
   // Explicitly set DOM body styling
