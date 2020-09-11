@@ -1,14 +1,13 @@
-import React from 'react'
-import customStyles from './customStyles'
-import customThemes from './customThemes'
+import React from 'react';
+import customStyles from './customStyles';
+import customThemes from './customThemes';
 import {
   ThoriumRoot,
   ThoriumConsumer,
   Block,
   Layer,
   ThemeToggle
-} from 'thorium-ui'
-import 'thorium-ui/dist/index.css'
+} from 'thorium-ui';
 
 const App = () => {
   return (
@@ -18,13 +17,13 @@ const App = () => {
           <ThemeToggle></ThemeToggle>
           <ThoriumConsumer>
             {(context) => {
-              return <p style={context.customStyles.test}>Test</p>
+              return <p style={context.customStyles.test}>Test</p>;
             }}
           </ThoriumConsumer>
         </Block>
       </Layer>
     </ThoriumRoot>
-  )
-}
+  );
+};
 
-export default App
+export default App;
