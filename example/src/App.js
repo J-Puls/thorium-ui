@@ -1,7 +1,7 @@
 import React from 'react';
 import customStyles from './customStyles';
 import customThemes from './customThemes';
-import { ThoriumRoot, Block, Layer, ThemeToggle } from 'thorium-ui';
+import { ThoriumRoot, Block, Layer, Dropdown, ThemeToggle } from 'thorium-ui';
 
 const App = () => {
   return (
@@ -10,7 +10,9 @@ const App = () => {
         <Block all={3}>
           <ThemeToggle size='lg'></ThemeToggle>
         </Block>
-        <Block all={12}></Block>
+        <Block all={12}>
+          <Dropdown variant="secondary" icons text="testing"></Dropdown>
+        </Block>
       </Layer>
     </ThoriumRoot>
   );
