@@ -1,11 +1,8 @@
 /* React */
-import React from "react";
+import React from 'react';
 /* Thorium-UI */
-import Button from "./Button";
-import Icon from "./Icon";
-import { ThoriumConsumer } from "../context/ThoriumContext";
-/* Icons */
-import icons from "../assets/icons.svg";
+import Button from './Button';
+import { ThoriumConsumer } from '../context/ThoriumContext';
 
 /**
  * The button which toggles the "active" state of the Menu
@@ -13,6 +10,30 @@ import icons from "../assets/icons.svg";
 export const DropdownTrigger = React.forwardRef((props, ref) => (
   <ThoriumConsumer>
     {(context) => {
+      const iconFill =
+        props.iconFill || context.theme.button[props.variant].normal.color;
+      const chevronUp = (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          viewBox='0 0 24 24'
+          height='.75em'
+          width='.75em'
+          fill={iconFill}
+        >
+          <path d='M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z' />
+        </svg>
+      );
+      const chevronDown = (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          viewBox='0 0 24 24'
+          height='.75em'
+          width='.75em'
+          fill={iconFill}
+        >
+          <path d='M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z' />
+        </svg>
+      );
       return (
         <div ref={ref}>
           <Button
@@ -21,31 +42,11 @@ export const DropdownTrigger = React.forwardRef((props, ref) => (
             variant={props.variant}
             size={props.size}
             id={props.id}
-            style={{ zIndex: 9999, width: "100%", ...props.style }}
+            style={{ zIndex: 9999, width: '100%', ...props.style }}
           >
             {props.text}
-            {props.icons && props.active && (
-              <span>
-                {" "}
-                <Icon
-                  width={10}
-                  height={10}
-                  src={`${icons}#chevron-up`}
-                  fill={context.theme.button[props.variant].normal.color}
-                />
-              </span>
-            )}
-            {props.icons && !props.active && (
-              <span>
-                {" "}
-                <Icon
-                  width={10}
-                  height={10}
-                  src={`${icons}#chevron-down`}
-                  fill={context.theme.button[props.variant].normal.color}
-                />
-              </span>
-            )}
+            {props.active && <span> {chevronUp}</span>}
+            {!props.active && <span> {chevronDown}</span>}
           </Button>
         </div>
       );
