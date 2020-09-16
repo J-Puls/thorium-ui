@@ -1,31 +1,31 @@
 /* React */
-import React, { Component } from "react";
+import React, { Component } from 'react';
 /* ThoriumContext */
-import { ThoriumConsumer } from "../context/ThoriumContext";
+import { ThoriumConsumer } from '../context/ThoriumContext';
 /* Style */
-import { buttonStyle as bs } from "../styles/buttonStyle";
+import { buttonStyle as bs } from '../styles/buttonStyle';
 /* Utils */
-import mapPropsToAttrs from "../utils/mapPropsToAttrs";
-import { validProps } from "../utils/propValidation";
-import mapPropsToMotion from "../utils/mapPropsToMotion";
+import mapPropsToAttrs from '../utils/mapPropsToAttrs';
+import { validProps } from '../utils/propValidation';
+import mapPropsToMotion from '../utils/mapPropsToMotion';
 /* PropTypes */
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 const propTypes = {
   animated: PropTypes.bool,
   size: PropTypes.string,
   stretch: PropTypes.bool,
   variant: PropTypes.oneOf(validProps.variants),
-  disabled: PropTypes.bool,
+  disabled: PropTypes.bool
 };
 
 const defaultProps = {
   animated: false,
-  size: "normal",
+  size: 'normal',
   stretch: false,
-  variant: "primary",
+  variant: 'primary',
   disabled: false,
-  withMotion: false,
+  withMotion: false
 };
 
 /**
@@ -37,7 +37,7 @@ export class Button extends Component {
     this.state = {
       isHovered: false,
       isClicked: false,
-      disabled: this.props.disabled || false,
+      disabled: this.props.disabled || false
     };
 
     this.handleMouseDown = () => {
@@ -73,14 +73,14 @@ export class Button extends Component {
         {(context) => {
           let motion;
           if (context.hasFramerEnabled && this.props.withMotion) {
-            motion = require("framer-motion").motion;
+            motion = require('framer-motion').motion;
           }
 
           // Build render style from props & state
           let rs = {
             ...bs.general,
             ...bs[this.props.size],
-            ...context.theme.button[this.props.variant].normal,
+            ...context.theme.button[this.props.variant].normal
           };
 
           if (this.state.isHovered) {
@@ -98,12 +98,12 @@ export class Button extends Component {
             (rs = {
               ...rs,
               ...context.theme.button.disabled,
-              cursor: "not-allowed",
+              cursor: 'not-allowed'
             });
 
           const genericProps = {
-            "data-testid": "button",
-            ...mapPropsToAttrs(this.props, "button"),
+            'data-testid': 'button',
+            ...mapPropsToAttrs(this.props, 'button'),
             disabled: this.state.disabled,
             onClick: this.handleClick,
             onMouseDown: this.handleMouseDown,
@@ -113,21 +113,21 @@ export class Button extends Component {
             onTouchEnd: this.handleTouchEnd,
             onTouchStart: this.handleTouchStart,
             ref: this.ref,
-            style: { ...rs, ...this.props.style },
+            style: { ...rs, ...this.props.style }
           };
           if (this.props.withMotion) {
-            console.log("motion button!");
+            console.log('motion button!');
             return (
               <motion.div
                 {...mapPropsToMotion(this.props)}
-                className="motion-btn-container"
+                className='motion-btn-container'
                 style={{
-                  position: "relative",
+                  position: 'relative',
                   width: rs.width,
-                  display: "inline-block",
+                  display: 'inline-block'
                 }}
               >
-                <button {...genericProps} className="motion-btn">
+                <button {...genericProps} className='motion-btn'>
                   {this.props.children}
                 </button>
               </motion.div>
@@ -136,9 +136,9 @@ export class Button extends Component {
             return (
               <div
                 style={{
-                  position: "relative",
+                  ...bs.wrapper,
                   width: rs.width,
-                  display: "inline-block",
+                  ...this.props.wrapperStyle
                 }}
               >
                 <button {...genericProps}>{this.props.children}</button>

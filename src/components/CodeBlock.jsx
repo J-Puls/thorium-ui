@@ -1,33 +1,33 @@
 /* React */
-import React, { useState } from "react";
+import React, { useState } from 'react';
 /* Thorium-UI */
-import Button from "./Button";
-import { ThoriumConsumer } from "../context/ThoriumContext";
+import Button from './Button';
+import { ThoriumConsumer } from '../context/ThoriumContext';
 /* Styles */
-import { codeBlockStyle } from "../styles/codeBlockStyle";
+import { codeBlockStyle } from '../styles/codeBlockStyle';
 /* Utils */
-import mapPropsToAttrs from "../utils/mapPropsToAttrs";
-import copyToClipboard from "../utils/copyToClipboard";
+import mapPropsToAttrs from '../utils/mapPropsToAttrs';
+import copyToClipboard from '../utils/copyToClipboard';
 /* PropTypes */
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 const propTypes = {
   disableCopy: PropTypes.bool,
   disableSelect: PropTypes.bool,
-  language: PropTypes.string,
+  language: PropTypes.string
 };
 
 const defaultProps = {
   disableCopy: false,
   disableSelect: false,
-  language: null,
+  language: null
 };
 
 /**
  * A wrapper used to share any text that needs to retain a specific formatting
  */
 export const CodeBlock = (props) => {
-  const [text, setText] = useState("Copy");
+  const [text, setText] = useState('Copy');
   return (
     <ThoriumConsumer>
       {(context) => {
@@ -44,21 +44,22 @@ export const CodeBlock = (props) => {
         const copyBtn = codeBlockStyle.copyBtn;
 
         // Disable user text selection of specified
-        if (props.disableSelect) code.userSelect = "none";
+        if (props.disableSelect) code.userSelect = 'none';
         return (
           <pre style={{ ...pre, ...props.style }} {...mapPropsToAttrs(props)}>
             {/* Add a copy button if not disabled */}
             {!props.disableCopy && !context.isMobile && (
               <Button
-                size="sm"
-                variant="link"
+                size='sm'
+                variant='link'
                 onClick={() => handleCopyClick()}
                 style={copyBtn}
+                wrapperStyle={{ display: 'block' }}
               >
                 {text}
               </Button>
             )}
-            <code style={{ ...code, ...props.style }}></code>
+            <code style={{ ...code, ...props.style }}>{props.children}</code>
           </pre>
         );
       }}
