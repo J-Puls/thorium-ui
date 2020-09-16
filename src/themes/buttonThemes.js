@@ -15,8 +15,8 @@ const mapThemes = (variant) => {
         color: colors[theme][`${variant}Text`],
       },
       disabled: {
-        backgroundColor: colors[theme].disabled,
-        color: colors[theme].disabledText,
+        backgroundColor: `${colors[theme][variant]}aa`,
+        color: colors[theme][`${variant}Text`],
       },
     };
   }
