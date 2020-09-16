@@ -1,4 +1,4 @@
-# Thorium-UI
+![thorium logo](https://i.ibb.co/6y2RSZf/banner.png)
 
 To read the full documentation, please visit https://thorium-ui-preview.now.sh/.
 
