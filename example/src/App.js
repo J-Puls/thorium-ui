@@ -7,11 +7,11 @@ const App = () => {
   return (
     <ThoriumRoot customStyles={customStyles} customThemes={customThemes}>
       <Layer justify='center'>
-        <Block all={3}>
+        <Block all={12} justify='center'>
           <ThemeToggle size='lg'></ThemeToggle>
         </Block>
-        <Block all={12}></Block>
       </Layer>
+      <Layer justify='center'></Layer>
     </ThoriumRoot>
   );
 };

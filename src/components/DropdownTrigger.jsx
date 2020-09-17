@@ -35,20 +35,19 @@ export const DropdownTrigger = React.forwardRef((props, ref) => (
         </svg>
       );
       return (
-        <div ref={ref}>
-          <Button
-            onClick={props.onClick}
-            stretch
-            variant={props.variant}
-            size={props.size}
-            id={props.id}
-            style={{ zIndex: 9999, width: '100%', ...props.style }}
-          >
-            {props.text}
-            {props.active && <span> {chevronUp}</span>}
-            {!props.active && <span> {chevronDown}</span>}
-          </Button>
-        </div>
+        <Button
+          ref={ref}
+          onClick={props.onClick}
+          stretch
+          variant={props.variant}
+          size={props.size}
+          id={props.id}
+          style={{ zIndex: 9999, ...props.style }}
+        >
+          {props.text}
+          {props.icons && props.active && <span> {chevronUp}</span>}
+          {props.icons && !props.active && <span> {chevronDown}</span>}
+        </Button>
       );
     }}
   </ThoriumConsumer>

@@ -1,40 +1,40 @@
 /* React */
-import React, { Children, Component, cloneElement } from "react";
+import React, { Children, Component, cloneElement } from 'react';
 /* Subcomponents */
-import { DropdownDivider as Divider } from "./DropdownDivider";
-import { DropdownItem as Item } from "./DropdownItem";
-import { DropdownLink as Link } from "./DropdownLink";
-import { DropdownMenu as Menu } from "./DropdownMenu";
-import { DropdownTrigger as Trigger } from "./DropdownTrigger";
-import { DropdownContainer as Container } from "./DropdownContainer";
+import { DropdownDivider as Divider } from './DropdownDivider';
+import { DropdownItem as Item } from './DropdownItem';
+import { DropdownLink as Link } from './DropdownLink';
+import { DropdownMenu as Menu } from './DropdownMenu';
+import { DropdownTrigger as Trigger } from './DropdownTrigger';
+import { DropdownContainer as Container } from './DropdownContainer';
 /* Utils */
-import { mapPropsToAttrs } from "../utils/mapPropsToAttrs";
-import { validProps } from "../utils/propValidation";
+import { mapPropsToAttrs } from '../utils/mapPropsToAttrs';
+import { validProps } from '../utils/propValidation';
 /* PropTypes */
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 const propTypes = {
-  triggerType: PropTypes.oneOf(["click", "hover"]),
-  defaultState: PropTypes.oneOf(["open", "closed"]),
+  triggerType: PropTypes.oneOf(['click', 'hover']),
+  defaultState: PropTypes.oneOf(['open', 'closed']),
   icons: PropTypes.bool,
   remoteTrigger: PropTypes.bool,
   text: PropTypes.string,
   variant: PropTypes.oneOf(validProps.variants),
-  size: PropTypes.oneOf(["sm", "normal", "lg"]),
-  displayType: PropTypes.oneOf(["block", "float"]),
-  targetID: PropTypes.string,
+  size: PropTypes.oneOf(['sm', 'normal', 'lg']),
+  displayType: PropTypes.oneOf(['block', 'float']),
+  targetID: PropTypes.string
 };
 
 const defaultProps = {
-  triggerType: "click",
+  triggerType: 'click',
   targetID: null,
-  defaultState: "closed",
+  defaultState: 'closed',
   icons: false,
   remoteTrigger: false,
   text: null,
-  variant: "primary",
-  size: "normal",
-  displayType: "block",
+  variant: 'primary',
+  size: 'normal',
+  displayType: 'block'
 };
 
 /**
@@ -44,11 +44,11 @@ export class Dropdown extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: this.props.defaultState === "open",
-      menuTop: 0,
+      active: this.props.defaultState === 'open',
+      menuTop: 0
     };
     this.toggle = () => {
-      this.props.triggerType === "click" &&
+      this.props.triggerType === 'click' &&
         this.setState({ active: !this.state.active });
     };
     this.collapse = () => {
@@ -56,10 +56,10 @@ export class Dropdown extends Component {
       this.setState({ active: false });
     };
     this.handleMouseEnter = () => {
-      this.props.triggerType === "hover" && this.setState({ active: true });
+      this.props.triggerType === 'hover' && this.setState({ active: true });
     };
     this.handleMouseLeave = () => {
-      this.props.triggerType === "hover" && this.setState({ active: false });
+      this.props.triggerType === 'hover' && this.setState({ active: false });
     };
   }
   componentDidMount() {
@@ -70,16 +70,17 @@ export class Dropdown extends Component {
     if (this.props.collapseOnClick) {
       children = Children.map(this.props.children, (child) => {
         return cloneElement(child, {
-          onClick: () => this.collapse(),
+          onClick: () => this.collapse()
         });
       });
     }
     let style;
-    this.props.remoteTrigger && (style = { display: "none" });
+    this.props.remoteTrigger && (style = { display: 'none' });
 
     return (
       <Container
         {...mapPropsToAttrs(this.props)}
+        displayType={this.props.displayType}
         style={{ marginLeft: 0, marginRight: 0, ...this.props.style }}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
@@ -100,6 +101,7 @@ export class Dropdown extends Component {
           active={this.state.active}
           height={this.props.height}
           top={this.state.menuTop}
+          size={this.props.size}
           scrollable={this.props.scrollable}
         >
           {children || this.props.children}

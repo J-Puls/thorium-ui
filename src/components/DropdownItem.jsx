@@ -1,11 +1,12 @@
 /* React */
-import React, { useState } from "react";
+import React, { useState } from 'react';
 /* Thorium-UI */
-import { ThoriumConsumer } from "../context/ThoriumContext";
+import { Block } from './Block';
+import { ThoriumConsumer } from '../context/ThoriumContext';
 /* Style */
-import dropdownItemStyle from "../styles/dropdownItemStyle";
+import dropdownItemStyle from '../styles/dropdownItemStyle';
 /* Utils */
-import mapPropsToAttrs from "../utils/mapPropsToAttrs";
+import mapPropsToAttrs from '../utils/mapPropsToAttrs';
 
 /**
  * A styalized container that can hold any other component
@@ -28,17 +29,17 @@ export const DropdownItem = (props) => {
         if (isHovered && !props.noHover) {
           style = {
             ...style,
-            ...context.theme.dropdown.item.hover,
+            ...context.theme.dropdown.item.hover
           };
         } else {
           style = {
             ...style,
-            ...context.theme.nav.item.normal,
+            ...context.theme.nav.item.normal
           };
         }
 
         return (
-          <dropdown-item
+          <Block
             {...mapPropsToAttrs(props)}
             style={{ ...style, ...props.style }}
             onMouseEnter={handleMouseEnter}
@@ -46,7 +47,7 @@ export const DropdownItem = (props) => {
             onClick={handleClick}
           >
             {props.children}
-          </dropdown-item>
+          </Block>
         );
       }}
     </ThoriumConsumer>

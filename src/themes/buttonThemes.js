@@ -1,4 +1,4 @@
-import { colors } from "./colors";
+import { colors } from './colors';
 
 const mapThemes = (variant) => {
   const themes = { dark: null, light: null };
@@ -8,30 +8,31 @@ const mapThemes = (variant) => {
         backgroundColor: colors[theme][`${variant}Hover`],
         color:
           colors[theme][`${variant}TextHover`] ||
-          colors[theme][`${variant}Text`],
+          colors[theme][`${variant}Text`]
       },
       normal: {
         backgroundColor: colors[theme][variant],
-        color: colors[theme][`${variant}Text`],
+        color: colors[theme][`${variant}Text`]
       },
       disabled: {
-        backgroundColor: colors[theme].disabled,
-        color: colors[theme].disabledText,
-      },
+        backgroundColor:
+          variant === 'link' ? 'transparent' : `${colors[theme][variant]}99`,
+        color: `${colors[theme][`${variant}Text`]}aa`
+      }
     };
   }
   return themes;
 };
 
 const variants = [
-  "dark",
-  "danger",
-  "light",
-  "link",
-  "primary",
-  "secondary",
-  "success",
-  "warning",
+  'dark',
+  'danger',
+  'light',
+  'link',
+  'primary',
+  'secondary',
+  'success',
+  'warning'
 ];
 const themes = {};
 
@@ -48,7 +49,7 @@ export const buttonThemes = {
     primary: themes.primary.dark,
     secondary: themes.secondary.dark,
     success: themes.success.dark,
-    warning: themes.warning.dark,
+    warning: themes.warning.dark
   },
   light: {
     danger: themes.danger.light,
@@ -58,7 +59,7 @@ export const buttonThemes = {
     primary: themes.primary.light,
     secondary: themes.secondary.light,
     success: themes.success.light,
-    warning: themes.warning.light,
-  },
+    warning: themes.warning.light
+  }
 };
 export default buttonThemes;

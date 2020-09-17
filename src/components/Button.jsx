@@ -46,7 +46,6 @@ export const Button = forwardRef((props, ref) => {
     }
   };
   const handleMouseEnter = () => {
-    console.log(isDisabled);
     if (!isDisabled) {
       setIsHovered(true);
       props.onMouseEnter && props.onMouseEnter();
@@ -104,7 +103,7 @@ export const Button = forwardRef((props, ref) => {
           (rs = {
             ...rs,
             ...btnTheme[props.variant].disabled,
-            cursor: 'not-allowed'
+            cursor: 'default'
           });
 
         const genericProps = {
