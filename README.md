@@ -14,7 +14,9 @@ Use the following instructions to get up and running with Thorium-UI.
 
 ## Installation
 
-`npm i thorium-ui`
+```bash
+npm i thorium-ui
+```
 
 ## Using ThoriumRoot
 
