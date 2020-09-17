@@ -1,7 +1,7 @@
-import React from "react";
-import { Block } from "./Block";
-import { ThoriumConsumer } from "../context/ThoriumContext";
-import { dropdownMenuStyle as dms } from "../styles/dropdownMenuStyle";
+import React from 'react';
+import { Block } from './Block';
+import { ThoriumConsumer } from '../context/ThoriumContext';
+import { dropdownMenuStyle as dms } from '../styles/dropdownMenuStyle';
 
 export const DropdownMenu = (props) => {
   return (
@@ -11,14 +11,10 @@ export const DropdownMenu = (props) => {
         if (props.active)
           style = { ...style, ...dms[props.displayType].active };
         else style = { ...style, ...dms[props.displayType].inactive };
-        props.displayType === "float" && (style.top = props.top);
-        props.scrollable && (style.overflowY = "auto");
+        props.displayType === 'float' && (style.top = props.top);
+        props.scrollable && props.height && (style.overflowY = 'auto');
         return (
-          <Block
-            all={12}
-            justify="center"
-            style={{ ...style, height: props.height, flexDirection: "column" }}
-          >
+          <Block all={12} style={{ ...style, height: props.height }} vertical>
             {props.children}
           </Block>
         );
