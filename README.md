@@ -26,7 +26,7 @@ Once you've successfully installed Thorium-UI, some very minimal boilerplate is 
 
 Your App.js file should look like the following.
 
-```
+```javascript
 import React from "react";
 import { ThoriumRoot } from "thorium-ui";
 import customStyles from "customStyles.js";
