@@ -31,7 +31,7 @@ const defaultProps = {
 
 export const Button = forwardRef(function ThButton(props, ref) {
   const btnTheme = useTheme().button[props.variant];
-  const baseStyle = { ...buttonStyle.general, ...buttonStyle[props.size] };
+  let baseStyle = { ...buttonStyle.general, ...buttonStyle[props.size] };
   props.stretch && (baseStyle = { ...baseStyle, ...buttonStyle.stretch });
 
   const [isHovered, setIsHovered] = useState(false);
