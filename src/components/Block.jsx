@@ -1,16 +1,16 @@
 /* React */
-import React, { Component, Fragment } from 'react'
+import React, { forwardRef, useContext } from 'react';
 /* ThoriumContext */
-import { ThoriumConsumer } from '../context/ThoriumContext'
+import { useViewportSizeName } from '../utils/useViewportSizeName';
 /* Styling */
-import { blockStyle } from '../styles/blockStyle'
+import { blockStyle } from '../styles/blockStyle';
 /* Utils */
-import mapPropsToAttrs from '../utils/mapPropsToAttrs'
-import { validProps } from '../utils/propValidation'
-import appendStyle from '../utils/appendStyle'
-import mapPropsToMotion from '../utils/mapPropsToMotion'
+import mapPropsToAttrs from '../utils/mapPropsToAttrs';
+import { validProps } from '../utils/propValidation';
+import appendStyle from '../utils/appendStyle';
+import mapPropsToMotion from '../utils/mapPropsToMotion';
 /* PropTypes */
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const propTypes = {
   all: PropTypes.oneOf(validProps.sizes),
@@ -20,11 +20,11 @@ const propTypes = {
   round: PropTypes.bool,
   rounded: PropTypes.bool,
   sm: PropTypes.oneOf(validProps.sizes),
-  transucent: PropTypes.bool,
+  translucent: PropTypes.bool,
   vertical: PropTypes.bool,
   xl: PropTypes.oneOf(validProps.sizes),
   xs: PropTypes.oneOf(validProps.sizes)
-}
+};
 
 const defaultProps = {
   all: null,
@@ -33,12 +33,12 @@ const defaultProps = {
   md: null,
   rounded: false,
   sm: null,
-  transucent: false,
+  translucent: false,
   vertical: false,
   xl: null,
   xs: null,
   withMotion: false
-}
+};
 
 // All valid props to be used by appendStyle
 const stylingProps = [
@@ -51,65 +51,34 @@ const stylingProps = [
   'md',
   'lg',
   'xl'
-]
-
+];
 /**
  * Defines a column within a Layer
  */
-export class Block extends Component {
-  constructor(props) {
-    super(props)
+export const Block = forwardRef(function ThBlock(props, ref) {
+  const vpSizeName = useViewportSizeName();
+  let style = { ...blockStyle.general };
+  style = appendStyle(props, stylingProps, style, blockStyle, { vpSizeName });
+  const genericProps = {
+    'data-testid': 'block',
+    ...mapPropsToAttrs(props),
+    style: { ...style, ...props.style },
+    ref
+  };
 
-    // Pass down mouse events if present
-    this.handleClick = () => {
-      this.props.onClick && this.props.onClick()
-    }
-    this.handleMouseEnter = () => {
-      this.props.onMouseEnter && this.props.onMouseEnter()
-    }
-    this.onMouseLeave = () => {
-      this.props.onMouseLeave && this.props.onMouseLeave()
-    }
-  }
-  render() {
+  if (props.withMotion) {
     return (
-      <ThoriumConsumer>
-        {(context) => {
-          let motion
-          if (context.hasFramerEnabled && this.props.withMotion) {
-            motion = require('framer-motion').motion
-          }
-          let style = { ...blockStyle.general }
-          style = appendStyle(
-            this.props,
-            stylingProps,
-            style,
-            blockStyle,
-            context
-          )
-          const genericProps = {
-            'data-testid': 'block',
-            ...mapPropsToAttrs(this.props),
-            style: { ...style, ...this.props.style }
-          }
+      <motion.div
+        className='motion-block'
+        {...genericProps}
+        {...mapPropsToMotion(props)}
+      >
+        {props.children}
+      </motion.div>
+    );
+  } else return <div {...genericProps}>{props.children}</div>;
+});
 
-          return (
-            <Fragment>
-              {this.props.withMotion && (
-                <motion.div {...mapPropsToMotion(this.props)} {...genericProps}>
-                  {this.props.children}
-                </motion.div>
-              )}
-              {!this.props.withMotion && (
-                <div {...genericProps}>{this.props.children}</div>
-              )}
-            </Fragment>
-          )
-        }}
-      </ThoriumConsumer>
-    )
-  }
-}
-Block.defaultProps = defaultProps
-Block.propTypes = propTypes
-export default Block
+Block.defaultProps = defaultProps;
+Block.propTypes = propTypes;
+export default Block;
