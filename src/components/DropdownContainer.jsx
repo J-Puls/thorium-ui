@@ -3,7 +3,7 @@ import Layer from './Layer';
 import Block from './Block';
 
 /**
- * A wrapper containing all other Dropdown subcomponents
+ * A wrapper containing all other Dropdown sub-components
  */
 export const DropdownContainer = (props) => (
   <Layer
