@@ -24,7 +24,7 @@ const defaultProps = {
   overrideSysTheme: false
 };
 
-const ThoriumRoot = forwardRef((props, ref) => {
+const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
   props.enableMotion && (globalThis.motion = require('framer-motion').motion);
   const initData = thoriumInit();
   const overrideSysTheme = props.overrideSysTheme;
