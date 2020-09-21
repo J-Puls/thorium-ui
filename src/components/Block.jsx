@@ -1,7 +1,5 @@
 /* React */
-import React, { forwardRef, useContext } from 'react';
-/* ThoriumContext */
-import { useViewportSizeName } from '../utils/useViewportSizeName';
+import React, { forwardRef } from 'react';
 /* Styling */
 import { blockStyle } from '../styles/blockStyle';
 /* Utils */
@@ -9,6 +7,8 @@ import mapPropsToAttrs from '../utils/mapPropsToAttrs';
 import { validProps } from '../utils/propValidation';
 import appendStyle from '../utils/appendStyle';
 import mapPropsToMotion from '../utils/mapPropsToMotion';
+/* Hooks */
+import { useViewportSizeName } from '../utils/useViewportSizeName';
 /* PropTypes */
 import PropTypes from 'prop-types';
 
