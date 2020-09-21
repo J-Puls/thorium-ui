@@ -26,6 +26,11 @@ const defaultProps = {
 
 const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
   props.enableMotion && (globalThis.motion = require('framer-motion').motion);
+  if (props.enableReactRouter) {
+    globalThis.ReactRouter = require('react-router');
+    globalThis.ReactRouterDom = require('react-router-dom');
+  }
+
   const initData = thoriumInit();
   const overrideSysTheme = props.overrideSysTheme;
   const sysDefaultTheme = initData.sysDefaultTheme;
@@ -129,6 +134,7 @@ const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
       <th-root
         class='thorium-root'
         id='thoriumRoot'
+        data-testid='thorium-root'
         style={{ boxSizing: 'border-box', ...props.style }}
         ref={ref}
       >
