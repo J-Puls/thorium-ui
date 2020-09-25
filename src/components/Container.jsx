@@ -1,37 +1,33 @@
 /* React */
-import React from "react";
-/* ThoriumContext */
-import { ThoriumConsumer } from "../context/ThoriumContext";
+import React from 'react';
 /* Style */
-import { containerStyle } from "../styles/containerStyle";
+import { containerStyle } from '../styles/containerStyle';
 /* Utils */
-import mapPropsToAttrs from "../utils/mapPropsToAttrs";
+import mapPropsToAttrs from '../utils/mapPropsToAttrs';
 /* Breakpoint configuration */
-import { config } from "../config";
+import { config } from '../config';
+import { useViewportSizeName } from '../utils/useViewportSizeName';
 
 /**
  * A responsive, centered and padded wrapper for page contents.
  */
-export const Container = (props) => (
-  <ThoriumConsumer>
-    {(context) => {
-      const vpWidth = context.viewportWidth;
-      const vpName = context.viewportSizeName;
-      return (
-        <div
-          data-testid="container"
-          {...mapPropsToAttrs(props)}
-          style={{
-            ...containerStyle,
-            maxWidth: vpWidth / config.containerSizes[vpName] || "100%",
-            ...props.style,
-          }}
-        >
-          {props.children}
-        </div>
-      );
-    }}
-  </ThoriumConsumer>
-);
+export const Container = (props) => {
+  const vpSizeName = useViewportSizeName();
+  const vpWidth = window.innerWidth;
+
+  return (
+    <div
+      data-testid='container'
+      {...mapPropsToAttrs(props)}
+      style={{
+        ...containerStyle,
+        maxWidth: vpWidth / config.containerSizes[vpSizeName] || '100%',
+        ...props.style
+      }}
+    >
+      {props.children}
+    </div>
+  );
+};
 
 export default Container;

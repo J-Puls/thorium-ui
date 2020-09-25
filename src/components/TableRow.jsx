@@ -1,11 +1,12 @@
 /* React */
-import React, { Children, cloneElement } from "react";
-/* ThoriumContext */
-import { ThoriumConsumer } from "../context/ThoriumContext";
+import React, { Children, cloneElement } from 'react';
+/* Hooks */
+import { useTheme } from '../utils/useTheme';
 
 export const TableRow = (props) => {
-  let children;
+  const theme = useTheme().table.row;
 
+  let children;
   // Add "body" or "footer" prop to each respective Cell for proper rendering downstream
   if (props.children.length > 0) {
     children = Children.map(props.children, (child) => {
@@ -13,15 +14,10 @@ export const TableRow = (props) => {
       else return cloneElement(child, { footer: true });
     });
   }
-  return (
-    <ThoriumConsumer>
-      {(context) => {
-        let style = {};
-        if (props.striped) style = context.theme.table.row.striped;
-        return <tr style={style}>{children}</tr>;
-      }}
-    </ThoriumConsumer>
-  );
+
+  let style = {};
+  if (props.striped) style = theme.striped;
+  return <tr style={style}>{children}</tr>;
 };
 
 export default TableRow;
