@@ -1,26 +1,25 @@
 /* React */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from 'react';
 /* ThoriumContext */
-import NavItem from "./NavItem";
-import { ThoriumConsumer } from "../context/ThoriumContext";
+import NavItem from './NavItem';
 /* Style */
-import { navLinkStyle } from "../styles/navLinkStyle";
+import { navLinkStyle } from '../styles/navLinkStyle';
 /* Utils */
-import mapPropsToAttrs from "../utils/mapPropsToAttrs";
-import { validProps } from "../utils/propValidation";
+import mapPropsToAttrs from '../utils/mapPropsToAttrs';
+import { validProps } from '../utils/propValidation';
 /* NavContext */
-import { NavContext } from "../context/NavContext";
+import { NavContext } from '../context/NavContext';
 /* PropTypes */
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 const propTypes = {
   noHover: PropTypes.bool,
-  variant: PropTypes.oneOf(validProps.variants),
+  variant: PropTypes.oneOf(validProps.variants)
 };
 
 const defaultProps = {
   noHover: false,
-  variant: "link",
+  variant: 'link'
 };
 
 /**
@@ -31,53 +30,40 @@ export const NavLink = (props) => {
   let [isActive, setIsActive] = useState(
     navContext.activeItem === props.navkey
   );
-  let link;
+
   useEffect(() => {
     const status = navContext.activeItem === props.navkey;
     setIsActive(status);
   }, [navContext.activeItem, props.navkey]);
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     !isActive && navContext.setActive(props.navkey);
-    link.click();
-    if (props.onClick) {
-      e.preventDefault();
-      props.onClick();
-    }
   };
 
-  return (
-    <ThoriumConsumer>
-      {(context) => {
-        let Link;
-        if (!props.asAnchor) Link = require("react-router-dom").Link;
-        let style = { ...navLinkStyle.general };
+  let style = { ...navLinkStyle.general };
 
-        return (
-          <NavItem onClick={(e) => handleClick(e)} navkey={props.navkey}>
-            {context.hasRouterEnabled && !props.asAnchor && (
-              <Link
-                {...mapPropsToAttrs(props, "anchor")}
-                to={props.to}
-                style={style}
-                ref={(el) => (link = el)}
-              >
-                {props.children}
-              </Link>
-            )}
-            {(props.asAnchor || !context.hasRouterEnabled) && (
-              <a
-                {...mapPropsToAttrs(props, "anchor")}
-                style={style}
-                ref={(el) => (link = el)}
-              >
-                {props.children}
-              </a>
-            )}
-          </NavItem>
-        );
-      }}
-    </ThoriumConsumer>
+  return (
+    <NavItem navkey={props.navkey}>
+      {!props.asAnchor && ReactRouterDom && (
+        <ReactRouterDom.Link
+          onClick={handleClick}
+          {...mapPropsToAttrs(props, 'anchor')}
+          to={props.to}
+          style={style}
+        >
+          {props.children}
+        </ReactRouterDom.Link>
+      )}
+      {(props.asAnchor || !ReactRouterDom) && (
+        <a
+          onClick={handleClick}
+          {...mapPropsToAttrs(props, 'anchor')}
+          style={style}
+        >
+          {props.children}
+        </a>
+      )}
+    </NavItem>
   );
 };
 

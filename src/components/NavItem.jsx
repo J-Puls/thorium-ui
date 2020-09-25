@@ -1,19 +1,20 @@
 /* React */
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from 'react';
 /* Utils */
-import mapPropsToAttrs from "../utils/mapPropsToAttrs";
-import mapPropsToMotion from "../utils/mapPropsToMotion";
-/* style */
-import { navItemStyle } from "../styles/navItemStyle";
-import { ThoriumConsumer } from "../context/ThoriumContext";
-import { NavContext } from "../context/NavContext";
+import mapPropsToAttrs from '../utils/mapPropsToAttrs';
+import mapPropsToMotion from '../utils/mapPropsToMotion';
+/* Style */
+import { navItemStyle } from '../styles/navItemStyle';
+import { NavContext } from '../context/NavContext';
+/* Hooks */
+import { useTheme } from '../utils/useTheme';
 
 /**
  * A simple padded wrapper to encapsulate different items within a Nav
  */
 export const NavItem = (props) => {
   const navContext = useContext(NavContext);
-
+  const theme = useTheme().nav.item;
   let [isHovered, setIsHovered] = useState(false);
   let [isActive, setIsActive] = useState(
     navContext.activeItem === props.navkey
@@ -35,57 +36,41 @@ export const NavItem = (props) => {
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
-  return (
-    <ThoriumConsumer>
-      {(context) => {
-        let motion;
-        if (context.hasFramerEnabled && props.withMotion) {
-          motion = require("framer-motion").motion;
-        }
-        let style = { ...navItemStyle.general };
-        if (isActive) {
-          style = {
-            ...style,
-            ...context.theme.nav.item[navContext.variant].active[
-              navContext.type
-            ],
-          };
-        } else if (isHovered) {
-          style = {
-            ...style,
-            ...context.theme.nav.item[navContext.variant].hover[
-              navContext.type
-            ],
-          };
-        } else {
-          style = {
-            ...style,
-            ...context.theme.nav.item[navContext.variant].inactive[
-              navContext.type
-            ],
-          };
-        }
+  let style = { ...navItemStyle.general };
+  if (isActive) {
+    style = {
+      ...style,
+      ...theme[navContext.variant].active[navContext.type]
+    };
+  } else if (isHovered) {
+    style = {
+      ...style,
+      ...theme[navContext.variant].hover[navContext.type]
+    };
+  } else {
+    style = {
+      ...style,
+      ...theme[navContext.variant].inactive[navContext.type]
+    };
+  }
 
-        const genericProps = {
-          ...mapPropsToAttrs(props),
-          style: { ...style, ...props.style },
-          onMouseEnter: handleMouseEnter,
-          onMouseLeave: handleMouseLeave,
-          onClick: handleClick,
-          navkey: props.navkey,
-        };
-        if (props.withMotion) {
-          return (
-            <motion.div {...genericProps} {...mapPropsToMotion(props)}>
-              {props.children}
-            </motion.div>
-          );
-        } else {
-          return <div {...genericProps}>{props.children}</div>;
-        }
-      }}
-    </ThoriumConsumer>
-  );
+  const genericProps = {
+    ...mapPropsToAttrs(props),
+    style: { ...style, ...props.style },
+    onMouseEnter: handleMouseEnter,
+    onMouseLeave: handleMouseLeave,
+    onClick: handleClick,
+    navkey: props.navkey
+  };
+  if (props.withMotion) {
+    return (
+      <motion.div {...genericProps} {...mapPropsToMotion(props)}>
+        {props.children}
+      </motion.div>
+    );
+  } else {
+    return <div {...genericProps}>{props.children}</div>;
+  }
 };
 
 export default NavItem;

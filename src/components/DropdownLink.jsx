@@ -15,7 +15,7 @@ export const DropdownLink = (props) => {
 
   return (
     <DropdownItem navKey={props.navKey} noHover={props.noHover}>
-      {!props.asAnchor && (
+      {!props.asAnchor && ReactRouterDom && (
         <ReactRouterDom.Link
           {...mapPropsToAttrs(props, 'anchor')}
           to={props.to}
@@ -24,11 +24,12 @@ export const DropdownLink = (props) => {
           {props.children}
         </ReactRouterDom.Link>
       )}
-      {props.asAnchor && (
-        <a {...mapPropsToAttrs(props, 'anchor')} style={style}>
-          {props.children}
-        </a>
-      )}
+      {props.asAnchor ||
+        (!ReactRouterDom && (
+          <a {...mapPropsToAttrs(props, 'anchor')} style={style}>
+            {props.children}
+          </a>
+        ))}
     </DropdownItem>
   );
 };
