@@ -5,7 +5,7 @@ import { linkStyle } from '../styles/linkStyle';
 /* Utils */
 import mapPropsToAttrs from '../utils/mapPropsToAttrs';
 /* Hooks */
-import { useTheme } from '../utils/useTheme';
+import { useTheme } from '../utils/hooks/useTheme';
 
 export const Link = (props) => {
   const theme = useTheme().link;

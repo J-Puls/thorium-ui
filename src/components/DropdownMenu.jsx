@@ -1,7 +1,7 @@
 import React from 'react';
 import { Block } from './Block';
 import { dropdownMenuStyle as dms } from '../styles/dropdownMenuStyle';
-import { useTheme } from '../utils/useTheme';
+import { useTheme } from '../utils/hooks/useTheme';
 
 export const DropdownMenu = (props) => {
   const theme = useTheme();

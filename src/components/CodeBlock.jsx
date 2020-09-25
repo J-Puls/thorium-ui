@@ -10,8 +10,8 @@ import copyToClipboard from '../utils/copyToClipboard';
 /* PropTypes */
 import PropTypes from 'prop-types';
 /* Hooks */
-import { useMobileStatus } from '../utils/useMobileStatus';
-import { useTheme } from '../utils/useTheme';
+import { useMobileStatus } from '../utils/hooks/useMobileStatus';
+import { useTheme } from '../utils/hooks/useTheme';
 
 const propTypes = {
   disableCopy: PropTypes.bool,

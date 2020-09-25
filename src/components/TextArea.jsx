@@ -1,53 +1,53 @@
 /* React */
-import React, { forwardRef, Fragment } from "react";
-/* ThoriumContext */
-import { ThoriumConsumer } from "../context/ThoriumContext";
+import React, { forwardRef, Fragment } from 'react';
 /* Style */
-import { textInputStyle } from "../styles/textInputStyle";
+import { textInputStyle } from '../styles/textInputStyle';
 /* Utils */
-import appendStyle from "../utils/appendStyle";
-import mapPropsToAttrs from "../utils/mapPropsToAttrs";
+import appendStyle from '../utils/appendStyle';
+import mapPropsToAttrs from '../utils/mapPropsToAttrs';
+import { useTheme } from '../utils/hooks/useTheme';
 /* PropTypes */
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 const propTypes = {
-  size: PropTypes.oneOf(["sm", "normal", "lg"]),
+  rows: PropTypes.number,
+  cols: PropTypes.number,
   bordered: PropTypes.bool,
-  label: PropTypes.string,
+  label: PropTypes.string
 };
 
 const defaultProps = {
-  size: "normal",
+  rows: 10,
+  cols: 10,
   bordered: false,
-  label: "",
+  label: ''
 };
 
 // All valid props to be used by appendStyle
-const stylingProps = ["size", "bordered"];
+const stylingProps = ['size', 'bordered'];
 
-export const TextArea = forwardRef((props, ref) => (
-  <ThoriumConsumer>
-    {(context) => {
-      let style = { ...textInputStyle.general, ...context.theme.textInput };
-      style = appendStyle(props, stylingProps, style, textInputStyle);
+export const TextArea = forwardRef(function ThTextArea(props, ref) {
+  const theme = useTheme().textInput;
+  let style = { ...textInputStyle.general, ...theme };
+  style = appendStyle(props, stylingProps, style, textInputStyle);
 
-      return (
-        <Fragment>
-          {props.label && (
-            <label form={props.form} htmlFor={props.id}>
-              {props.label}
-            </label>
-          )}
-          <textarea
-            ref={ref}
-            {...mapPropsToAttrs(props, "input")}
-            style={{ ...style, ...props.style }}
-          />
-        </Fragment>
-      );
-    }}
-  </ThoriumConsumer>
-));
+  return (
+    <Fragment>
+      {props.label && (
+        <label form={props.form} htmlFor={props.id}>
+          {props.label}
+        </label>
+      )}
+      <textarea
+        ref={ref}
+        {...mapPropsToAttrs(props, 'input')}
+        rows={props.rows}
+        cols={props.cols}
+        style={{ ...style, ...props.style }}
+      />
+    </Fragment>
+  );
+});
 
 TextArea.propTypes = propTypes;
 TextArea.defaultProps = defaultProps;

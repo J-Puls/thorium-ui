@@ -1,7 +1,7 @@
 /* React */
 import React, { Children, cloneElement } from 'react';
 /* Hooks */
-import { useTheme } from '../utils/useTheme';
+import { useTheme } from '../utils/hooks/useTheme';
 
 export const TableRow = (props) => {
   const theme = useTheme().table.row;

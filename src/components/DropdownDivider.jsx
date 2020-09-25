@@ -4,7 +4,7 @@ import React from 'react';
 import { dropdownDividerStyle as dds } from '../styles/dropdownDividerStyle';
 /* Utils */
 // import mapPropsToAttrs from '../utils/mapPropsToAttrs';
-import { useTheme } from '../utils/useTheme';
+import { useTheme } from '../utils/hooks/useTheme';
 /* PropTypes */
 import PropTypes from 'prop-types';
 
