@@ -1,5 +1,5 @@
 /* React */
-import React, { Fragment } from 'react';
+import React from 'react';
 /* Style */
 import { linkStyle } from '../styles/linkStyle';
 /* Utils */
@@ -12,7 +12,7 @@ export const Link = (props) => {
   const text = { ...linkStyle, ...theme };
 
   return (
-    <Fragment>
+    <React.Fragment>
       {!props.asAnchor && ReactRouterDom && (
         <ReactRouterDom.Link
           {...mapPropsToAttrs(props, 'anchor')}
@@ -32,7 +32,7 @@ export const Link = (props) => {
           <strong>{props.children}</strong>
         </a>
       )}
-    </Fragment>
+    </React.Fragment>
   );
 };
 

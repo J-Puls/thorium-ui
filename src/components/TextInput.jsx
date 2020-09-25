@@ -1,5 +1,5 @@
 /* React */
-import React, { forwardRef, Fragment } from 'react';
+import React, { forwardRef } from 'react';
 /* Style */
 import { textInputStyle } from '../styles/textInputStyle';
 /* Utils */
@@ -32,14 +32,14 @@ export const TextInput = forwardRef((props, ref) => {
   style = appendStyle(props, stylingProps, style, textInputStyle);
 
   return (
-    <Fragment>
+    <React.Fragment>
       {props.label && (
         <label form={props.form} htmlFor={props.id}>
           {props.label}
         </label>
       )}
       <input ref={ref} {...mapPropsToAttrs(props, 'input')} style={style} />
-    </Fragment>
+    </React.Fragment>
   );
 });
 
