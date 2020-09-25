@@ -3,7 +3,7 @@ import React from 'react';
 /* Style */
 import { codeStyle } from '../styles/codeStyle';
 /* Hooks */
-import { useTheme } from '../utils/useTheme';
+import { useTheme } from '../utils/hooks/useTheme';
 
 export const Code = (props) => {
   const theme = useTheme();

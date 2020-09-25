@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { ThoriumContext } from '../context/ThoriumContext';
+import { ThoriumContext } from '../../context/ThoriumContext';
 
 export const useViewportSizeName = () => {
   const context = useContext(ThoriumContext);

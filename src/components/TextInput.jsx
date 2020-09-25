@@ -8,7 +8,7 @@ import mapPropsToAttrs from '../utils/mapPropsToAttrs';
 /* PropTypes */
 import PropTypes from 'prop-types';
 /* Hooks */
-import { useTheme } from '../utils/useTheme';
+import { useTheme } from '../utils/hooks/useTheme';
 
 const propTypes = {
   size: PropTypes.oneOf(['sm', 'normal', 'lg']),

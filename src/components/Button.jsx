@@ -8,7 +8,7 @@ import mapPropsToAttrs from '../utils/mapPropsToAttrs';
 import { validProps } from '../utils/propValidation';
 import mapPropsToMotion from '../utils/mapPropsToMotion';
 /* Hooks */
-import { useTheme } from '../utils/useTheme';
+import { useTheme } from '../utils/hooks/useTheme';
 /* PropTypes */
 import PropTypes from 'prop-types';
 

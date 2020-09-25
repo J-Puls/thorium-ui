@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
-import { ThoriumContext } from '../context/ThoriumContext';
-import { useThemeName } from '../utils/useThemeName';
-import { themes } from '../themes';
+import { ThoriumContext } from '../../context/ThoriumContext';
+import { useThemeName } from './useThemeName';
+import { themes } from '../../themes';
 
 export const useTheme = () => {
   const context = useContext(ThoriumContext);
