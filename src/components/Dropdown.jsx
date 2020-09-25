@@ -1,6 +1,6 @@
 /* React */
 import React, { Children, Component, cloneElement } from 'react';
-/* Subcomponents */
+/* Sub-components */
 import { DropdownDivider as Divider } from './DropdownDivider';
 import { DropdownItem as Item } from './DropdownItem';
 import { DropdownLink as Link } from './DropdownLink';
@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   triggerType: PropTypes.oneOf(['click', 'hover']),
-  defaultState: PropTypes.oneOf(['open', 'closed']),
+  defaultOpen: PropTypes.bool,
   icons: PropTypes.bool,
   remoteTrigger: PropTypes.bool,
   text: PropTypes.string,
@@ -28,7 +28,7 @@ const propTypes = {
 const defaultProps = {
   triggerType: 'click',
   targetID: null,
-  defaultState: 'closed',
+  defaultOpen: false,
   icons: false,
   remoteTrigger: false,
   text: null,
@@ -38,28 +38,28 @@ const defaultProps = {
 };
 
 /**
- * A collapsable menu with a customizable trigger.
+ * A collapsible, animated menu with a customizable trigger.
  */
 export class Dropdown extends Component {
   constructor(props) {
-    super(props);
+    super();
     this.state = {
-      active: this.props.defaultState === 'open',
+      active: props.defaultOpen,
       menuTop: 0
     };
     this.toggle = () => {
-      this.props.triggerType === 'click' &&
+      props.triggerType === 'click' &&
         this.setState({ active: !this.state.active });
     };
     this.collapse = () => {
-      this.props.collapseOnClick && this.props.toggleBurger();
+      props.collapseOnClick && props.toggleBurger();
       this.setState({ active: false });
     };
     this.handleMouseEnter = () => {
-      this.props.triggerType === 'hover' && this.setState({ active: true });
+      props.triggerType === 'hover' && this.setState({ active: true });
     };
     this.handleMouseLeave = () => {
-      this.props.triggerType === 'hover' && this.setState({ active: false });
+      props.triggerType === 'hover' && this.setState({ active: false });
     };
   }
   componentDidMount() {
@@ -119,4 +119,5 @@ Dropdown.Trigger = Trigger;
 Dropdown.Container = Container;
 Dropdown.defaultProps = defaultProps;
 Dropdown.propTypes = propTypes;
+
 export default Dropdown;

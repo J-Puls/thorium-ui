@@ -1,26 +1,17 @@
 /* React */
-import React from "react";
-/* ThoriumContext */
-import { ThoriumConsumer } from "../context/ThoriumContext";
+import React from 'react';
 /* Style */
-import { codeStyle } from "../styles/codeStyle";
+import { codeStyle } from '../styles/codeStyle';
+/* Hooks */
+import { useTheme } from '../utils/useTheme';
 
-export const Code = (props) => (
-  <ThoriumConsumer>
-    {(context) => {
-      return (
-        <code
-          data-testid="code"
-          style={{
-            ...codeStyle,
-            ...context.theme.code,
-          }}
-        >
-          {props.children}
-        </code>
-      );
-    }}
-  </ThoriumConsumer>
-);
+export const Code = (props) => {
+  const theme = useTheme();
+  return (
+    <code data-testid='code' style={{ ...codeStyle, ...theme.code }}>
+      {props.children}
+    </code>
+  );
+};
 
 export default Code;

@@ -1,56 +1,46 @@
 /* React */
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 /* Thorium-UI */
 import { Block } from './Block';
-import { ThoriumConsumer } from '../context/ThoriumContext';
 /* Style */
 import dropdownItemStyle from '../styles/dropdownItemStyle';
 /* Utils */
 import mapPropsToAttrs from '../utils/mapPropsToAttrs';
+/* Hooks */
+import { useTheme } from '../utils/useTheme';
 
 /**
- * A styalized container that can hold any other component
+ * A stylized container that can hold any other component
  */
 export const DropdownItem = (props) => {
+  const theme = useTheme().dropdown.item;
+  const baseStyle = { ...dropdownItemStyle.general };
   const [isHovered, setIsHovered] = useState(false);
+  const [style, setStyle] = useState({ ...baseStyle, ...theme.normal });
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
-  const handleClick = (e) => {
-    if (props.onClick) {
-      e.preventDefault();
-      props.onClick();
+
+  useLayoutEffect(() => {
+    setStyle({ ...baseStyle, ...theme.normal });
+  }, [theme]);
+
+  useLayoutEffect(() => {
+    if (!props.noHover) {
+      isHovered
+        ? setStyle({ ...baseStyle, ...theme.hover })
+        : setStyle({ ...baseStyle, ...theme.normal });
     }
-  };
+  }, [isHovered, props.noHover]);
 
   return (
-    <ThoriumConsumer>
-      {(context) => {
-        let style = { ...dropdownItemStyle.general };
-        if (isHovered && !props.noHover) {
-          style = {
-            ...style,
-            ...context.theme.dropdown.item.hover
-          };
-        } else {
-          style = {
-            ...style,
-            ...context.theme.nav.item.normal
-          };
-        }
-
-        return (
-          <Block
-            {...mapPropsToAttrs(props)}
-            style={{ ...style, ...props.style }}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onClick={handleClick}
-          >
-            {props.children}
-          </Block>
-        );
-      }}
-    </ThoriumConsumer>
+    <Block
+      {...mapPropsToAttrs(props)}
+      style={{ ...style, ...props.style }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {props.children}
+    </Block>
   );
 };
 

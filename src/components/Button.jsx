@@ -1,13 +1,14 @@
 /* React */
-import React, { forwardRef, useState } from 'react';
-/* ThoriumContext */
-import { ThoriumConsumer } from '../context/ThoriumContext';
+import React, { forwardRef, useState, useLayoutEffect } from 'react';
+
 /* Style */
-import { buttonStyle as bs } from '../styles/buttonStyle';
+import { buttonStyle } from '../styles/buttonStyle';
 /* Utils */
 import mapPropsToAttrs from '../utils/mapPropsToAttrs';
 import { validProps } from '../utils/propValidation';
 import mapPropsToMotion from '../utils/mapPropsToMotion';
+/* Hooks */
+import { useTheme } from '../utils/useTheme';
 /* PropTypes */
 import PropTypes from 'prop-types';
 
@@ -28,10 +29,20 @@ const defaultProps = {
   withMotion: false
 };
 
-export const Button = forwardRef((props, ref) => {
+export const Button = forwardRef(function ThButton(props, ref) {
+  const btnTheme = useTheme().button[props.variant];
+  let baseStyle = { ...buttonStyle.general, ...buttonStyle[props.size] };
+  props.stretch && (baseStyle = { ...baseStyle, ...buttonStyle.stretch });
+
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [isDisabled, setIsDisabled] = useState(props.isDisabled);
+  const [renderStyle, setRenderStyle] = useState(
+    !isDisabled
+      ? { ...baseStyle, ...btnTheme.normal }
+      : { ...baseStyle, ...btnTheme.disabled, ...buttonStyle.disabled }
+  );
+
   const handleClick = () => props.onClick && !isDisabled && props.onClick();
   const handleMouseDown = () => {
     if (!isDisabled) {
@@ -73,90 +84,67 @@ export const Button = forwardRef((props, ref) => {
     }
   };
 
-  return (
-    <ThoriumConsumer>
-      {(context) => {
-        let motion;
-        if (context.hasFramerEnabled && props.withMotion) {
-          motion = require('framer-motion').motion;
-        }
-        const btnTheme = context.theme.button;
-        // Build render style from props & state
-        let rs = {
-          ...bs.general,
-          ...bs[props.size],
-          ...btnTheme[props.variant].normal,
-          width: props.stretch ? '100%' : 'initial'
-        };
+  useLayoutEffect(() => {
+    setRenderStyle(
+      !isDisabled
+        ? { ...baseStyle, ...btnTheme.normal }
+        : { ...baseStyle, ...btnTheme.disabled, ...buttonStyle.disabled }
+    );
+  }, [btnTheme, isDisabled, props]);
 
-        // Change style when hovered
-        isHovered && (rs = { ...rs, ...btnTheme[props.variant].hover });
+  useLayoutEffect(() => {
+    if (!isDisabled) {
+      if (isHovered) {
+        setRenderStyle({ ...baseStyle, ...btnTheme.hover });
+      } else setRenderStyle({ ...baseStyle, ...btnTheme.normal });
+    }
+  }, [isHovered, isDisabled]);
 
-        // Add respective animation when clicked
-        if (props.animated && isClicked) {
-          rs = props.stretch
-            ? { ...rs, ...bs.animate.stretch }
-            : { ...rs, ...bs.animate.normal };
-        }
+  const genericProps = {
+    'data-testid': 'button',
+    ...mapPropsToAttrs(props, 'button'),
+    disabled: isDisabled,
+    onMouseDown: handleMouseDown,
+    onMouseEnter: handleMouseEnter,
+    onMouseLeave: handleMouseLeave,
+    onMouseUp: handleMouseUp,
+    onTouchEnd: handleTouchEnd,
+    onTouchStart: handleTouchStart,
+    ref: ref,
+    style: { ...renderStyle, ...props.style }
+  };
 
-        props.isDisabled &&
-          (rs = {
-            ...rs,
-            ...btnTheme[props.variant].disabled,
-            cursor: 'default'
-          });
-
-        const genericProps = {
-          'data-testid': 'button',
-          ...mapPropsToAttrs(props, 'button'),
-          disabled: isDisabled,
-          onMouseDown: handleMouseDown,
-          onMouseEnter: handleMouseEnter,
-          onMouseLeave: handleMouseLeave,
-          onMouseUp: handleMouseUp,
-          onTouchEnd: handleTouchEnd,
-          onTouchStart: handleTouchStart,
-          ref: ref,
-          style: { ...rs, ...props.style }
-        };
-        if (props.withMotion) {
-          return (
-            <motion.div
-              {...mapPropsToMotion(props)}
-              className='motion-btn-container'
-              style={{
-                position: 'relative',
-                width: rs.width,
-                display: 'inline-block'
-              }}
-            >
-              <button
-                {...genericProps}
-                className='motion-btn'
-                onClick={handleClick}
-              >
-                {props.children}
-              </button>
-            </motion.div>
-          );
-        } else {
-          return (
-            <div
-              style={{
-                ...bs.wrapper,
-                width: rs.width,
-                ...props.wrapperStyle
-              }}
-            >
-              <button {...genericProps} onClick={handleClick}>
-                {props.children}
-              </button>
-            </div>
-          );
-        }
-      }}
-    </ThoriumConsumer>
-  );
+  if (props.withMotion) {
+    return (
+      <motion.div
+        {...mapPropsToMotion(props)}
+        className='motion-btn-container'
+        style={{
+          position: 'relative',
+          width: renderStyle.width,
+          display: 'inline-block'
+        }}
+      >
+        <button {...genericProps} className='motion-btn' onClick={handleClick}>
+          {props.children}
+        </button>
+      </motion.div>
+    );
+  } else {
+    return (
+      <div
+        style={{
+          ...buttonStyle.wrapper,
+          width: renderStyle.width,
+          ...props.wrapperStyle
+        }}
+      >
+        <button {...genericProps} onClick={handleClick}>
+          {props.children}
+        </button>
+      </div>
+    );
+  }
 });
 
 Button.defaultProps = defaultProps;

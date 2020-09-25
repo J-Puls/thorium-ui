@@ -1,39 +1,33 @@
 /* React */
-import React from "react";
-/* ThoriumContext */
-import { ThoriumConsumer } from "../context/ThoriumContext";
+import React from 'react';
 /* Style */
-import { dropdownDividerStyle as dds } from "../styles/dropdownDividerStyle";
+import { dropdownDividerStyle as dds } from '../styles/dropdownDividerStyle';
 /* Utils */
-import mapPropsToAttrs from "../utils/mapPropsToAttrs";
+// import mapPropsToAttrs from '../utils/mapPropsToAttrs';
+import { useTheme } from '../utils/useTheme';
 /* PropTypes */
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 const propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.string
+};
+const defaultProps = {
+  label: ''
 };
 
 /**
- * A styalized horizontal divider used to separate different sections in the Menu
+ * A stylized horizontal divider used to separate different sections in the Menu
  */
-export const DropdownDivider = (props) => (
-  <ThoriumConsumer>
-    {(context) => {
-      return (
-        <div
-          {...mapPropsToAttrs(props)}
-          style={{
-            ...dds,
-            ...context.theme.dropdown.divider,
-            ...props.style,
-          }}
-        >
-          {props.label && <span>{props.label}</span>}
-        </div>
-      );
-    }}
-  </ThoriumConsumer>
-);
+export const DropdownDivider = (props) => {
+  const theme = useTheme();
+
+  return (
+    <div style={{ ...dds, ...theme.dropdown.divider, ...props.style }}>
+      {props.label && <span>{props.label}</span>}
+    </div>
+  );
+};
 
 DropdownDivider.propTypes = propTypes;
+DropdownDivider.defaultProps = defaultProps;
 export default DropdownDivider;

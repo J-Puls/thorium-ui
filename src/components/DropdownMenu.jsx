@@ -1,25 +1,22 @@
 import React from 'react';
 import { Block } from './Block';
-import { ThoriumConsumer } from '../context/ThoriumContext';
 import { dropdownMenuStyle as dms } from '../styles/dropdownMenuStyle';
+import { useTheme } from '../utils/useTheme';
 
 export const DropdownMenu = (props) => {
+  const theme = useTheme();
+  let style = { ...dms.general, ...theme.dropdown.menu };
+
+  if (props.active) style = { ...style, ...dms[props.displayType].active };
+  else style = { ...style, ...dms[props.displayType].inactive };
+  props.displayType === 'float' && (style.top = props.top);
+  props.scrollable && props.height && (style.overflowY = 'auto');
+  props.height && (style.height = props.height);
+
   return (
-    <ThoriumConsumer>
-      {(context) => {
-        let style = { ...dms.general, ...context.theme.dropdown.menu };
-        if (props.active)
-          style = { ...style, ...dms[props.displayType].active };
-        else style = { ...style, ...dms[props.displayType].inactive };
-        props.displayType === 'float' && (style.top = props.top);
-        props.scrollable && props.height && (style.overflowY = 'auto');
-        return (
-          <Block all={12} style={{ ...style, height: props.height }} vertical>
-            {props.children}
-          </Block>
-        );
-      }}
-    </ThoriumConsumer>
+    <Block all={12} style={style} vertical>
+      {props.children}
+    </Block>
   );
 };
 export default DropdownMenu;

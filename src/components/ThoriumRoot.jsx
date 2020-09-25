@@ -24,7 +24,13 @@ const defaultProps = {
   overrideSysTheme: false
 };
 
-const ThoriumRoot = forwardRef((props, ref) => {
+const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
+  props.enableMotion && (globalThis.motion = require('framer-motion').motion);
+  if (props.enableReactRouter) {
+    globalThis.ReactRouter = require('react-router');
+    globalThis.ReactRouterDom = require('react-router-dom');
+  }
+
   const initData = thoriumInit();
   const overrideSysTheme = props.overrideSysTheme;
   const sysDefaultTheme = initData.sysDefaultTheme;
@@ -114,18 +120,21 @@ const ThoriumRoot = forwardRef((props, ref) => {
   const context = {
     colors,
     customStyles,
-    setTheme: setTheme,
+    setTheme: (name) => setTheme(themes[name]),
     theme: theme,
+    themeName: theme.name,
     toggleTheme: toggleTheme,
     viewportSizeName: viewportSizeName,
     viewportWidth: viewportWidth,
     ...initData
   };
+
   return (
     <ThoriumProvider value={context}>
       <th-root
         class='thorium-root'
         id='thoriumRoot'
+        data-testid='thorium-root'
         style={{ boxSizing: 'border-box', ...props.style }}
         ref={ref}
       >
@@ -134,130 +143,6 @@ const ThoriumRoot = forwardRef((props, ref) => {
     </ThoriumProvider>
   );
 });
-
-// export class ThoriumRoot extends Component {
-//   constructor(props) {
-//     super(props)
-//     this.initData = thoriumInit()
-
-//     // Set default theme based on initialization data
-//     if (this.props.customThemes) {
-//       this.defaultTheme = this.props.overrideSysTheme
-//         ? {
-//             ...themes[this.props.defaultTheme],
-//             ...this.props.customThemes[this.props.defaultTheme]
-//           }
-//         : {
-//             ...themes[this.props.defaultTheme],
-//             ...this.props.customThemes[this.initData.sysDefaultTheme]
-//           }
-//     } else {
-//       this.defaultTheme = this.props.overrideSysTheme
-//         ? { ...themes[this.props.defaultTheme] }
-//         : { ...themes[this.initData.sysDefaultTheme] }
-//     }
-
-//     this.state = {
-//       sysDefaultTheme: this.initData.sysDefaultTheme,
-//       overrideSysTheme: props.overrideSysTheme,
-//       theme:
-//         this.defaultTheme ||
-//         themes[this.initData.sysDefaultTheme] ||
-//         themes[props.defaultTheme],
-//       viewportSizeName: updateVpName(window.innerWidth),
-//       viewportWidth: window.innerWidth
-//     }
-
-//     /**
-//      * Allows children components to explicitly set the theme at any point
-//      * @param { Object } data An object containing the new theme definition
-//      */
-//     this.setTheme = (data) => {
-//       this.setState({ theme: data })
-//     }
-
-//     /**
-//      * Allows children components to toggle the theme at any point
-//      */
-//     this.toggleTheme = () => {
-//       let newTheme
-//       this.state.theme.name === 'dark'
-//         ? (newTheme = themes.light)
-//         : (newTheme = themes.dark)
-
-//       if (this.props.customThemes) {
-//         newTheme = {
-//           ...newTheme,
-//           ...this.props.customThemes[newTheme.name]
-//         }
-//       }
-//       this.setState({ theme: newTheme })
-//     }
-
-//     // Monitor for changes in system-wide theme mode
-//     window
-//       .matchMedia('(prefers-color-scheme: dark)')
-//       .addEventListener('change', (e) => {
-//         this.toggleTheme()
-//       })
-//   }
-
-//   componentDidMount() {
-//     /**
-//      *  Updates the viewport state properties when the window is resized past a breakpoint
-//      */
-//     this.handleResize = () => {
-//       if (updateVpName(window.innerWidth) !== this.state.viewportSizeName) {
-//         this.setState({
-//           viewportSizeName: updateVpName(window.innerWidth),
-//           viewportWidth: window.innerWidth
-//         })
-//       }
-//     }
-
-//     // Monitor for window resizing
-//     window.addEventListener('resize', this.handleResize)
-//   }
-//   // Prevent memory leak when unmounted
-//   componentWillUnmount() {
-//     window.removeEventListener('resize', this.handleResize)
-//     window
-//       .matchMedia('(prefers-color-scheme: dark)')
-//       .removeEventListener('change', this.toggleTheme)
-//   }
-
-//   render() {
-//     // Get custom styles if the file was found during initialization
-//     let customStyles = this.props.customStyles(this.state.theme, colors)
-
-//     // Explicitly set DOM body styling
-//     updateBodyStyle(bodyStyle, customStyles, this.state.theme.body)
-
-//     // ThoriumContext
-//     const context = {
-//       colors,
-//       customStyles,
-//       setTheme: this.setTheme,
-//       theme: this.state.theme,
-//       toggleTheme: this.toggleTheme,
-//       viewportSizeName: this.state.viewportSizeName,
-//       viewportWidth: this.state.viewportWidth,
-
-//       ...this.initData
-//     }
-//     return (
-//       <ThoriumProvider value={context}>
-//         <th-root
-//           class='thorium-root'
-//           id='thoriumRoot'
-//           style={{ boxSizing: 'border-box', ...this.props.style }}
-//         >
-//           {this.props.children}
-//         </th-root>
-//       </ThoriumProvider>
-//     )
-//   }
-// }
 
 ThoriumRoot.defaultProps = defaultProps;
 ThoriumRoot.propTypes = propTypes;

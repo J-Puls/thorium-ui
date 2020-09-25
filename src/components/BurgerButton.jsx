@@ -1,5 +1,5 @@
 /* React */
-import React, { useState, forwardRef, Component } from 'react';
+import React, { Component } from 'react';
 /* Thorium-UI */
 import Button from './Button';
 import { ThoriumConsumer } from '../context/ThoriumContext';
@@ -7,6 +7,7 @@ import { ThoriumConsumer } from '../context/ThoriumContext';
 import mapPropsToAttrs from '../utils/mapPropsToAttrs';
 import { validProps } from '../utils/propValidation';
 import mapPropsToMotion from '../utils/mapPropsToMotion';
+
 /* PropTypes */
 import PropTypes from 'prop-types';
 
@@ -40,7 +41,7 @@ export class BurgerButton extends Component {
       target: props.targetID,
       active: false
     };
-    
+
     this.toggle = () => this.setState({ active: !this.state.active });
     this.handleClick = () => {
       const slave = document.getElementById(this.state.target);

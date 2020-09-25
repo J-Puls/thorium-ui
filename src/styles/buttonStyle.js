@@ -14,6 +14,9 @@ export const buttonStyle = {
     transitionDuration: '.15s',
     fontFamily: 'inherit'
   },
+  disabled: {
+    cursor: 'default'
+  },
   lg: {
     paddingTop: '.5rem',
     paddingBottom: '.5rem',
