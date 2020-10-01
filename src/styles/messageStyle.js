@@ -7,8 +7,11 @@ export const messageStyle = {
     marginTop: '.25rem',
     padding: '1rem',
     position: 'relative',
-    textAlign: 'center'
+    textAlign: 'center',
+    transitionDuration: '0.3s'
   },
+  visible: { maxHeight: '100vh', opacity: 1 },
+  hidden: { maxHeight: 0, opacity: 0, padding: 0 },
   button: {
     background: 'transparent',
     border: 'none',
