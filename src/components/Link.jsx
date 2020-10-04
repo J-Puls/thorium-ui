@@ -8,8 +8,9 @@ import mapPropsToAttrs from '../utils/mapPropsToAttrs';
 import { useTheme } from '../utils/hooks/useTheme';
 
 export const Link = (props) => {
-  const theme = useTheme().link;
-  const text = { ...linkStyle, ...theme };
+  const theme = useTheme();
+  const text = { ...linkStyle, ...theme.link };
+  if (props.useParentColor) text.color = 'inherit';
 
   return (
     <React.Fragment>
