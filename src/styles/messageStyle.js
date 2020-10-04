@@ -6,7 +6,7 @@ export const messageStyle = {
     marginBottom: '.125rem',
     marginTop: '.25rem',
     paddingLeft: '1rem',
-    paddingRight: '1rem',
+    paddingRight: '2rem',
     paddingTop: '1rem',
     paddingBottom: '1rem',
     position: 'relative',
@@ -23,7 +23,7 @@ export const messageStyle = {
     paddingBottom: 0
   },
   dismissed: { display: 'none', marginBottom: 0, marginTop: 0 },
-  button: {
+  dismiss: {
     background: 'transparent',
     border: 'none',
     cursor: 'pointer',
@@ -35,5 +35,9 @@ export const messageStyle = {
     position: 'absolute',
     right: '1rem',
     top: '1rem'
+  },
+  title: {
+    textAlign: 'left',
+    marginBottom: 0
   }
 };
