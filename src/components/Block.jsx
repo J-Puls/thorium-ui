@@ -8,7 +8,7 @@ import { validProps } from '../utils/propValidation';
 import appendStyle from '../utils/appendStyle';
 import mapPropsToMotion from '../utils/mapPropsToMotion';
 /* Hooks */
-import { useViewportSizeName } from '../utils/hooks/useViewportSizeName';
+import { useViewportSizeName } from '../hooks/thoriumRoot/useViewportSizeName';
 /* PropTypes */
 import PropTypes from 'prop-types';
 

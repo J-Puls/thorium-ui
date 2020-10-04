@@ -7,7 +7,7 @@ import dropdownItemStyle from '../styles/dropdownItemStyle';
 /* Utils */
 import mapPropsToAttrs from '../utils/mapPropsToAttrs';
 /* Hooks */
-import { useTheme } from '../utils/hooks/useTheme';
+import { useTheme } from '../hooks/thoriumRoot/useTheme';
 
 /**
  * A stylized container that can hold any other component

@@ -5,7 +5,7 @@ import { linkStyle } from '../styles/linkStyle';
 /* Utils */
 import mapPropsToAttrs from '../utils/mapPropsToAttrs';
 /* Hooks */
-import { useTheme } from '../utils/hooks/useTheme';
+import { useTheme } from '../hooks/thoriumRoot/useTheme';
 
 export const Link = (props) => {
   const theme = useTheme();

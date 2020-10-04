@@ -5,7 +5,7 @@ import { textInputStyle } from '../styles/textInputStyle';
 /* Utils */
 import appendStyle from '../utils/appendStyle';
 import mapPropsToAttrs from '../utils/mapPropsToAttrs';
-import { useTheme } from '../utils/hooks/useTheme';
+import { useTheme } from '../hooks/thoriumRoot/useTheme';
 /* PropTypes */
 import PropTypes from 'prop-types';
 

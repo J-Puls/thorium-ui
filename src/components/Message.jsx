@@ -12,7 +12,7 @@ import { Button } from './Button';
 /* Style */
 import { messageStyle } from '../styles/messageStyle';
 /* Hooks */
-import { useTheme } from '../utils/hooks/useTheme';
+import { useTheme } from '../hooks/thoriumRoot/useTheme';
 /* Utils */
 import { sleep } from '../utils/sleep';
 /* Context */

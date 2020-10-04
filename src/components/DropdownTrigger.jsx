@@ -3,7 +3,7 @@ import React from 'react';
 /* Thorium-UI */
 import Button from './Button';
 /* Hooks */
-import { useTheme } from '../utils/hooks/useTheme';
+import { useTheme } from '../hooks/thoriumRoot/useTheme';
 
 /**
  * The button which toggles the "active" state of the Menu

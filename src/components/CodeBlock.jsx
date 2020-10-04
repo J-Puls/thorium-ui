@@ -10,8 +10,8 @@ import copyToClipboard from '../utils/copyToClipboard';
 /* PropTypes */
 import PropTypes from 'prop-types';
 /* Hooks */
-import { useMobileStatus } from '../utils/hooks/useMobileStatus';
-import { useTheme } from '../utils/hooks/useTheme';
+import { useMobileStatus } from '../hooks/thoriumRoot/useMobileStatus';
+import { useTheme } from '../hooks/thoriumRoot/useTheme';
 
 const propTypes = {
   disableCopy: PropTypes.bool,

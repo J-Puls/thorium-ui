@@ -8,7 +8,7 @@ import mapPropsToAttrs from '../utils/mapPropsToAttrs';
 /* PropTypes */
 import PropTypes from 'prop-types';
 /* Hooks */
-import { useTheme } from '../utils/hooks/useTheme';
+import { useTheme } from '../hooks/thoriumRoot/useTheme';
 
 const propTypes = {
   size: PropTypes.oneOf(['sm', 'normal', 'lg']),

@@ -8,7 +8,7 @@ import { validProps } from '../utils/propValidation';
 /* PropTypes */
 import PropTypes from 'prop-types';
 /* Hooks */
-import { useTheme } from '../utils/hooks/useTheme';
+import { useTheme } from '../hooks/thoriumRoot/useTheme';
 
 const propTypes = {
   checked: PropTypes.bool,

@@ -6,7 +6,7 @@ import { containerStyle } from '../styles/containerStyle';
 import mapPropsToAttrs from '../utils/mapPropsToAttrs';
 /* Breakpoint configuration */
 import { config } from '../config';
-import { useViewportSizeName } from '../utils/hooks/useViewportSizeName';
+import { useViewportSizeName } from '../hooks/thoriumRoot/useViewportSizeName';
 
 /**
  * A responsive, centered and padded wrapper for page contents.

@@ -4,7 +4,7 @@ import React from 'react';
 import { dropdownDividerStyle as dds } from '../styles/dropdownDividerStyle';
 /* Utils */
 // import mapPropsToAttrs from '../utils/mapPropsToAttrs';
-import { useTheme } from '../utils/hooks/useTheme';
+import { useTheme } from '../hooks/thoriumRoot/useTheme';
 /* PropTypes */
 import PropTypes from 'prop-types';
 

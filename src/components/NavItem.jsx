@@ -7,7 +7,7 @@ import mapPropsToMotion from '../utils/mapPropsToMotion';
 import { navItemStyle } from '../styles/navItemStyle';
 import { NavContext } from '../context/NavContext';
 /* Hooks */
-import { useTheme } from '../utils/hooks/useTheme';
+import { useTheme } from '../hooks/thoriumRoot/useTheme';
 
 /**
  * A simple padded wrapper to encapsulate different items within a Nav
