@@ -1,6 +1,5 @@
 /* React */
 import React, { forwardRef, useState, useLayoutEffect } from 'react';
-
 /* Style */
 import { buttonStyle } from '../styles/buttonStyle';
 /* Utils */
@@ -17,7 +16,8 @@ const propTypes = {
   size: PropTypes.string,
   stretch: PropTypes.bool,
   variant: PropTypes.oneOf(validProps.variants),
-  disabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
+  withMotion: PropTypes.bool
 };
 
 const defaultProps = {

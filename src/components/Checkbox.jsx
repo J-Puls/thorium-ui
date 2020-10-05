@@ -7,7 +7,6 @@ import { checkboxStyle as cbs } from "../styles/checkboxStyle";
 /* Utils */
 import mapPropsToAttrs from "../utils/mapPropsToAttrs";
 import { validProps } from "../utils/propValidation";
-
 /* PropTypes */
 import PropTypes from "prop-types";
 

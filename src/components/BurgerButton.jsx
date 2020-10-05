@@ -1,13 +1,12 @@
 /* React */
 import React, { Component } from 'react';
 /* Thorium-UI */
-import Button from './Button';
+import { Button } from './Button';
 import { ThoriumConsumer } from '../context/ThoriumContext';
 /* Utils */
 import mapPropsToAttrs from '../utils/mapPropsToAttrs';
 import { validProps } from '../utils/propValidation';
 import mapPropsToMotion from '../utils/mapPropsToMotion';
-
 /* PropTypes */
 import PropTypes from 'prop-types';
 
@@ -17,17 +16,15 @@ const propTypes = {
   overrideFill: PropTypes.bool,
   size: PropTypes.string,
   stretch: PropTypes.bool,
-  targetID: PropTypes.string,
+  targetID: PropTypes.string.isRequired,
   variant: PropTypes.oneOf(validProps.variants)
 };
 
 const defaultProps = {
   animated: false,
-  iconFill: '',
   overrideFill: false,
   size: 'normal',
   stretch: false,
-  targetID: '',
   variant: 'link'
 };
 
@@ -35,7 +32,7 @@ const defaultProps = {
  *  A pre-styled button to be used as the trigger for a mobile dropdown menu
  */
 export class BurgerButton extends Component {
-  constructor(props, ref) {
+  constructor(props) {
     super();
     this.state = {
       target: props.targetID,
@@ -49,6 +46,7 @@ export class BurgerButton extends Component {
       this.toggle();
     };
   }
+
   render() {
     return (
       <ThoriumConsumer>

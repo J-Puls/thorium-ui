@@ -20,7 +20,6 @@ const propTypes = {
   round: PropTypes.bool,
   rounded: PropTypes.bool,
   sm: PropTypes.oneOf(validProps.sizes),
-  translucent: PropTypes.bool,
   vertical: PropTypes.bool,
   xl: PropTypes.oneOf(validProps.sizes),
   xs: PropTypes.oneOf(validProps.sizes)
@@ -31,13 +30,13 @@ const defaultProps = {
   justify: null,
   lg: null,
   md: null,
+  round: false,
   rounded: false,
   sm: null,
-  translucent: false,
   vertical: false,
+  withMotion: false,
   xl: null,
-  xs: null,
-  withMotion: false
+  xs: null
 };
 
 // All valid props to be used by appendStyle
@@ -52,15 +51,18 @@ const stylingProps = [
   'lg',
   'xl'
 ];
+
 /**
  * Defines a column within a Layer
  */
 export const Block = forwardRef(function ThBlock(props, ref) {
   const vpSizeName = useViewportSizeName();
+
   let style = { ...blockStyle.general };
   style = appendStyle(props, stylingProps, style, blockStyle, { vpSizeName });
+
   const genericProps = {
-    'data-testid': 'block',
+    'data-testid': 'th-block',
     ...mapPropsToAttrs(props),
     style: { ...style, ...props.style },
     ref
