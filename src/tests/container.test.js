@@ -1,38 +1,34 @@
 import React from "react";
-import Container from "../components/Container";
 import { render } from "@testing-library/react";
-import config from "../config";
+import "@testing-library/jest-dom/extend-expect";
+import { Container } from "../components/Container";
+import { breakpoints, containerSizes } from "../config";
 
 it("renders correctly", () => {
-  const { container, getByTestId } = render(<Container />);
-  expect(getByTestId("container")).toBeInTheDocument();
+  const { getByTestId } = render(<Container />);
+  expect(getByTestId("th-container")).toBeInTheDocument();
 });
 
 it("responds to breakpoints", () => {
-  const breakpoints = {
-    xs: 575,
-    sm: 700,
-    md: 1024,
-    lg: 1366,
-    xl: 1920,
-  };
-  Object.entries(breakpoints).forEach((entry) => {
+  for (const breakpoint in breakpoints) {
     const { container } = render(
       <Container
-        style={{ maxWidth: entry[1] / config.containerSizes[entry[0]] }}
+        style={{
+          maxWidth: breakpoints[breakpoint] / containerSizes[breakpoint]
+        }}
       />
     );
     expect(parseFloat(container.firstElementChild.style.maxWidth)).toBe(
-      entry[1] / config.containerSizes[entry[0]]
+      breakpoints[breakpoint] / containerSizes[breakpoint]
     );
-  });
+  }
 });
 
 it("renders its children correctly", () => {
-  const { container, getByTestId } = render(
+  const { container } = render(
     <Container>
-      <div></div>
+      <div />
     </Container>
   );
-  expect(getByTestId("container").children.length).toBeTruthy();
+  expect(container.children.length).toBe(1);
 });

@@ -12,8 +12,7 @@ export const responsiveSizes = {
   4: 33.333333,
   3: 25,
   2: 16.666667,
-  1: 8.333333,
-  none: 0
+  1: 8.333333
 };
 
 export const containerSizes = {
@@ -24,9 +23,18 @@ export const containerSizes = {
   xl: 1.3
 };
 
+export const breakpoints = {
+  xs: 575,
+  sm: 700,
+  md: 1024,
+  lg: 1366,
+  xl: 1920
+};
+
 export const config = {
-  responsiveSizes,
-  containerSizes
+  breakpoints,
+  containerSizes,
+  responsiveSizes
 };
 
 export default config;

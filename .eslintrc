@@ -8,8 +8,10 @@
     "prettier/react"
   ],
   "env": {
-    "node": true
+    "node": true,
+    "jest": true
   },
+
   "parserOptions": {
     "ecmaVersion": 2020,
     "ecmaFeatures": {
@@ -17,6 +19,11 @@
       "jsx": true
     }
   },
+
+  "globals": {
+    "globalThis": false
+  },
+
   "settings": {
     "react": {
       "version": "16"

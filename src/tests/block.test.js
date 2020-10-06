@@ -1,36 +1,37 @@
 import React from "react";
 import { render } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
 import { Block } from "../components/Block";
-import { config } from "../config";
+import { responsiveSizes } from "../config";
 
-it("renders correctly", () => {
-  const { container, getByTestId } = render(<Block />);
-  expect(getByTestId("block")).toBeInTheDocument();
+it("renders the correct element", () => {
+  const { getByTestId } = render(<Block />);
+  expect(getByTestId("th-block")).toBeInTheDocument();
 });
 
 it("renders with responsive width", () => {
-  for (let key in config.responsiveSizes) {
+  for (const key in responsiveSizes) {
     const { container } = render(<Block all={parseInt(key)} />);
     expect(parseFloat(container.firstElementChild.style.maxWidth)).toBe(
-      config.responsiveSizes[key]
+      responsiveSizes[key]
     );
   }
 });
 
 it("overrides size if 'all' is passed", () => {
-  for (let key in config.responsiveSizes) {
+  for (const key in responsiveSizes) {
     const { container } = render(<Block xs={12} all={parseInt(key)} />);
     expect(parseFloat(container.firstElementChild.style.maxWidth)).toBe(
-      config.responsiveSizes[key]
+      responsiveSizes[key]
     );
   }
 });
 
 it("renders its children correctly", () => {
-  const { container, getByTestId } = render(
+  const { container } = render(
     <Block>
-      <div></div>
+      <div />
     </Block>
   );
-  expect(getByTestId("block").children.length).toBeTruthy();
+  expect(container.children.length).toBe(1);
 });
