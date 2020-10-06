@@ -3,7 +3,7 @@ import { colors } from "./colors";
 const mapThemes = (variant) => {
   const themes = { dark: null, light: null };
 
-  for (let theme in themes) {
+  for (const theme in themes) {
     const opTheme = theme === "dark" ? "light" : "dark";
     themes[theme] = {
       active: {

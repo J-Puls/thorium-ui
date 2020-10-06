@@ -2,7 +2,7 @@ import { colors } from "./colors";
 
 const mapThemes = (variant) => {
   const themes = { dark: null, light: null };
-  for (let theme in themes) {
+  for (const theme in themes) {
     themes[theme] = {
       backgroundColor: colors[theme][variant],
       color: colors[theme][`${variant}Text`]

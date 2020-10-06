@@ -2,7 +2,7 @@ import { colors } from "./colors";
 
 const mapThemes = (variant) => {
   const themes = { dark: null, light: null };
-  for (let theme in themes) {
+  for (const theme in themes) {
     themes[theme] = {
       hover: {
         backgroundColor: colors[theme][`${variant}Hover`],

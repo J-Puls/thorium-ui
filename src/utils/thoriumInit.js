@@ -1,6 +1,6 @@
 import checkForRouter from "./checkForRouter";
 import { checkIfMobileDevice } from "./checkIfMobileDevice";
-import checkForFramer from "./checkForRouter";
+import checkForFramer from "./checkForFramer";
 
 // Check for system-wide theme mode preference
 let sysDefaultTheme;

@@ -15,7 +15,7 @@ export const appendStyle = (props, stylingProps, style, styleRoot, options) => {
     vpSizeName = options.vpSizeName || null;
   }
 
-  let breakpoints = ["all", "xs", "sm", "md", "lg", "xl"];
+  const breakpoints = ["all", "xs", "sm", "md", "lg", "xl"];
 
   const addStyles = (styles) => {
     stylesToAdd = { ...stylesToAdd, ...styles };
