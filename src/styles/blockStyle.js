@@ -8,7 +8,7 @@ const updateSize = (size) => {
     return {
       flexBasis: `${rs}%`,
       flexGrow: 0,
-      maxWidth: `${rs}%`,
+      maxWidth: `${rs}%`
     };
   } else return { display: "none" };
 };
@@ -22,17 +22,17 @@ export const blockStyle = {
     flexBasis: 0,
     flexGrow: 1,
     maxWidth: "100%",
-    boxSizing: "inherit",
+    boxSizing: "inherit"
   },
   round: {
-    borderRadius: "50%",
+    borderRadius: "50%"
   },
   rounded: {
-    borderRadius: ".25rem",
+    borderRadius: ".25rem"
   },
   vertical: {
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "column"
   },
   justify: (value) => updateJustify(value),
   translucent: (value) => makeTranslucent(value),
@@ -41,5 +41,5 @@ export const blockStyle = {
   sm: (value) => updateSize(value),
   md: (value) => updateSize(value),
   lg: (value) => updateSize(value),
-  xl: (value) => updateSize(value),
+  xl: (value) => updateSize(value)
 };

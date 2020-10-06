@@ -7,7 +7,7 @@ export const validProps = {
   modifiers: {
     block: ["justify", "rounded", "round", "bg", "translucent", "vertical"],
     layer: ["justify", "rounded", "bg", "translucent", "sticky"],
-    image: ["fluid", "fluidHalf", "rounded", "round"],
+    image: ["fluid", "fluidHalf", "rounded", "round"]
   },
   variants: [
     "danger",
@@ -17,8 +17,8 @@ export const validProps = {
     "primary",
     "secondary",
     "success",
-    "warning",
-  ],
+    "warning"
+  ]
 };
 
 export default validProps;

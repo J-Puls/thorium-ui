@@ -5,20 +5,20 @@ import React, {
   forwardRef,
   useContext,
   Fragment
-} from 'react';
+} from "react";
 /* Thorium-UI */
-import { Block } from './Block';
-import { Button } from './Button';
+import { Block } from "./Block";
+import { Button } from "./Button";
 /* Style */
-import { messageStyle } from '../styles/messageStyle';
+import { messageStyle } from "../styles/messageStyle";
 /* Hooks */
-import { useTheme } from '../utils/hooks/useTheme';
+import { useTheme } from "../hooks/thoriumRoot/useTheme";
 /* Utils */
-import { sleep } from '../utils/sleep';
+import { sleep } from "../utils/sleep";
 /* Context */
-import { MessageBoxContext } from '../context/MessageBoxContext';
+import { MessageBoxContext } from "../context/MessageBoxContext";
 /* PropTypes */
-import PropTypes, { node, string } from 'prop-types';
+import PropTypes, { node, string } from "prop-types";
 
 const propTypes = {
   messageID: PropTypes.number.isRequired,
@@ -27,19 +27,19 @@ const propTypes = {
   title: PropTypes.string,
   isDismissed: PropTypes.bool,
   variant: PropTypes.oneOf([
-    'danger',
-    'dark',
-    'light',
-    'primary',
-    'secondary',
-    'success',
-    'warning'
+    "danger",
+    "dark",
+    "light",
+    "primary",
+    "secondary",
+    "success",
+    "warning"
   ])
 };
 
 const defaultProps = {
   isDismissed: false,
-  variant: 'primary'
+  variant: "primary"
 };
 
 export const Message = forwardRef(function ThMessage(props, ref) {
@@ -78,14 +78,14 @@ export const Message = forwardRef(function ThMessage(props, ref) {
   const callToAction = props.callToAction;
   return (
     <Block
-      data-testid='message'
+      data-testid="message"
       all={12}
       style={renderStyle}
-      justify='center'
+      justify="center"
       ref={ref}
       vertical
     >
-      <div >
+      <div>
         {props.title && (
           <Fragment>
             <h3 style={messageStyle.title}>{props.title}</h3>
@@ -96,8 +96,8 @@ export const Message = forwardRef(function ThMessage(props, ref) {
         {callToAction && (
           <a
             href={callToAction.destination}
-            rel='noopener noreferrer'
-            target={callToAction.newTab ? '_blank' : null}
+            rel="noopener noreferrer"
+            target={callToAction.newTab ? "_blank" : null}
           >
             <Button
               variant={callToAction.variant}
@@ -113,7 +113,7 @@ export const Message = forwardRef(function ThMessage(props, ref) {
       <button
         onClick={handleDismiss}
         style={{ ...messageStyle.dismiss, color: theme.color }}
-        title='dismiss'
+        title="dismiss"
       >
         &#128473;
       </button>

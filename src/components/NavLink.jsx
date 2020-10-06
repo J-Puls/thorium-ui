@@ -1,16 +1,16 @@
 /* React */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from "react";
 /* ThoriumContext */
-import NavItem from './NavItem';
+import NavItem from "./NavItem";
 /* Style */
-import { navLinkStyle } from '../styles/navLinkStyle';
+import { navLinkStyle } from "../styles/navLinkStyle";
 /* Utils */
-import mapPropsToAttrs from '../utils/mapPropsToAttrs';
-import { validProps } from '../utils/propValidation';
+import mapPropsToAttrs from "../utils/mapPropsToAttrs";
+import { validProps } from "../utils/propValidation";
 /* NavContext */
-import { NavContext } from '../context/NavContext';
+import { NavContext } from "../context/NavContext";
 /* PropTypes */
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const propTypes = {
   noHover: PropTypes.bool,
@@ -19,7 +19,7 @@ const propTypes = {
 
 const defaultProps = {
   noHover: false,
-  variant: 'link'
+  variant: "link"
 };
 
 /**
@@ -47,7 +47,7 @@ export const NavLink = (props) => {
       {!props.asAnchor && ReactRouterDom && (
         <ReactRouterDom.Link
           onClick={handleClick}
-          {...mapPropsToAttrs(props, 'anchor')}
+          {...mapPropsToAttrs(props, "anchor")}
           to={props.to}
           style={style}
         >
@@ -57,7 +57,7 @@ export const NavLink = (props) => {
       {(props.asAnchor || !ReactRouterDom) && (
         <a
           onClick={handleClick}
-          {...mapPropsToAttrs(props, 'anchor')}
+          {...mapPropsToAttrs(props, "anchor")}
           style={style}
         >
           {props.children}

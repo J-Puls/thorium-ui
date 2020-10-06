@@ -7,7 +7,6 @@ import { checkboxStyle as cbs } from "../styles/checkboxStyle";
 /* Utils */
 import mapPropsToAttrs from "../utils/mapPropsToAttrs";
 import { validProps } from "../utils/propValidation";
-
 /* PropTypes */
 import PropTypes from "prop-types";
 
@@ -17,7 +16,7 @@ const propTypes = {
   round: PropTypes.bool,
   rounded: PropTypes.bool,
   size: PropTypes.oneOf(["lg", "sm"]),
-  vertical: PropTypes.bool,
+  vertical: PropTypes.bool
 };
 
 const defaultProps = {
@@ -26,7 +25,7 @@ const defaultProps = {
   round: false,
   rounded: false,
   size: "lg",
-  vertical: false,
+  vertical: false
 };
 
 export const Checkbox = (props) => {

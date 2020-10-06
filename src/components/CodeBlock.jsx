@@ -1,17 +1,17 @@
 /* React */
-import React, { useState } from 'react';
+import React, { useState } from "react";
 /* Thorium-UI */
-import Button from './Button';
+import Button from "./Button";
 /* Styles */
-import { codeBlockStyle } from '../styles/codeBlockStyle';
+import { codeBlockStyle } from "../styles/codeBlockStyle";
 /* Utils */
-import mapPropsToAttrs from '../utils/mapPropsToAttrs';
-import copyToClipboard from '../utils/copyToClipboard';
+import mapPropsToAttrs from "../utils/mapPropsToAttrs";
+import copyToClipboard from "../utils/copyToClipboard";
 /* PropTypes */
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 /* Hooks */
-import { useMobileStatus } from '../utils/hooks/useMobileStatus';
-import { useTheme } from '../utils/hooks/useTheme';
+import { useMobileStatus } from "../hooks/thoriumRoot/useMobileStatus";
+import { useTheme } from "../hooks/thoriumRoot/useTheme";
 
 const propTypes = {
   disableCopy: PropTypes.bool,
@@ -31,7 +31,7 @@ const defaultProps = {
 export const CodeBlock = (props) => {
   const isMobile = useMobileStatus();
   const theme = useTheme().codeBlock;
-  const [text, setText] = useState('Copy');
+  const [text, setText] = useState("Copy");
 
   /**
    * Copy the text contents to the device's clipboard
@@ -46,17 +46,17 @@ export const CodeBlock = (props) => {
   const copyBtn = codeBlockStyle.copyBtn;
 
   // Disable user text selection of specified
-  if (props.disableSelect) code.userSelect = 'none';
+  if (props.disableSelect) code.userSelect = "none";
   return (
     <pre style={{ ...pre, ...props.style }} {...mapPropsToAttrs(props)}>
       {/* Add a copy button if not disabled */}
       {!props.disableCopy && !isMobile && (
         <Button
-          size='sm'
-          variant='link'
+          size="sm"
+          variant="link"
           onClick={() => handleCopyClick()}
           style={copyBtn}
-          wrapperStyle={{ display: 'block' }}
+          wrapperStyle={{ display: "block" }}
         >
           {text}
         </Button>

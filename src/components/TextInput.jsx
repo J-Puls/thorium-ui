@@ -1,29 +1,29 @@
 /* React */
-import React, { forwardRef } from 'react';
+import React, { forwardRef } from "react";
 /* Style */
-import { textInputStyle } from '../styles/textInputStyle';
+import { textInputStyle } from "../styles/textInputStyle";
 /* Utils */
-import appendStyle from '../utils/appendStyle';
-import mapPropsToAttrs from '../utils/mapPropsToAttrs';
+import appendStyle from "../utils/appendStyle";
+import mapPropsToAttrs from "../utils/mapPropsToAttrs";
 /* PropTypes */
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 /* Hooks */
-import { useTheme } from '../utils/hooks/useTheme';
+import { useTheme } from "../hooks/thoriumRoot/useTheme";
 
 const propTypes = {
-  size: PropTypes.oneOf(['sm', 'normal', 'lg']),
+  size: PropTypes.oneOf(["sm", "normal", "lg"]),
   bordered: PropTypes.bool,
   label: PropTypes.string
 };
 
 const defaultProps = {
-  size: 'normal',
+  size: "normal",
   bordered: false,
-  label: ''
+  label: ""
 };
 
 // All valid props to be used by appendStyle
-const stylingProps = ['size', 'bordered'];
+const stylingProps = ["size", "bordered"];
 
 export const TextInput = forwardRef((props, ref) => {
   const theme = useTheme().textInput;
@@ -38,7 +38,7 @@ export const TextInput = forwardRef((props, ref) => {
           {props.label}
         </label>
       )}
-      <input ref={ref} {...mapPropsToAttrs(props, 'input')} style={style} />
+      <input ref={ref} {...mapPropsToAttrs(props, "input")} style={style} />
     </React.Fragment>
   );
 });

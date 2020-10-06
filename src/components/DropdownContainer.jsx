@@ -1,6 +1,6 @@
-import React from 'react';
-import Layer from './Layer';
-import Block from './Block';
+import React from "react";
+import Layer from "./Layer";
+import Block from "./Block";
 
 /**
  * A wrapper containing all other Dropdown sub-components
@@ -8,10 +8,10 @@ import Block from './Block';
 export const DropdownContainer = (props) => (
   <Layer
     style={{
-      overflow: props.displayType === 'block' ? 'hidden' : 'initial',
+      overflow: props.displayType === "block" ? "hidden" : "initial",
       ...props.style
     }}
-    justify='center'
+    justify="center"
     onMouseEnter={props.onMouseEnter}
     onMouseLeave={props.onMouseLeave}
   >

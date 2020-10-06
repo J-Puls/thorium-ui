@@ -4,7 +4,7 @@ export const mapPropsToMotion = (props) => {
     animate: props.animate,
     exit: props.exit,
     transition: props.transition,
-    variants: props.variants,
+    variants: props.variants
   };
 };
 export default mapPropsToMotion;

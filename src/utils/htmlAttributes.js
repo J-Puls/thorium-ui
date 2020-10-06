@@ -61,7 +61,7 @@ const globalAttrs = [
   "spellCheck",
   "tabIndex",
   "title",
-  "translate",
+  "translate"
 ];
 
 const eventAttrs = [
@@ -142,7 +142,7 @@ const eventAttrs = [
   "onUnload",
   "onVolumeChange",
   "onWaiting",
-  "onWheel",
+  "onWheel"
 ];
 
 const btnAttrs = [
@@ -156,7 +156,7 @@ const btnAttrs = [
   "formTarget",
   "name",
   "type",
-  "value",
+  "value"
 ];
 const imgAttrs = [
   "align",
@@ -173,7 +173,7 @@ const imgAttrs = [
   "srcSet",
   "useMap",
   "vSpace",
-  "width",
+  "width"
 ];
 const formAttrs = [
   "accept",
@@ -185,7 +185,7 @@ const formAttrs = [
   "name",
   "noValidate",
   "onSubmit",
-  "target",
+  "target"
 ];
 const inputAttrs = [
   "accept",
@@ -222,7 +222,7 @@ const inputAttrs = [
   "type",
   "value",
   "width",
-  "wrap",
+  "wrap"
 ];
 const anchorAttrs = [
   "charSet",
@@ -238,7 +238,7 @@ const anchorAttrs = [
   "rev",
   "shape",
   "target",
-  "type",
+  "type"
 ];
 export const HTMLGlobalAttributes = new Set(globalAttrs);
 export const HTMLEventAttributes = new Set(eventAttrs);
@@ -254,5 +254,5 @@ export default {
   imgAttributes,
   formAttributes,
   inputAttributes,
-  anchorAttributes,
+  anchorAttributes
 };

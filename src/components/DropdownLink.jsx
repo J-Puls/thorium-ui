@@ -1,23 +1,23 @@
 /* React */
-import React from 'react';
+import React from "react";
 /* ThoriumContext */
-import DropdownItem from './DropdownItem';
+import DropdownItem from "./DropdownItem";
 /* Style */
-import { dropdownLinkStyle as ddlStyle } from '../styles/dropdownLinkStyle';
+import { dropdownLinkStyle as ddlStyle } from "../styles/dropdownLinkStyle";
 /* Utils */
-import mapPropsToAttrs from '../utils/mapPropsToAttrs';
+import mapPropsToAttrs from "../utils/mapPropsToAttrs";
 
 /**
  * A stylized Link component
  */
 export const DropdownLink = (props) => {
-  let style = { ...ddlStyle.general, color: 'inherit', ...props.style };
+  let style = { ...ddlStyle.general, color: "inherit", ...props.style };
 
   return (
     <DropdownItem navKey={props.navKey} noHover={props.noHover}>
       {!props.asAnchor && ReactRouterDom && (
         <ReactRouterDom.Link
-          {...mapPropsToAttrs(props, 'anchor')}
+          {...mapPropsToAttrs(props, "anchor")}
           to={props.to}
           style={style}
         >
@@ -26,7 +26,7 @@ export const DropdownLink = (props) => {
       )}
       {props.asAnchor ||
         (!ReactRouterDom && (
-          <a {...mapPropsToAttrs(props, 'anchor')} style={style}>
+          <a {...mapPropsToAttrs(props, "anchor")} style={style}>
             {props.children}
           </a>
         ))}

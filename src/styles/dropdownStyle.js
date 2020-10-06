@@ -1,7 +1,7 @@
 export const dropdownStyle = {
   body: {
     paddingLeft: 0,
-    paddingRight: 0,
+    paddingRight: 0
   },
   visible: {
     normal: { paddingLeft: 0, paddingRight: 0 },
@@ -16,10 +16,10 @@ export const dropdownStyle = {
       paddingRight: 0,
       marginTop: 1,
       border: "1px solid #00000088",
-      borderRadius: ".125rem",
-    },
+      borderRadius: ".125rem"
+    }
   },
   hidden: {
-    display: "none",
-  },
+    display: "none"
+  }
 };

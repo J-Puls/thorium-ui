@@ -7,20 +7,20 @@ export const layerStyle = {
     flexWrap: "wrap",
     marginRight: "15px",
     marginLeft: "15px",
-    boxSizing: "border-box",
+    boxSizing: "border-box"
   },
   rounded: {
-    borderRadius: ".25rem",
+    borderRadius: ".25rem"
   },
   sticky: {
     position: "sticky",
     top: 0,
-    zIndex: 1000,
+    zIndex: 1000
   },
   vertical: {
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "column"
   },
   justify: (value) => updateJustify(value),
-  translucent: (value) => makeTranslucent(value),
+  translucent: (value) => makeTranslucent(value)
 };

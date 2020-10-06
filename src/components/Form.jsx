@@ -17,7 +17,7 @@ import mapPropsToMotion from "../utils/mapPropsToMotion";
 
 const propTypes = {
   bordered: PropTypes.bool,
-  vertical: PropTypes.bool,
+  vertical: PropTypes.bool
 };
 
 /**

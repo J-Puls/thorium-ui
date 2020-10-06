@@ -3,6 +3,6 @@ export const formStyle = {
   border: "2px solid transparent",
   borderRadius: ".25rem",
   display: "flex",
-  flexDirection: "column",
+  flexDirection: "column"
 };
 export default formStyle;

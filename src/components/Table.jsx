@@ -18,12 +18,12 @@ import PropTypes from "prop-types";
 
 const propTypes = {
   bordered: PropTypes.bool,
-  rounded: PropTypes.bool,
+  rounded: PropTypes.bool
 };
 
 const defaultProps = {
   bordered: true,
-  rounded: false,
+  rounded: false
 };
 
 const stylingProps = ["bordered", "rounded"];

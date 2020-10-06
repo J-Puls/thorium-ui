@@ -7,12 +7,12 @@ import { parseRGBValues } from "./parseRGBValues";
  * @returns { Object } {r, g, b} An object containing equivelant RGB values
  */
 export const stringToRGB = (str) => {
-  let e, calcColor, rgbValues;
-  e = document.createElement("div");
+  const e = document.createElement("div");
   e.style.color = str;
   document.body.appendChild(e);
-  calcColor = window.getComputedStyle(e).color;
-  rgbValues = parseRGBValues(calcColor);
+
+  const calcColor = window.getComputedStyle(e).color;
+  const rgbValues = parseRGBValues(calcColor);
   document.body.removeChild(e);
   return rgbValues;
 };
