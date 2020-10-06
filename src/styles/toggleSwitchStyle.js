@@ -1,7 +1,7 @@
 export const toggleSwitchStyle = {
   container: {
     alignItems: "flex-end",
-    display: "inline-flex",
+    display: "inline-flex"
   },
   lg: {
     body: {
@@ -9,13 +9,13 @@ export const toggleSwitchStyle = {
       height: "1.25rem",
       overflow: "hidden",
       position: "relative",
-      width: "2.5rem",
+      width: "2.5rem"
     },
     off: {
-      transform: "translateX(.025rem)",
+      transform: "translateX(.025rem)"
     },
     on: {
-      transform: "translateX(1.3rem)",
+      transform: "translateX(1.3rem)"
     },
     slider: {
       backgroundColor: "#fafafa",
@@ -27,21 +27,21 @@ export const toggleSwitchStyle = {
       position: "absolute",
       transitionDuration: ".1s",
       width: "1.2rem",
-      zIndex: 2,
-    },
+      zIndex: 2
+    }
   },
   normal: {
     body: {
       display: "inline-block",
       height: "1rem",
       position: "relative",
-      width: "2rem",
+      width: "2rem"
     },
     off: {
-      transform: "translateX(.025rem)",
+      transform: "translateX(.025rem)"
     },
     on: {
-      transform: "translateX(1.05rem)",
+      transform: "translateX(1.05rem)"
     },
     slider: {
       backgroundColor: "#fafafa",
@@ -53,13 +53,13 @@ export const toggleSwitchStyle = {
       position: "absolute",
       transitionDuration: ".1s",
       width: ".9rem",
-      zIndex: 2,
-    },
+      zIndex: 2
+    }
   },
   origin: {
     height: 0,
     opacity: 0,
-    width: 0,
+    width: 0
   },
   rail: {
     borderRadius: "1rem",
@@ -70,6 +70,6 @@ export const toggleSwitchStyle = {
     right: 0,
     top: 0,
     transitionDuration: ".1s",
-    zIndex: 1,
-  },
+    zIndex: 1
+  }
 };

@@ -25,7 +25,7 @@
 //   try {
 //     const data = require('thorium-ui-customize').customStyles
 //     return data(...args)
-   
+
 //   } catch {
 //     console.info(failure)
 //     return null

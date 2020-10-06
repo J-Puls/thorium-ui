@@ -3,7 +3,7 @@ import { createContext } from "react";
 
 // Creates the main context passed in ThoriumRoot
 export const ThoriumContext = createContext({
-  displayName: "ThoriumContext",
+  displayName: "ThoriumContext"
 });
 
 // Provide shorthand version of Provider and Consumer

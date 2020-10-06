@@ -1,24 +1,24 @@
 /* React */
-import React from 'react';
+import React from "react";
 /* Style */
-import { linkStyle } from '../styles/linkStyle';
+import { linkStyle } from "../styles/linkStyle";
 /* Utils */
-import mapPropsToAttrs from '../utils/mapPropsToAttrs';
+import mapPropsToAttrs from "../utils/mapPropsToAttrs";
 /* Hooks */
-import { useTheme } from '../hooks/thoriumRoot/useTheme';
+import { useTheme } from "../hooks/thoriumRoot/useTheme";
 
 export const Link = (props) => {
   const theme = useTheme();
   const text = { ...linkStyle, ...theme.link };
-  if (props.useParentColor) text.color = 'inherit';
+  if (props.useParentColor) text.color = "inherit";
 
   return (
     <React.Fragment>
       {!props.asAnchor && ReactRouterDom && (
         <ReactRouterDom.Link
-          {...mapPropsToAttrs(props, 'anchor')}
+          {...mapPropsToAttrs(props, "anchor")}
           to={props.to}
-          rel='noreferrer noopener'
+          rel="noreferrer noopener"
           style={text}
         >
           <strong>{props.children}</strong>
@@ -27,8 +27,8 @@ export const Link = (props) => {
       {(props.asAnchor || !ReactRouterDom) && (
         <a
           style={text}
-          {...mapPropsToAttrs(props, 'anchor')}
-          rel='noreferrer noopener'
+          {...mapPropsToAttrs(props, "anchor")}
+          rel="noreferrer noopener"
         >
           <strong>{props.children}</strong>
         </a>

@@ -1,40 +1,40 @@
 /* React */
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, { useState, useEffect, forwardRef } from "react";
 /* ThoriumContext */
-import { ThoriumProvider } from '../context/ThoriumContext';
+import { ThoriumProvider } from "../context/ThoriumContext";
 /* Themes */
-import themes from '../themes';
-import colors from '../themes/colors';
+import themes from "../themes";
+import colors from "../themes/colors";
 /* PropTypes */
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 /* Utils */
-import thoriumInit from '../utils/thoriumInit';
-import updateBodyStyle from '../utils/updateBodyStyle';
-import updateVpName from '../utils/updateVpName';
+import thoriumInit from "../utils/thoriumInit";
+import updateBodyStyle from "../utils/updateBodyStyle";
+import updateVpName from "../utils/updateVpName";
 /* Style */
-import { bodyStyle } from '../styles/bodyStyle';
+import { bodyStyle } from "../styles/bodyStyle";
 
 const propTypes = {
-  defaultTheme: PropTypes.oneOf(['dark', 'light']),
+  defaultTheme: PropTypes.oneOf(["dark", "light"]),
   overrideSysTheme: PropTypes.bool
 };
 
 const defaultProps = {
-  defaultTheme: 'dark',
+  defaultTheme: "dark",
   overrideSysTheme: false
 };
 
 const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
-  props.enableMotion && (globalThis.motion = require('framer-motion').motion);
+  props.enableMotion && (globalThis.motion = require("framer-motion").motion);
   if (props.enableReactRouter) {
-    globalThis.ReactRouter = require('react-router');
-    globalThis.ReactRouterDom = require('react-router-dom');
+    globalThis.ReactRouter = require("react-router");
+    globalThis.ReactRouterDom = require("react-router-dom");
   }
 
   const initData = thoriumInit();
   const overrideSysTheme = props.overrideSysTheme;
   const sysDefaultTheme = initData.sysDefaultTheme;
-  const darkModeQuery = '(prefers-color-scheme: dark)';
+  const darkModeQuery = "(prefers-color-scheme: dark)";
   let defaultTheme;
   if (props.customThemes) {
     defaultTheme = overrideSysTheme
@@ -62,7 +62,7 @@ const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
 
   const toggleTheme = () => {
     let newTheme;
-    theme.name === 'dark'
+    theme.name === "dark"
       ? (newTheme = themes.light)
       : (newTheme = themes.dark);
 
@@ -82,7 +82,7 @@ const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
 
   useEffect(() => {
     // Monitor for changes in system-wide theme mode
-    window.matchMedia(darkModeQuery).addEventListener('change', (e) => {
+    window.matchMedia(darkModeQuery).addEventListener("change", (e) => {
       setTheme(isSysDarkMode() ? themes.dark : themes.light);
     });
 
@@ -95,14 +95,14 @@ const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
       }
     };
     // Monitor for window resizing and update state accordingly
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
       // Prevent memory leak when unmounted
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
       window
         .matchMedia(darkModeQuery)
-        .removeEventListener('change', toggleTheme);
+        .removeEventListener("change", toggleTheme);
     };
   }, []);
 
@@ -132,10 +132,10 @@ const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
   return (
     <ThoriumProvider value={context}>
       <th-root
-        class='thorium-root'
-        id='thoriumRoot'
-        data-testid='thorium-root'
-        style={{ boxSizing: 'border-box', ...props.style }}
+        class="thorium-root"
+        id="thoriumRoot"
+        data-testid="thorium-root"
+        style={{ boxSizing: "border-box", ...props.style }}
         ref={ref}
       >
         {props.children}

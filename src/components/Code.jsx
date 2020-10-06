@@ -1,14 +1,14 @@
 /* React */
-import React from 'react';
+import React from "react";
 /* Style */
-import { codeStyle } from '../styles/codeStyle';
+import { codeStyle } from "../styles/codeStyle";
 /* Hooks */
-import { useTheme } from '../hooks/thoriumRoot/useTheme';
+import { useTheme } from "../hooks/thoriumRoot/useTheme";
 
 export const Code = (props) => {
   const theme = useTheme();
   return (
-    <code data-testid='code' style={{ ...codeStyle, ...theme.code }}>
+    <code data-testid="code" style={{ ...codeStyle, ...theme.code }}>
       {props.children}
     </code>
   );

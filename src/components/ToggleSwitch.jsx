@@ -1,35 +1,35 @@
 /* React */
-import React, { useState } from 'react';
+import React, { useState } from "react";
 /* Style */
-import { toggleSwitchStyle as toggle } from '../styles/toggleSwitchStyle';
+import { toggleSwitchStyle as toggle } from "../styles/toggleSwitchStyle";
 /* Utils */
-import mapPropsToAttrs from '../utils/mapPropsToAttrs';
-import { validProps } from '../utils/propValidation';
+import mapPropsToAttrs from "../utils/mapPropsToAttrs";
+import { validProps } from "../utils/propValidation";
 /* PropTypes */
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 /* Hooks */
-import { useTheme } from '../hooks/thoriumRoot/useTheme';
+import { useTheme } from "../hooks/thoriumRoot/useTheme";
 
 const propTypes = {
   checked: PropTypes.bool,
-  size: PropTypes.oneOf(['normal', 'lg']),
-  variant: PropTypes.oneOf([...validProps.variants, 'themeToggle'])
+  size: PropTypes.oneOf(["normal", "lg"]),
+  variant: PropTypes.oneOf([...validProps.variants, "themeToggle"])
 };
 
 const defaultProps = {
   checked: false,
-  size: 'normal',
-  variant: 'primary'
+  size: "normal",
+  variant: "primary"
 };
 
 export const ToggleSwitch = (props) => {
   const theme = useTheme().toggleSwitch;
   const [isActive, setIsActive] = useState(props.checked);
-  const [position, setPosition] = useState('off');
+  const [position, setPosition] = useState("off");
 
   const handleClick = () => {
     setIsActive(!isActive);
-    position === 'off' ? setPosition('on') : setPosition('off');
+    position === "off" ? setPosition("on") : setPosition("off");
     props.onChange && props.onChange();
   };
   let body = { ...toggle[props.size].body };
@@ -40,7 +40,7 @@ export const ToggleSwitch = (props) => {
   let rail = { ...toggle.rail };
 
   const ts = theme;
-  if (props.variant === 'themeToggle') {
+  if (props.variant === "themeToggle") {
     rail.backgroundColor = ts.themeToggle.backgroundColor;
   } else {
     rail.backgroundColor = isActive
@@ -58,14 +58,14 @@ export const ToggleSwitch = (props) => {
       <label
         form={props.form}
         htmlFor={props.id}
-        style={{ paddingRight: '.5rem' }}
+        style={{ paddingRight: ".5rem" }}
       >
         {props.label}
       </label>
       <div style={body}>
         <input
-          {...mapPropsToAttrs(props, 'input')}
-          type='hidden'
+          {...mapPropsToAttrs(props, "input")}
+          type="hidden"
           value={isActive}
         />
         <div onClick={handleClick} style={slider} />

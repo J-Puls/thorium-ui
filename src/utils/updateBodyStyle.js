@@ -11,22 +11,22 @@
  */
 export const updateBodyStyle = (style, customStyle, theme) => {
   const quotesAndBraces = /["{}]/g,
-    commas = /[,]/g
+    commas = /[,]/g;
 
-  let calcStyle = { ...style, ...theme }
+  let calcStyle = { ...style, ...theme };
   // If a customTheme module exists, overwrite the default style
   if (customStyle) {
-    if (customStyle.body) calcStyle = { ...calcStyle, ...customStyle.body }
+    if (customStyle.body) calcStyle = { ...calcStyle, ...customStyle.body };
   }
 
   // Format to CSS syntax
   const bodyStyle =
     JSON.stringify(calcStyle)
-      .replace(quotesAndBraces, ' ')
-      .replace(commas, ';')
-      .trim() + ';'
+      .replace(quotesAndBraces, " ")
+      .replace(commas, ";")
+      .trim() + ";";
 
   // Explicitely set the body styling
-  document.body.style.cssText = bodyStyle
-}
-export default updateBodyStyle
+  document.body.style.cssText = bodyStyle;
+};
+export default updateBodyStyle;

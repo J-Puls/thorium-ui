@@ -1,40 +1,40 @@
 /* React */
-import React, { Children, Component, cloneElement } from 'react';
+import React, { Children, Component, cloneElement } from "react";
 /* Sub-components */
-import { DropdownDivider as Divider } from './DropdownDivider';
-import { DropdownItem as Item } from './DropdownItem';
-import { DropdownLink as Link } from './DropdownLink';
-import { DropdownMenu as Menu } from './DropdownMenu';
-import { DropdownTrigger as Trigger } from './DropdownTrigger';
-import { DropdownContainer as Container } from './DropdownContainer';
+import { DropdownDivider as Divider } from "./DropdownDivider";
+import { DropdownItem as Item } from "./DropdownItem";
+import { DropdownLink as Link } from "./DropdownLink";
+import { DropdownMenu as Menu } from "./DropdownMenu";
+import { DropdownTrigger as Trigger } from "./DropdownTrigger";
+import { DropdownContainer as Container } from "./DropdownContainer";
 /* Utils */
-import { mapPropsToAttrs } from '../utils/mapPropsToAttrs';
-import { validProps } from '../utils/propValidation';
+import { mapPropsToAttrs } from "../utils/mapPropsToAttrs";
+import { validProps } from "../utils/propValidation";
 /* PropTypes */
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const propTypes = {
-  triggerType: PropTypes.oneOf(['click', 'hover']),
+  triggerType: PropTypes.oneOf(["click", "hover"]),
   defaultOpen: PropTypes.bool,
   icons: PropTypes.bool,
   remoteTrigger: PropTypes.bool,
   text: PropTypes.string,
   variant: PropTypes.oneOf(validProps.variants),
-  size: PropTypes.oneOf(['sm', 'normal', 'lg']),
-  displayType: PropTypes.oneOf(['block', 'float']),
+  size: PropTypes.oneOf(["sm", "normal", "lg"]),
+  displayType: PropTypes.oneOf(["block", "float"]),
   targetID: PropTypes.string
 };
 
 const defaultProps = {
-  triggerType: 'click',
+  triggerType: "click",
   targetID: null,
   defaultOpen: false,
   icons: false,
   remoteTrigger: false,
   text: null,
-  variant: 'primary',
-  size: 'normal',
-  displayType: 'block'
+  variant: "primary",
+  size: "normal",
+  displayType: "block"
 };
 
 /**
@@ -48,7 +48,7 @@ export class Dropdown extends Component {
       menuTop: 0
     };
     this.toggle = () => {
-      props.triggerType === 'click' &&
+      props.triggerType === "click" &&
         this.setState({ active: !this.state.active });
     };
     this.collapse = () => {
@@ -56,10 +56,10 @@ export class Dropdown extends Component {
       this.setState({ active: false });
     };
     this.handleMouseEnter = () => {
-      props.triggerType === 'hover' && this.setState({ active: true });
+      props.triggerType === "hover" && this.setState({ active: true });
     };
     this.handleMouseLeave = () => {
-      props.triggerType === 'hover' && this.setState({ active: false });
+      props.triggerType === "hover" && this.setState({ active: false });
     };
   }
   componentDidMount() {
@@ -75,7 +75,7 @@ export class Dropdown extends Component {
       });
     }
     let style;
-    this.props.remoteTrigger && (style = { display: 'none' });
+    this.props.remoteTrigger && (style = { display: "none" });
 
     return (
       <Container

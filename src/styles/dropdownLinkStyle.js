@@ -4,6 +4,6 @@ export const dropdownLinkStyle = {
     paddingRight: ".25rem",
     paddingTop: ".25rem",
     paddingBottom: ".25rem",
-    textDecoration: "none",
-  },
+    textDecoration: "none"
+  }
 };

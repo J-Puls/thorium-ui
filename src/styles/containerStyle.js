@@ -5,5 +5,5 @@ export const containerStyle = {
   paddingLeft: "15px",
   marginRight: "auto",
   marginLeft: "auto",
-  boxSizing: "inherit",
+  boxSizing: "inherit"
 };

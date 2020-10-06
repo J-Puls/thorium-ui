@@ -1,15 +1,15 @@
 /* React */
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, { useState, useEffect, forwardRef } from "react";
 /* Thorium-UI */
-import { Layer } from './Layer';
-import { Message } from './Message';
-import { MessageRenderer } from './MessageRenderer';
+import { Layer } from "./Layer";
+import { Message } from "./Message";
+import { MessageRenderer } from "./MessageRenderer";
 /* Context */
-import { MessageBoxProvider } from '../context/MessageBoxContext';
+import { MessageBoxProvider } from "../context/MessageBoxContext";
 /* Style */
-import { messageBoxStyle } from '../styles/messageBoxStyle';
+import { messageBoxStyle } from "../styles/messageBoxStyle";
 /* PropTypes */
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const propTypes = {
   messages: PropTypes.arrayOf(PropTypes.object),
@@ -65,7 +65,7 @@ export const MessageBox = forwardRef(function ThMessageBox(props, ref) {
   };
   return (
     <MessageBoxProvider value={context}>
-      <Layer vertical data-testid='message-box' style={renderStyle} ref={ref}>
+      <Layer vertical data-testid="message-box" style={renderStyle} ref={ref}>
         <MessageRenderer />
       </Layer>
     </MessageBoxProvider>

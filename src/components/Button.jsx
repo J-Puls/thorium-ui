@@ -1,15 +1,15 @@
 /* React */
-import React, { forwardRef, useState, useLayoutEffect } from 'react';
+import React, { forwardRef, useState, useLayoutEffect } from "react";
 /* Style */
-import { buttonStyle } from '../styles/buttonStyle';
+import { buttonStyle } from "../styles/buttonStyle";
 /* Utils */
-import mapPropsToAttrs from '../utils/mapPropsToAttrs';
-import { validProps } from '../utils/propValidation';
-import mapPropsToMotion from '../utils/mapPropsToMotion';
+import mapPropsToAttrs from "../utils/mapPropsToAttrs";
+import { validProps } from "../utils/propValidation";
+import mapPropsToMotion from "../utils/mapPropsToMotion";
 /* Hooks */
-import { useTheme } from '../hooks/thoriumRoot/useTheme';
+import { useTheme } from "../hooks/thoriumRoot/useTheme";
 /* PropTypes */
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const propTypes = {
   animated: PropTypes.bool,
@@ -22,9 +22,9 @@ const propTypes = {
 
 const defaultProps = {
   animated: false,
-  size: 'normal',
+  size: "normal",
   stretch: false,
-  variant: 'primary',
+  variant: "primary",
   isDisabled: false,
   withMotion: false
 };
@@ -101,8 +101,8 @@ export const Button = forwardRef(function ThButton(props, ref) {
   }, [isHovered, isDisabled]);
 
   const genericProps = {
-    'data-testid': 'button',
-    ...mapPropsToAttrs(props, 'button'),
+    "data-testid": "button",
+    ...mapPropsToAttrs(props, "button"),
     disabled: isDisabled,
     onMouseDown: handleMouseDown,
     onMouseEnter: handleMouseEnter,
@@ -118,14 +118,14 @@ export const Button = forwardRef(function ThButton(props, ref) {
     return (
       <motion.div
         {...mapPropsToMotion(props)}
-        className='motion-btn-container'
+        className="motion-btn-container"
         style={{
-          position: 'relative',
+          position: "relative",
           width: renderStyle.width,
-          display: 'inline-block'
+          display: "inline-block"
         }}
       >
-        <button {...genericProps} className='motion-btn' onClick={handleClick}>
+        <button {...genericProps} className="motion-btn" onClick={handleClick}>
           {props.children}
         </button>
       </motion.div>

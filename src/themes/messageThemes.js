@@ -1,4 +1,4 @@
-import { colors } from './colors';
+import { colors } from "./colors";
 
 const mapThemes = (variant) => {
   const themes = { dark: null, light: null };
@@ -12,13 +12,13 @@ const mapThemes = (variant) => {
 };
 
 const variants = [
-  'dark',
-  'danger',
-  'light',
-  'primary',
-  'secondary',
-  'success',
-  'warning'
+  "dark",
+  "danger",
+  "light",
+  "primary",
+  "secondary",
+  "success",
+  "warning"
 ];
 const themes = {};
 

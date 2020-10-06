@@ -12,14 +12,14 @@ const validRatios = ["original", "1x1", "3x4", "16x9"];
 const propTypes = {
   fluid: PropTypes.oneOf(["full", "half", null]),
   ratio: PropTypes.oneOf(validRatios),
-  src: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired
 };
 
 const defaultProps = {
   fluid: "full",
   round: false,
   rounded: false,
-  ratio: "original",
+  ratio: "original"
 };
 
 // All valid props to be used by appendStyle

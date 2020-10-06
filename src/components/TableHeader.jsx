@@ -8,7 +8,7 @@ export const TableHeader = (props) => {
   if (props.children.length >= 0) {
     children = Children.map(props.children, (child) => {
       return cloneElement(child, {
-        header: true,
+        header: true
       });
     });
   }

@@ -1,14 +1,14 @@
 /* React */
-import React, { Component } from 'react';
+import React, { Component } from "react";
 /* Thorium-UI */
-import { Button } from './Button';
-import { ThoriumConsumer } from '../context/ThoriumContext';
+import { Button } from "./Button";
+import { ThoriumConsumer } from "../context/ThoriumContext";
 /* Utils */
-import mapPropsToAttrs from '../utils/mapPropsToAttrs';
-import { validProps } from '../utils/propValidation';
-import mapPropsToMotion from '../utils/mapPropsToMotion';
+import mapPropsToAttrs from "../utils/mapPropsToAttrs";
+import { validProps } from "../utils/propValidation";
+import mapPropsToMotion from "../utils/mapPropsToMotion";
 /* PropTypes */
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const propTypes = {
   animated: PropTypes.bool,
@@ -23,9 +23,9 @@ const propTypes = {
 const defaultProps = {
   animated: false,
   overrideFill: false,
-  size: 'normal',
+  size: "normal",
   stretch: false,
-  variant: 'link'
+  variant: "link"
 };
 
 /**
@@ -56,35 +56,35 @@ export class BurgerButton extends Component {
             context.theme.button[this.props.variant].normal.color;
           const burgerIcon = (
             <svg
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox='0 0 20 20'
-              height='20'
-              width='20'
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              height="20"
+              width="20"
               fill={iconFill}
             >
-              <rect width='20' height='4' />
-              <rect y='8' width='20' height='4' />
-              <rect y='16' width='20' height='4' />
+              <rect width="20" height="4" />
+              <rect y="8" width="20" height="4" />
+              <rect y="16" width="20" height="4" />
             </svg>
           );
           const closeIcon = (
             <svg
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox='0 0 20 20'
-              height='20'
-              width='20'
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              height="20"
+              width="20"
               fill={iconFill}
             >
               <polygon
-                points='18.5 4.3 15.7 1.5 10 7.2
+                points="18.5 4.3 15.7 1.5 10 7.2
         4.3 1.5 1.5 4.3 7.2 10 1.5 15.7 4.3 18.5
-        10 12.8 15.7 18.5 18.5 15.7 12.8 10 '
+        10 12.8 15.7 18.5 18.5 15.7 12.8 10 "
               />
             </svg>
           );
           return (
             <Button
-              {...mapPropsToAttrs(this.props, 'button')}
+              {...mapPropsToAttrs(this.props, "button")}
               id={this.props.id}
               onClick={this.handleClick}
               size={this.props.size}

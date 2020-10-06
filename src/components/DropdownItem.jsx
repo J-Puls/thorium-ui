@@ -1,13 +1,13 @@
 /* React */
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from "react";
 /* Thorium-UI */
-import { Block } from './Block';
+import { Block } from "./Block";
 /* Style */
-import dropdownItemStyle from '../styles/dropdownItemStyle';
+import dropdownItemStyle from "../styles/dropdownItemStyle";
 /* Utils */
-import mapPropsToAttrs from '../utils/mapPropsToAttrs';
+import mapPropsToAttrs from "../utils/mapPropsToAttrs";
 /* Hooks */
-import { useTheme } from '../hooks/thoriumRoot/useTheme';
+import { useTheme } from "../hooks/thoriumRoot/useTheme";
 
 /**
  * A stylized container that can hold any other component

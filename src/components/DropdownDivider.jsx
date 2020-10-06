@@ -1,18 +1,18 @@
 /* React */
-import React from 'react';
+import React from "react";
 /* Style */
-import { dropdownDividerStyle as dds } from '../styles/dropdownDividerStyle';
+import { dropdownDividerStyle as dds } from "../styles/dropdownDividerStyle";
 /* Utils */
 // import mapPropsToAttrs from '../utils/mapPropsToAttrs';
-import { useTheme } from '../hooks/thoriumRoot/useTheme';
+import { useTheme } from "../hooks/thoriumRoot/useTheme";
 /* PropTypes */
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const propTypes = {
   label: PropTypes.string
 };
 const defaultProps = {
-  label: ''
+  label: ""
 };
 
 /**

@@ -13,7 +13,7 @@ export const responsiveSizes = {
   "3": 25,
   "2": 16.666667,
   "1": 8.333333,
-  none: 0,
+  none: 0
 };
 
 export const containerSizes = {
@@ -21,7 +21,7 @@ export const containerSizes = {
   sm: 1.12,
   md: 1.17,
   lg: 1.2,
-  xl: 1.3,
+  xl: 1.3
 };
 
 export const config = {

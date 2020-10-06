@@ -4,11 +4,11 @@ import React, { Children, cloneElement } from "react";
 import PropTypes from "prop-types";
 
 const propTypes = {
-  striped: PropTypes.bool,
+  striped: PropTypes.bool
 };
 
 const defaultProps = {
-  striped: true,
+  striped: true
 };
 
 export const TableBody = (props) => {
@@ -19,14 +19,14 @@ export const TableBody = (props) => {
     if (!props.striped) {
       children = Children.map(props.children, (child) => {
         return cloneElement(child, {
-          body: true,
+          body: true
         });
       });
     } else {
       children = Children.map(props.children, (child, key) => {
         return cloneElement(child, {
           body: true,
-          striped: key % 2 === 0,
+          striped: key % 2 === 0
         });
       });
     }

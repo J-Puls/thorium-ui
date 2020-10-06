@@ -1,16 +1,16 @@
 /* React */
-import React, { forwardRef } from 'react';
+import React, { forwardRef } from "react";
 /* Styling */
-import { blockStyle } from '../styles/blockStyle';
+import { blockStyle } from "../styles/blockStyle";
 /* Utils */
-import mapPropsToAttrs from '../utils/mapPropsToAttrs';
-import { validProps } from '../utils/propValidation';
-import appendStyle from '../utils/appendStyle';
-import mapPropsToMotion from '../utils/mapPropsToMotion';
+import mapPropsToAttrs from "../utils/mapPropsToAttrs";
+import { validProps } from "../utils/propValidation";
+import appendStyle from "../utils/appendStyle";
+import mapPropsToMotion from "../utils/mapPropsToMotion";
 /* Hooks */
-import { useViewportSizeName } from '../hooks/thoriumRoot/useViewportSizeName';
+import { useViewportSizeName } from "../hooks/thoriumRoot/useViewportSizeName";
 /* PropTypes */
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const propTypes = {
   all: PropTypes.oneOf(validProps.sizes),
@@ -41,15 +41,15 @@ const defaultProps = {
 
 // All valid props to be used by appendStyle
 const stylingProps = [
-  'rounded',
-  'vertical',
-  'justify',
-  'all',
-  'xs',
-  'sm',
-  'md',
-  'lg',
-  'xl'
+  "rounded",
+  "vertical",
+  "justify",
+  "all",
+  "xs",
+  "sm",
+  "md",
+  "lg",
+  "xl"
 ];
 
 /**
@@ -62,7 +62,7 @@ export const Block = forwardRef(function ThBlock(props, ref) {
   style = appendStyle(props, stylingProps, style, blockStyle, { vpSizeName });
 
   const genericProps = {
-    'data-testid': 'th-block',
+    "data-testid": "th-block",
     ...mapPropsToAttrs(props),
     style: { ...style, ...props.style },
     ref
@@ -71,7 +71,7 @@ export const Block = forwardRef(function ThBlock(props, ref) {
   if (props.withMotion) {
     return (
       <motion.div
-        className='motion-block'
+        className="motion-block"
         {...genericProps}
         {...mapPropsToMotion(props)}
       >

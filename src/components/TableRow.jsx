@@ -1,7 +1,7 @@
 /* React */
-import React, { Children, cloneElement } from 'react';
+import React, { Children, cloneElement } from "react";
 /* Hooks */
-import { useTheme } from '../hooks/thoriumRoot/useTheme';
+import { useTheme } from "../hooks/thoriumRoot/useTheme";
 
 export const TableRow = (props) => {
   const theme = useTheme().table.row;

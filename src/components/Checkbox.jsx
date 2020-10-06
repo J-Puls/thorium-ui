@@ -16,7 +16,7 @@ const propTypes = {
   round: PropTypes.bool,
   rounded: PropTypes.bool,
   size: PropTypes.oneOf(["lg", "sm"]),
-  vertical: PropTypes.bool,
+  vertical: PropTypes.bool
 };
 
 const defaultProps = {
@@ -25,7 +25,7 @@ const defaultProps = {
   round: false,
   rounded: false,
   size: "lg",
-  vertical: false,
+  vertical: false
 };
 
 export const Checkbox = (props) => {

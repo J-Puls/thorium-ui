@@ -1,13 +1,13 @@
 /* React */
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from "react";
 /* Utils */
-import mapPropsToAttrs from '../utils/mapPropsToAttrs';
-import mapPropsToMotion from '../utils/mapPropsToMotion';
+import mapPropsToAttrs from "../utils/mapPropsToAttrs";
+import mapPropsToMotion from "../utils/mapPropsToMotion";
 /* Style */
-import { navItemStyle } from '../styles/navItemStyle';
-import { NavContext } from '../context/NavContext';
+import { navItemStyle } from "../styles/navItemStyle";
+import { NavContext } from "../context/NavContext";
 /* Hooks */
-import { useTheme } from '../hooks/thoriumRoot/useTheme';
+import { useTheme } from "../hooks/thoriumRoot/useTheme";
 
 /**
  * A simple padded wrapper to encapsulate different items within a Nav

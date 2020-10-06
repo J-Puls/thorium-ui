@@ -1,13 +1,13 @@
 /* React */
-import React, { forwardRef } from 'react';
+import React, { forwardRef } from "react";
 /* Style */
-import { textInputStyle } from '../styles/textInputStyle';
+import { textInputStyle } from "../styles/textInputStyle";
 /* Utils */
-import appendStyle from '../utils/appendStyle';
-import mapPropsToAttrs from '../utils/mapPropsToAttrs';
-import { useTheme } from '../hooks/thoriumRoot/useTheme';
+import appendStyle from "../utils/appendStyle";
+import mapPropsToAttrs from "../utils/mapPropsToAttrs";
+import { useTheme } from "../hooks/thoriumRoot/useTheme";
 /* PropTypes */
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const propTypes = {
   rows: PropTypes.number,
@@ -20,11 +20,11 @@ const defaultProps = {
   rows: 10,
   cols: 10,
   bordered: false,
-  label: ''
+  label: ""
 };
 
 // All valid props to be used by appendStyle
-const stylingProps = ['size', 'bordered'];
+const stylingProps = ["size", "bordered"];
 
 export const TextArea = forwardRef(function ThTextArea(props, ref) {
   const theme = useTheme().textInput;
@@ -40,7 +40,7 @@ export const TextArea = forwardRef(function ThTextArea(props, ref) {
       )}
       <textarea
         ref={ref}
-        {...mapPropsToAttrs(props, 'input')}
+        {...mapPropsToAttrs(props, "input")}
         rows={props.rows}
         cols={props.cols}
         style={{ ...style, ...props.style }}

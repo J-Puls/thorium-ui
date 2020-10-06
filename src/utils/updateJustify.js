@@ -10,11 +10,11 @@ export const updateJustify = (value) => {
     end: "flex-end",
     around: "space-around",
     between: "space-between",
-    evenly: "space-evenly",
+    evenly: "space-evenly"
   };
   return {
     display: "flex",
-    justifyContent: vals[value],
+    justifyContent: vals[value]
   };
 };
 export default updateJustify;

@@ -1,5 +1,5 @@
-import { useContext, useState, useEffect } from 'react';
-import { ThoriumContext } from '../../context/ThoriumContext';
+import { useContext, useState, useEffect } from "react";
+import { ThoriumContext } from "../../context/ThoriumContext";
 
 export const useRouterEnabledStatus = () => {
   const context = useContext(ThoriumContext);

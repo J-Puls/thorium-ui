@@ -1,4 +1,4 @@
-import { colors } from './colors';
+import { colors } from "./colors";
 
 const mapThemes = (variant) => {
   const themes = { dark: null, light: null };
@@ -16,7 +16,7 @@ const mapThemes = (variant) => {
       },
       disabled: {
         backgroundColor:
-          variant === 'link' ? 'transparent' : `${colors[theme][variant]}99`,
+          variant === "link" ? "transparent" : `${colors[theme][variant]}99`,
         color: `${colors[theme][`${variant}Text`]}aa`
       }
     };
@@ -25,14 +25,14 @@ const mapThemes = (variant) => {
 };
 
 const variants = [
-  'dark',
-  'danger',
-  'light',
-  'link',
-  'primary',
-  'secondary',
-  'success',
-  'warning'
+  "dark",
+  "danger",
+  "light",
+  "link",
+  "primary",
+  "secondary",
+  "success",
+  "warning"
 ];
 const themes = {};
 

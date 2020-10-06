@@ -21,7 +21,7 @@ const propTypes = {
   trackActive: PropTypes.bool,
   centerLinks: PropTypes.bool,
   variant: PropTypes.oneOf(validProps.variants),
-  type: PropTypes.oneOf(["normal", "tabs", "pills"]),
+  type: PropTypes.oneOf(["normal", "tabs", "pills"])
 };
 
 const defaultProps = {
@@ -31,7 +31,7 @@ const defaultProps = {
   centerLinks: false,
   defaultActive: 0,
   variant: "link",
-  type: "normal",
+  type: "normal"
 };
 
 /**
@@ -47,7 +47,7 @@ export const Nav = (props) => {
     currentURL: window.location.pathname,
     trackActive: props.trackActive,
     variant: props.variant,
-    type: props.type,
+    type: props.type
   };
 
   useEffect(() => {
