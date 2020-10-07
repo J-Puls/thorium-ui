@@ -18,8 +18,13 @@ export const layerStyle = {
     zIndex: 1000
   },
   vertical: {
-    display: "flex",
     flexDirection: "column"
+  },
+  reverse: {
+    flexDirection: "row-reverse"
+  },
+  verticalReverse: {
+    flexDirection: "column-reverse"
   },
   justify: (value) => updateJustify(value),
   translucent: (value) => makeTranslucent(value)
