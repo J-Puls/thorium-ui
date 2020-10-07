@@ -85,6 +85,7 @@ export class BurgerButton extends Component {
           return (
             <Button
               {...mapPropsToAttrs(this.props, "button")}
+              data-testid="th-burger-button"
               id={this.props.id}
               onClick={this.handleClick}
               size={this.props.size}
