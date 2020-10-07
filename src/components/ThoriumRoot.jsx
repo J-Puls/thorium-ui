@@ -24,7 +24,7 @@ const defaultProps = {
   overrideSysTheme: false
 };
 
-const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
+export const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
   props.enableMotion && (globalThis.motion = require("framer-motion").motion);
   if (props.enableReactRouter) {
     globalThis.ReactRouter = require("react-router");
@@ -55,7 +55,7 @@ const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
   const [theme, setTheme] = useState(
     defaultTheme || themes[sysDefaultTheme] || themes[props.defaultTheme]
   );
-  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+  const [viewportWidth, setViewportWidth] = useState(globalThis.innerWidth);
   const [viewportSizeName, setViewportSizeName] = useState(
     updateVpName(viewportWidth)
   );
@@ -76,31 +76,31 @@ const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
   };
 
   const isSysDarkMode = () => {
-    const darkModeOn = window.matchMedia(darkModeQuery).matches;
+    const darkModeOn = globalThis.matchMedia(darkModeQuery).matches;
     return darkModeOn;
   };
 
   useEffect(() => {
     // Monitor for changes in system-wide theme mode
-    window.matchMedia(darkModeQuery).addEventListener("change", (e) => {
+    globalThis.matchMedia(darkModeQuery).addEventListener("change", (e) => {
       setTheme(isSysDarkMode() ? themes.dark : themes.light);
     });
 
     /**
-     *  Updates the viewport state properties when the window is resized past a breakpoint
+     *  Updates the viewport state properties when the globalThis is resized past a breakpoint
      */
     const handleResize = () => {
-      if (updateVpName(window.innerWidth) !== viewportSizeName) {
-        setViewportWidth(window.innerWidth);
+      if (updateVpName(globalThis.innerWidth) !== viewportSizeName) {
+        setViewportWidth(globalThis.innerWidth);
       }
     };
-    // Monitor for window resizing and update state accordingly
-    window.addEventListener("resize", handleResize);
+    // Monitor for globalThis resizing and update state accordingly
+    globalThis.addEventListener("resize", handleResize);
 
     return () => {
       // Prevent memory leak when unmounted
-      window.removeEventListener("resize", handleResize);
-      window
+      globalThis.removeEventListener("resize", handleResize);
+      globalThis
         .matchMedia(darkModeQuery)
         .removeEventListener("change", toggleTheme);
     };
@@ -111,7 +111,9 @@ const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
   }, [viewportWidth]);
 
   // Evaluate custom styles if present
-  let customStyles = props.customStyles(theme, colors) || null;
+  let customStyles = props.customStyles
+    ? props.customStyles(theme, colors)
+    : null;
 
   // Explicitly set DOM body styling
   updateBodyStyle(bodyStyle, customStyles, theme.body);
@@ -134,7 +136,7 @@ const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
       <th-root
         class="thorium-root"
         id="thoriumRoot"
-        data-testid="thorium-root"
+        data-testid="th-thorium-root"
         style={{ boxSizing: "border-box", ...props.style }}
         ref={ref}
       >
