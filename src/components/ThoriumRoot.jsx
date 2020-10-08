@@ -72,8 +72,14 @@ export const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
   // Explicitly set DOM body styling
   updateBodyStyle(bodyStyle, customStyles, theme.body);
 
-  props.enableMotion && (globalThis.motion = require("framer-motion").motion);
-  if (props.enableReactRouter) {
+  // Globalize framer-motion and/or react-router if enabled
+
+  if (props.enableMotion && !globalThis.motion)
+    globalThis.motion = require("framer-motion").motion;
+  if (
+    props.enableReactRouter &&
+    (!globalThis.ReactRouter || !globalThis.ReactRouterDom)
+  ) {
     globalThis.ReactRouter = require("react-router");
     globalThis.ReactRouterDom = require("react-router-dom");
   }
