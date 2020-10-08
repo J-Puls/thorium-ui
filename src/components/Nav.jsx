@@ -1,26 +1,26 @@
 /* React */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, cloneElement } from "react";
 /* Thorium-UI */
 import { Block } from "./Block";
-/* Subcomponents */
+/* Sub-components */
 import { NavLink as Link } from "./NavLink";
 import { NavItem as Item } from "./NavItem";
 /* NavContext */
 import { NavProvider } from "../context/NavContext";
 /* Utils */
 import mapPropsToAttrs from "../utils/mapPropsToAttrs";
-import { validProps } from "../utils/propValidation";
+import { variants, justify } from "../utils/propValidation";
 import mapPropsToResponsiveSize from "../utils/mapPropsToResponsiveSize";
 import mapPropsToMotion from "../utils/mapPropsToMotion";
 /* PropTypes */
 import PropTypes from "prop-types";
 
 const propTypes = {
-  justify: PropTypes.oneOf(validProps.justify),
+  justify: PropTypes.oneOf(justify),
   vertical: PropTypes.bool,
   trackActive: PropTypes.bool,
   centerLinks: PropTypes.bool,
-  variant: PropTypes.oneOf(validProps.variants),
+  variant: PropTypes.oneOf(variants),
   type: PropTypes.oneOf(["normal", "tabs", "pills"])
 };
 
@@ -40,10 +40,10 @@ const defaultProps = {
 export const Nav = (props) => {
   const [activeItem, setActiveItem] = useState(props.defaultActive);
 
-  // Define context to be accessible by Nav subcomponents
+  // Define context to be accessible by Nav sub-components
   const navContext = {
     activeItem: activeItem,
-    setActive: (id) => setActiveItem(id),
+    setActiveItem,
     currentURL: window.location.pathname,
     trackActive: props.trackActive,
     variant: props.variant,
@@ -53,6 +53,13 @@ export const Nav = (props) => {
   useEffect(() => {
     props.onActiveItemChange && props.onActiveItemChange(navContext);
   }, [navContext, props]);
+
+  const children = React.Children.map(props.children, (child) => {
+    return cloneElement(child, {
+      variant: props.variant,
+      type: props.type
+    });
+  });
 
   let style = { ...props.style };
   props.centerLinks && (style.textAlign = "center");
@@ -69,7 +76,7 @@ export const Nav = (props) => {
           withMotion={true}
           {...mapPropsToMotion(props)}
         >
-          {props.children}
+          {children}
         </Block>
       )}
       {!props.withMotion && (
@@ -81,7 +88,7 @@ export const Nav = (props) => {
           style={style}
           class={props.className}
         >
-          {props.children}
+          {children}
         </Block>
       )}
     </NavProvider>
