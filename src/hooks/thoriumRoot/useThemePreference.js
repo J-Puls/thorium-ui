@@ -26,3 +26,4 @@ export const useThemePreference = () => {
 
   return themePreference;
 };
+export default useThemePreference;
