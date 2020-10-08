@@ -4,7 +4,7 @@ import React, { forwardRef } from "react";
 import { blockStyle } from "../styles/blockStyle";
 /* Utils */
 import mapPropsToAttrs from "../utils/mapPropsToAttrs";
-import { validProps } from "../utils/propValidation";
+import { sizes, justify } from "../utils/propValidation";
 import appendStyle from "../utils/appendStyle";
 import mapPropsToMotion from "../utils/mapPropsToMotion";
 /* Hooks */
@@ -13,16 +13,16 @@ import { useViewportSizeName } from "../hooks/thoriumRoot/useViewportSizeName";
 import PropTypes from "prop-types";
 
 const propTypes = {
-  all: PropTypes.oneOf(validProps.sizes),
-  justify: PropTypes.oneOf(validProps.justify),
-  lg: PropTypes.oneOf(validProps.sizes),
-  md: PropTypes.oneOf(validProps.sizes),
+  all: PropTypes.oneOf(sizes),
+  justify: PropTypes.oneOf(justify),
+  lg: PropTypes.oneOf(sizes),
+  md: PropTypes.oneOf(sizes),
   round: PropTypes.bool,
   rounded: PropTypes.bool,
-  sm: PropTypes.oneOf(validProps.sizes),
+  sm: PropTypes.oneOf(sizes),
   vertical: PropTypes.bool,
-  xl: PropTypes.oneOf(validProps.sizes),
-  xs: PropTypes.oneOf(validProps.sizes)
+  xl: PropTypes.oneOf(sizes),
+  xs: PropTypes.oneOf(sizes)
 };
 
 const defaultProps = {

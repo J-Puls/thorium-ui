@@ -4,7 +4,7 @@ import React, { forwardRef, useState, useLayoutEffect } from "react";
 import { buttonStyle } from "../styles/buttonStyle";
 /* Utils */
 import mapPropsToAttrs from "../utils/mapPropsToAttrs";
-import { validProps } from "../utils/propValidation";
+import { variants } from "../utils/propValidation";
 import mapPropsToMotion from "../utils/mapPropsToMotion";
 /* Hooks */
 import { useTheme } from "../hooks/thoriumRoot/useTheme";
@@ -15,7 +15,7 @@ const propTypes = {
   animated: PropTypes.bool,
   size: PropTypes.string,
   stretch: PropTypes.bool,
-  variant: PropTypes.oneOf(validProps.variants),
+  variant: PropTypes.oneOf(variants),
   isDisabled: PropTypes.bool,
   withMotion: PropTypes.bool
 };

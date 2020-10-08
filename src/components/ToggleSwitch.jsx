@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { toggleSwitchStyle as toggle } from "../styles/toggleSwitchStyle";
 /* Utils */
 import mapPropsToAttrs from "../utils/mapPropsToAttrs";
-import { validProps } from "../utils/propValidation";
+import { variants } from "../utils/propValidation";
 /* PropTypes */
 import PropTypes from "prop-types";
 /* Hooks */
@@ -13,7 +13,7 @@ import { useTheme } from "../hooks/thoriumRoot/useTheme";
 const propTypes = {
   checked: PropTypes.bool,
   size: PropTypes.oneOf(["normal", "lg"]),
-  variant: PropTypes.oneOf([...validProps.variants, "themeToggle"])
+  variant: PropTypes.oneOf([...variants, "themeToggle"])
 };
 
 const defaultProps = {
