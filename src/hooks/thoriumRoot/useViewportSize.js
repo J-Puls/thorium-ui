@@ -11,13 +11,14 @@ export const useViewportSize = () => {
     prevH !== newH && updateHeight();
   };
 
+  const handleResize = () => {
+    updateSize(width, globalThis.innerWidth, height, globalThis.innerHeight);
+  };
   useEffect(() => {
-    globalThis.addEventListener("resize", () =>
-      updateSize(width, globalThis.innerWidth, height, globalThis.innerHeight)
-    );
+    globalThis.addEventListener("resize", handleResize);
 
     return () => {
-      globalThis.removeEventListener("resize");
+      globalThis.removeEventListener("resize", handleResize);
     };
   }, []);
   return { width, height };
