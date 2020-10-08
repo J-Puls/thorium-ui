@@ -1,49 +1,51 @@
 /* React */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 /* ThoriumContext */
 import NavItem from "./NavItem";
 /* Style */
 import { navLinkStyle } from "../styles/navLinkStyle";
 /* Utils */
 import mapPropsToAttrs from "../utils/mapPropsToAttrs";
-import { validProps } from "../utils/propValidation";
-/* NavContext */
-import { NavContext } from "../context/NavContext";
+import { variants } from "../utils/propValidation";
 /* PropTypes */
 import PropTypes from "prop-types";
+/* Hooks */
+import useActiveItem from "../hooks/nav/useActiveItem";
+import useSetActiveItem from "../hooks/nav/useSetActiveItem";
 
 const propTypes = {
-  noHover: PropTypes.bool,
-  variant: PropTypes.oneOf(validProps.variants)
-};
-
-const defaultProps = {
-  noHover: false,
-  variant: "link"
+  navkey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  variant: PropTypes.oneOf(variants),
+  type: PropTypes.oneOf(["normal", "pills", "tabs"]),
+  withMotion: PropTypes.bool
 };
 
 /**
  * A styled React Router wrapper
  */
 export const NavLink = (props) => {
-  const navContext = useContext(NavContext);
-  let [isActive, setIsActive] = useState(
-    navContext.activeItem === props.navkey
-  );
+  const activeItem = useActiveItem();
+  const setActiveItem = useSetActiveItem();
+  const [isActive, setIsActive] = useState(activeItem === props.navkey);
 
   useEffect(() => {
-    const status = navContext.activeItem === props.navkey;
+    const status = activeItem === props.navkey;
     setIsActive(status);
-  }, [navContext.activeItem, props.navkey]);
+  }, [activeItem, props.navkey]);
 
   const handleClick = () => {
-    !isActive && navContext.setActive(props.navkey);
+    !isActive && setActiveItem(props.navkey);
   };
 
   let style = { ...navLinkStyle.general };
 
   return (
-    <NavItem navkey={props.navkey}>
+    <NavItem
+      navkey={props.navkey}
+      variant={props.variant}
+      type={props.type}
+      withMotion={props.withMotion}
+    >
       {!props.asAnchor && ReactRouterDom && (
         <ReactRouterDom.Link
           onClick={handleClick}
@@ -68,6 +70,5 @@ export const NavLink = (props) => {
 };
 
 NavLink.propTypes = propTypes;
-NavLink.defaultProps = defaultProps;
 
 export default NavLink;

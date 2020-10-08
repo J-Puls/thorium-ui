@@ -6,13 +6,13 @@ import { Block } from "./Block";
 import { checkboxStyle as cbs } from "../styles/checkboxStyle";
 /* Utils */
 import mapPropsToAttrs from "../utils/mapPropsToAttrs";
-import { validProps } from "../utils/propValidation";
+import { justify } from "../utils/propValidation";
 /* PropTypes */
 import PropTypes from "prop-types";
 
 const propTypes = {
   defaultChecked: PropTypes.bool,
-  justify: PropTypes.oneOf(validProps.justify),
+  justify: PropTypes.oneOf(justify),
   round: PropTypes.bool,
   rounded: PropTypes.bool,
   size: PropTypes.oneOf(["lg", "sm"]),

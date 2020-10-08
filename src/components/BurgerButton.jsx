@@ -5,7 +5,7 @@ import { Button } from "./Button";
 import { ThoriumConsumer } from "../context/ThoriumContext";
 /* Utils */
 import mapPropsToAttrs from "../utils/mapPropsToAttrs";
-import { validProps } from "../utils/propValidation";
+import { variants } from "../utils/propValidation";
 import mapPropsToMotion from "../utils/mapPropsToMotion";
 /* PropTypes */
 import PropTypes from "prop-types";
@@ -17,7 +17,7 @@ const propTypes = {
   size: PropTypes.string,
   stretch: PropTypes.bool,
   targetID: PropTypes.string.isRequired,
-  variant: PropTypes.oneOf(validProps.variants)
+  variant: PropTypes.oneOf(variants)
 };
 
 const defaultProps = {

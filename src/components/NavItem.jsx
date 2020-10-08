@@ -1,34 +1,46 @@
 /* React */
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 /* Utils */
 import mapPropsToAttrs from "../utils/mapPropsToAttrs";
 import mapPropsToMotion from "../utils/mapPropsToMotion";
 /* Style */
 import { navItemStyle } from "../styles/navItemStyle";
-import { NavContext } from "../context/NavContext";
 /* Hooks */
 import { useTheme } from "../hooks/thoriumRoot/useTheme";
+import { useActiveItem } from "../hooks/nav/useActiveItem";
+import useSetActiveItem from "../hooks/nav/useSetActiveItem";
+import PropTypes from "prop-types";
+import { variants } from "../utils/propValidation";
+
+const propTypes = {
+  navkey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  variant: PropTypes.oneOf(variants),
+  type: PropTypes.oneOf(["normal", "pills", "tabs"]),
+  withMotion: PropTypes.bool
+};
+
+const defaultProps = {
+  variant: "primary",
+  type: "normal",
+  withMotion: false
+};
 
 /**
  * A simple padded wrapper to encapsulate different items within a Nav
  */
 export const NavItem = (props) => {
-  const navContext = useContext(NavContext);
   const theme = useTheme().nav.item;
-  let [isHovered, setIsHovered] = useState(false);
-  let [isActive, setIsActive] = useState(
-    navContext.activeItem === props.navkey
-  );
-
+  const [isHovered, setIsHovered] = useState(false);
+  const activeItem = useActiveItem();
+  const setActiveItem = useSetActiveItem();
+  const [isActive, setIsActive] = useState(activeItem === props.navkey);
   useEffect(() => {
-    const status = navContext.activeItem === props.navkey;
-    setIsActive(status);
-  }, [navContext.activeItem, props.navkey]);
+    setIsActive(activeItem === props.navkey);
+  }, [activeItem, props.navkey]);
 
   const handleClick = (e) => {
-    !isActive && navContext.setActive(props.navkey);
+    !isActive && setActiveItem(props.navkey);
     if (props.onClick) {
-      e.preventDefault();
       props.onClick();
     }
   };
@@ -36,23 +48,13 @@ export const NavItem = (props) => {
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
-  let style = { ...navItemStyle.general };
-  if (isActive) {
-    style = {
-      ...style,
-      ...theme[navContext.variant].active[navContext.type]
-    };
-  } else if (isHovered) {
-    style = {
-      ...style,
-      ...theme[navContext.variant].hover[navContext.type]
-    };
-  } else {
-    style = {
-      ...style,
-      ...theme[navContext.variant].inactive[navContext.type]
-    };
-  }
+  const styleMod = isActive
+    ? { ...theme[props.variant].active[props.type] }
+    : isHovered
+    ? { ...theme[props.variant].hover[props.type] }
+    : { ...theme[props.variant].inactive[props.type] };
+
+  const style = { ...navItemStyle.general, ...styleMod };
 
   const genericProps = {
     ...mapPropsToAttrs(props),
@@ -73,4 +75,6 @@ export const NavItem = (props) => {
   }
 };
 
+NavItem.propTypes = propTypes;
+NavItem.defaultProps = defaultProps;
 export default NavItem;

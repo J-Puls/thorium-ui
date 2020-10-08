@@ -9,7 +9,7 @@ import { DropdownTrigger as Trigger } from "./DropdownTrigger";
 import { DropdownContainer as Container } from "./DropdownContainer";
 /* Utils */
 import { mapPropsToAttrs } from "../utils/mapPropsToAttrs";
-import { validProps } from "../utils/propValidation";
+import { variants } from "../utils/propValidation";
 /* PropTypes */
 import PropTypes from "prop-types";
 
@@ -19,7 +19,7 @@ const propTypes = {
   icons: PropTypes.bool,
   remoteTrigger: PropTypes.bool,
   text: PropTypes.string,
-  variant: PropTypes.oneOf(validProps.variants),
+  variant: PropTypes.oneOf(variants),
   size: PropTypes.oneOf(["sm", "normal", "lg"]),
   displayType: PropTypes.oneOf(["block", "float"]),
   targetID: PropTypes.string
