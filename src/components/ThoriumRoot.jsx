@@ -3,112 +3,66 @@ import React, { useState, useEffect, forwardRef } from "react";
 /* ThoriumContext */
 import { ThoriumProvider } from "../context/ThoriumContext";
 /* Themes */
-import themes from "../themes";
-import colors from "../themes/colors";
+import { colors, themes as baseThemes } from "../themes";
 /* PropTypes */
 import PropTypes from "prop-types";
 /* Utils */
-import thoriumInit from "../utils/thoriumInit";
 import updateBodyStyle from "../utils/updateBodyStyle";
 import updateVpName from "../utils/updateVpName";
 /* Style */
 import { bodyStyle } from "../styles/bodyStyle";
+/* Hooks */
+import { useThemePreference } from "../hooks/thoriumRoot/useThemePreference";
+import { useMobileStatus } from "../hooks/thoriumRoot/useMobileStatus";
+import { useTouchStatus } from "../hooks/thoriumRoot/useTouchStatus";
+import { useViewportSize } from "../hooks/thoriumRoot/useViewportSize";
 
 const propTypes = {
-  defaultTheme: PropTypes.oneOf(["dark", "light"]),
-  overrideSysTheme: PropTypes.bool
+  defaultTheme: PropTypes.oneOf(["dark", "light"]).isRequired,
+  overrideSysTheme: PropTypes.bool,
+  customStyles: PropTypes.func,
+  customThemes: PropTypes.object,
+  enableMotion: PropTypes.bool,
+  enableReactRouter: PropTypes.bool
 };
 
 const defaultProps = {
-  defaultTheme: "dark",
-  overrideSysTheme: false
+  overrideSysTheme: false,
+  enableMotion: false,
+  enableReactRouter: false,
+  customTheme: {}
 };
 
 export const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
-  props.enableMotion && (globalThis.motion = require("framer-motion").motion);
-  if (props.enableReactRouter) {
-    globalThis.ReactRouter = require("react-router");
-    globalThis.ReactRouterDom = require("react-router-dom");
-  }
+  const themePreference = useThemePreference();
+  const themes = {
+    dark: { ...baseThemes.dark, ...props.customTheme.dark },
+    light: { ...baseThemes.light, ...props.customTheme.light }
+  };
+  const initialTheme = props.overrideSysTheme
+    ? themes[props.defaultTheme]
+    : themes[themePreference];
 
-  const initData = thoriumInit();
-  const overrideSysTheme = props.overrideSysTheme;
-  const sysDefaultTheme = initData.sysDefaultTheme;
-  const darkModeQuery = "(prefers-color-scheme: dark)";
-  let defaultTheme;
-  if (props.customThemes) {
-    defaultTheme = overrideSysTheme
-      ? {
-          ...themes[props.defaultTheme],
-          ...props.customThemes[props.defaultTheme]
-        }
-      : {
-          ...themes[props.defaultTheme],
-          ...props.customThemes[sysDefaultTheme]
-        };
-  } else {
-    defaultTheme = overrideSysTheme
-      ? { ...themes[props.defaultTheme] }
-      : { ...themes[sysDefaultTheme] };
-  }
+  const [theme, setTheme] = useState(initialTheme);
+  // Update the theme if user-preferred theme is changed
+  useEffect(() => {
+    !props.overrideSysTheme && setTheme(themes[themePreference]);
+  }, [themePreference]);
 
-  const [theme, setTheme] = useState(
-    defaultTheme || themes[sysDefaultTheme] || themes[props.defaultTheme]
-  );
-  const [viewportWidth, setViewportWidth] = useState(globalThis.innerWidth);
+  const isMobileDevice = useMobileStatus();
+  const isTouchDevice = useTouchStatus();
+  const viewportSize = useViewportSize();
+
   const [viewportSizeName, setViewportSizeName] = useState(
-    updateVpName(viewportWidth)
+    updateVpName(viewportSize.width)
   );
+  useEffect(() => {
+    setViewportSizeName(updateVpName(viewportSize.width));
+  }, [viewportSize.width]);
 
   const toggleTheme = () => {
-    let newTheme;
-    theme.name === "dark"
-      ? (newTheme = themes.light)
-      : (newTheme = themes.dark);
-
-    if (props.customThemes) {
-      newTheme = {
-        ...newTheme,
-        ...props.customThemes[newTheme.name]
-      };
-    }
-    setTheme(newTheme);
+    setTheme(theme.name === "dark" ? themes.light : themes.dark);
   };
-
-  const isSysDarkMode = () => {
-    const darkModeOn = globalThis.matchMedia(darkModeQuery).matches;
-    return darkModeOn;
-  };
-
-  useEffect(() => {
-    // Monitor for changes in system-wide theme mode
-    globalThis.matchMedia(darkModeQuery).addEventListener("change", (e) => {
-      setTheme(isSysDarkMode() ? themes.dark : themes.light);
-    });
-
-    /**
-     *  Updates the viewport state properties when the globalThis is resized past a breakpoint
-     */
-    const handleResize = () => {
-      if (updateVpName(globalThis.innerWidth) !== viewportSizeName) {
-        setViewportWidth(globalThis.innerWidth);
-      }
-    };
-    // Monitor for globalThis resizing and update state accordingly
-    globalThis.addEventListener("resize", handleResize);
-
-    return () => {
-      // Prevent memory leak when unmounted
-      globalThis.removeEventListener("resize", handleResize);
-      globalThis
-        .matchMedia(darkModeQuery)
-        .removeEventListener("change", toggleTheme);
-    };
-  }, []);
-
-  useEffect(() => {
-    setViewportSizeName(updateVpName(viewportWidth));
-  }, [viewportWidth]);
 
   // Evaluate custom styles if present
   let customStyles = props.customStyles
@@ -118,17 +72,25 @@ export const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
   // Explicitly set DOM body styling
   updateBodyStyle(bodyStyle, customStyles, theme.body);
 
+  props.enableMotion && (globalThis.motion = require("framer-motion").motion);
+  if (props.enableReactRouter) {
+    globalThis.ReactRouter = require("react-router");
+    globalThis.ReactRouterDom = require("react-router-dom");
+  }
+
   // ThoriumContext
   const context = {
     colors,
     customStyles,
     setTheme: (name) => setTheme(themes[name]),
-    theme: theme,
+    theme,
     themeName: theme.name,
-    toggleTheme: toggleTheme,
-    viewportSizeName: viewportSizeName,
-    viewportWidth: viewportWidth,
-    ...initData
+    toggleTheme,
+    viewportSizeName,
+    viewportSize: { ...viewportSize },
+    isMobileDevice,
+    isTouchDevice,
+    sysThemeOverridden: props.overrideSysTheme
   };
 
   return (

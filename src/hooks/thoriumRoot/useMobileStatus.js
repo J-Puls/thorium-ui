@@ -1,13 +1,18 @@
-import { useContext, useState, useEffect } from "react";
-import { ThoriumContext } from "../../context/ThoriumContext";
+import { useState, useEffect } from "react";
+
+const getMobileStatus = () => {
+  return (
+    typeof window.orientation !== "undefined" ||
+    navigator.userAgent.indexOf("IEMobile") !== -1
+  );
+};
 
 export const useMobileStatus = () => {
-  const context = useContext(ThoriumContext);
-  const [isMobile, setIsMobile] = useState(context.isMobile);
+  const [isMobile, setIsMobile] = useState(getMobileStatus());
 
   useEffect(() => {
-    setIsMobile(context.isMobile);
-  }, [context.isMobile]);
+    setIsMobile(getMobileStatus);
+  }, [window.orientation, navigator.userAgent]);
   return isMobile;
 };
 export default useMobileStatus;
