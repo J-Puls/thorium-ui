@@ -13,7 +13,8 @@ import PropTypes from "prop-types";
 
 const propTypes = {
   messages: PropTypes.arrayOf(PropTypes.object),
-  onRemove: PropTypes.func.isRequired
+  onRemove: PropTypes.func.isRequired,
+  direction: PropTypes.oneOf(["normal", "reverse"])
 };
 
 const defaultProps = {
@@ -21,7 +22,8 @@ const defaultProps = {
     console.warn(
       `MessageBox 'onRemove' prop has not been assigned a function.
 Dismissed messages will not be accounted for in the MessageBoxContext message queue.`
-    )
+    ),
+  direction: "normal"
 };
 
 export const MessageBox = forwardRef(function ThMessageBox(props, ref) {
@@ -65,9 +67,21 @@ export const MessageBox = forwardRef(function ThMessageBox(props, ref) {
   };
   return (
     <MessageBoxProvider value={context}>
-      <Layer vertical data-testid="message-box" style={renderStyle} ref={ref}>
-        <MessageRenderer />
-      </Layer>
+      {props.direction === "normal" && (
+        <Layer vertical data-testid="message-box" style={renderStyle} ref={ref}>
+          <MessageRenderer />
+        </Layer>
+      )}
+      {props.direction === "reverse" && (
+        <Layer
+          verticalReverse
+          data-testid="message-box"
+          style={renderStyle}
+          ref={ref}
+        >
+          <MessageRenderer />
+        </Layer>
+      )}
     </MessageBoxProvider>
   );
 });

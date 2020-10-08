@@ -9,7 +9,14 @@ import appendStyle from "../utils/appendStyle";
 import mapPropsToMotion from "../utils/mapPropsToMotion";
 
 // All valid props to be used by appendStyle
-const stylingProps = ["justify", "rounded", "sticky", "vertical"];
+const stylingProps = [
+  "justify",
+  "rounded",
+  "sticky",
+  "vertical",
+  "reverse",
+  "verticalReverse"
+];
 
 /**
  * A horizontal row in the page grid, segmented into 12 blocks.
