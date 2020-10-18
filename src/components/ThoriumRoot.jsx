@@ -36,8 +36,8 @@ const defaultProps = {
 export const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
   const themePreference = useThemePreference();
   const themes = {
-    dark: { ...baseThemes.dark, ...props.customTheme.dark },
-    light: { ...baseThemes.light, ...props.customTheme.light }
+    dark: { ...baseThemes.dark, ...props.customThemes.dark },
+    light: { ...baseThemes.light, ...props.customThemes.light }
   };
   const initialTheme = props.overrideSysTheme
     ? themes[props.defaultTheme]
