@@ -27,7 +27,7 @@ export const NavLink = (props) => {
   const activeItem = useActiveItem();
   const setActiveItem = useSetActiveItem();
   const [isActive, setIsActive] = useState(activeItem === props.navkey);
-
+  let thisLink;
   useEffect(() => {
     const status = activeItem === props.navkey;
     setIsActive(status);
@@ -35,6 +35,7 @@ export const NavLink = (props) => {
 
   const handleClick = () => {
     !isActive && setActiveItem(props.navkey);
+    thisLink.click();
   };
 
   let style = { ...navLinkStyle.general };
@@ -45,10 +46,11 @@ export const NavLink = (props) => {
       variant={props.variant}
       type={props.type}
       withMotion={props.withMotion}
+      onClick={handleClick}
     >
       {!props.asAnchor && ReactRouterDom && (
         <ReactRouterDom.Link
-          onClick={handleClick}
+          ref={(el) => (thisLink = el)}
           {...mapPropsToAttrs(props, "anchor")}
           to={props.to}
           style={style}
@@ -58,7 +60,7 @@ export const NavLink = (props) => {
       )}
       {(props.asAnchor || !ReactRouterDom) && (
         <a
-          onClick={handleClick}
+          ref={(el) => (thisLink = el)}
           {...mapPropsToAttrs(props, "anchor")}
           style={style}
         >
