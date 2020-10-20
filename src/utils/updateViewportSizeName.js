@@ -10,11 +10,11 @@
  * @param {Number} w The current viewport width
  * @returns {String} The matching breakpoint size name
  */
-export const updateVpName = (w) => {
+export const updateViewportSizeName = (w) => {
   if (w < 576) return "xs";
   else if (w >= 576 && w < 1024) return "sm";
   else if (w >= 1024 && w < 1366) return "md";
   else if (w >= 1366 && w < 1920) return "lg";
   else return "xl";
 };
-export default updateVpName;
+export default updateViewportSizeName;
