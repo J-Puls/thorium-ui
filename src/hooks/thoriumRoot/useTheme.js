@@ -1,16 +1,13 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useLayoutEffect } from "react";
 import { ThoriumContext } from "../../context/ThoriumContext";
-import { useThemeName } from "./useThemeName";
-import { themes } from "../../themes";
 
 export const useTheme = () => {
   const context = useContext(ThoriumContext);
-  const themeName = useThemeName();
   const [theme, setTheme] = useState(context.theme);
 
-  useEffect(() => {
-    setTheme(themes[themeName]);
-  }, [themeName]);
+  useLayoutEffect(() => {
+    setTheme(context.theme);
+  }, [context.themeName]);
   return theme;
 };
 export default useTheme;
