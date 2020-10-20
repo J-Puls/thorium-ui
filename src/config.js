@@ -24,11 +24,11 @@ export const containerSizes = {
 };
 
 export const breakpoints = {
-  xs: 575,
-  sm: 700,
-  md: 1024,
-  lg: 1366,
-  xl: 1920
+  xs: [0, 575],
+  sm: [576, 700],
+  md: [701, 1024],
+  lg: [1025, 1366],
+  xl: [1367, 10000]
 };
 
 export const config = {
