@@ -20,7 +20,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  variant: "primary",
   type: "normal",
   withMotion: false
 };
