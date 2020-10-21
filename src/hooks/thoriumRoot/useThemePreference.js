@@ -1,18 +1,26 @@
 import { useEffect, useState } from "react";
 
-export const useThemePreference = () => {
+export const useThemePreference = (props) => {
   const darkModeQuery = "(prefers-color-scheme: dark)";
-  const getPrefersDarkMode = () => {
-    return globalThis.matchMedia(darkModeQuery).matches;
-  };
-  const [themePreference, setThemePreference] = useState(
-    getPrefersDarkMode() ? "dark" : "light"
-  );
-  const toggle = () => {
-    setThemePreference(getPrefersDarkMode() ? "dark" : "light");
+  const lightModeQuery = "(prefers-color-scheme: light)";
+
+  const getThemePreference = () => {
+    const preference = globalThis.matchMedia(darkModeQuery).matches
+      ? "dark"
+      : globalThis.matchMedia(lightModeQuery).matches
+      ? "light"
+      : props.defaultTheme;
+    return preference;
   };
 
+  const [themePreference, setThemePreference] = useState(
+    props.overrideSysTheme ? props.defaultTheme : getThemePreference()
+  );
+
   useEffect(() => {
+    const toggle = () => {
+      setThemePreference(getThemePreference());
+    };
     //  Update themePreference value if change is made in OS
     globalThis.matchMedia(darkModeQuery).addEventListener("change", toggle);
 
@@ -24,6 +32,6 @@ export const useThemePreference = () => {
     };
   }, []);
 
-  return themePreference;
+  return { value: themePreference, setter: setThemePreference };
 };
 export default useThemePreference;

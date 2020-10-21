@@ -1,5 +1,5 @@
 /* React */
-import React, { useState, useEffect, forwardRef } from "react";
+import React, { forwardRef } from "react";
 /* ThoriumContext */
 import { ThoriumProvider } from "../context/ThoriumContext";
 /* Themes */
@@ -8,7 +8,6 @@ import { colors, themes as baseThemes } from "../themes";
 import PropTypes from "prop-types";
 /* Utils */
 import updateBodyStyle from "../utils/updateBodyStyle";
-import updateVpName from "../utils/updateVpName";
 /* Style */
 import { bodyStyle } from "../styles/bodyStyle";
 /* Hooks */
@@ -16,6 +15,7 @@ import { useThemePreference } from "../hooks/thoriumRoot/useThemePreference";
 import { useMobileStatus } from "../hooks/thoriumRoot/useMobileStatus";
 import { useTouchStatus } from "../hooks/thoriumRoot/useTouchStatus";
 import { useViewportSize } from "../hooks/thoriumRoot/useViewportSize";
+import { useViewportSizeName } from "../hooks/thoriumRoot/useViewportSizeName";
 
 const propTypes = {
   defaultTheme: PropTypes.oneOf(["dark", "light"]).isRequired,
@@ -27,53 +27,42 @@ const propTypes = {
 };
 
 const defaultProps = {
+  defaultTheme: "dark",
   overrideSysTheme: false,
   enableMotion: false,
   enableReactRouter: false,
-  customTheme: {}
+  customThemes: {}
 };
 
 export const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
-  const themePreference = useThemePreference();
+  const tp = useThemePreference(props);
+  const themePreference = tp.value;
+  const setThemePreference = tp.setter;
+
   const themes = {
     dark: { ...baseThemes.dark, ...props.customThemes.dark },
     light: { ...baseThemes.light, ...props.customThemes.light }
   };
-  const initialTheme = props.overrideSysTheme
-    ? themes[props.defaultTheme]
-    : themes[themePreference];
-
-  const [theme, setTheme] = useState(initialTheme);
-  // Update the theme if user-preferred theme is changed
-  useEffect(() => {
-    !props.overrideSysTheme && setTheme(themes[themePreference]);
-  }, [themePreference]);
 
   const isMobileDevice = useMobileStatus();
   const isTouchDevice = useTouchStatus();
-  const viewportSize = useViewportSize();
 
-  const [viewportSizeName, setViewportSizeName] = useState(
-    updateVpName(viewportSize.width)
-  );
-  useEffect(() => {
-    setViewportSizeName(updateVpName(viewportSize.width));
-  }, [viewportSize.width]);
+  const viewportSize = useViewportSize();
+  const viewportSizeName = useViewportSizeName();
 
   const toggleTheme = () => {
-    setTheme(theme.name === "dark" ? themes.light : themes.dark);
+    setThemePreference(themePreference === "dark" ? "light" : "dark");
   };
 
   // Evaluate custom styles if present
   let customStyles = props.customStyles
-    ? props.customStyles(theme, colors)
+    ? props.customStyles(themes[themePreference], colors)
     : null;
 
   // Explicitly set DOM body styling
-  updateBodyStyle(bodyStyle, customStyles, theme.body);
+  updateBodyStyle(bodyStyle, customStyles, themes[themePreference].body);
 
   // Globalize framer-motion and/or react-router if enabled
-
   if (props.enableMotion && !globalThis.motion)
     globalThis.motion = require("framer-motion").motion;
   if (
@@ -88,17 +77,17 @@ export const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
   const context = {
     colors,
     customStyles,
-    setTheme: (name) => setTheme(themes[name]),
-    theme,
-    themeName: theme.name,
-    toggleTheme,
-    viewportSizeName,
-    viewportSize: { ...viewportSize },
+    customThemes: props.customThemes,
     isMobileDevice,
     isTouchDevice,
-    sysThemeOverridden: props.overrideSysTheme
+    setTheme: (name) => setThemePreference(name),
+    sysThemeOverridden: props.overrideSysTheme,
+    theme: themes[themePreference],
+    themeName: themes[themePreference].name,
+    toggleTheme,
+    viewportSize,
+    viewportSizeName
   };
-
   return (
     <ThoriumProvider value={context}>
       <th-root

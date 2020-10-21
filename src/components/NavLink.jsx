@@ -12,6 +12,7 @@ import PropTypes from "prop-types";
 /* Hooks */
 import useActiveItem from "../hooks/nav/useActiveItem";
 import useSetActiveItem from "../hooks/nav/useSetActiveItem";
+import useTheme from "../hooks/thoriumRoot/useTheme";
 
 const propTypes = {
   navkey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -24,6 +25,7 @@ const propTypes = {
  * A styled React Router wrapper
  */
 export const NavLink = (props) => {
+  const theme = useTheme();
   const activeItem = useActiveItem();
   const setActiveItem = useSetActiveItem();
   const [isActive, setIsActive] = useState(activeItem === props.navkey);
@@ -38,7 +40,7 @@ export const NavLink = (props) => {
     thisLink.click();
   };
 
-  let style = { ...navLinkStyle.general };
+  let style = { ...navLinkStyle.general, ...theme.nav.link };
 
   return (
     <NavItem
