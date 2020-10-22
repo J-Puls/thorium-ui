@@ -1,45 +1,29 @@
-import makeTranslucent from "../utils/makeTranslucent";
 import updateJustify from "../utils/updateJustify";
-import config from "../config";
 
-const updateSize = (size) => {
-  const rs = config.responsiveSizes[size];
-  if (rs) {
-    return {
-      flexBasis: `${rs}%`,
-      flexGrow: 0,
-      maxWidth: `${rs}%`
-    };
-  } else return { display: "none" };
-};
-
-// Default block styling
 export const blockStyle = {
   general: {
-    position: "relative",
-    paddingRight: "15px",
-    paddingLeft: "15px",
+    boxSizing: "inherit",
     flexBasis: 0,
     flexGrow: 1,
     maxWidth: "100%",
-    boxSizing: "inherit"
+    paddingLeft: "15px",
+    paddingRight: "15px",
+    position: "relative"
   },
-  round: {
-    borderRadius: "50%"
-  },
+  justify: (value) => updateJustify(value),
+  order: (value) => ({
+    order: value
+  }),
+  responsiveSize: (size) => ({
+    flexBasis: `${size}%`,
+    flexGrow: 0,
+    maxWidth: `${size}%`
+  }),
   rounded: {
     borderRadius: ".25rem"
   },
   vertical: {
     display: "flex",
     flexDirection: "column"
-  },
-  justify: (value) => updateJustify(value),
-  translucent: (value) => makeTranslucent(value),
-  all: (value) => updateSize(value),
-  xs: (value) => updateSize(value),
-  sm: (value) => updateSize(value),
-  md: (value) => updateSize(value),
-  lg: (value) => updateSize(value),
-  xl: (value) => updateSize(value)
+  }
 };
