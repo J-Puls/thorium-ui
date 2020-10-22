@@ -7,6 +7,31 @@ import mapPropsToAttrs from "../utils/mapPropsToAttrs";
 import makeTranslucent from "../utils/makeTranslucent";
 import appendStyle from "../utils/appendStyle";
 import mapPropsToMotion from "../utils/mapPropsToMotion";
+import { justify } from "../utils/propValidation";
+/* PropTypes */
+import PropTypes from "prop-types";
+
+const propTypes = {
+  justify: PropTypes.oneOf(justify),
+  reverse: PropTypes.bool,
+  rounded: PropTypes.bool,
+  sticky: PropTypes.bool,
+  translucent: PropTypes.bool,
+  vertical: PropTypes.bool,
+  verticalReverse: PropTypes.bool,
+  withMotion: PropTypes.bool
+};
+
+const defaultProps = {
+  justify: "start",
+  reverse: false,
+  rounded: false,
+  sticky: false,
+  translucent: false,
+  vertical: false,
+  verticalReverse: false,
+  withMotion: false
+};
 
 // All valid props to be used by appendStyle
 const stylingProps = [
@@ -45,4 +70,6 @@ export const Layer = forwardRef(function ThLayer(props, ref) {
   }
 });
 
+Layer.propTypes = propTypes;
+Layer.defaultProps = defaultProps;
 export default Layer;
