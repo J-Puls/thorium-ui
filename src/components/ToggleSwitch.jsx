@@ -3,7 +3,7 @@ import React, { useState } from "react";
 /* Style */
 import { toggleSwitchStyle as toggle } from "../styles/toggleSwitchStyle";
 /* Utils */
-import mapPropsToAttrs from "../utils/mapPropsToAttrs";
+import { mapPropsToAttrs } from "../utils/mapPropsToAttrs";
 import { variants } from "../utils/propValidation";
 /* PropTypes */
 import PropTypes from "prop-types";
@@ -14,40 +14,38 @@ const propTypes = {
   checked: PropTypes.bool,
   size: PropTypes.oneOf(["normal", "lg"]),
   variant: PropTypes.oneOf([...variants, "themeToggle"]),
-  label: PropTypes.string
+  label: PropTypes.string,
+  position: PropTypes.oneOf(["off", "on"]).isRequired
 };
 
 const defaultProps = {
   checked: false,
   size: "normal",
-  variant: "primary"
+  variant: "primary",
+  position: "off"
 };
 
 export const ToggleSwitch = (props) => {
   const theme = useTheme().toggleSwitch;
   const [isActive, setIsActive] = useState(props.checked);
-  const [position, setPosition] = useState("off");
+  const [position, setPosition] = useState(props.position);
 
   const handleClick = () => {
     setIsActive(!isActive);
-    position === "off" ? setPosition("on") : setPosition("off");
+    setPosition(position === "off" ? "on" : "off");
+    props.onClick && props.onClick();
     props.onChange && props.onChange();
   };
-  const body = { ...toggle[props.size].body };
-  const slider = {
-    ...toggle[props.size][position],
-    ...toggle[props.size].slider
-  };
-  const rail = { ...toggle.rail };
 
-  const ts = theme;
-  if (props.variant === "themeToggle") {
-    rail.backgroundColor = ts.themeToggle.backgroundColor;
-  } else {
-    rail.backgroundColor = isActive
-      ? ts[position][props.variant].backgroundColor
-      : ts.off.backgroundColor;
-  }
+  const rail = {
+    ...toggle.rail,
+    backgroundColor:
+      props.variant === "themeToggle"
+        ? theme.themeToggle.backgroundColor
+        : isActive
+        ? theme[position][props.variant].backgroundColor
+        : theme.off.backgroundColor
+  };
 
   return (
     <div
@@ -77,7 +75,7 @@ export const ToggleSwitch = (props) => {
       <div
         className="th-toggle-switch-body"
         data-testid="th-toggle-switch-body"
-        style={body}
+        style={{ ...toggle[props.size].body }}
       >
         <input
           {...mapPropsToAttrs(props, "input")}
@@ -90,7 +88,10 @@ export const ToggleSwitch = (props) => {
           className="th-toggle-switch-slider"
           data-testid="th-toggle-switch-slider"
           onClick={handleClick}
-          style={slider}
+          style={{
+            ...toggle[props.size][position],
+            ...toggle[props.size].slider
+          }}
         />
         <span
           className="th-toggle-switch-rail"
