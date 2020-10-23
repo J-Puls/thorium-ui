@@ -5,23 +5,25 @@ import { containerStyle } from "../styles/containerStyle";
 /* Utils */
 import mapPropsToAttrs from "../utils/mapPropsToAttrs";
 /* Breakpoint configuration */
-import { config } from "../config";
+import { containerSizes } from "../config";
 import { useViewportSizeName } from "../hooks/thoriumRoot/useViewportSizeName";
+import { useViewportSize } from "../hooks/thoriumRoot/useViewportSize";
 
 /**
  * A responsive, centered and padded wrapper for page contents.
  */
 export const Container = (props) => {
   const vpSizeName = useViewportSizeName();
-  const vpWidth = window.innerWidth;
+  const vpWidth = useViewportSize().width;
 
   return (
     <div
+      className="th-container"
       data-testid="th-container"
       {...mapPropsToAttrs(props)}
       style={{
         ...containerStyle,
-        maxWidth: vpWidth / config.containerSizes[vpSizeName] || "100%",
+        maxWidth: vpWidth / containerSizes[vpSizeName] || "100%",
         ...props.style
       }}
     >

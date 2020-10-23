@@ -91,9 +91,9 @@ export const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
   return (
     <ThoriumProvider value={context}>
       <th-root
-        class="thorium-root"
-        id="thoriumRoot"
-        data-testid="th-thorium-root"
+        className="th-root"
+        id="th-root"
+        data-testid="th-root"
         style={{ boxSizing: "border-box", ...props.style }}
         ref={ref}
       >

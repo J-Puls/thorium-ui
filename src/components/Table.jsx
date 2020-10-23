@@ -1,9 +1,9 @@
 /* React */
 import React from "react";
 /* Thorium-UI */
-import Block from "./Block";
-import Layer from "./Layer";
-/* Subcomponents */
+import { Block } from "./Block";
+import { Layer } from "./Layer";
+/* Sub-components */
 import { TableHeader as Header } from "./TableHeader";
 import { TableCell as Cell } from "./TableCell";
 import { TableRow as Row } from "./TableRow";
@@ -33,12 +33,15 @@ export const Table = (props) => {
   style = appendStyle(props, stylingProps, style, tableStyle);
 
   return (
-    <Layer justify={props.justify}>
+    <Layer justify={props.justify} className="th-table-layer">
       <Block
         {...mapPropsToResponsiveSize(props)}
+        className="th-table-block"
         style={{ ...style, ...props.style }}
       >
-        <table style={tableStyle.table}>{props.children}</table>
+        <table className="th-table" style={tableStyle.table}>
+          {props.children}
+        </table>
       </Block>
     </Layer>
   );

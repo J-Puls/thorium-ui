@@ -31,7 +31,11 @@ export const TableBody = (props) => {
       });
     }
   }
-  return <tbody>{children}</tbody>;
+  return (
+    <tbody className="th-table-body" data-testid="th-table-body">
+      {children}
+    </tbody>
+  );
 };
 
 TableBody.propTypes = propTypes;

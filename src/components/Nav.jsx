@@ -21,7 +21,8 @@ const propTypes = {
   trackActive: PropTypes.bool,
   centerLinks: PropTypes.bool,
   variant: PropTypes.oneOf(variants),
-  type: PropTypes.oneOf(["normal", "tabs", "pills"])
+  type: PropTypes.oneOf(["normal", "tabs", "pills"]),
+  onActiveItemChange: PropTypes.func
 };
 
 const defaultProps = {
@@ -63,34 +64,33 @@ export const Nav = (props) => {
 
   let style = { ...props.style };
   props.centerLinks && (style.textAlign = "center");
+
+  const genericProps = {
+    ...mapPropsToAttrs(props),
+    ...mapPropsToResponsiveSize(props),
+    className: props.className
+      ? props.className
+      : props.withMotion
+      ? "th-motion-nav"
+      : "th-nav",
+    "data-testid": props["data-testid"]
+      ? props["data-testid"]
+      : props.withMotion
+      ? "th-motion-nav"
+      : "th-nav",
+    justify: props.justify,
+    vertical: props.vertical,
+    style
+  };
+
   return (
     <NavProvider value={navContext}>
       {props.withMotion && (
-        <Block
-          {...mapPropsToAttrs(props)}
-          {...mapPropsToResponsiveSize(props)}
-          justify={props.justify}
-          vertical={props.vertical}
-          style={style}
-          class={props.className}
-          withMotion={true}
-          {...mapPropsToMotion(props)}
-        >
+        <Block {...genericProps} withMotion={true} {...mapPropsToMotion(props)}>
           {children}
         </Block>
       )}
-      {!props.withMotion && (
-        <Block
-          {...mapPropsToAttrs(props)}
-          {...mapPropsToResponsiveSize(props)}
-          justify={props.justify}
-          vertical={props.vertical}
-          style={style}
-          class={props.className}
-        >
-          {children}
-        </Block>
-      )}
+      {!props.withMotion && <Block {...genericProps}>{children}</Block>}
     </NavProvider>
   );
 };

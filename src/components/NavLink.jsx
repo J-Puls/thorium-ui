@@ -42,6 +42,14 @@ export const NavLink = (props) => {
 
   let style = { ...navLinkStyle.general, ...theme.nav.link };
 
+  const genericProps = {
+    ...mapPropsToAttrs(props, "anchor"),
+    className: "th-nav-link",
+    "data-testid": "th-nav-link",
+    ref: (el) => (thisLink = el),
+    style
+  };
+
   return (
     <NavItem
       navkey={props.navkey}
@@ -51,23 +59,12 @@ export const NavLink = (props) => {
       onClick={handleClick}
     >
       {!props.asAnchor && ReactRouterDom && (
-        <ReactRouterDom.Link
-          ref={(el) => (thisLink = el)}
-          {...mapPropsToAttrs(props, "anchor")}
-          to={props.to}
-          style={style}
-        >
+        <ReactRouterDom.Link {...genericProps} to={props.to}>
           {props.children}
         </ReactRouterDom.Link>
       )}
       {(props.asAnchor || !ReactRouterDom) && (
-        <a
-          ref={(el) => (thisLink = el)}
-          {...mapPropsToAttrs(props, "anchor")}
-          style={style}
-        >
-          {props.children}
-        </a>
+        <a {...genericProps}>{props.children}</a>
       )}
     </NavItem>
   );

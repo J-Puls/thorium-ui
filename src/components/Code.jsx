@@ -8,7 +8,7 @@ import { useTheme } from "../hooks/thoriumRoot/useTheme";
 export const Code = (props) => {
   const theme = useTheme();
   return (
-    <code data-testid="code" style={{ ...codeStyle, ...theme.code }}>
+    <code data-testid="th-code" style={{ ...codeStyle, ...theme.code }}>
       {props.children}
     </code>
   );

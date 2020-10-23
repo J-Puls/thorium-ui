@@ -14,7 +14,13 @@ export const DropdownMenu = (props) => {
   props.height && (style.height = props.height);
 
   return (
-    <Block all={12} style={style} vertical>
+    <Block
+      className="th-dropdown-menu"
+      data-testid="th-dropdown-menu"
+      all={12}
+      style={style}
+      vertical
+    >
       {props.children}
     </Block>
   );

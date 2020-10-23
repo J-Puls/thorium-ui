@@ -13,7 +13,8 @@ import { useTheme } from "../hooks/thoriumRoot/useTheme";
 const propTypes = {
   checked: PropTypes.bool,
   size: PropTypes.oneOf(["normal", "lg"]),
-  variant: PropTypes.oneOf([...variants, "themeToggle"])
+  variant: PropTypes.oneOf([...variants, "themeToggle"]),
+  label: PropTypes.string
 };
 
 const defaultProps = {
@@ -32,12 +33,12 @@ export const ToggleSwitch = (props) => {
     position === "off" ? setPosition("on") : setPosition("off");
     props.onChange && props.onChange();
   };
-  let body = { ...toggle[props.size].body };
-  let slider = {
+  const body = { ...toggle[props.size].body };
+  const slider = {
     ...toggle[props.size][position],
     ...toggle[props.size].slider
   };
-  let rail = { ...toggle.rail };
+  const rail = { ...toggle.rail };
 
   const ts = theme;
   if (props.variant === "themeToggle") {
@@ -50,26 +51,52 @@ export const ToggleSwitch = (props) => {
 
   return (
     <div
-      className={props.className}
+      className={
+        props.className ? props.className : "th-toggle-switch-container"
+      }
+      data-testid={
+        props["data-testid"]
+          ? props["data-testid"]
+          : "th-toggle-switch-container"
+      }
       id={props.id}
       name={props.name}
       style={{ ...toggle.container, ...props.style }}
     >
-      <label
-        form={props.form}
-        htmlFor={props.id}
-        style={{ paddingRight: ".5rem" }}
+      {props.label && (
+        <label
+          className="th-toggle-switch-label"
+          data-testid="th-toggle-switch-label"
+          form={props.form}
+          htmlFor={props.id}
+          style={{ paddingRight: ".5rem" }}
+        >
+          {props.label}
+        </label>
+      )}
+      <div
+        className="th-toggle-switch-body"
+        data-testid="th-toggle-switch-body"
+        style={body}
       >
-        {props.label}
-      </label>
-      <div style={body}>
         <input
           {...mapPropsToAttrs(props, "input")}
+          className="th-toggle-hidden-input"
+          data-testid="th-toggle-hidden-input"
           type="hidden"
           value={isActive}
         />
-        <div onClick={handleClick} style={slider} />
-        <span style={rail} />
+        <div
+          className="th-toggle-switch-slider"
+          data-testid="th-toggle-switch-slider"
+          onClick={handleClick}
+          style={slider}
+        />
+        <span
+          className="th-toggle-switch-rail"
+          data-testid="th-toggle-switch-rail"
+          style={rail}
+        />
       </div>
     </div>
   );

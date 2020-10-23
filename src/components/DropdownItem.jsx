@@ -35,6 +35,8 @@ export const DropdownItem = (props) => {
   return (
     <Block
       {...mapPropsToAttrs(props)}
+      className="th-dropdown-item"
+      data-testid="th-dropdown-item"
       style={{ ...style, ...props.style }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

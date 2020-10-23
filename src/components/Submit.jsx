@@ -1,11 +1,12 @@
 /* React */
 import React from "react";
 /* Thorium-UI */
-import Button from "./Button";
+import { Button } from "./Button";
 
 export const Submit = (props) => (
   <Button
-    data-testid="submit"
+    data-testid="th-submit"
+    className="th-submit"
     animated={props.animated}
     size={props.size}
     stretch={props.stretch}

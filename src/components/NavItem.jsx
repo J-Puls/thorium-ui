@@ -57,6 +57,16 @@ export const NavItem = (props) => {
 
   const genericProps = {
     ...mapPropsToAttrs(props),
+    className: props.className
+      ? props.className
+      : props.withMotion
+      ? "th-motion-nav-item"
+      : "th-nav-item",
+    "data-testid": props["data-testid"]
+      ? props["data-testid"]
+      : props.withMotion
+      ? "th-motion-nav-item"
+      : "th-nav-item",
     style: { ...style, ...props.style },
     onMouseEnter: handleMouseEnter,
     onMouseLeave: handleMouseLeave,

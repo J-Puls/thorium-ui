@@ -1,11 +1,11 @@
 /* React */
-import React, { Fragment } from "react";
+import React from "react";
 /* Hooks */
 import { useMessageQueue } from "../hooks/messageBox/useMessageQueue";
 
 export const MessageRenderer = () => {
   const messageQueue = useMessageQueue();
-  return <Fragment>{messageQueue}</Fragment>;
+  return <React.Fragment>{messageQueue}</React.Fragment>;
 };
 
 export default MessageRenderer;

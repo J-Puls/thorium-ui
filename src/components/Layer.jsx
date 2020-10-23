@@ -49,16 +49,30 @@ const stylingProps = [
 export const Layer = forwardRef(function ThLayer(props, ref) {
   let style = { ...layerStyle.general };
   style = appendStyle(props, stylingProps, style, layerStyle);
-  props.style && (style = { ...style, ...props.style });
-  if (props.translucent) {
+
+  if (
+    props.makeTranslucent &&
+    (style.backgroundColor || style["background-color"])
+  ) {
     style.backgroundColor = makeTranslucent(style.backgroundColor);
   }
+
   const genericProps = {
-    "data-testid": "layer",
     ...mapPropsToAttrs(props),
-    style,
+    className: props.className
+      ? props.className
+      : props.withMotion
+      ? "th-motion-layer"
+      : "th-layer",
+    "data-testid": props["data-testid"]
+      ? props["data-testid"]
+      : props.withMotion
+      ? "th-motion-layer"
+      : "th-layer",
+    style: { ...style, ...props.style },
     ref
   };
+
   if (props.withMotion) {
     return (
       <motion.div {...genericProps} {...mapPropsToMotion(props)}>

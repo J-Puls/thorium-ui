@@ -80,19 +80,24 @@ export const Block = forwardRef(function ThBlock(props, ref) {
   }
 
   const genericProps = {
-    "data-testid": "th-block",
     ...mapPropsToAttrs(props),
+    className: props.className
+      ? props.className
+      : props.withMotion
+      ? "th-motion-block"
+      : "th-block",
+    "data-testid": props["data-testid"]
+      ? props["data-testid"]
+      : props.withMotion
+      ? "th-motion-block"
+      : "th-block",
     style: { ...style, ...props.style },
     ref
   };
 
   if (props.withMotion) {
     return (
-      <motion.div
-        className="motion-block"
-        {...genericProps}
-        {...mapPropsToMotion(props)}
-      >
+      <motion.div {...genericProps} {...mapPropsToMotion(props)}>
         {props.children}
       </motion.div>
     );

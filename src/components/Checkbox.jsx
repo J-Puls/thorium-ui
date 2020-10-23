@@ -36,24 +36,40 @@ export const Checkbox = (props) => {
   props.size ? (style = cbs[props.size]) : (style = cbs.normal);
   props.rounded && (style.borderRadius = cbs.rounded);
   props.round && (style.borderRadius = cbs.round);
+
   return (
     <Block
+      className="th-checkbox-container"
+      data-testid="th-checkbox-container"
       justify={props.justify}
       style={{ paddingLeft: 0 }}
       vertical={props.vertical}
     >
       {props.label && (
-        <label form={props.form} htmlFor={props.id} style={style.label}>
+        <label
+          className="th-checkbox-label"
+          data-testid="th-checkbox-label"
+          form={props.form}
+          htmlFor={props.id}
+          style={style.label}
+        >
           {props.label}
         </label>
       )}
-      <div style={{ ...cbs.general, ...style }} onClick={handleClick}>
+      <div
+        className="th-checkbox"
+        data-testid="th-checkbox"
+        style={{ ...cbs.general, ...style }}
+        onClick={handleClick}
+      >
         {isChecked && <span>&#10003;</span>}
         {!isChecked && <span>&nbsp;&nbsp;</span>}
       </div>
 
       <input
         {...mapPropsToAttrs(props, "input")}
+        className="th-checkbox-hidden-input"
+        data-testid="th-checkbox-hidden-input"
         type="hidden"
         value={isChecked}
       />
