@@ -1,12 +1,12 @@
 ![thorium logo](https://i.ibb.co/6y2RSZf/banner.png)
+[![NPM](https://nodei.co/npm/thorium-ui.png)](https://npmjs.org/package/thorium-ui)
 
-To read the full documentation, please visit https://thorium-ui-preview.now.sh/.
-
-**_Please note, this documentation is only updated periodically and does not always represent the current state of the project_**
-
-# Overview
-
+# Overview  
 Thorium-UI is designed to be an intuitive React.js framework, with which to quickly build themed applications, without needing a ton of CSS clutter.
+
+## Documentation  
+[View the Official Documentation](https://thorium-ui.jpuls.dev)  
+**_Please note, this documentation is only updated periodically and does not always represent the current state of the project_**
 
 # Getting Started
 
