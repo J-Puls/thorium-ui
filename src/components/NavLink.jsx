@@ -44,7 +44,7 @@ export const NavLink = (props) => {
     thisLink.click();
   };
 
-  let style = { ...navLinkStyle.general, ...theme.nav.link };
+  let style = { ...navLinkStyle.general };
 
   const genericProps = {
     ...mapPropsToAttrs(props, "anchor"),

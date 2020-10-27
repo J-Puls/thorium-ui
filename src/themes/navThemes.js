@@ -23,7 +23,7 @@ const mapThemes = (variant) => {
           borderLeft: `1px solid ${colors[theme][variant]}`,
           borderRight: `1px solid ${colors[theme][variant]}`,
           borderTop: `1px solid ${colors[theme][variant]}`,
-          color: colors[opTheme].linkText,
+          color: colors[theme].linkText,
           backgroundColor: colors[theme][variant],
           fontWeight: 900
         }
