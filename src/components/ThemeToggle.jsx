@@ -1,24 +1,39 @@
 /* React */
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 /* Thorium-UI */
-import ToggleSwitch from "./ToggleSwitch";
-import { ThoriumContext } from "../context/ThoriumContext";
+import { ToggleSwitch } from "./ToggleSwitch";
 /* Utils */
-import mapPropsToAttrs from "../utils/mapPropsToAttrs";
+import { mapPropsToAttrs } from "../utils/mapPropsToAttrs";
+/* Hooks */
+import { useToggleTheme } from "../hooks/thoriumRoot/useToggleTheme";
+/* PropTypes */
+import PropTypes from "prop-types";
+
+const propTypes = {
+  label: PropTypes.string,
+  size: PropTypes.oneOf(["sm", "normal", "lg"])
+};
+
+const defaultProps = {
+  size: "normal"
+};
 
 /**
  * A specialized ToggleSwitch for toggling the ThoriumContext theme.
  */
 export const ThemeToggle = (props) => {
-  const context = useContext(ThoriumContext);
+  const toggleTheme = useToggleTheme();
   const [isActive, setIsActive] = useState(false);
   const handleChange = () => {
     setIsActive(!isActive);
-    context.toggleTheme();
+    toggleTheme();
   };
+
   return (
     <ToggleSwitch
       {...mapPropsToAttrs(props, "input")}
+      className="th-theme-toggle"
+      data-testid="th-theme-toggle"
       checked={isActive}
       label={props.label}
       size={props.size}
@@ -29,4 +44,6 @@ export const ThemeToggle = (props) => {
   );
 };
 
+ThemeToggle.propTypes = propTypes;
+ThemeToggle.defaultProps = defaultProps;
 export default ThemeToggle;

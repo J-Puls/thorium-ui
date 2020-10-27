@@ -17,7 +17,11 @@ export const TableRow = (props) => {
 
   let style = {};
   if (props.striped) style = theme.striped;
-  return <tr style={style}>{children}</tr>;
+  return (
+    <tr className="th-table-row" data-testid="th-table-row" style={style}>
+      {children}
+    </tr>
+  );
 };
 
 export default TableRow;

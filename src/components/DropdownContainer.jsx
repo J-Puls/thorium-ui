@@ -7,6 +7,8 @@ import Block from "./Block";
  */
 export const DropdownContainer = (props) => (
   <Layer
+    className="th-dropdown-container"
+    data-testid="th-dropdown-container"
     style={{
       overflow: props.displayType === "block" ? "hidden" : "initial",
       ...props.style

@@ -103,6 +103,11 @@ export const Button = forwardRef(function ThButton(props, ref) {
   const genericProps = {
     "data-testid": "button",
     ...mapPropsToAttrs(props, "button"),
+    className: props.className
+      ? props.className
+      : props.withMotion
+      ? "th-motion-button"
+      : "th-button",
     disabled: isDisabled,
     onMouseDown: handleMouseDown,
     onMouseEnter: handleMouseEnter,
@@ -118,14 +123,18 @@ export const Button = forwardRef(function ThButton(props, ref) {
     return (
       <motion.div
         {...mapPropsToMotion(props)}
-        className="motion-btn-container"
+        className="th-motion-button-container"
         style={{
           position: "relative",
           width: renderStyle.width,
           display: "inline-block"
         }}
       >
-        <button {...genericProps} className="motion-btn" onClick={handleClick}>
+        <button
+          {...genericProps}
+          className="th-motion-button"
+          onClick={handleClick}
+        >
           {props.children}
         </button>
       </motion.div>
@@ -133,13 +142,14 @@ export const Button = forwardRef(function ThButton(props, ref) {
   } else {
     return (
       <div
+        className="th-button-container"
         style={{
           ...buttonStyle.wrapper,
           width: renderStyle.width,
           ...props.wrapperStyle
         }}
       >
-        <button {...genericProps} onClick={handleClick}>
+        <button className="th-button" {...genericProps} onClick={handleClick}>
           {props.children}
         </button>
       </div>

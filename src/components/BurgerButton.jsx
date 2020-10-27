@@ -25,7 +25,8 @@ const defaultProps = {
   overrideFill: false,
   size: "normal",
   stretch: false,
-  variant: "link"
+  variant: "link",
+  withMotion: false
 };
 
 /**

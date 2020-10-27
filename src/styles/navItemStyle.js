@@ -4,6 +4,7 @@ export const navItemStyle = {
     paddingTop: ".5rem",
     paddingBottom: ".5rem",
     cursor: "pointer",
-    width: "100%"
+    width: "100%", 
+    transitionDuration: ".15s"
   }
 };

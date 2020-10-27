@@ -22,7 +22,11 @@ export const DropdownDivider = (props) => {
   const theme = useTheme();
 
   return (
-    <div style={{ ...dds, ...theme.dropdown.divider, ...props.style }}>
+    <div
+      className="th-dropdown-divider"
+      data-testid="th-dropdown-divider"
+      style={{ ...dds, ...theme.dropdown.divider, ...props.style }}
+    >
       {props.label && <span>{props.label}</span>}
     </div>
   );

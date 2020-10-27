@@ -21,6 +21,10 @@ const propTypes = {
   withMotion: PropTypes.bool
 };
 
+const defaultProps = {
+  withMotion: false
+};
+
 /**
  * A styled React Router wrapper
  */
@@ -40,7 +44,15 @@ export const NavLink = (props) => {
     thisLink.click();
   };
 
-  let style = { ...navLinkStyle.general, ...theme.nav.link };
+  let style = { ...navLinkStyle.general };
+
+  const genericProps = {
+    ...mapPropsToAttrs(props, "anchor"),
+    className: "th-nav-link",
+    "data-testid": "th-nav-link",
+    ref: (el) => (thisLink = el),
+    style
+  };
 
   return (
     <NavItem
@@ -51,28 +63,17 @@ export const NavLink = (props) => {
       onClick={handleClick}
     >
       {!props.asAnchor && ReactRouterDom && (
-        <ReactRouterDom.Link
-          ref={(el) => (thisLink = el)}
-          {...mapPropsToAttrs(props, "anchor")}
-          to={props.to}
-          style={style}
-        >
+        <ReactRouterDom.Link {...genericProps} to={props.to}>
           {props.children}
         </ReactRouterDom.Link>
       )}
       {(props.asAnchor || !ReactRouterDom) && (
-        <a
-          ref={(el) => (thisLink = el)}
-          {...mapPropsToAttrs(props, "anchor")}
-          style={style}
-        >
-          {props.children}
-        </a>
+        <a {...genericProps}>{props.children}</a>
       )}
     </NavItem>
   );
 };
 
 NavLink.propTypes = propTypes;
-
+NavLink.defaultProps = defaultProps;
 export default NavLink;

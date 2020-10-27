@@ -14,27 +14,27 @@ import { variants } from "../utils/propValidation";
 import PropTypes from "prop-types";
 
 const propTypes = {
-  triggerType: PropTypes.oneOf(["click", "hover"]),
   defaultOpen: PropTypes.bool,
+  displayType: PropTypes.oneOf(["block", "float"]),
   icons: PropTypes.bool,
   remoteTrigger: PropTypes.bool,
-  text: PropTypes.string,
-  variant: PropTypes.oneOf(variants),
   size: PropTypes.oneOf(["sm", "normal", "lg"]),
-  displayType: PropTypes.oneOf(["block", "float"]),
-  targetID: PropTypes.string
+  targetID: PropTypes.string,
+  text: PropTypes.string,
+  triggerType: PropTypes.oneOf(["click", "hover"]),
+  variant: PropTypes.oneOf(variants)
 };
 
 const defaultProps = {
-  triggerType: "click",
-  targetID: null,
   defaultOpen: false,
+  displayType: "block",
   icons: false,
   remoteTrigger: false,
-  text: null,
-  variant: "primary",
   size: "normal",
-  displayType: "block"
+  targetID: null,
+  text: null,
+  triggerType: "click",
+  variant: "primary"
 };
 
 /**

@@ -3,8 +3,7 @@ import React, {
   useState,
   useLayoutEffect,
   forwardRef,
-  useContext,
-  Fragment
+  useContext
 } from "react";
 /* Thorium-UI */
 import { Block } from "./Block";
@@ -78,7 +77,8 @@ export const Message = forwardRef(function ThMessage(props, ref) {
   const callToAction = props.callToAction;
   return (
     <Block
-      data-testid="message"
+      data-testid="th-message"
+      className="th-message"
       all={12}
       style={renderStyle}
       justify="center"
@@ -87,10 +87,10 @@ export const Message = forwardRef(function ThMessage(props, ref) {
     >
       <div>
         {props.title && (
-          <Fragment>
+          <React.Fragment>
             <h3 style={messageStyle.title}>{props.title}</h3>
             <hr style={{ borderColor: theme.color }} />
-          </Fragment>
+          </React.Fragment>
         )}
         <span style={{ color: theme.color }}>{props.contents}</span>
         {callToAction && (
@@ -115,7 +115,7 @@ export const Message = forwardRef(function ThMessage(props, ref) {
         style={{ ...messageStyle.dismiss, color: theme.color }}
         title="dismiss"
       >
-        &#128473;
+        &#10006;
       </button>
     </Block>
   );

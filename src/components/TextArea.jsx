@@ -34,13 +34,20 @@ export const TextArea = forwardRef(function ThTextArea(props, ref) {
   return (
     <React.Fragment>
       {props.label && (
-        <label form={props.form} htmlFor={props.id}>
+        <label
+          className="th-textarea-label"
+          data-testid="th-textarea-label"
+          form={props.form}
+          htmlFor={props.id}
+        >
           {props.label}
         </label>
       )}
       <textarea
         ref={ref}
         {...mapPropsToAttrs(props, "input")}
+        className="th-textarea"
+        data-testid="th-textarea"
         rows={props.rows}
         cols={props.cols}
         style={{ ...style, ...props.style }}

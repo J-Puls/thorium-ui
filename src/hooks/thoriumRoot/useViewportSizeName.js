@@ -1,20 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
+import { useViewportSize } from "../thoriumRoot/useViewportSize";
 import { breakpoints } from "../../config";
-import { updateViewportSizeName } from "../../utils/updateViewportSizeName";
 
 export const useViewportSizeName = () => {
-  const [sizeName, setSizeName] = useState(
-    updateViewportSizeName(globalThis.innerWidth)
-  );
+  const viewportSize = useViewportSize();
 
-  useEffect(() => {
+  const getSizeName = () => {
     for (const [key, val] of Object.entries(breakpoints)) {
-      const match =
-        globalThis.innerWidth > val[0] && globalThis.innerWidth <= val[1];
-
-      match && setSizeName(key);
+      if (viewportSize.width >= val[0] && viewportSize.width < val[1]) {
+        return key;
+      }
     }
-  }, [globalThis.innerWidth]);
+  };
+  const [sizeName, setSizeName] = useState(getSizeName());
+
+  useLayoutEffect(() => {
+    setSizeName(getSizeName());
+  }, [viewportSize.width]);
 
   return sizeName;
 };

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 /* Style */
 import { toggleSwitchStyle as toggle } from "../styles/toggleSwitchStyle";
 /* Utils */
-import mapPropsToAttrs from "../utils/mapPropsToAttrs";
+import { mapPropsToAttrs } from "../utils/mapPropsToAttrs";
 import { variants } from "../utils/propValidation";
 /* PropTypes */
 import PropTypes from "prop-types";
@@ -13,63 +13,91 @@ import { useTheme } from "../hooks/thoriumRoot/useTheme";
 const propTypes = {
   checked: PropTypes.bool,
   size: PropTypes.oneOf(["normal", "lg"]),
-  variant: PropTypes.oneOf([...variants, "themeToggle"])
+  variant: PropTypes.oneOf([...variants, "themeToggle"]),
+  label: PropTypes.string,
+  position: PropTypes.oneOf(["off", "on"]).isRequired
 };
 
 const defaultProps = {
   checked: false,
   size: "normal",
-  variant: "primary"
+  variant: "primary",
+  position: "off"
 };
 
 export const ToggleSwitch = (props) => {
   const theme = useTheme().toggleSwitch;
   const [isActive, setIsActive] = useState(props.checked);
-  const [position, setPosition] = useState("off");
+  const [position, setPosition] = useState(props.position);
 
   const handleClick = () => {
     setIsActive(!isActive);
-    position === "off" ? setPosition("on") : setPosition("off");
+    setPosition(position === "off" ? "on" : "off");
+    props.onClick && props.onClick();
     props.onChange && props.onChange();
   };
-  let body = { ...toggle[props.size].body };
-  let slider = {
-    ...toggle[props.size][position],
-    ...toggle[props.size].slider
-  };
-  let rail = { ...toggle.rail };
 
-  const ts = theme;
-  if (props.variant === "themeToggle") {
-    rail.backgroundColor = ts.themeToggle.backgroundColor;
-  } else {
-    rail.backgroundColor = isActive
-      ? ts[position][props.variant].backgroundColor
-      : ts.off.backgroundColor;
-  }
+  const rail = {
+    ...toggle.rail,
+    backgroundColor:
+      props.variant === "themeToggle"
+        ? theme.themeToggle.backgroundColor
+        : isActive
+        ? theme[position][props.variant].backgroundColor
+        : theme.off.backgroundColor
+  };
 
   return (
     <div
-      className={props.className}
+      className={
+        props.className ? props.className : "th-toggle-switch-container"
+      }
+      data-testid={
+        props["data-testid"]
+          ? props["data-testid"]
+          : "th-toggle-switch-container"
+      }
       id={props.id}
       name={props.name}
       style={{ ...toggle.container, ...props.style }}
     >
-      <label
-        form={props.form}
-        htmlFor={props.id}
-        style={{ paddingRight: ".5rem" }}
+      {props.label && (
+        <label
+          className="th-toggle-switch-label"
+          data-testid="th-toggle-switch-label"
+          form={props.form}
+          htmlFor={props.id}
+          style={{ paddingRight: ".5rem" }}
+        >
+          {props.label}
+        </label>
+      )}
+      <div
+        className="th-toggle-switch-body"
+        data-testid="th-toggle-switch-body"
+        style={{ ...toggle[props.size].body }}
       >
-        {props.label}
-      </label>
-      <div style={body}>
         <input
           {...mapPropsToAttrs(props, "input")}
+          className="th-toggle-hidden-input"
+          data-testid="th-toggle-hidden-input"
           type="hidden"
           value={isActive}
         />
-        <div onClick={handleClick} style={slider} />
-        <span style={rail} />
+        <div
+          className="th-toggle-switch-slider"
+          data-testid="th-toggle-switch-slider"
+          onClick={handleClick}
+          style={{
+            ...toggle[props.size][position],
+            ...toggle[props.size].slider
+          }}
+        />
+        <span
+          className="th-toggle-switch-rail"
+          data-testid="th-toggle-switch-rail"
+          style={rail}
+        />
       </div>
     </div>
   );

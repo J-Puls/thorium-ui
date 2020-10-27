@@ -40,6 +40,8 @@ export const DropdownTrigger = React.forwardRef(function ThDropdownTrigger(
 
   return (
     <Button
+      className="th-dropdown-trigger"
+      data-testid="th-dropdown-trigger"
       ref={ref}
       onClick={props.onClick}
       stretch

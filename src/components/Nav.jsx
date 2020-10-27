@@ -1,5 +1,5 @@
 /* React */
-import React, { useState, useEffect, cloneElement } from "react";
+import React, { cloneElement, useEffect, useState } from "react";
 /* Thorium-UI */
 import { Block } from "./Block";
 /* Sub-components */
@@ -9,29 +9,31 @@ import { NavItem as Item } from "./NavItem";
 import { NavProvider } from "../context/NavContext";
 /* Utils */
 import mapPropsToAttrs from "../utils/mapPropsToAttrs";
-import { variants, justify } from "../utils/propValidation";
+import { justify, variants } from "../utils/propValidation";
 import mapPropsToResponsiveSize from "../utils/mapPropsToResponsiveSize";
 import mapPropsToMotion from "../utils/mapPropsToMotion";
 /* PropTypes */
 import PropTypes from "prop-types";
 
 const propTypes = {
-  justify: PropTypes.oneOf(justify),
-  vertical: PropTypes.bool,
-  trackActive: PropTypes.bool,
   centerLinks: PropTypes.bool,
+  defaultActive: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  justify: PropTypes.oneOf(justify),
+  onActiveItemChange: PropTypes.func,
+  trackActive: PropTypes.bool,
+  type: PropTypes.oneOf(["normal", "tabs", "pills"]),
   variant: PropTypes.oneOf(variants),
-  type: PropTypes.oneOf(["normal", "tabs", "pills"])
+  vertical: PropTypes.bool
 };
 
 const defaultProps = {
-  justify: "start",
-  vertical: false,
-  trackActive: false,
   centerLinks: false,
   defaultActive: 0,
+  justify: "start",
+  trackActive: false,
+  type: "normal",
   variant: "link",
-  type: "normal"
+  vertical: false
 };
 
 /**
@@ -43,54 +45,46 @@ export const Nav = (props) => {
   // Define context to be accessible by Nav sub-components
   const navContext = {
     activeItem: activeItem,
-    setActiveItem,
     currentURL: window.location.pathname,
+    setActiveItem,
     trackActive: props.trackActive,
-    variant: props.variant,
-    type: props.type
+    type: props.type,
+    variant: props.variant
   };
 
   useEffect(() => {
     props.onActiveItemChange && props.onActiveItemChange(navContext);
   }, [navContext, props]);
 
-  const children = React.Children.map(props.children, (child) => {
-    return cloneElement(child, {
-      variant: props.variant,
-      type: props.type
-    });
-  });
-
   let style = { ...props.style };
   props.centerLinks && (style.textAlign = "center");
+
+  const genericProps = {
+    ...mapPropsToAttrs(props),
+    ...mapPropsToResponsiveSize(props),
+    className: props.className
+      ? props.className
+      : props.withMotion
+      ? "th-motion-nav"
+      : "th-nav",
+    "data-testid": props["data-testid"]
+      ? props["data-testid"]
+      : props.withMotion
+      ? "th-motion-nav"
+      : "th-nav",
+    justify: props.justify,
+    vertical: props.vertical,
+    style
+  };
+
   return (
     <NavProvider value={navContext}>
       {props.withMotion && (
-        <Block
-          {...mapPropsToAttrs(props)}
-          {...mapPropsToResponsiveSize(props)}
-          justify={props.justify}
-          vertical={props.vertical}
-          style={style}
-          class={props.className}
-          withMotion={true}
-          {...mapPropsToMotion(props)}
-        >
-          {children}
+        <Block {...genericProps} withMotion={true} {...mapPropsToMotion(props)}>
+          {props.children}
         </Block>
       )}
-      {!props.withMotion && (
-        <Block
-          {...mapPropsToAttrs(props)}
-          {...mapPropsToResponsiveSize(props)}
-          justify={props.justify}
-          vertical={props.vertical}
-          style={style}
-          class={props.className}
-        >
-          {children}
-        </Block>
-      )}
+      {!props.withMotion && <Block {...genericProps}>{props.children}</Block>}
     </NavProvider>
   );
 };

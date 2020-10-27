@@ -39,6 +39,7 @@ export const MessageBox = forwardRef(function ThMessageBox(props, ref) {
             messageID={toBeMapped.indexOf(message)}
             key={toBeMapped.indexOf(message)}
             handleRemove={props.onRemove}
+            style={toBeMapped[0] === message ? { marginTop: 0 } : null}
           />
         );
       }
@@ -65,20 +66,23 @@ export const MessageBox = forwardRef(function ThMessageBox(props, ref) {
     messages,
     remove: (id) => props.onRemove(id)
   };
+
+  const genericProps = {
+    "data-testid": "th-message-box",
+    className: "th-message-box",
+    ref,
+    style: renderStyle
+  };
+
   return (
     <MessageBoxProvider value={context}>
       {props.direction === "normal" && (
-        <Layer vertical data-testid="message-box" style={renderStyle} ref={ref}>
+        <Layer {...genericProps} vertical>
           <MessageRenderer />
         </Layer>
       )}
       {props.direction === "reverse" && (
-        <Layer
-          verticalReverse
-          data-testid="message-box"
-          style={renderStyle}
-          ref={ref}
-        >
+        <Layer {...genericProps} verticalReverse>
           <MessageRenderer />
         </Layer>
       )}

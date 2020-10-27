@@ -13,23 +13,23 @@ import mapPropsToAttrs from "../utils/mapPropsToAttrs";
 export const DropdownLink = (props) => {
   let style = { ...ddlStyle.general, color: "inherit", ...props.style };
 
+  const genericProps = {
+    ...mapPropsToAttrs(props, "anchor"),
+    className: "th-dropdown-link",
+    "data-testid": "th-dropdown-link",
+    style
+  };
+
   return (
     <DropdownItem navKey={props.navKey} noHover={props.noHover}>
       {!props.asAnchor && ReactRouterDom && (
-        <ReactRouterDom.Link
-          {...mapPropsToAttrs(props, "anchor")}
-          to={props.to}
-          style={style}
-        >
+        <ReactRouterDom.Link {...genericProps} to={props.to}>
           {props.children}
         </ReactRouterDom.Link>
       )}
-      {props.asAnchor ||
-        (!ReactRouterDom && (
-          <a {...mapPropsToAttrs(props, "anchor")} style={style}>
-            {props.children}
-          </a>
-        ))}
+      {(props.asAnchor || !ReactRouterDom) && (
+        <a {...genericProps}>{props.children}</a>
+      )}
     </DropdownItem>
   );
 };

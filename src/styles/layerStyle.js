@@ -1,5 +1,5 @@
 import updateJustify from "../utils/updateJustify";
-import makeTranslucent from "../utils/makeTranslucent";
+
 // Default layer styling
 export const layerStyle = {
   general: {
@@ -26,6 +26,5 @@ export const layerStyle = {
   verticalReverse: {
     flexDirection: "column-reverse"
   },
-  justify: (value) => updateJustify(value),
-  translucent: (value) => makeTranslucent(value)
+  justify: (value) => updateJustify(value)
 };

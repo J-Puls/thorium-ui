@@ -1,9 +1,8 @@
 /* React */
 import React from "react";
 /* Thorium-UI Components */
-import Block from "./Block";
-import { ThoriumConsumer } from "../context/ThoriumContext";
-/* Subcomponents */
+import { Block } from "./Block";
+/* Sub-components */
 import { FormField as Field } from "./FormField";
 import { FormGroup as Group } from "./FormGroup";
 /* Styling */
@@ -21,43 +20,36 @@ const propTypes = {
 };
 
 /**
- * The main wrapper which contains all other subcomponents.
+ * The main wrapper which contains all other sub-components.
  */
 export const Form = (props) => {
   let style = { ...formStyle };
   props.bordered && (style.borderColor = "gray");
-  return (
-    <ThoriumConsumer>
-      {(context) => {
-        let motion;
-        if (context.hasFramerEnabled && props.withMotion) {
-          motion = require("framer-motion").motion;
-        }
-        return (
-          <Block
-            {...mapPropsToResponsiveSize(props)}
-            vertical={props.vertical}
-            style={props.style}
-          >
-            {props.withMotion && (
-              <motion.form
-                {...mapPropsToAttrs(props, "form")}
-                {...mapPropsToMotion(props)}
-                style={{ ...style }}
-              >
-                {props.children}
-              </motion.form>
-            )}
-            {!props.withMotion && (
-              <form {...mapPropsToAttrs(props, "form")} style={{ ...style }}>
-                {props.children}
-              </form>
-            )}
-          </Block>
-        );
-      }}
-    </ThoriumConsumer>
-  );
+
+  const genericProps = {
+    ...mapPropsToResponsiveSize(props),
+    className: props.className
+      ? props.className
+      : props.withMotion
+      ? "th-motion-form"
+      : "th-form",
+    "data-testid": props.withMotion ? "th-motion-form" : "th-form",
+    vertical: props.vertical,
+    style: { ...style, ...props.style }
+  };
+
+  if (props.withMotion) {
+    return (
+      <Block {...genericProps} withMotion {...mapPropsToMotion(props)}>
+        <form {...mapPropsToAttrs(props, "form")}>{props.children}</form>
+      </Block>
+    );
+  } else
+    return (
+      <Block {...genericProps}>
+        <form {...mapPropsToAttrs(props, "form")}>{props.children}</form>
+      </Block>
+    );
 };
 
 Form.Field = Field;

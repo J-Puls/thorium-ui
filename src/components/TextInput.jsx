@@ -34,11 +34,22 @@ export const TextInput = forwardRef((props, ref) => {
   return (
     <React.Fragment>
       {props.label && (
-        <label form={props.form} htmlFor={props.id}>
+        <label
+          className="th-text-input-label"
+          data-testid="th-text-input-label"
+          form={props.form}
+          htmlFor={props.id}
+        >
           {props.label}
         </label>
       )}
-      <input ref={ref} {...mapPropsToAttrs(props, "input")} style={style} />
+      <input
+        className="th-text-input"
+        data-testid="th-text-input"
+        ref={ref}
+        {...mapPropsToAttrs(props, "input")}
+        style={style}
+      />
     </React.Fragment>
   );
 });

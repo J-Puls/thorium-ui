@@ -14,8 +14,10 @@ export const TableHeader = (props) => {
   }
 
   return (
-    <thead>
-      <tr>{children}</tr>
+    <thead className="th-table-header" data-testid="th-table-header">
+      <tr className="th-table-header-row" data-testid="th-table-header-row">
+        {children}
+      </tr>
     </thead>
   );
 };

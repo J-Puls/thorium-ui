@@ -48,7 +48,11 @@ export const CodeBlock = (props) => {
   // Disable user text selection of specified
   if (props.disableSelect) code.userSelect = "none";
   return (
-    <pre style={{ ...pre, ...props.style }} {...mapPropsToAttrs(props)}>
+    <pre
+      className="th-codeblock"
+      style={{ ...pre, ...props.style }}
+      {...mapPropsToAttrs(props)}
+    >
       {/* Add a copy button if not disabled */}
       {!props.disableCopy && !isMobile && (
         <Button

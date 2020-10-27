@@ -4,44 +4,39 @@ const mapThemes = (variant) => {
   const themes = { dark: null, light: null };
 
   for (const theme in themes) {
-    const opTheme = theme === "dark" ? "light" : "dark";
     themes[theme] = {
       active: {
         normal: {
           backgroundColor: colors[theme][variant],
           color: colors[theme][`${variant}Text`],
-          fontWeight: 900
+          fontWeight: 700
         },
         pills: {
           backgroundColor: colors[theme][variant],
           margin: "0 .25rem",
           borderRadius: ".25rem",
           color: colors[theme][`${variant}Text`],
-          fontWeight: 900
+          fontWeight: 700
         },
         tabs: {
-          borderLeft: `1px solid ${colors[theme][variant]}`,
-          borderRight: `1px solid ${colors[theme][variant]}`,
-          borderTop: `1px solid ${colors[theme][variant]}`,
-          color: colors[opTheme].linkText,
+          color: colors[theme][`${variant}Text`],
           backgroundColor: colors[theme][variant],
-          fontWeight: 900
+          fontWeight: 700
         }
       },
       hover: {
         normal: {
           backgroundColor: colors[theme][`${variant}Hover`],
-          color: colors[theme][`${variant}Text`]
+          color: colors[theme][`${variant}HoverText`]
         },
         tabs: {
-          borderLeft: `2px solid ${colors[theme][variant]}`,
-          borderRight: `2px solid ${colors[theme][variant]}`,
-          borderTop: `2px solid ${colors[theme][variant]}`
+          boxShadow: ` 0px 3px 0px 3px inset ${colors[theme][variant]}`,
+          color: colors[theme].linkText
         },
         pills: {
           borderRadius: ".25rem",
-          backgroundColor: colors[theme][variant],
-          color: colors[theme][`${variant}Text`],
+          backgroundColor: colors[theme][`${variant}Hover`],
+          color: colors[theme][`${variant}HoverText`],
           margin: "0 .25rem"
         }
       },
@@ -50,8 +45,12 @@ const mapThemes = (variant) => {
           backgroundColor: "transparent",
           color: colors[theme].linkText
         },
-        tabs: { borderBottom: `2px solid ${colors[theme][variant]}` },
+        tabs: {
+          boxShadow: `inset ${colors[theme][variant]} 0px -3px 0px 0px`,
+          color: colors[theme].linkText
+        },
         pills: {
+          color: colors[theme].linkText,
           boxShadow: `0 0 0 2px inset ${colors[theme][variant]}`,
           borderRadius: ".25rem",
           margin: "0 .25rem"
@@ -79,11 +78,6 @@ variants.forEach((variant) => {
 
 export const navItemThemes = itemThemes;
 
-export const navLinkThemes = {
-  dark: { color: colors.dark.linkText },
-  light: { color: colors.light.linkText }
-};
-
 export const navThemes = {
   dark: {
     item: {
@@ -95,8 +89,7 @@ export const navThemes = {
       secondary: navItemThemes.secondary.dark,
       success: navItemThemes.success.dark,
       warning: navItemThemes.warning.dark
-    },
-    link: navLinkThemes.dark
+    }
   },
   light: {
     item: {
@@ -108,8 +101,7 @@ export const navThemes = {
       secondary: navItemThemes.secondary.light,
       success: navItemThemes.success.light,
       warning: navItemThemes.warning.light
-    },
-    link: navLinkThemes.light
+    }
   }
 };
 
