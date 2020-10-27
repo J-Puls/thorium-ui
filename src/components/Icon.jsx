@@ -6,10 +6,10 @@ import mapPropsToAttrs from "../utils/mapPropsToAttrs";
 import PropTypes from "prop-types";
 
 const propTypes = {
-  width: PropTypes.number.required,
-  height: PropTypes.number.required,
-  xlinkHref: PropTypes.string.required,
-  fill: PropTypes.string.required
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  src: PropTypes.string.isRequired,
+  fill: PropTypes.string.isRequired
 };
 
 /**
