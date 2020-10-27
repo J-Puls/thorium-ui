@@ -39,6 +39,7 @@ export const MessageBox = forwardRef(function ThMessageBox(props, ref) {
             messageID={toBeMapped.indexOf(message)}
             key={toBeMapped.indexOf(message)}
             handleRemove={props.onRemove}
+            style={toBeMapped[0] === message ? { marginTop: 0 } : null}
           />
         );
       }

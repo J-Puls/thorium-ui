@@ -115,7 +115,7 @@ export const Message = forwardRef(function ThMessage(props, ref) {
         style={{ ...messageStyle.dismiss, color: theme.color }}
         title="dismiss"
       >
-        &#128473;
+        &#10006;
       </button>
     </Block>
   );

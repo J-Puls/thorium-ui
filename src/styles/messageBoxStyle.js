@@ -1,11 +1,19 @@
 export const messageBoxStyle = {
   active: {
-    marginTop: "15px",
-    marginBottom: "15px",
-    marginLeft: "15px",
-    marginRight: "15px"
+    paddingTop: "5px",
+    paddingBottom: "5px",
+    paddingLeft: "5px",
+    paddingRight: "5px",
+    marginLeft: 0,
+    marginRight: 0
   },
-  inactive: { display: "none" }
+  inactive: {
+    display: "none",
+    paddingTop: 0,
+    paddingBottom: 0,
+    paddingLeft: 0,
+    paddingRight: 0
+  }
 };
 
 export default messageBoxStyle;
