@@ -1,5 +1,5 @@
 /* React */
-import React, { useState, useEffect, cloneElement } from "react";
+import React, { cloneElement, useEffect, useState } from "react";
 /* Thorium-UI */
 import { Block } from "./Block";
 /* Sub-components */
@@ -9,30 +9,31 @@ import { NavItem as Item } from "./NavItem";
 import { NavProvider } from "../context/NavContext";
 /* Utils */
 import mapPropsToAttrs from "../utils/mapPropsToAttrs";
-import { variants, justify } from "../utils/propValidation";
+import { justify, variants } from "../utils/propValidation";
 import mapPropsToResponsiveSize from "../utils/mapPropsToResponsiveSize";
 import mapPropsToMotion from "../utils/mapPropsToMotion";
 /* PropTypes */
 import PropTypes from "prop-types";
 
 const propTypes = {
-  justify: PropTypes.oneOf(justify),
-  vertical: PropTypes.bool,
-  trackActive: PropTypes.bool,
   centerLinks: PropTypes.bool,
-  variant: PropTypes.oneOf(variants),
+  defaultActive: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  justify: PropTypes.oneOf(justify),
+  onActiveItemChange: PropTypes.func,
+  trackActive: PropTypes.bool,
   type: PropTypes.oneOf(["normal", "tabs", "pills"]),
-  onActiveItemChange: PropTypes.func
+  variant: PropTypes.oneOf(variants),
+  vertical: PropTypes.bool
 };
 
 const defaultProps = {
-  justify: "start",
-  vertical: false,
-  trackActive: false,
   centerLinks: false,
   defaultActive: 0,
+  justify: "start",
+  trackActive: false,
+  type: "normal",
   variant: "link",
-  type: "normal"
+  vertical: false
 };
 
 /**
