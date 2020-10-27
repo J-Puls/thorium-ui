@@ -21,6 +21,10 @@ const propTypes = {
   withMotion: PropTypes.bool
 };
 
+const defaultProps = {
+  withMotion: false
+};
+
 /**
  * A styled React Router wrapper
  */
@@ -71,5 +75,5 @@ export const NavLink = (props) => {
 };
 
 NavLink.propTypes = propTypes;
-
+NavLink.defaultProps = defaultProps;
 export default NavLink;

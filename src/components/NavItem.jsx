@@ -1,16 +1,16 @@
 /* React */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 /* Utils */
-import mapPropsToAttrs from "../utils/mapPropsToAttrs";
-import mapPropsToMotion from "../utils/mapPropsToMotion";
+import { mapPropsToAttrs } from "../utils/mapPropsToAttrs";
+import { mapPropsToMotion } from "../utils/mapPropsToMotion";
 /* Style */
 import { navItemStyle } from "../styles/navItemStyle";
 /* Hooks */
 import { useTheme } from "../hooks/thoriumRoot/useTheme";
-import { useActiveItem } from "../hooks/nav/useActiveItem";
-import useSetActiveItem from "../hooks/nav/useSetActiveItem";
-import PropTypes from "prop-types";
 import { variants } from "../utils/propValidation";
+/* PropTypes */
+import PropTypes from "prop-types";
+import NavContext from "../context/NavContext";
 
 const propTypes = {
   navkey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -30,28 +30,35 @@ const defaultProps = {
 export const NavItem = (props) => {
   const theme = useTheme().nav.item;
   const [isHovered, setIsHovered] = useState(false);
-  const activeItem = useActiveItem();
-  const setActiveItem = useSetActiveItem();
-  const [isActive, setIsActive] = useState(activeItem === props.navkey);
+  const navContext = useContext(NavContext);
+  const { activeItem, setActiveItem, trackActive, type, variant } = navContext;
+
+  // Allow for individual variant / type if defined
+  const thisVariant = props.variant || variant;
+  const thisType = props.type || type;
+
+  // Track if this is the currently active item
+  const [isActive, setIsActive] = useState(
+    trackActive && activeItem === props.navkey
+  );
   useEffect(() => {
-    setIsActive(activeItem === props.navkey);
+    trackActive && setIsActive(activeItem === props.navkey);
   }, [activeItem, props.navkey]);
 
   const handleClick = (e) => {
     !isActive && setActiveItem(props.navkey);
-    if (props.onClick) {
-      props.onClick();
-    }
+    props.onClick && props.onClick();
   };
 
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
+  // Style modification based on variant / type
   const styleMod = isActive
-    ? { ...theme[props.variant].active[props.type] }
+    ? { ...theme[thisVariant].active[thisType] }
     : isHovered
-    ? { ...theme[props.variant].hover[props.type] }
-    : { ...theme[props.variant].inactive[props.type] };
+    ? { ...theme[thisVariant].hover[thisType] }
+    : { ...theme[thisVariant].inactive[thisType] };
 
   const style = { ...navItemStyle.general, ...styleMod };
 
@@ -73,6 +80,7 @@ export const NavItem = (props) => {
     onClick: handleClick,
     navkey: props.navkey
   };
+
   if (props.withMotion) {
     return (
       <motion.div {...genericProps} {...mapPropsToMotion(props)}>

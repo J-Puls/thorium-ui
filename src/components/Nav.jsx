@@ -45,23 +45,16 @@ export const Nav = (props) => {
   // Define context to be accessible by Nav sub-components
   const navContext = {
     activeItem: activeItem,
-    setActiveItem,
     currentURL: window.location.pathname,
+    setActiveItem,
     trackActive: props.trackActive,
-    variant: props.variant,
-    type: props.type
+    type: props.type,
+    variant: props.variant
   };
 
   useEffect(() => {
     props.onActiveItemChange && props.onActiveItemChange(navContext);
   }, [navContext, props]);
-
-  const children = React.Children.map(props.children, (child) => {
-    return cloneElement(child, {
-      variant: props.variant,
-      type: props.type
-    });
-  });
 
   let style = { ...props.style };
   props.centerLinks && (style.textAlign = "center");
@@ -88,10 +81,10 @@ export const Nav = (props) => {
     <NavProvider value={navContext}>
       {props.withMotion && (
         <Block {...genericProps} withMotion={true} {...mapPropsToMotion(props)}>
-          {children}
+          {props.children}
         </Block>
       )}
-      {!props.withMotion && <Block {...genericProps}>{children}</Block>}
+      {!props.withMotion && <Block {...genericProps}>{props.children}</Block>}
     </NavProvider>
   );
 };
