@@ -50,7 +50,7 @@ export const Dropdown = forwardRef((props, ref) => {
   useEffect(() => {
     props.onToggle && props.onToggle(active);
   }, [active]);
-  
+
   const toggle = () => {
     if (props.triggerType === "click") {
       setActive(!active);
@@ -82,41 +82,41 @@ export const Dropdown = forwardRef((props, ref) => {
       });
     });
   }
-  let style;
-  props.remoteTrigger && (style = { display: "none" });
+  let triggerStyle = { ...props.triggerStyle };
+  props.remoteTrigger && (triggerStyle.display = "none");
 
   return (
-    <div ref={ref} data-active={active}>
-      <Container
-        {...mapPropsToAttrs(props)}
+    <Container
+      {...mapPropsToAttrs(props)}
+      displayType={props.displayType}
+      style={{ marginLeft: 0, marginRight: 0, ...props.style }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      style={props.containerStyle}
+    >
+      <Trigger
+        ref={trigger}
+        variant={props.variant}
+        icons={props.icons}
+        active={active}
+        onClick={toggle}
+        text={props.text}
+        size={props.size}
+        id={props.targetID || props.id}
+        style={triggerStyle}
+      />
+      <Menu
         displayType={props.displayType}
-        style={{ marginLeft: 0, marginRight: 0, ...props.style }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        active={active}
+        height={props.height}
+        top={menuTop}
+        size={props.size}
+        scrollable={props.scrollable}
+        style={props.menuStyle}
       >
-        <Trigger
-          ref={trigger}
-          variant={props.variant}
-          icons={props.icons}
-          active={active}
-          onClick={toggle}
-          text={props.text}
-          size={props.size}
-          id={props.targetID || props.id}
-          style={style}
-        />
-        <Menu
-          displayType={props.displayType}
-          active={active}
-          height={props.height}
-          top={menuTop}
-          size={props.size}
-          scrollable={props.scrollable}
-        >
-          {children || props.children}
-        </Menu>
-      </Container>
-    </div>
+        {children || props.children}
+      </Menu>
+    </Container>
   );
 });
 
