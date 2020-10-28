@@ -7,7 +7,7 @@ export const useViewportSizeName = () => {
 
   const getSizeName = () => {
     for (const [key, val] of Object.entries(breakpoints)) {
-      if (viewportSize.width >= val[0] && viewportSize.width < val[1]) {
+      if (viewportSize.width >= val[0] && viewportSize.width <= val[1]) {
         return key;
       }
     }
