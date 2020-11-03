@@ -1,10 +1,12 @@
 ![thorium logo](https://i.ibb.co/6y2RSZf/banner.png)
 [![NPM](https://nodei.co/npm/thorium-ui.png)](https://npmjs.org/package/thorium-ui)
 
-# Overview  
+# Overview
+
 Thorium-UI is designed to be an intuitive React.js framework, with which to quickly build themed applications, without needing a ton of CSS clutter.
 
-## Documentation  
+## Documentation
+
 [View the Official Documentation](https://thorium-ui.jpuls.dev)  
 **_Please note, this documentation is only updated periodically and does not always represent the current state of the project_**
 
@@ -35,12 +37,14 @@ import customStyles from "customStyles.js";
 import customThemes from "customThemes.js";
 
 export const App = (props) => {
- return (
-   <ThoriumRoot customStyles={customStyles} customThemes={customThemes}>
+  return (
+    <ThoriumRoot customStyles={customStyles} customThemes={customThemes}>
       /* YOUR COMPONENTS HERE */
-   </ThoriumRoot>
- );
-}
+    </ThoriumRoot>
+  );
+};
+
+
 export default App;
 ```
 

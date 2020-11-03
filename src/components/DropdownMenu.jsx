@@ -5,7 +5,7 @@ import { useTheme } from "../hooks/thoriumRoot/useTheme";
 
 export const DropdownMenu = (props) => {
   const theme = useTheme();
-  let style = { ...dms.general, ...theme.dropdown.menu };
+  let style = { ...dms.general, ...theme.dropdown.menu, ...props.style };
 
   if (props.active) style = { ...style, ...dms[props.displayType].active };
   else style = { ...style, ...dms[props.displayType].inactive };
