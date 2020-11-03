@@ -53,6 +53,7 @@ export { default as useTheme } from "./hooks/thoriumRoot/useTheme";
 export { default as useThemeColors } from "./hooks/thoriumRoot/useThemeColors";
 export { default as useThemeName } from "./hooks/thoriumRoot/useThemeName";
 export { default as useThemePreference } from "./hooks/thoriumRoot/useThemePreference";
+export { default as useToggleTheme } from "./hooks/thoriumRoot/useToggleTheme";
 export { default as useTouchStatus } from "./hooks/thoriumRoot/useTouchStatus";
 export { default as useViewportSize } from "./hooks/thoriumRoot/useViewportSize";
 export { default as useViewportSizeName } from "./hooks/thoriumRoot/useViewportSizeName";
