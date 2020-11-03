@@ -18,7 +18,7 @@ const propTypes = {
 export const Icon = (props) => (
   <svg
     {...mapPropsToAttrs(props)}
-    className="th-icon"
+    className={props.className ? `th-icon ${props.className}` : "th-icon"}
     data-testid="th-icon"
     width={props.width}
     height={props.height}
