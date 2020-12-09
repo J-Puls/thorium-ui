@@ -1,5 +1,5 @@
 /* React */
-import React, { cloneElement, useEffect, useState } from "react";
+import React, { Component, cloneElement, useEffect, useState } from "react";
 /* Thorium-UI */
 import { Block } from "./Block";
 /* Sub-components */
@@ -36,58 +36,69 @@ const defaultProps = {
   vertical: false
 };
 
-/**
- *  A pre-styled navigation menu that can be included in any layout component
- */
-export const Nav = (props) => {
-  const [activeItem, setActiveItem] = useState(props.defaultActive);
+export class Nav extends Component {
+  constructor(props, ref) {
+    super(props);
+    this.ref = ref;
+    this.state = {
+      activeItem: props.defaultActive
+    };
+    this.setActiveItem = (item) => {
+      this.setState({ activeItem: item }, () => {
+        props.onActiveItemChange && props.onActiveItemChange(item);
+      });
+    };
+    this.getActiveItem = () => this.state.activeItem;
+  }
 
-  // Define context to be accessible by Nav sub-components
-  const navContext = {
-    activeItem: activeItem,
-    currentURL: window.location.pathname,
-    setActiveItem,
-    trackActive: props.trackActive,
-    type: props.type,
-    variant: props.variant
-  };
+  render() {
+    let style = { ...this.props.style };
+    this.props.centerLinks && (style.textAlign = "center");
 
-  useEffect(() => {
-    props.onActiveItemChange && props.onActiveItemChange(navContext);
-  }, [navContext, props]);
+    const genericProps = {
+      ...mapPropsToAttrs(this.props),
+      ...mapPropsToResponsiveSize(this.props),
+      className: this.props.className
+        ? this.props.className
+        : this.props.withMotion
+        ? "th-motion-nav"
+        : "th-nav",
+      "data-testid": this.props["data-testid"]
+        ? this.props["data-testid"]
+        : this.props.withMotion
+        ? "th-motion-nav"
+        : "th-nav",
+      justify: this.props.justify,
+      vertical: this.props.vertical,
+      style
+    };
 
-  let style = { ...props.style };
-  props.centerLinks && (style.textAlign = "center");
-
-  const genericProps = {
-    ...mapPropsToAttrs(props),
-    ...mapPropsToResponsiveSize(props),
-    className: props.className
-      ? props.className
-      : props.withMotion
-      ? "th-motion-nav"
-      : "th-nav",
-    "data-testid": props["data-testid"]
-      ? props["data-testid"]
-      : props.withMotion
-      ? "th-motion-nav"
-      : "th-nav",
-    justify: props.justify,
-    vertical: props.vertical,
-    style
-  };
-
-  return (
-    <NavProvider value={navContext}>
-      {props.withMotion && (
-        <Block {...genericProps} withMotion={true} {...mapPropsToMotion(props)}>
-          {props.children}
-        </Block>
-      )}
-      {!props.withMotion && <Block {...genericProps}>{props.children}</Block>}
-    </NavProvider>
-  );
-};
+    const navContext = {
+      activeItem: this.state.activeItem,
+      currentURL: window.location.pathname,
+      setActiveItem: this.setActiveItem,
+      trackActive: this.props.trackActive,
+      type: this.props.type,
+      variant: this.props.variant
+    };
+    return (
+      <NavProvider value={navContext}>
+        {this.props.withMotion && (
+          <Block
+            {...genericProps}
+            withMotion={true}
+            {...mapPropsToMotion(props)}
+          >
+            {this.props.children}
+          </Block>
+        )}
+        {!this.props.withMotion && (
+          <Block {...genericProps}>{this.props.children}</Block>
+        )}
+      </NavProvider>
+    );
+  }
+}
 
 Nav.Link = Link;
 Nav.Item = Item;
