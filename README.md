@@ -43,6 +43,8 @@ export const App = (props) => {
     </ThoriumRoot>
   );
 };
+
+
 export default App;
 ```
 
