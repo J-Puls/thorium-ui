@@ -83,16 +83,15 @@ export class Nav extends Component {
     };
     return (
       <NavProvider value={navContext}>
-        {this.props.withMotion && (
+        {this.props.withMotion ? (
           <Block
             {...genericProps}
             withMotion={true}
-            {...mapPropsToMotion(props)}
+            {...mapPropsToMotion(this.props)}
           >
             {this.props.children}
           </Block>
-        )}
-        {!this.props.withMotion && (
+        ) : (
           <Block {...genericProps}>{this.props.children}</Block>
         )}
       </NavProvider>
