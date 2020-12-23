@@ -94,6 +94,7 @@ export const ThoriumRoot = forwardRef(function ThRoot(props, ref) {
         className="th-root"
         id="th-root"
         data-testid="th-root"
+        data-currentTheme={themePreference}
         style={{ boxSizing: "border-box", ...props.style }}
         ref={ref}
       >
